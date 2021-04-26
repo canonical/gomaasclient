@@ -9,10 +9,8 @@ import (
 	"github.com/jarcoal/httpmock"
 
 	"github.com/ionutbalutoiu/gomaasclient/api"
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
 	. "github.com/ionutbalutoiu/gomaasclient/gmaw"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
-
 	"github.com/ionutbalutoiu/gomaasclient/test/helper"
 )
 
@@ -29,13 +27,13 @@ func TestRackControllers(t *testing.T) {
 
 	t.Run("Get", func(t *testing.T) {
 		t.Parallel()
-		var want []entity.RackController
+		var want []endpoint.RackController
 		if err := helper.TestdataFromJSON("maas/rack_controllers.json", &want); err != nil {
 			t.Fatal(err)
 		}
 		httpmock.RegisterResponder("GET", "/MAAS/api/2.0/rackcontrollers/",
 			httpmock.NewJsonResponderOrPanic(http.StatusOK, want))
-		res, err := rackControllerClient.Get(&params.RackControllerSearch{})
+		res, err := rackControllerClient.Get(&endpoint.RackControllerSearch{})
 		if err != nil {
 			t.Fatal(err)
 		}

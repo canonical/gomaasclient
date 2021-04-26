@@ -9,10 +9,8 @@ import (
 	"github.com/jarcoal/httpmock"
 
 	"github.com/ionutbalutoiu/gomaasclient/api"
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
 	. "github.com/ionutbalutoiu/gomaasclient/gmaw"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
-
 	"github.com/ionutbalutoiu/gomaasclient/test/helper"
 )
 
@@ -29,7 +27,7 @@ func TestSubnets(t *testing.T) {
 
 	t.Run("Get", func(t *testing.T) {
 		t.Parallel()
-		var subnets []entity.Subnet
+		var subnets []endpoint.Subnet
 		if err := helper.TestdataFromJSON("maas/subnets.json", &subnets); err != nil {
 			t.Fatal(err)
 		}
@@ -45,14 +43,14 @@ func TestSubnets(t *testing.T) {
 	})
 	t.Run("Post", func(t *testing.T) {
 		t.Parallel()
-		subnet := new(entity.Subnet)
+		subnet := new(endpoint.Subnet)
 		if err := helper.TestdataFromJSON("maas/subnet.json", subnet); err != nil {
 			t.Fatal(err)
 		}
 		httpmock.RegisterResponder("POST", "/MAAS/api/2.0/subnets/",
 			httpmock.NewJsonResponderOrPanic(http.StatusOK, subnet))
 
-		p := new(params.Subnet)
+		p := new(endpoint.SubnetParams)
 		res, err := subnetsClient.Post(p)
 		if err != nil {
 			t.Fatal(err)

@@ -4,11 +4,10 @@ import (
 	"encoding/json"
 	"net/url"
 
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
-	"github.com/ionutbalutoiu/gomaasclient/maas"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
-
 	"github.com/juju/gomaasapi"
+
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
+	"github.com/ionutbalutoiu/gomaasclient/maas"
 )
 
 // Subnets provides methods for the Subnets operations in the MaaS API.
@@ -27,7 +26,7 @@ func NewSubnets(client *gomaasapi.MAASObject) *Subnets {
 // Get returns information about all of the configured subnets.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (s *Subnets) Get() (subnets []entity.Subnet, err error) {
+func (s *Subnets) Get() (subnets []endpoint.Subnet, err error) {
 	err = s.client.Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &subnets)
 	})
@@ -37,9 +36,9 @@ func (s *Subnets) Get() (subnets []entity.Subnet, err error) {
 // Post creates a new subnet and returns information about the new subnet.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (s *Subnets) Post(p *params.Subnet) (subnet *entity.Subnet, err error) {
+func (s *Subnets) Post(p *endpoint.SubnetParams) (subnet *endpoint.Subnet, err error) {
 	qsp := maas.ToQSP(p)
-	subnet = new(entity.Subnet)
+	subnet = new(endpoint.Subnet)
 	err = s.client.Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, subnet)
 	})

@@ -4,10 +4,9 @@ import (
 	"encoding/json"
 	"net/url"
 
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
-
 	"github.com/juju/gomaasapi"
+
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
 )
 
 // RackControllers provides methods for the Rack Controllers operations in the MaaS API.
@@ -26,7 +25,7 @@ func NewRackControllers(client *gomaasapi.MAASObject) *RackControllers {
 // Get returns information about configured rack controllers.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (s *RackControllers) Get(p *params.RackControllerSearch) (ctrls []entity.RackController, err error) {
+func (s *RackControllers) Get(p *endpoint.RackControllerSearch) (ctrls []endpoint.RackController, err error) {
 	err = s.client.Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &ctrls)
 	})

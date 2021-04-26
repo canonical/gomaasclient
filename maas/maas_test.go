@@ -60,27 +60,27 @@ var (
 var (
 	emptyVals             = url.Values{}
 	simpleVals url.Values = map[string][]string{
-		"name":       []string{"Brian"},
-		"id":         []string{"31"},
-		"unexported": []string{"638.427"},
-		"unsigned":   []string{"42"},
+		"name":       {"Brian"},
+		"id":         {"31"},
+		"unexported": {"638.427"},
+		"unsigned":   {"42"},
 	}
 	simpleWEVals url.Values = map[string][]string{
-		"name":       []string{"Frank"},
-		"id":         []string{"0"},
-		"unexported": []string{"12"},
-		"unsigned":   []string{"0"},
+		"name":       {"Frank"},
+		"id":         {"0"},
+		"unexported": {"12"},
+		"unsigned":   {"0"},
 	}
 	tagsVals url.Values = map[string][]string{
-		"snake_case": []string{"always"},
-		"many_tags":  []string{"sure"},
+		"snake_case": {"always"},
+		"many_tags":  {"sure"},
 	}
 	arraysVals url.Values = map[string][]string{
-		"names": []string{"Robin", "Little John", "Mervyn"},
-		"ids":   []string{"Hood", "?", "Sheriff of Rottingham"},
+		"names": {"Robin", "Little John", "Mervyn"},
+		"ids":   {"Hood", "?", "Sheriff of Rottingham"},
 	}
 	arraysSOVals url.Values = map[string][]string{
-		"names": []string{"None"},
+		"names": {"None"},
 	}
 )
 

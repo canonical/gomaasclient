@@ -3,9 +3,10 @@ package gmaw
 import (
 	"net/url"
 
-	"github.com/ionutbalutoiu/gomaasclient/maas"
-
 	"github.com/juju/gomaasapi"
+
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
+	"github.com/ionutbalutoiu/gomaasclient/maas"
 )
 
 // Machine implements the maas.MachineFetcher interface.
@@ -48,13 +49,13 @@ func (m *Machine) Get(systemID string) ([]byte, error) {
 }
 
 // Commission fulfills the maas.MachineFetcher interface
-func (m *Machine) Commission(systemID string, params maas.MachineCommissionParams) ([]byte, error) {
+func (m *Machine) Commission(systemID string, params *endpoint.MachineCommissionParams) ([]byte, error) {
 	qsp := maas.ToQSP(params)
 	return m.callPost(systemID, "commission", qsp)
 }
 
 // Deploy fulfills the maas.MachineFetcher interface
-func (m *Machine) Deploy(systemID string, params *maas.MachineDeployParams) ([]byte, error) {
+func (m *Machine) Deploy(systemID string, params *endpoint.MachineDeployParams) ([]byte, error) {
 	qsp := maas.ToQSP(params)
 	return m.callPost(systemID, "deploy", qsp)
 }

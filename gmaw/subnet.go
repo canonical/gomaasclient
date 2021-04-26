@@ -5,12 +5,11 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
-	"github.com/ionutbalutoiu/gomaasclient/maas"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity/subnet"
-
 	"github.com/juju/gomaasapi"
+
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint/subnet"
+	"github.com/ionutbalutoiu/gomaasclient/maas"
 )
 
 // Subnet provides methods for the Subnet operations in the MaaS API.
@@ -40,8 +39,8 @@ func (s *Subnet) Delete(id int) error {
 // Get returns information about a subnet.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (s *Subnet) Get(id int) (sn *entity.Subnet, err error) {
-	sn = new(entity.Subnet)
+func (s *Subnet) Get(id int) (sn *endpoint.Subnet, err error) {
+	sn = new(endpoint.Subnet)
 	err = s.client(id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, sn)
 	})
@@ -112,9 +111,9 @@ func (s *Subnet) GetUnreservedIPRanges(id int) (ranges []subnet.IPRange, err err
 // Put updates the configuration for a subnet.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (s *Subnet) Put(id int, p *params.Subnet) (sn *entity.Subnet, err error) {
+func (s *Subnet) Put(id int, p *endpoint.SubnetParams) (sn *endpoint.Subnet, err error) {
 	qsp := maas.ToQSP(p)
-	sn = new(entity.Subnet)
+	sn = new(endpoint.Subnet)
 	err = s.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, sn)
 	})

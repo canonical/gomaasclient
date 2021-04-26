@@ -6,11 +6,11 @@ import (
 	"os"
 	"testing"
 
-	. "github.com/ionutbalutoiu/gomaasclient/gmaw"
-	"github.com/ionutbalutoiu/gomaasclient/maas"
-
 	"github.com/jarcoal/httpmock"
 	"github.com/juju/gomaasapi"
+
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
+	. "github.com/ionutbalutoiu/gomaasclient/gmaw"
 )
 
 const apiURL string = "http://localhost:5240/MAAS"
@@ -54,7 +54,7 @@ func TestMachine_Commission(t *testing.T) {
 
 	machine := NewMachine(client)
 	runTestCases(t, tests, func(tc testCase) ([]byte, error) {
-		return machine.Commission(tc.URL[9:11], maas.MachineCommissionParams{})
+		return machine.Commission(tc.URL[9:11], &endpoint.MachineCommissionParams{})
 	})
 }
 
@@ -71,7 +71,7 @@ func TestMachine_Deploy(t *testing.T) {
 
 	machine := NewMachine(client)
 	runTestCases(t, tests, func(tc testCase) ([]byte, error) {
-		return machine.Deploy(tc.URL[9:11], &maas.MachineDeployParams{})
+		return machine.Deploy(tc.URL[9:11], &endpoint.MachineDeployParams{})
 	})
 }
 

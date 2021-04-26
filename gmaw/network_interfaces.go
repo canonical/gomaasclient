@@ -4,11 +4,10 @@ import (
 	"encoding/json"
 	"net/url"
 
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
-	"github.com/ionutbalutoiu/gomaasclient/maas"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
-
 	"github.com/juju/gomaasapi"
+
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
+	"github.com/ionutbalutoiu/gomaasclient/maas"
 )
 
 // NetworkInterfaces provides methods for the Interfaces operations in the MaaS API.
@@ -32,7 +31,7 @@ func (i *NetworkInterfaces) client(systemID string) Client {
 // Get returns information about all of <systemID>'s configured interfaces.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (i *NetworkInterfaces) Get(systemID string) (ifcs []entity.NetworkInterface, err error) {
+func (i *NetworkInterfaces) Get(systemID string) (ifcs []endpoint.NetworkInterface, err error) {
 	err = i.client(systemID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &ifcs)
 	})
@@ -43,9 +42,9 @@ func (i *NetworkInterfaces) Get(systemID string) (ifcs []entity.NetworkInterface
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
 func (i *NetworkInterfaces) CreateBond(systemID string,
-	p *params.NetworkInterfaceBond) (ifc *entity.NetworkInterface, err error) {
+	p *endpoint.NetworkInterfaceBondParams) (ifc *endpoint.NetworkInterface, err error) {
 	qsp := maas.ToQSP(p)
-	ifc = new(entity.NetworkInterface)
+	ifc = new(endpoint.NetworkInterface)
 	err = i.client(systemID).Post("create_bond", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ifc)
 	})
@@ -56,22 +55,22 @@ func (i *NetworkInterfaces) CreateBond(systemID string,
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
 func (i *NetworkInterfaces) CreateBridge(systemID string,
-	p *params.NetworkInterfaceBridge) (ifc *entity.NetworkInterface, err error) {
+	p *endpoint.NetworkInterfaceBridgeParams) (ifc *endpoint.NetworkInterface, err error) {
 	qsp := maas.ToQSP(p)
-	ifc = new(entity.NetworkInterface)
+	ifc = new(endpoint.NetworkInterface)
 	err = i.client(systemID).Post("create_bridge", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ifc)
 	})
 	return
 }
 
-// CreatePhysical creates a new physical interface on <systemID>'s <params.MACAddress> interface.
+// CreatePhysical creates a new physical interface on <systemID>.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
 func (i *NetworkInterfaces) CreatePhysical(systemID string,
-	p *params.NetworkInterfacePhysical) (ifc *entity.NetworkInterface, err error) {
+	p *endpoint.NetworkInterfacePhysicalParams) (ifc *endpoint.NetworkInterface, err error) {
 	qsp := maas.ToQSP(p)
-	ifc = new(entity.NetworkInterface)
+	ifc = new(endpoint.NetworkInterface)
 	err = i.client(systemID).Post("create_physical", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ifc)
 	})
@@ -82,9 +81,9 @@ func (i *NetworkInterfaces) CreatePhysical(systemID string,
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
 func (i *NetworkInterfaces) CreateVLAN(systemID string,
-	p *params.NetworkInterfaceVLAN) (ifc *entity.NetworkInterface, err error) {
+	p *endpoint.NetworkInterfaceVLANParams) (ifc *endpoint.NetworkInterface, err error) {
 	qsp := maas.ToQSP(p)
-	ifc = new(entity.NetworkInterface)
+	ifc = new(endpoint.NetworkInterface)
 	err = i.client(systemID).Post("create_vlan", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ifc)
 	})

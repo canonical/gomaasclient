@@ -9,10 +9,8 @@ import (
 	"github.com/jarcoal/httpmock"
 
 	"github.com/ionutbalutoiu/gomaasclient/api"
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
 	. "github.com/ionutbalutoiu/gomaasclient/gmaw"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
-
 	"github.com/ionutbalutoiu/gomaasclient/test/helper"
 )
 
@@ -28,7 +26,7 @@ func TestVLANs(t *testing.T) {
 	vlansClient := NewVLANs(client)
 
 	t.Run("Get", func(t *testing.T) {
-		var vlans []entity.VLAN
+		var vlans []endpoint.VLAN
 		if err := helper.TestdataFromJSON("maas/vlans.json", &vlans); err != nil {
 			t.Fatal(err)
 		}
@@ -50,7 +48,7 @@ func TestVLANs(t *testing.T) {
 				httpmock.NewStringResponder(http.StatusNotFound, "Not Found"))
 
 			got, err := vlansClient.Get(234)
-			if diff := cmp.Diff(([]entity.VLAN{}), got, cmpopts.EquateEmpty()); diff != "" {
+			if diff := cmp.Diff(([]endpoint.VLAN{}), got, cmpopts.EquateEmpty()); diff != "" {
 				t.Fatalf("json.Decode() mismatch (-want +got):\n%s", diff)
 			}
 			if err.Error() != "ServerError: 404 (Not Found)" {
@@ -59,7 +57,7 @@ func TestVLANs(t *testing.T) {
 		})
 	})
 	t.Run("Post", func(t *testing.T) {
-		vlan := new(entity.VLAN)
+		vlan := new(endpoint.VLAN)
 		if err := helper.TestdataFromJSON("maas/vlan.json", vlan); err != nil {
 			t.Fatal(err)
 		}
@@ -68,7 +66,7 @@ func TestVLANs(t *testing.T) {
 			httpmock.RegisterResponder("POST", "/MAAS/api/2.0/fabrics/123/vlans/",
 				httpmock.NewJsonResponderOrPanic(http.StatusOK, vlan))
 
-			p := new(params.VLAN)
+			p := new(endpoint.VLANParams)
 			got, err := vlansClient.Post(123, p)
 			if err != nil {
 				t.Fatal(err)
@@ -82,9 +80,9 @@ func TestVLANs(t *testing.T) {
 			httpmock.RegisterResponder("POST", "/MAAS/api/2.0/fabrics/234/vlans/",
 				httpmock.NewStringResponder(http.StatusNotFound, "Not Found"))
 
-			p := new(params.VLAN)
+			p := new(endpoint.VLANParams)
 			got, err := vlansClient.Post(234, p)
-			if diff := cmp.Diff((&entity.VLAN{}), got, cmpopts.EquateEmpty()); diff != "" {
+			if diff := cmp.Diff((&endpoint.VLAN{}), got, cmpopts.EquateEmpty()); diff != "" {
 				t.Fatalf("json.Decode() mismatch (-want +got):\n%s", diff)
 			}
 			if err.Error() != "ServerError: 404 (Not Found)" {

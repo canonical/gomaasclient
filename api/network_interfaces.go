@@ -1,15 +1,14 @@
 package api
 
 import (
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
 )
 
 // NetworkInterfaces represents the MaaS Server Interfaces endpoint
 type NetworkInterfaces interface {
-	Get(systemID string) ([]entity.NetworkInterface, error)
-	CreateBond(systemID string, params *params.NetworkInterfaceBond) (*entity.NetworkInterface, error)
-	CreateBridge(systemID string, params *params.NetworkInterfaceBridge) (*entity.NetworkInterface, error)
-	CreatePhysical(systemID string, params *params.NetworkInterfacePhysical) (*entity.NetworkInterface, error)
-	CreateVLAN(systemID string, params *params.NetworkInterfaceVLAN) (*entity.NetworkInterface, error)
+	Get(systemID string) ([]endpoint.NetworkInterface, error)
+	CreateBond(systemID string, params *endpoint.NetworkInterfaceBondParams) (*endpoint.NetworkInterface, error)
+	CreateBridge(systemID string, params *endpoint.NetworkInterfaceBridgeParams) (*endpoint.NetworkInterface, error)
+	CreatePhysical(systemID string, params *endpoint.NetworkInterfacePhysicalParams) (*endpoint.NetworkInterface, error)
+	CreateVLAN(systemID string, params *endpoint.NetworkInterfaceVLANParams) (*endpoint.NetworkInterface, error)
 }

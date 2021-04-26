@@ -4,22 +4,22 @@ import (
 	"encoding/json"
 	"sync"
 
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
 )
 
 // NewMachine converts a MAAS API JSON response into a Golang representation
-func NewMachine(data []byte) (m *entity.Machine, err error) {
-	m = &entity.Machine{}
+func NewMachine(data []byte) (m *endpoint.Machine, err error) {
+	m = &endpoint.Machine{}
 	err = json.Unmarshal(data, m)
 	return
 }
 
-// MachineManager contains functionality for manipulating the Machine endpoint.
-// A MachineManager represents a single machine, as does the API endpoint.
-type MachineManager struct {
-	state  []entity.Machine
-	client MachineFetcher
-	mutex  sync.RWMutex
+// MachineFetcher is the interface that API clients must implement.
+type MachineFetcher interface {
+	Get(string) ([]byte, error)
+	Commission(string, *endpoint.MachineCommissionParams) ([]byte, error)
+	Deploy(string, *endpoint.MachineDeployParams) ([]byte, error)
+	Lock(string, string) ([]byte, error)
 }
 
 // NewMachineManager creates a new MachineManager.
@@ -36,27 +36,23 @@ func NewMachineManager(systemID string, client MachineFetcher) (*MachineManager,
 		return nil, err
 	}
 	return &MachineManager{
-		state:  []entity.Machine{*m},
+		state:  []endpoint.Machine{*m},
 		client: client,
 		mutex:  sync.RWMutex{},
 	}, nil
 }
 
+// MachineManager contains functionality for manipulating the Machine endpoint.
+// A MachineManager represents a single machine, as does the API endpoint.
+type MachineManager struct {
+	state  []endpoint.Machine
+	client MachineFetcher
+	mutex  sync.RWMutex
+}
+
 // Current returns the most current known state of the machine.
-func (m *MachineManager) Current() *entity.Machine {
+func (m *MachineManager) Current() *endpoint.Machine {
 	return &m.state[len(m.state)-1]
-}
-
-func (m *MachineManager) append(current *entity.Machine) {
-	m.state = append(m.state, *current)
-}
-
-func (m *MachineManager) appendBytes(data []byte) error {
-	next, err := NewMachine(data)
-	if err == nil {
-		m.append(next)
-	}
-	return err
 }
 
 // SystemID returns the machine's systemID.
@@ -65,7 +61,7 @@ func (m *MachineManager) SystemID() string {
 }
 
 // Commission calls the commission operation on the API.
-func (m *MachineManager) Commission(params MachineCommissionParams) error {
+func (m *MachineManager) Commission(params *endpoint.MachineCommissionParams) error {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 
@@ -77,7 +73,7 @@ func (m *MachineManager) Commission(params MachineCommissionParams) error {
 }
 
 // Deploy calls the deploy operation on the API.
-func (m *MachineManager) Deploy(params *MachineDeployParams) error {
+func (m *MachineManager) Deploy(params *endpoint.MachineDeployParams) error {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 
@@ -86,6 +82,15 @@ func (m *MachineManager) Deploy(params *MachineDeployParams) error {
 		err = m.appendBytes(res)
 	}
 	return err
+}
+
+// Update fetches and returns the current state of the machine.
+func (m *MachineManager) Update() (ma *endpoint.Machine, err error) {
+	ma, err = m.update()
+	if err == nil {
+		m.append(ma)
+	}
+	return
 }
 
 // Lock calls the lock operation on the API.
@@ -100,52 +105,23 @@ func (m *MachineManager) Lock(comment string) error {
 	return err
 }
 
-// Update fetches and returns the current state of the machine.
-func (m *MachineManager) Update() (ma *entity.Machine, err error) {
-	ma, err = m.update()
-	if err == nil {
-		m.append(ma)
-	}
-	return
+func (m *MachineManager) append(current *endpoint.Machine) {
+	m.state = append(m.state, *current)
 }
 
-func (m *MachineManager) update() (ma *entity.Machine, err error) {
+func (m *MachineManager) appendBytes(data []byte) error {
+	next, err := NewMachine(data)
+	if err == nil {
+		m.append(next)
+	}
+	return err
+}
+
+func (m *MachineManager) update() (ma *endpoint.Machine, err error) {
 	var res []byte
 	res, err = m.client.Get(m.SystemID())
 	if err == nil {
 		ma, err = NewMachine(res)
 	}
 	return
-}
-
-// MachineFetcher is the interface that API clients must implement.
-type MachineFetcher interface {
-	Get(string) ([]byte, error)
-	Commission(string, MachineCommissionParams) ([]byte, error)
-	Deploy(string, *MachineDeployParams) ([]byte, error)
-	Lock(string, string) ([]byte, error)
-}
-
-// MachineCommissionParams enumerates the parameters for the commission operation
-type MachineCommissionParams struct {
-	EnableSSH            int
-	SkipBMCConfig        int
-	SkipNetworking       int
-	SkipStorage          int
-	CommissioningScripts string
-	TestingScripts       string
-}
-
-// MachineDeployParams enumerates the parameters for the deploy operation
-type MachineDeployParams struct {
-	UserData     string `json:"user_data"`
-	DistroSeries string `json:"distro_series"`
-	HWEKernel    string `json:"hwe_kernel"`
-	AgentName    string `json:"agent_name"`
-	Comment      string `json:"comment"`
-	BridgeFD     int    `json:"bridge_fd"`
-	BridgeAll    bool   `json:"bridge_all"`
-	BridgeSTP    bool   `json:"bridge_stp"`
-	InstallRackD bool   `json:"install_rackd"`
-	InstallKVM   bool   `json:"install_kvm"`
 }

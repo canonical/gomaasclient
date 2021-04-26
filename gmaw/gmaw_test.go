@@ -5,13 +5,11 @@ import (
 	"net/http"
 	"testing"
 
+	"github.com/google/go-cmp/cmp"
 	"github.com/jarcoal/httpmock"
-
 	"github.com/juju/errors"
 
 	. "github.com/ionutbalutoiu/gomaasclient/gmaw"
-
-	"github.com/google/go-cmp/cmp"
 )
 
 // The test cases for the endpoint types use this type in unit tests

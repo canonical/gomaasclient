@@ -9,11 +9,9 @@ import (
 	"github.com/jarcoal/httpmock"
 
 	"github.com/ionutbalutoiu/gomaasclient/api"
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint/subnet"
 	. "github.com/ionutbalutoiu/gomaasclient/gmaw"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity/subnet"
-
 	"github.com/ionutbalutoiu/gomaasclient/test/helper"
 )
 
@@ -49,7 +47,7 @@ func TestSubnet(t *testing.T) {
 
 	t.Run("Get", func(t *testing.T) {
 		t.Parallel()
-		want := new(entity.Subnet)
+		want := new(endpoint.Subnet)
 		if err := helper.TestdataFromJSON("maas/subnet.json", want); err != nil {
 			t.Fatal(err)
 		}
@@ -191,13 +189,13 @@ func TestSubnet(t *testing.T) {
 	t.Run("Put", func(t *testing.T) {
 		t.Run("200", func(t *testing.T) {
 			t.Parallel()
-			want := new(entity.Subnet)
+			want := new(endpoint.Subnet)
 			if err := helper.TestdataFromJSON("maas/subnet.json", want); err != nil {
 				t.Fatal(err)
 			}
 			httpmock.RegisterResponder("PUT", "/MAAS/api/2.0/subnets/10/",
 				httpmock.NewJsonResponderOrPanic(http.StatusOK, want))
-			res, err := subnetClient.Put(10, &params.Subnet{})
+			res, err := subnetClient.Put(10, &endpoint.SubnetParams{})
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -209,8 +207,8 @@ func TestSubnet(t *testing.T) {
 			t.Parallel()
 			httpmock.RegisterResponder("PUT", "/MAAS/api/2.0/subnets/11/",
 				httpmock.NewStringResponder(http.StatusNotFound, "Not Found"))
-			got, err := subnetClient.Put(11, &params.Subnet{})
-			if diff := cmp.Diff((&entity.Subnet{}), got, cmpopts.EquateEmpty()); diff != "" {
+			got, err := subnetClient.Put(11, &endpoint.SubnetParams{})
+			if diff := cmp.Diff((&endpoint.Subnet{}), got, cmpopts.EquateEmpty()); diff != "" {
 				t.Fatalf("json.Decode() mismatch (-want +got):\n%s", diff)
 			}
 			if err.Error() != "ServerError: 404 (Not Found)" {

@@ -5,11 +5,10 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
-	"github.com/ionutbalutoiu/gomaasclient/maas"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
-
 	"github.com/juju/gomaasapi"
+
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
+	"github.com/ionutbalutoiu/gomaasclient/maas"
 )
 
 // VLANs provides methods for the vlans operations in the MaaS API.
@@ -33,7 +32,7 @@ func (v *VLANs) client(fabricID int) Client {
 // Get returns information about all of the configured VLANs for <fabric>.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (v *VLANs) Get(fabricID int) (vlans []entity.VLAN, err error) {
+func (v *VLANs) Get(fabricID int) (vlans []endpoint.VLAN, err error) {
 	err = v.client(fabricID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &vlans)
 	})
@@ -43,9 +42,9 @@ func (v *VLANs) Get(fabricID int) (vlans []entity.VLAN, err error) {
 // Post creates a new VLAN and returns information about the new VLAN.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (v *VLANs) Post(fabricID int, p *params.VLAN) (vlan *entity.VLAN, err error) {
+func (v *VLANs) Post(fabricID int, p *endpoint.VLANParams) (vlan *endpoint.VLAN, err error) {
 	qsp := maas.ToQSP(p)
-	vlan = new(entity.VLAN)
+	vlan = new(endpoint.VLAN)
 	err = v.client(fabricID).Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, vlan)
 	})

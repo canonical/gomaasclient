@@ -3,9 +3,10 @@ package gmaw
 import (
 	"net/url"
 
-	"github.com/ionutbalutoiu/gomaasclient/maas"
-
 	"github.com/juju/gomaasapi"
+
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
+	"github.com/ionutbalutoiu/gomaasclient/maas"
 )
 
 // Machines implements the maas.MachinesFetcher interface.
@@ -33,7 +34,7 @@ func (m *Machines) callPost(op string, qsp url.Values) ([]byte, error) {
 }
 
 // Allocate fulfills the maas.MachinesFetcher interface
-func (m *Machines) Allocate(params *maas.MachinesAllocateParams) ([]byte, error) {
+func (m *Machines) Allocate(params *endpoint.MachinesAllocateParams) ([]byte, error) {
 	qsp := maas.ToQSP(params)
 	return m.callPost("allocate", qsp)
 }

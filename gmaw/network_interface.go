@@ -5,11 +5,10 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
-	"github.com/ionutbalutoiu/gomaasclient/maas"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
-
 	"github.com/juju/gomaasapi"
+
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
+	"github.com/ionutbalutoiu/gomaasclient/maas"
 )
 
 // NetworkInterface provides methods for the Interface operations in the MaaS API.
@@ -41,8 +40,8 @@ func (i *NetworkInterface) Delete(systemID string, id int) error {
 // Get information about the interface with <id> on <systemID>.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (i *NetworkInterface) Get(systemID string, id int) (ifc *entity.NetworkInterface, err error) {
-	ifc = new(entity.NetworkInterface)
+func (i *NetworkInterface) Get(systemID string, id int) (ifc *endpoint.NetworkInterface, err error) {
+	ifc = new(endpoint.NetworkInterface)
 	err = i.client(systemID, id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, ifc)
 	})
@@ -52,8 +51,8 @@ func (i *NetworkInterface) Get(systemID string, id int) (ifc *entity.NetworkInte
 // AddTag adds an additional tag to the interface.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (i *NetworkInterface) AddTag(systemID string, id int, tag string) (ifc *entity.NetworkInterface, err error) {
-	ifc = new(entity.NetworkInterface)
+func (i *NetworkInterface) AddTag(systemID string, id int, tag string) (ifc *endpoint.NetworkInterface, err error) {
+	ifc = new(endpoint.NetworkInterface)
 	qsp := url.Values{}
 	qsp.Add("tag", tag)
 	err = i.client(systemID, id).Post("add_tag", qsp, func(data []byte) error {
@@ -65,8 +64,8 @@ func (i *NetworkInterface) AddTag(systemID string, id int, tag string) (ifc *ent
 // Disconnect the interface with <id> on <systemID>.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (i *NetworkInterface) Disconnect(systemID string, id int) (ifc *entity.NetworkInterface, err error) {
-	ifc = new(entity.NetworkInterface)
+func (i *NetworkInterface) Disconnect(systemID string, id int) (ifc *endpoint.NetworkInterface, err error) {
+	ifc = new(endpoint.NetworkInterface)
 	err = i.client(systemID, id).Post("disconnect", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, ifc)
 	})
@@ -77,8 +76,8 @@ func (i *NetworkInterface) Disconnect(systemID string, id int) (ifc *entity.Netw
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
 func (i *NetworkInterface) LinkSubnet(systemID string, id int,
-	p *params.NetworkInterfaceLink) (ifc *entity.NetworkInterface, err error) {
-	ifc = new(entity.NetworkInterface)
+	p *endpoint.NetworkInterfaceLinkParams) (ifc *endpoint.NetworkInterface, err error) {
+	ifc = new(endpoint.NetworkInterface)
 	qsp := maas.ToQSP(p)
 	err = i.client(systemID, id).Post("link_subnet", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ifc)
@@ -89,8 +88,8 @@ func (i *NetworkInterface) LinkSubnet(systemID string, id int,
 // RemoveTag removes the <tag> tag from the interface
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (i *NetworkInterface) RemoveTag(systemID string, id int, tag string) (ifc *entity.NetworkInterface, err error) {
-	ifc = new(entity.NetworkInterface)
+func (i *NetworkInterface) RemoveTag(systemID string, id int, tag string) (ifc *endpoint.NetworkInterface, err error) {
+	ifc = new(endpoint.NetworkInterface)
 	qsp := url.Values{}
 	qsp.Add("tag", tag)
 	err = i.client(systemID, id).Post("remove_tag", qsp, func(data []byte) error {
@@ -106,8 +105,8 @@ func (i *NetworkInterface) RemoveTag(systemID string, id int, tag string) (ifc *
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
 func (i *NetworkInterface) SetDefaultGateway(systemID string, id,
-	linkID int) (ifc *entity.NetworkInterface, err error) {
-	ifc = new(entity.NetworkInterface)
+	linkID int) (ifc *endpoint.NetworkInterface, err error) {
+	ifc = new(endpoint.NetworkInterface)
 	qsp := url.Values{}
 	if linkID > 0 {
 		qsp.Add("link_id", strconv.Itoa(linkID))
@@ -121,8 +120,8 @@ func (i *NetworkInterface) SetDefaultGateway(systemID string, id,
 // Unlink subnet removes the link between interface <id> and link <linkID>.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (i *NetworkInterface) UnlinkSubnet(systemID string, id, linkID int) (ifc *entity.NetworkInterface, err error) {
-	ifc = new(entity.NetworkInterface)
+func (i *NetworkInterface) UnlinkSubnet(systemID string, id, linkID int) (ifc *endpoint.NetworkInterface, err error) {
+	ifc = new(endpoint.NetworkInterface)
 	qsp := url.Values{}
 	qsp.Add("id", strconv.Itoa(linkID))
 	err = i.client(systemID, id).Post("unlink_subnet", qsp, func(data []byte) error {
@@ -132,13 +131,13 @@ func (i *NetworkInterface) UnlinkSubnet(systemID string, id, linkID int) (ifc *e
 }
 
 // Put updates the interface configuration with <params>.
-// The params argument is one of params.NetworkInterface{Bond,Bridge,Physical,VLAN},
+// The params argument is one of endpoint.NetworkInterface{BondParams,BridgeParams,PhysicalParams,VLANParams},
 // depending on the type of interface being updated.
 // This function returns an error if the gomaasapi returns an error or if
 // the response cannot be decoded.
-func (i *NetworkInterface) Put(systemID string, id int, p interface{}) (ifc *entity.NetworkInterface, err error) {
+func (i *NetworkInterface) Put(systemID string, id int, p interface{}) (ifc *endpoint.NetworkInterface, err error) {
 	qsp := maas.ToQSP(p)
-	ifc = new(entity.NetworkInterface)
+	ifc = new(endpoint.NetworkInterface)
 	err = i.client(systemID, id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, ifc)
 	})

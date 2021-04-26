@@ -1,12 +1,11 @@
 package api
 
 import (
-	"github.com/ionutbalutoiu/gomaasclient/api/params"
-	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
+	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
 )
 
 // VLANs represents the MaaS Vlans endpoint
 type VLANs interface {
-	Get(fabricID int) ([]entity.VLAN, error)
-	Post(fabricID int, params *params.VLAN) (*entity.VLAN, error)
+	Get(fabricID int) ([]endpoint.VLAN, error)
+	Post(fabricID int, params *endpoint.VLANParams) (*endpoint.VLAN, error)
 }
