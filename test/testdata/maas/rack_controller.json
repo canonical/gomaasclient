@@ -22,7 +22,7 @@
         "children": [
             "bond-VpkNvO"
         ],
-        "discovered": null,
+        "discovered": [],
         "id": 112,
         "params": "",
         "type": "physical",
@@ -208,7 +208,7 @@
             "children": [
                 "bond-VpkNvO"
             ],
-            "discovered": null,
+            "discovered": [],
             "id": 112,
             "params": "",
             "type": "physical",
@@ -248,7 +248,7 @@
             "children": [
                 "bond-VpkNvO"
             ],
-            "discovered": null,
+            "discovered": [],
             "id": 113,
             "params": "",
             "type": "physical",
@@ -288,7 +288,7 @@
             "children": [
                 "bond-VpkNvO"
             ],
-            "discovered": null,
+            "discovered": [],
             "id": 114,
             "params": "",
             "type": "physical",
@@ -326,7 +326,7 @@
             "vendor": null,
             "enabled": true,
             "children": [],
-            "discovered": null,
+            "discovered": [],
             "id": 115,
             "params": "",
             "type": "bond",

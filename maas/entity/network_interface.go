@@ -8,6 +8,7 @@ type NetworkInterface struct {
 	Children           []string               `json:"children,omitempty"`
 	Parents            []string               `json:"parents,omitempty"`
 	Tags               []string               `json:"tags,omitempty"`
+	Discovered         []string               `json:"discovered,omitempty"`
 	Links              []NetworkInterfaceLink `json:"links,omitempty"`
 	Name               string                 `json:"name,omitempty"`
 	MACAddress         string                 `json:"mac_address,omitempty"`
@@ -16,7 +17,6 @@ type NetworkInterface struct {
 	SystemID           string                 `json:"system_id,omitempty"`
 	Params             interface{}            `json:"params,omitempty"`
 	Type               string                 `json:"type,omitempty"`
-	Discovered         string                 `json:"discovered,omitempty"`
 	Vendor             string                 `json:"vendor,omitempty"`
 	ResourceURI        string                 `json:"resource_uri,omitempty"`
 	BondXMitHashPolicy string                 `json:"bond_x_mit_hash_policy,omitempty"`

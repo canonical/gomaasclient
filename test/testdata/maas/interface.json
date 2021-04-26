@@ -14,7 +14,7 @@
     "tags": [],
     "params": {},
     "type": "physical",
-    "discovered": null,
+    "discovered": [],
     "effective_mtu": 1500,
     "vendor": null,
     "id": 138,
