@@ -8,7 +8,28 @@
     "used_size": 0,
     "tags": [],
     "partition_table_type": null,
-    "partitions": [],
+    "partitions": [
+        {
+            "uuid": "95c8571a-9477-4b83-ae15-f160ab162815",
+            "size": 7990149120,
+            "bootable": false,
+            "tags": [],
+            "system_id": "yh4r38",
+            "id": 13,
+            "device_id": 17,
+            "filesystem": {
+                "fstype": "ext4",
+                "label": "root",
+                "uuid": "89d2a569-d481-493f-9d67-308f05f6d1fb",
+                "mount_point": "/",
+                "mount_options": null
+            },
+            "type": "partition",
+            "used_for": "ext4 formatted filesystem mounted at /",
+            "path": "/dev/disk/by-dname/vda-part2",
+            "resource_uri": "/MAAS/api/2.0/nodes/yh4r38/blockdevices/17/partition/13"
+        }
+    ],
     "path": "/dev/disk/by-dname/newblockdevice",
     "size": 1000000000,
     "id_path": "",
