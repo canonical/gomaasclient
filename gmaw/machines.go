@@ -40,9 +40,9 @@ func (m *Machines) Allocate(params *maas.MachinesAllocateParams) ([]byte, error)
 
 // Release fulfills the  maas.MachinesFetcher interface
 func (m *Machines) Release(systemIDs []string, comment string) error {
-	var qsp url.Values
+	qsp := url.Values{}
 	for _, val := range systemIDs {
-		qsp.Add("system_id", val)
+		qsp.Add("machines", val)
 	}
 	_, err := m.callPost("release", qsp)
 	return err
