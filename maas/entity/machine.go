@@ -37,7 +37,6 @@ type Machine struct {
 	PhysicalBlockDeviceSet       []BlockDevice       `json:"physicalblockdevice_set,omitempty"`
 	ISCSIBlockDeviceSet          []BlockDevice       `json:"iscsiblockdevice_set,omitempty"`
 	VirtualBlockDeviceSet        []BlockDevice       `json:"virtualblockdevice_set,omitempty"`
-	CurrentInstallationResultID  string              `json:"current_installation_result_id,omitempty"`
 	FQDN                         string              `json:"fqdn,omitempty"`
 	DistroSeries                 string              `json:"distro_series,omitempty"`
 	MinHWEKernel                 string              `json:"min_hwe_kernel,omitempty"`
@@ -72,6 +71,7 @@ type Machine struct {
 	HardwareInfo                 map[string]string   `json:"hardware_info,omitempty"`
 	CPUCount                     int                 `json:"cpu_count,omitempty"`
 	Status                       node.Status         `json:"status,omitempty"`
+	CurrentInstallationResultID  int                 `json:"current_installation_result_id,omitempty"`
 	CurrentTestingResultID       int                 `json:"current_testing_result_id,omitempty"`
 	CommissioningStatus          int                 `json:"commissioning_status,omitempty"`
 	OtherTestStatus              int                 `json:"other_test_status,omitempty"`
