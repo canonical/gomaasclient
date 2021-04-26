@@ -1,7 +1,11 @@
 package maas
 
+import (
+	"github.com/ionutbalutoiu/gomaasclient/maas/entity"
+)
+
 // Machines represents the Machines endpoint
-type Machines []Machine
+type Machines []entity.Machine
 
 // MachinesManager provides locking and management capabilities for Machines
 type MachinesManager struct {
@@ -14,7 +18,7 @@ func NewMachinesManager(client MachinesFetcher) *MachinesManager {
 }
 
 // Allocate calls the allocate operation
-func (m *MachinesManager) Allocate(params *MachinesAllocateParams) (ma *Machine, err error) {
+func (m *MachinesManager) Allocate(params *MachinesAllocateParams) (ma *entity.Machine, err error) {
 	var res []byte
 	res, err = m.client.Allocate(params)
 	if err == nil {
