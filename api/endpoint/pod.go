@@ -44,3 +44,35 @@ type PodResource struct {
 	Memory       int `json:"memory,omitempty"`
 	LocalStorage int `json:"local_storage,omitempty"`
 }
+
+// PodParams enumerates the Pod configuration options.
+type PodParams struct {
+	Name                  string  `json:"name"`
+	Type                  string  `json:"type"`
+	PowerAddress          string  `json:"power_address"`
+	PowerUser             string  `json:"power_user"`
+	PowerPass             string  `json:"power_pass"`
+	Zone                  string  `json:"zone"`
+	Pool                  string  `json:"pool"`
+	DefaultStoragePool    string  `json:"default_storage_pool"`
+	DefaultMacvlanMode    string  `json:"default_macvlan_mode"`
+	CPUOverCommitRatio    float64 `json:"cpu_over_commit_ratio"`
+	MemoryOverCommitRatio float64 `json:"memory_over_commit_ratio"`
+	Tags                  string  `json:"tags"`
+}
+
+// PodMachineParams enumerates the Pod machine configuration options.
+type PodMachineParams struct {
+	Cores           int    `json:"cores"`
+	PinnedCores     int    `json:"pinned_cores"`
+	CPUSpeed        int    `json:"cpu_speed"`
+	Memory          int    `json:"memory"`
+	HugepagesBacked bool   `json:"hugepages_backed"`
+	Architecture    string `json:"architecture"`
+	Storage         string `json:"storage"`
+	Interfaces      string `json:"interfaces"`
+	Hostname        string `json:"hostname"`
+	Domain          string `json:"domain"`
+	Zone            string `json:"zone"`
+	Pool            string `json:"pool"`
+}
