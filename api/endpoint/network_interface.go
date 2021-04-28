@@ -8,7 +8,7 @@ type NetworkInterface struct {
 	Children           []string               `json:"children,omitempty"`
 	Parents            []string               `json:"parents,omitempty"`
 	Tags               []string               `json:"tags,omitempty"`
-	Discovered         []string               `json:"discovered,omitempty"`
+	Discovered         []NetworkInterfaceLink `json:"discovered,omitempty"`
 	Links              []NetworkInterfaceLink `json:"links,omitempty"`
 	Name               string                 `json:"name,omitempty"`
 	MACAddress         string                 `json:"mac_address,omitempty"`

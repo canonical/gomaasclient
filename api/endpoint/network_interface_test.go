@@ -26,7 +26,7 @@ var sampleNetworkInterface NetworkInterface = NetworkInterface{
 	Tags:            []string{},
 	Params:          map[string]interface{}{},
 	Type:            "physical",
-	Discovered:      []string{},
+	Discovered:      []NetworkInterfaceLink{},
 	EffectiveMTU:    1500,
 	Vendor:          "",
 	ID:              138,
@@ -65,7 +65,7 @@ var sampleNetworkInterfaces []NetworkInterface = []NetworkInterface{
 			"tag-QAxfJH",
 			"tag-VOqx2b",
 		},
-		Discovered: []string{},
+		Discovered: []NetworkInterfaceLink{},
 		ID:         37,
 		Links: []NetworkInterfaceLink{
 			{
@@ -143,7 +143,7 @@ var sampleNetworkInterfaces []NetworkInterface = []NetworkInterface{
 			"tag-EDi2sp",
 			"tag-RwynT2",
 		},
-		Discovered: []string{},
+		Discovered: []NetworkInterfaceLink{},
 		ID:         38,
 		Links: []NetworkInterfaceLink{
 			{
@@ -221,7 +221,7 @@ var sampleNetworkInterfaces []NetworkInterface = []NetworkInterface{
 			"tag-D71Hh0",
 			"tag-PnEfvN",
 		},
-		Discovered: []string{},
+		Discovered: []NetworkInterfaceLink{},
 		ID:         39,
 		Links: []NetworkInterfaceLink{
 			{
@@ -301,7 +301,7 @@ var sampleNetworkInterfaces []NetworkInterface = []NetworkInterface{
 			"tag-C09Efp",
 			"tag-QK7j09",
 		},
-		Discovered: []string{},
+		Discovered: []NetworkInterfaceLink{},
 		ID:         40,
 		Links: []NetworkInterfaceLink{
 			{
@@ -378,7 +378,7 @@ var sampleNetworkInterfaces []NetworkInterface = []NetworkInterface{
 			"tag-dxAebl",
 			"tag-GsPX3m",
 		},
-		Discovered: []string{},
+		Discovered: []NetworkInterfaceLink{},
 		ID:         41,
 		Links: []NetworkInterfaceLink{
 			{
@@ -456,7 +456,7 @@ var sampleNetworkInterfaces []NetworkInterface = []NetworkInterface{
 			"tag-nnoi80",
 			"tag-xhApes",
 		},
-		Discovered: []string{},
+		Discovered: []NetworkInterfaceLink{},
 		ID:         42,
 		Links: []NetworkInterfaceLink{
 			{
