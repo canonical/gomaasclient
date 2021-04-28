@@ -65,14 +65,10 @@ type PodParams struct {
 type PodMachineParams struct {
 	Cores           int    `json:"cores"`
 	PinnedCores     int    `json:"pinned_cores"`
-	CPUSpeed        int    `json:"cpu_speed"`
 	Memory          int    `json:"memory"`
 	HugepagesBacked bool   `json:"hugepages_backed"`
 	Architecture    string `json:"architecture"`
 	Storage         string `json:"storage"`
 	Interfaces      string `json:"interfaces"`
 	Hostname        string `json:"hostname"`
-	Domain          string `json:"domain"`
-	Zone            string `json:"zone"`
-	Pool            string `json:"pool"`
 }
