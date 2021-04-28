@@ -93,6 +93,28 @@ type MachineServiceSet struct {
 	StatusInfo string `json:"status_info,omitempty"`
 }
 
+// MachineParams enumerates the parameters for the machine update operation
+type MachineParams struct {
+	CPUCount     int    `json:"cpu_count"`
+	Memory       int    `json:"memory"`
+	SwapSize     int    `json:"swap_size"`
+	Architecture string `json:"architecture"`
+	MinHWEKernel string `json:"min_hwe_kernel"`
+	PowerType    string `json:"power_type"`
+	Hostname     string `json:"hostname"`
+	Description  string `json:"description"`
+	Domain       string `json:"domain"`
+	Pool         string `json:"pool"`
+	Zone         string `json:"zone"`
+}
+
+type VirshMachineParams struct {
+	MachineParams
+	PowerAddress  string `json:"power_parameters_power_address"`
+	PowerID       string `json:"power_parameters_power_id"`
+	PowerPassword string `json:"power_parameters_power_pass"`
+}
+
 // MachineCommissionParams enumerates the parameters for the commission operation
 type MachineCommissionParams struct {
 	EnableSSH            int    `json:"enable_ssh"`

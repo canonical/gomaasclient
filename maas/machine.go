@@ -17,6 +17,8 @@ func NewMachine(data []byte) (m *endpoint.Machine, err error) {
 // MachineFetcher is the interface that API clients must implement.
 type MachineFetcher interface {
 	Get(string) ([]byte, error)
+	Update(string, *endpoint.MachineParams) ([]byte, error)
+	Delete(string) error
 	Commission(string, *endpoint.MachineCommissionParams) ([]byte, error)
 	Deploy(string, *endpoint.MachineDeployParams) ([]byte, error)
 	Lock(string, string) ([]byte, error)
@@ -60,6 +62,21 @@ func (m *MachineManager) SystemID() string {
 	return m.Current().SystemID
 }
 
+// UpdateState updates the current state of the machine.
+func (m *MachineManager) UpdateState() error {
+	res, err := m.client.Get(m.SystemID())
+	if err != nil {
+		return err
+	}
+
+	err = m.appendMachineState(res)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // Commission calls the commission operation on the API.
 func (m *MachineManager) Commission(params *endpoint.MachineCommissionParams) error {
 	m.mutex.Lock()
@@ -67,7 +84,7 @@ func (m *MachineManager) Commission(params *endpoint.MachineCommissionParams) er
 
 	res, err := m.client.Commission(m.SystemID(), params)
 	if err == nil {
-		err = m.appendBytes(res)
+		err = m.appendMachineState(res)
 	}
 	return err
 }
@@ -79,18 +96,9 @@ func (m *MachineManager) Deploy(params *endpoint.MachineDeployParams) error {
 
 	res, err := m.client.Deploy(m.SystemID(), params)
 	if err == nil {
-		err = m.appendBytes(res)
+		err = m.appendMachineState(res)
 	}
 	return err
-}
-
-// Update fetches and returns the current state of the machine.
-func (m *MachineManager) Update() (ma *endpoint.Machine, err error) {
-	ma, err = m.update()
-	if err == nil {
-		m.append(ma)
-	}
-	return
 }
 
 // Lock calls the lock operation on the API.
@@ -100,28 +108,33 @@ func (m *MachineManager) Lock(comment string) error {
 
 	res, err := m.client.Lock(m.SystemID(), comment)
 	if err == nil {
-		err = m.appendBytes(res)
+		err = m.appendMachineState(res)
 	}
 	return err
 }
 
-func (m *MachineManager) append(current *endpoint.Machine) {
-	m.state = append(m.state, *current)
+// Calls the machine update API
+func (m *MachineManager) Update(params *endpoint.MachineParams) error {
+	m.mutex.Lock()
+	defer m.mutex.Unlock()
+
+	res, err := m.client.Update(m.SystemID(), params)
+	if err != nil {
+		return err
+	}
+
+	return m.appendMachineState(res)
 }
 
-func (m *MachineManager) appendBytes(data []byte) error {
-	next, err := NewMachine(data)
+// Calls the delete Pod API
+func (m *MachineManager) Delete() error {
+	return m.client.Delete(m.SystemID())
+}
+
+func (m *MachineManager) appendMachineState(data []byte) error {
+	ma, err := NewMachine(data)
 	if err == nil {
-		m.append(next)
+		m.state = append(m.state, *ma)
 	}
 	return err
-}
-
-func (m *MachineManager) update() (ma *endpoint.Machine, err error) {
-	var res []byte
-	res, err = m.client.Get(m.SystemID())
-	if err == nil {
-		ma, err = NewMachine(res)
-	}
-	return
 }

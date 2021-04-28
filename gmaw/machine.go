@@ -48,6 +48,21 @@ func (m *Machine) Get(systemID string) ([]byte, error) {
 	return res.GetBytes()
 }
 
+func (m *Machine) Update(systemID string, params *endpoint.MachineParams) ([]byte, error) {
+	mc := m.client.GetSubObject("machines").GetSubObject(systemID)
+	maasObj, err := mc.Update(maas.ToQSP(params))
+	if err != nil {
+		return nil, err
+	}
+
+	return maasObj.MarshalJSON()
+}
+
+func (m *Machine) Delete(systemID string) error {
+	mc := m.client.GetSubObject("machines").GetSubObject(systemID)
+	return mc.Delete()
+}
+
 // Commission fulfills the maas.MachineFetcher interface
 func (m *Machine) Commission(systemID string, params *endpoint.MachineCommissionParams) ([]byte, error) {
 	qsp := maas.ToQSP(params)
