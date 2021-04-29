@@ -95,21 +95,23 @@ type MachineServiceSet struct {
 
 // MachineParams enumerates the parameters for the machine update operation
 type MachineParams struct {
-	CPUCount     int    `json:"cpu_count"`
-	Memory       int    `json:"memory"`
-	SwapSize     int    `json:"swap_size"`
-	Architecture string `json:"architecture"`
-	MinHWEKernel string `json:"min_hwe_kernel"`
-	PowerType    string `json:"power_type"`
-	Hostname     string `json:"hostname"`
-	Description  string `json:"description"`
-	Domain       string `json:"domain"`
-	Pool         string `json:"pool"`
-	Zone         string `json:"zone"`
+	CPUCount      int    `json:"cpu_count"`
+	Memory        int    `json:"memory"`
+	SwapSize      int    `json:"swap_size"`
+	PXEMacAddress string `json:"mac_addresses"`
+	Architecture  string `json:"architecture"`
+	MinHWEKernel  string `json:"min_hwe_kernel"`
+	PowerType     string `json:"power_type"`
+	Hostname      string `json:"hostname"`
+	Description   string `json:"description"`
+	Domain        string `json:"domain"`
+	Pool          string `json:"pool"`
+	Zone          string `json:"zone"`
+	Commission    bool   `json:"commission"`
 }
 
-type VirshMachineParams struct {
-	MachineParams
+// VirshPowerParams enumerates the parameters for the virsh power type.
+type VirshPowerParams struct {
 	PowerAddress  string `json:"power_parameters_power_address"`
 	PowerID       string `json:"power_parameters_power_id"`
 	PowerPassword string `json:"power_parameters_power_pass"`

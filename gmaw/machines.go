@@ -33,6 +33,15 @@ func (m *Machines) callPost(op string, qsp url.Values) ([]byte, error) {
 	return res.GetBytes()
 }
 
+// Creates a new MAAS machines
+func (m *Machines) Create(machineParams *endpoint.MachineParams, powerParams interface{}) ([]byte, error) {
+	qspParams := maas.ToQSP(machineParams)
+	for k, v := range maas.ToQSP(powerParams) {
+		qspParams[k] = v
+	}
+	return m.callPost("", qspParams)
+}
+
 // Allocate fulfills the maas.MachinesFetcher interface
 func (m *Machines) Allocate(params *endpoint.MachinesAllocateParams) ([]byte, error) {
 	qsp := maas.ToQSP(params)
