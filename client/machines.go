@@ -25,10 +25,10 @@ func (m *Machines) Get() (machines []entity.Machine, err error) {
 }
 
 // Create machine.
-func (m *Machines) Create(machineParams *entity.MachineParams, powerParams interface{}) (ma *entity.Machine, err error) {
+func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[string]string) (ma *entity.Machine, err error) {
 	qsp := ToQSP(machineParams)
-	for k, v := range ToQSP(powerParams) {
-		qsp[k] = v
+	for k, v := range powerParams {
+		qsp.Add(k, v)
 	}
 	ma = new(entity.Machine)
 	err = m.client().Post("", qsp, func(data []byte) error {

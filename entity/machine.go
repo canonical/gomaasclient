@@ -110,13 +110,6 @@ type MachineParams struct {
 	Commission    bool   `json:"commission"`
 }
 
-// VirshPowerParams enumerates the parameters for the virsh power type.
-type VirshPowerParams struct {
-	PowerAddress  string `json:"power_parameters_power_address"`
-	PowerID       string `json:"power_parameters_power_id"`
-	PowerPassword string `json:"power_parameters_power_pass"`
-}
-
 // MachineCommissionParams enumerates the parameters for the commission operation
 type MachineCommissionParams struct {
 	EnableSSH            int    `json:"enable_ssh"`

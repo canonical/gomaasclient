@@ -26,9 +26,13 @@ func (m *Machine) Get(systemID string) (ma *entity.Machine, err error) {
 }
 
 // Update machine.
-func (m *Machine) Update(systemID string, params *entity.MachineParams) (ma *entity.Machine, err error) {
+func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, powerParams map[string]string) (ma *entity.Machine, err error) {
+	qsp := ToQSP(machineParams)
+	for k, v := range powerParams {
+		qsp.Add(k, v)
+	}
 	ma = new(entity.Machine)
-	err = m.client(systemID).Put(ToQSP(params), func(data []byte) error {
+	err = m.client(systemID).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
 	return
