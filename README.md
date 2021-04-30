@@ -4,9 +4,27 @@ This repository contains the following  packages:
 
 * `api` - defines an interface to each MAAS API endpoint.
 
-* `gmaw` (**G**o**M**aas**A**pi**W**rapper) - is a wrapper (read: adapter) for [gomaasapi](github.com/juju/gomaasapi) to make it compatible with the client interfaces defined in and expected by the adjacent `maas` package.
+* `entity` - defines types for the MAAS API endpoints' return types.
 
-* `maas` - encapsulates a MAAS API client with thread safety, state management, Go types for resource data, and enhanced functionality for managing API calls.
+* `client` - contains the MAAS client source code.
+
+## Usage
+
+```Go
+import (
+    gomaasclient "github.com/ionutbalutoiu/gomaasclient/client"
+)
+
+c, _ := gomaasclient.GetClient("<MAAS_URL>", "<API_KEY>", "2.0")
+
+// List MAAS machines
+machines, _ := c.Machines.Get()
+// Get MAAS machine details
+machine, _ := c.Machine.Get(machines[0].SystemID)
+
+// List MAAS pods
+pods, _ := c.Pods.Get()
+```
 
 ## Credit
 

@@ -1,10 +1,10 @@
 package api
 
 import (
-	"github.com/ionutbalutoiu/gomaasclient/api/endpoint"
+	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
 // RackControllers represents the MaaS Rack Controllers endpoint
 type RackControllers interface {
-	Get(*endpoint.RackControllerSearch) ([]endpoint.RackController, error)
+	Get(*entity.RackControllerSearch) ([]entity.RackController, error)
 }
