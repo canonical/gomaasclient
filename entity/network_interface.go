@@ -1,6 +1,8 @@
 package entity
 
-import "net"
+import (
+	"net"
+)
 
 // NetworkInterface represents the MaaS Interface endpoint.
 type NetworkInterface struct {

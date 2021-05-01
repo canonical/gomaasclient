@@ -1,6 +1,8 @@
 package entity
 
-import "net"
+import (
+	"net"
+)
 
 // Subnet represents the MaaS Subnet endpoint.
 type Subnet struct {

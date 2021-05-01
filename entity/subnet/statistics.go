@@ -1,6 +1,8 @@
 package subnet
 
-import "net"
+import (
+	"net"
+)
 
 // Statistics represents a Subnet's GetStatistics()
 type Statistics struct {

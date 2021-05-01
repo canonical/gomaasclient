@@ -1,4 +1,4 @@
-package entity_test
+package entity
 
 import (
 	"net"
@@ -6,7 +6,6 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 
-	. "github.com/ionutbalutoiu/gomaasclient/entity"
 	"github.com/ionutbalutoiu/gomaasclient/test/helper"
 )
 

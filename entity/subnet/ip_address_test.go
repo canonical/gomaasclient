@@ -1,4 +1,4 @@
-package subnet_test
+package subnet
 
 import (
 	"net"
@@ -6,7 +6,6 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 
-	. "github.com/ionutbalutoiu/gomaasclient/entity/subnet"
 	"github.com/ionutbalutoiu/gomaasclient/test/helper"
 )
 

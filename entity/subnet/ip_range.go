@@ -1,6 +1,8 @@
 package subnet
 
-import "net"
+import (
+	"net"
+)
 
 // IPRange represents an IP range from a Subnet's GetUnreservedIPRanges()
 type IPRange struct {

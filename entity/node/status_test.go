@@ -1,11 +1,9 @@
-package node_test
+package node
 
 import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-
-	. "github.com/ionutbalutoiu/gomaasclient/entity/node"
 )
 
 func TestStatus(t *testing.T) {

@@ -1,11 +1,10 @@
-package entity_test
+package entity
 
 import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 
-	. "github.com/ionutbalutoiu/gomaasclient/entity"
 	"github.com/ionutbalutoiu/gomaasclient/test/helper"
 )
 

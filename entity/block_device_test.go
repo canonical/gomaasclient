@@ -1,9 +1,8 @@
-package entity_test
+package entity
 
 import (
 	"testing"
 
-	. "github.com/ionutbalutoiu/gomaasclient/entity"
 	"github.com/ionutbalutoiu/gomaasclient/test/helper"
 )
 
