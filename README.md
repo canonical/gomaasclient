@@ -3,9 +3,7 @@
 This repository contains the following  packages:
 
 * `api` - defines an interface to each MAAS API endpoint.
-
 * `entity` - defines types for the MAAS API endpoints' return types.
-
 * `client` - contains the MAAS client source code.
 
 ## Usage
@@ -19,6 +17,7 @@ c, _ := gomaasclient.GetClient("<MAAS_URL>", "<API_KEY>", "2.0")
 
 // List MAAS machines
 machines, _ := c.Machines.Get()
+
 // Get MAAS machine details
 machine, _ := c.Machine.Get(machines[0].SystemID)
 
