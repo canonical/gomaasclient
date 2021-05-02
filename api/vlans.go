@@ -7,5 +7,5 @@ import (
 // VLANs represents the MaaS Vlans endpoint
 type VLANs interface {
 	Get(fabricID int) ([]entity.VLAN, error)
-	Post(fabricID int, params *entity.VLANParams) (*entity.VLAN, error)
+	Create(fabricID int, params *entity.VLANParams) (*entity.VLAN, error)
 }

@@ -13,25 +13,33 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 		return nil, err
 	}
 	client := Client{
-		Machine:  &Machine{ApiClient: *apiClient},
-		Machines: &Machines{ApiClient: *apiClient},
-		Pod:      &Pod{ApiClient: *apiClient},
-		Pods:     &Pods{ApiClient: *apiClient},
-		Subnets:  &Subnets{ApiClient: *apiClient},
-		Tag:      &Tag{ApiClient: *apiClient},
-		Tags:     &Tags{ApiClient: *apiClient},
+		Fabrics:           &Fabrics{ApiClient: *apiClient},
+		VLANs:             &VLANs{ApiClient: *apiClient},
+		Machine:           &Machine{ApiClient: *apiClient},
+		Machines:          &Machines{ApiClient: *apiClient},
+		Pod:               &Pod{ApiClient: *apiClient},
+		Pods:              &Pods{ApiClient: *apiClient},
+		NetworkInterface:  &NetworkInterface{ApiClient: *apiClient},
+		NetworkInterfaces: &NetworkInterfaces{ApiClient: *apiClient},
+		Subnets:           &Subnets{ApiClient: *apiClient},
+		Tag:               &Tag{ApiClient: *apiClient},
+		Tags:              &Tags{ApiClient: *apiClient},
 	}
 	return &client, nil
 }
 
 type Client struct {
-	Machine  api.Machine
-	Machines api.Machines
-	Pod      api.Pod
-	Pods     api.Pods
-	Subnets  api.Subnets
-	Tag      api.Tag
-	Tags     api.Tags
+	Fabrics           api.Fabrics
+	VLANs             api.VLANs
+	Machine           api.Machine
+	Machines          api.Machines
+	Pod               api.Pod
+	Pods              api.Pods
+	NetworkInterface  api.NetworkInterface
+	NetworkInterfaces api.NetworkInterfaces
+	Subnets           api.Subnets
+	Tag               api.Tag
+	Tags              api.Tags
 }
 
 func GetApiClient(apiURL string, apiKey string, apiVersion string) (*ApiClient, error) {
