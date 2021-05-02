@@ -38,7 +38,7 @@ func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[s
 }
 
 // Allocate machine.
-func (m *Machines) Allocate(params *entity.MachinesAllocateParams) (ma *entity.Machine, err error) {
+func (m *Machines) Allocate(params *entity.MachineAllocateParams) (ma *entity.Machine, err error) {
 	ma = new(entity.Machine)
 	err = m.client().Post("allocate", ToQSP(params), func(data []byte) error {
 		return json.Unmarshal(data, ma)
