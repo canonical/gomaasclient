@@ -7,5 +7,5 @@ import (
 // Subnets represents the MaaS Subnets endpoint
 type Subnets interface {
 	Get() ([]entity.Subnet, error)
-	Post(*entity.SubnetParams) (*entity.Subnet, error)
+	Create(params *entity.SubnetParams) (*entity.Subnet, error)
 }

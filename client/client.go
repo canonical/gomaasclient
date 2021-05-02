@@ -17,6 +17,7 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 		Machines: &Machines{ApiClient: *apiClient},
 		Pod:      &Pod{ApiClient: *apiClient},
 		Pods:     &Pods{ApiClient: *apiClient},
+		Subnets:  &Subnets{ApiClient: *apiClient},
 		Tag:      &Tag{ApiClient: *apiClient},
 		Tags:     &Tags{ApiClient: *apiClient},
 	}
@@ -28,6 +29,7 @@ type Client struct {
 	Machines api.Machines
 	Pod      api.Pod
 	Pods     api.Pods
+	Subnets  api.Subnets
 	Tag      api.Tag
 	Tags     api.Tags
 }
