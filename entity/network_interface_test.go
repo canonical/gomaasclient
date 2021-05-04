@@ -383,7 +383,7 @@ var sampleNetworkInterfaces []NetworkInterface = []NetworkInterface{
 			{
 				ID:        18,
 				Mode:      "static",
-				IPAddress: net.ParseIP("2001:db8:42:0:6556:13fa:7452:70da"),
+				IPAddress: "2001:db8:42:0:6556:13fa:7452:70da",
 				Subnet: Subnet{
 					Name: "name-m3vYqT",
 					VLAN: VLAN{
@@ -461,7 +461,7 @@ var sampleNetworkInterfaces []NetworkInterface = []NetworkInterface{
 			{
 				ID:        19,
 				Mode:      "static",
-				IPAddress: net.ParseIP("2001:db8:42:0:cf29:e368:ba5b:9977"),
+				IPAddress: "2001:db8:42:0:cf29:e368:ba5b:9977",
 				Subnet: Subnet{
 					Name: "name-m3vYqT",
 					VLAN: VLAN{

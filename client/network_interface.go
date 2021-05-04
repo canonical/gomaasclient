@@ -65,7 +65,9 @@ func (n *NetworkInterface) LinkSubnet(systemID string, id int, params *entity.Ne
 }
 
 func (n *NetworkInterface) UnlinkSubnet(systemID string, id int, linkID int) (networkInterface *entity.NetworkInterface, err error) {
-	return n.callPost(systemID, id, url.Values{}, "unlink_subnet")
+	qsp := url.Values{}
+	qsp.Add("id", fmt.Sprintf("%v", linkID))
+	return n.callPost(systemID, id, qsp, "unlink_subnet")
 }
 
 func (n *NetworkInterface) SetDefaultGateway(systemID string, id int, linkID int) (networkInterface *entity.NetworkInterface, err error) {

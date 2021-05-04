@@ -1,9 +1,5 @@
 package entity
 
-import (
-	"net"
-)
-
 // NetworkInterface represents the MaaS Interface endpoint.
 type NetworkInterface struct {
 	VLAN               VLAN                   `json:"vlan,omitempty"`
@@ -42,7 +38,7 @@ type NetworkInterfaceLink struct {
 	ID        int    `json:"id,omitempty"`
 	Mode      string `json:"mode,omitempty"`
 	Subnet    Subnet `json:"subnet,omitempty"`
-	IPAddress net.IP `json:"ip_address,omitempty"`
+	IPAddress string `json:"ip_address,omitempty"`
 }
 
 // NetworkInterfaceLinkParams is used with NetworkInterface.LinkSubnet().
@@ -55,9 +51,9 @@ type NetworkInterfaceLink struct {
 type NetworkInterfaceLinkParams struct {
 	Mode           string `json:"mode"`
 	Subnet         int    `json:"subnet"`
-	IPAddress      net.IP `json:"ip_address"`
+	IPAddress      string `json:"ip_address"`
 	Force          bool   `json:"force"`
-	DefaultGateway net.IP `json:"default_gateway"`
+	DefaultGateway bool   `json:"default_gateway"`
 }
 
 // NetworkInterfacePhysical is the parameters for the NetworkInterfaces create_physical POST operation.

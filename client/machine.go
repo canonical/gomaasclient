@@ -73,3 +73,12 @@ func (m *Machine) Lock(systemID string, comment string) (ma *entity.Machine, err
 	})
 	return
 }
+
+// Clear default gateways.
+func (m *Machine) ClearDefaultGateways(systemID string) (ma *entity.Machine, err error) {
+	ma = new(entity.Machine)
+	err = m.client(systemID).Post("clear_default_gateways", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, ma)
+	})
+	return
+}

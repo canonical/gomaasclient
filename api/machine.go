@@ -11,4 +11,5 @@ type Machine interface {
 	Commission(systemID string, params *entity.MachineCommissionParams) (*entity.Machine, error)
 	Deploy(systemID string, params *entity.MachineDeployParams) (*entity.Machine, error)
 	Lock(systemID string, comment string) (*entity.Machine, error)
+	ClearDefaultGateways(systemID string) (*entity.Machine, error)
 }
