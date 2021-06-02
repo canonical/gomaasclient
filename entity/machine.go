@@ -156,14 +156,15 @@ type MachineAllocateParams struct {
 
 // MachineDeployParams enumerates the parameters for the deploy operation
 type MachineDeployParams struct {
-	UserData     string `json:"user_data"`
-	DistroSeries string `json:"distro_series"`
-	HWEKernel    string `json:"hwe_kernel"`
-	AgentName    string `json:"agent_name"`
-	Comment      string `json:"comment"`
-	BridgeFD     int    `json:"bridge_fd"`
-	BridgeAll    bool   `json:"bridge_all"`
-	BridgeSTP    bool   `json:"bridge_stp"`
-	InstallRackD bool   `json:"install_rackd"`
-	InstallKVM   bool   `json:"install_kvm"`
+	UserData       string `json:"user_data"`
+	DistroSeries   string `json:"distro_series"`
+	HWEKernel      string `json:"hwe_kernel"`
+	AgentName      string `json:"agent_name"`
+	Comment        string `json:"comment"`
+	BridgeFD       int    `json:"bridge_fd"`
+	BridgeAll      bool   `json:"bridge_all"`
+	BridgeSTP      bool   `json:"bridge_stp"`
+	InstallRackD   bool   `json:"install_rackd"`
+	InstallKVM     bool   `json:"install_kvm"`
+	RegisterVMHost bool   `json:"register_vmhost"`
 }
