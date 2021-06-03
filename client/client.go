@@ -17,8 +17,8 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 		VLANs:             &VLANs{ApiClient: *apiClient},
 		Machine:           &Machine{ApiClient: *apiClient},
 		Machines:          &Machines{ApiClient: *apiClient},
-		Pod:               &Pod{ApiClient: *apiClient},
-		Pods:              &Pods{ApiClient: *apiClient},
+		VMHost:            &VMHost{ApiClient: *apiClient},
+		VMHosts:           &VMHosts{ApiClient: *apiClient},
 		NetworkInterface:  &NetworkInterface{ApiClient: *apiClient},
 		NetworkInterfaces: &NetworkInterfaces{ApiClient: *apiClient},
 		Subnets:           &Subnets{ApiClient: *apiClient},
@@ -33,8 +33,8 @@ type Client struct {
 	VLANs             api.VLANs
 	Machine           api.Machine
 	Machines          api.Machines
-	Pod               api.Pod
-	Pods              api.Pods
+	VMHost            api.VMHost
+	VMHosts           api.VMHosts
 	NetworkInterface  api.NetworkInterface
 	NetworkInterfaces api.NetworkInterfaces
 	Subnets           api.Subnets

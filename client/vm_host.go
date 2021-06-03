@@ -9,38 +9,38 @@ import (
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
-// Contains functionality for manipulating the Pod entity.
-type Pod struct {
+// Contains functionality for manipulating the VMHost entity.
+type VMHost struct {
 	ApiClient ApiClient
 	mutex     sync.Mutex
 }
 
-func (p *Pod) client(id int) ApiClient {
+func (p *VMHost) client(id int) ApiClient {
 	return p.ApiClient.GetSubObject("pods").GetSubObject(fmt.Sprintf("%v", id))
 }
 
-func (p *Pod) Get(id int) (pod *entity.Pod, err error) {
-	pod = new(entity.Pod)
+func (p *VMHost) Get(id int) (vmHost *entity.VMHost, err error) {
+	vmHost = new(entity.VMHost)
 	err = p.client(id).Get("", url.Values{}, func(data []byte) error {
-		return json.Unmarshal(data, pod)
+		return json.Unmarshal(data, vmHost)
 	})
 	return
 }
 
-func (p *Pod) Update(id int, params *entity.PodParams) (pod *entity.Pod, err error) {
-	pod = new(entity.Pod)
+func (p *VMHost) Update(id int, params *entity.VMHostParams) (vmHost *entity.VMHost, err error) {
+	vmHost = new(entity.VMHost)
 	err = p.client(id).Put(ToQSP(params), func(data []byte) error {
-		return json.Unmarshal(data, pod)
+		return json.Unmarshal(data, vmHost)
 	})
 	return
 }
 
-func (p *Pod) Delete(id int) (err error) {
+func (p *VMHost) Delete(id int) (err error) {
 	err = p.client(id).Delete()
 	return
 }
 
-func (p *Pod) Compose(id int, params *entity.PodMachineParams) (machine *entity.Machine, err error) {
+func (p *VMHost) Compose(id int, params *entity.VMHostMachineParams) (machine *entity.Machine, err error) {
 	p.mutex.Lock()
 	defer p.mutex.Unlock()
 
@@ -51,15 +51,15 @@ func (p *Pod) Compose(id int, params *entity.PodMachineParams) (machine *entity.
 	return
 }
 
-func (p *Pod) Refresh(id int) (pod *entity.Pod, err error) {
+func (p *VMHost) Refresh(id int) (vmHost *entity.VMHost, err error) {
 	err = p.client(id).Post("refresh", url.Values{}, func(data []byte) error { return nil })
 	return
 }
 
-func (p *Pod) GetParameters(id int) (podParams *entity.PodParams, err error) {
-	podParams = new(entity.PodParams)
+func (p *VMHost) GetParameters(id int) (vmHostParams *entity.VMHostParams, err error) {
+	vmHostParams = new(entity.VMHostParams)
 	err = p.client(id).Get("parameters", url.Values{}, func(data []byte) error {
-		return json.Unmarshal(data, podParams)
+		return json.Unmarshal(data, vmHostParams)
 	})
 	return
 }

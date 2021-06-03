@@ -9,7 +9,7 @@ import (
 // Machine represents the MaaS Machine endpoint.
 type Machine struct {
 	BootInterface   NetworkInterface `json:"boot_interface,omitempty"`
-	Pod             Pod              `json:"pod,omitempty"`
+	VMHost          VMHost           `json:"pod,omitempty"`
 	BootDisk        BlockDevice      `json:"boot_disk,omitempty"`
 	Domain          Domain           `json:"domain,omitempty"`
 	DefaultGateways struct {
@@ -138,10 +138,10 @@ type MachineAllocateParams struct {
 	Arch             string   `json:"arch"`
 	Zone             string   `json:"zone"`
 	Pool             string   `json:"pool"`
-	Pod              string   `json:"pod"`
-	NotPod           string   `json:"not_pod"`
-	PodType          string   `json:"pod_type"`
-	NotPodType       string   `json:"not_pod_type"`
+	VMHost           string   `json:"pod"`
+	NotVMHost        string   `json:"not_pod"`
+	VMHostType       string   `json:"pod_type"`
+	NotVMHostType    string   `json:"not_pod_type"`
 	Interfaces       string   `json:"interfaces"`
 	AgentName        string   `json:"agent_name"`
 	Comment          string   `json:"comment"`

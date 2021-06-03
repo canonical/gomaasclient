@@ -21,8 +21,8 @@ machines, _ := c.Machines.Get()
 // Get MAAS machine details
 machine, _ := c.Machine.Get(machines[0].SystemID)
 
-// List MAAS pods
-pods, _ := c.Pods.Get()
+// List MAAS VM hosts
+vmHosts, _ := c.VMHosts.Get()
 ```
 
 ## Credit
