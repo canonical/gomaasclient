@@ -10,4 +10,5 @@ type Pod interface {
 	Delete(id int) error
 	Compose(id int, params *entity.PodMachineParams) (*entity.Machine, error)
 	Refresh(id int) (*entity.Pod, error)
+	GetParameters(id int) (*entity.PodParams, error)
 }

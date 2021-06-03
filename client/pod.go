@@ -50,3 +50,11 @@ func (p *Pod) Refresh(id int) (pod *entity.Pod, err error) {
 	err = p.client(id).Post("refresh", url.Values{}, func(data []byte) error { return nil })
 	return
 }
+
+func (p *Pod) GetParameters(id int) (podParams *entity.PodParams, err error) {
+	podParams = new(entity.PodParams)
+	err = p.client(id).Get("parameters", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, podParams)
+	})
+	return
+}
