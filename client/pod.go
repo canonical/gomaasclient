@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/url"
+	"sync"
 
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
@@ -11,6 +12,7 @@ import (
 // Contains functionality for manipulating the Pod entity.
 type Pod struct {
 	ApiClient ApiClient
+	mutex     sync.Mutex
 }
 
 func (p *Pod) client(id int) ApiClient {
@@ -39,6 +41,9 @@ func (p *Pod) Delete(id int) (err error) {
 }
 
 func (p *Pod) Compose(id int, params *entity.PodMachineParams) (machine *entity.Machine, err error) {
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
+
 	machine = new(entity.Machine)
 	err = p.client(id).Post("compose", ToQSP(params), func(data []byte) error {
 		return json.Unmarshal(data, machine)
