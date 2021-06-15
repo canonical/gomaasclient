@@ -24,6 +24,8 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 		Subnets:           &Subnets{ApiClient: *apiClient},
 		Tag:               &Tag{ApiClient: *apiClient},
 		Tags:              &Tags{ApiClient: *apiClient},
+		BlockDevice:       &BlockDevice{ApiClient: *apiClient},
+		BlockDevices:      &BlockDevices{ApiClient: *apiClient},
 	}
 	return &client, nil
 }
@@ -40,6 +42,8 @@ type Client struct {
 	Subnets           api.Subnets
 	Tag               api.Tag
 	Tags              api.Tags
+	BlockDevice       api.BlockDevice
+	BlockDevices      api.BlockDevices
 }
 
 func GetApiClient(apiURL string, apiKey string, apiVersion string) (*ApiClient, error) {

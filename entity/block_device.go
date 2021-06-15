@@ -17,10 +17,20 @@ type BlockDevice struct {
 	UsedSize           int                    `json:"used_size,omitempty"`
 	PartitionTableType string                 `json:"partition_table_type,omitempty"`
 	Partitions         []BlockDevicePartition `json:"partitions,omitempty"`
-	Filesystem         string                 `json:"filesystem,omitempty"`
+	Filesystem         PartitionFileSystem    `json:"filesystem,omitempty"`
 	StoragePool        string                 `json:"storage_pool,omitempty"`
 	UsedFor            string                 `json:"used_for,omitempty"`
 	Type               string                 `json:"type,omitempty"`
 	UUID               string                 `json:"uuid,omitempty"`
 	ResourceURI        string                 `json:"resource_uri,omitempty"`
+}
+
+type BlockDeviceParams struct {
+	Name      string `json:"name"`
+	UUID      string `json:"uuid"`
+	Model     string `json:"model"`
+	Serial    string `json:"serial"`
+	IDPath    string `json:"id_path"`
+	Size      int    `json:"size"`
+	BlockSize int    `json:"block_size"`
 }
