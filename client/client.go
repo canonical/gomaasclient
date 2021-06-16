@@ -13,37 +13,41 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 		return nil, err
 	}
 	client := Client{
-		Fabrics:           &Fabrics{ApiClient: *apiClient},
-		VLANs:             &VLANs{ApiClient: *apiClient},
-		Machine:           &Machine{ApiClient: *apiClient},
-		Machines:          &Machines{ApiClient: *apiClient},
-		VMHost:            &VMHost{ApiClient: *apiClient},
-		VMHosts:           &VMHosts{ApiClient: *apiClient},
-		NetworkInterface:  &NetworkInterface{ApiClient: *apiClient},
-		NetworkInterfaces: &NetworkInterfaces{ApiClient: *apiClient},
-		Subnets:           &Subnets{ApiClient: *apiClient},
-		Tag:               &Tag{ApiClient: *apiClient},
-		Tags:              &Tags{ApiClient: *apiClient},
-		BlockDevice:       &BlockDevice{ApiClient: *apiClient},
-		BlockDevices:      &BlockDevices{ApiClient: *apiClient},
+		Fabrics:               &Fabrics{ApiClient: *apiClient},
+		VLANs:                 &VLANs{ApiClient: *apiClient},
+		Machine:               &Machine{ApiClient: *apiClient},
+		Machines:              &Machines{ApiClient: *apiClient},
+		VMHost:                &VMHost{ApiClient: *apiClient},
+		VMHosts:               &VMHosts{ApiClient: *apiClient},
+		NetworkInterface:      &NetworkInterface{ApiClient: *apiClient},
+		NetworkInterfaces:     &NetworkInterfaces{ApiClient: *apiClient},
+		Subnets:               &Subnets{ApiClient: *apiClient},
+		Tag:                   &Tag{ApiClient: *apiClient},
+		Tags:                  &Tags{ApiClient: *apiClient},
+		BlockDevice:           &BlockDevice{ApiClient: *apiClient},
+		BlockDevices:          &BlockDevices{ApiClient: *apiClient},
+		BlockDevicePartition:  &BlockDevicePartition{ApiClient: *apiClient},
+		BlockDevicePartitions: &BlockDevicePartitions{ApiClient: *apiClient},
 	}
 	return &client, nil
 }
 
 type Client struct {
-	Fabrics           api.Fabrics
-	VLANs             api.VLANs
-	Machine           api.Machine
-	Machines          api.Machines
-	VMHost            api.VMHost
-	VMHosts           api.VMHosts
-	NetworkInterface  api.NetworkInterface
-	NetworkInterfaces api.NetworkInterfaces
-	Subnets           api.Subnets
-	Tag               api.Tag
-	Tags              api.Tags
-	BlockDevice       api.BlockDevice
-	BlockDevices      api.BlockDevices
+	Fabrics               api.Fabrics
+	VLANs                 api.VLANs
+	Machine               api.Machine
+	Machines              api.Machines
+	VMHost                api.VMHost
+	VMHosts               api.VMHosts
+	NetworkInterface      api.NetworkInterface
+	NetworkInterfaces     api.NetworkInterfaces
+	Subnets               api.Subnets
+	Tag                   api.Tag
+	Tags                  api.Tags
+	BlockDevice           api.BlockDevice
+	BlockDevices          api.BlockDevices
+	BlockDevicePartition  api.BlockDevicePartition
+	BlockDevicePartitions api.BlockDevicePartitions
 }
 
 func GetApiClient(apiURL string, apiKey string, apiVersion string) (*ApiClient, error) {
@@ -52,10 +56,11 @@ func GetApiClient(apiURL string, apiKey string, apiVersion string) (*ApiClient, 
 	if err != nil {
 		return nil, err
 	}
-	return &ApiClient{gomaasapi.NewMAAS(*authClient)}, nil
+	return &ApiClient{*authClient, gomaasapi.NewMAAS(*authClient)}, nil
 }
 
 type ApiClient struct {
+	AuthClient gomaasapi.Client
 	*gomaasapi.MAASObject
 }
 
@@ -73,7 +78,7 @@ func (c ApiClient) Get(op string, params url.Values, f func([]byte) error) error
 
 func (c ApiClient) GetSubObject(name string) ApiClient {
 	mc := c.MAASObject.GetSubObject(name)
-	return ApiClient{&mc}
+	return ApiClient{c.AuthClient, &mc}
 }
 
 func (c ApiClient) Post(op string, params url.Values, f func([]byte) error) error {

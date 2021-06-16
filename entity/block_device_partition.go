@@ -23,3 +23,9 @@ type PartitionFileSystem struct {
 	Label        string `json:"label,omitempty"`
 	MountOptions string `json:"mount_options,omitempty"`
 }
+
+type BlockDevicePartitionParams struct {
+	Size     int    `json:"size"`
+	UUID     string `json:"uuid"`
+	Bootable bool   `json:"bootable"`
+}
