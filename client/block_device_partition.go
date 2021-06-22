@@ -77,13 +77,14 @@ func (p *BlockDevicePartition) RemoveTag(systemID string, blockDeviceID int, id 
 	return
 }
 
-func (p *BlockDevicePartition) Format(systemID string, blockDeviceID int, id int, fsType string) (partition *entity.BlockDevicePartition, err error) {
+func (p *BlockDevicePartition) Format(systemID string, blockDeviceID int, id int, fsType string, label string) (partition *entity.BlockDevicePartition, err error) {
 	client, err := p.client(systemID, blockDeviceID, id)
 	if err != nil {
 		return
 	}
 	qsp := url.Values{}
 	qsp.Set("fstype", fsType)
+	qsp.Set("label", label)
 	partition = new(entity.BlockDevicePartition)
 	err = client.Post("format", qsp, func(data []byte) error {
 		return json.Unmarshal(data, partition)
