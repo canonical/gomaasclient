@@ -21,3 +21,11 @@ func (f *Fabrics) Get() (fabrics []entity.Fabric, err error) {
 	})
 	return
 }
+
+func (f *Fabrics) Create(fabricParams *entity.FabricParams) (fabric *entity.Fabric, err error) {
+	fabric = new(entity.Fabric)
+	err = f.client().Post("", ToQSP(fabricParams), func(data []byte) error {
+		return json.Unmarshal(data, fabric)
+	})
+	return
+}

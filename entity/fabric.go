@@ -7,3 +7,9 @@ type Fabric struct {
 	ClassType   string `json:"class_type,omitempty"`
 	ResourceURI string `json:"resource_uri,omitempty"`
 }
+
+type FabricParams struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	ClassType   string `json:"class_type"`
+}

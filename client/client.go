@@ -13,6 +13,7 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 		return nil, err
 	}
 	client := Client{
+		Fabric:                &Fabric{ApiClient: *apiClient},
 		Fabrics:               &Fabrics{ApiClient: *apiClient},
 		VLANs:                 &VLANs{ApiClient: *apiClient},
 		Machine:               &Machine{ApiClient: *apiClient},
@@ -33,6 +34,7 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 }
 
 type Client struct {
+	Fabric                api.Fabric
 	Fabrics               api.Fabrics
 	VLANs                 api.VLANs
 	Machine               api.Machine
