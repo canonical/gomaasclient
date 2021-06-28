@@ -17,6 +17,8 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 		Fabrics:               &Fabrics{ApiClient: *apiClient},
 		VLAN:                  &VLAN{ApiClient: *apiClient},
 		VLANs:                 &VLANs{ApiClient: *apiClient},
+		Space:                 &Space{ApiClient: *apiClient},
+		Spaces:                &Spaces{ApiClient: *apiClient},
 		Machine:               &Machine{ApiClient: *apiClient},
 		Machines:              &Machines{ApiClient: *apiClient},
 		VMHost:                &VMHost{ApiClient: *apiClient},
@@ -39,6 +41,8 @@ type Client struct {
 	Fabrics               api.Fabrics
 	VLAN                  api.VLAN
 	VLANs                 api.VLANs
+	Space                 api.Space
+	Spaces                api.Spaces
 	Machine               api.Machine
 	Machines              api.Machines
 	VMHost                api.VMHost
