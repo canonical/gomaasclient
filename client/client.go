@@ -25,6 +25,7 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 		VMHosts:               &VMHosts{ApiClient: *apiClient},
 		NetworkInterface:      &NetworkInterface{ApiClient: *apiClient},
 		NetworkInterfaces:     &NetworkInterfaces{ApiClient: *apiClient},
+		Subnet:                &Subnet{ApiClient: *apiClient},
 		Subnets:               &Subnets{ApiClient: *apiClient},
 		Tag:                   &Tag{ApiClient: *apiClient},
 		Tags:                  &Tags{ApiClient: *apiClient},
@@ -49,6 +50,7 @@ type Client struct {
 	VMHosts               api.VMHosts
 	NetworkInterface      api.NetworkInterface
 	NetworkInterfaces     api.NetworkInterfaces
+	Subnet                api.Subnet
 	Subnets               api.Subnets
 	Tag                   api.Tag
 	Tags                  api.Tags

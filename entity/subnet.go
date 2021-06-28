@@ -23,17 +23,16 @@ type Subnet struct {
 
 // SubnetParams contains the parameters for the POST operation on the Subnets endpoint.
 type SubnetParams struct {
-	CIDR        string   `json:"cidr,omitempty"`
-	Name        string   `json:"name,omitempty"`
-	Description string   `json:"description,omitempty"`
-	VLAN        string   `json:"vlan,omitempty"`
-	Fabric      string   `json:"fabric,omitempty"`
-	VID         int      `json:"vid,omitempty"`
-	Space       string   `json:"space,omitempty"`
-	GatewayIP   net.IP   `json:"gateway_ip,omitempty"`
-	RDNSMode    int      `json:"rdns_mode,omitempty"`
-	AllowDNS    bool     `json:"allow_dns,omitempty"`
-	AllowProxy  bool     `json:"allow_proxy,omitempty"`
-	DNSServers  []string `json:"dns_servers,omitempty"`
-	Managed     int      `json:"managed,omitempty"`
+	CIDR        string   `url:"cidr"`
+	Name        string   `url:"name,omitempty"`
+	Description string   `url:"description,omitempty"`
+	VLAN        string   `url:"vlan,omitempty"`
+	Fabric      string   `url:"fabric,omitempty"`
+	VID         int      `url:"vid,omitempty"`
+	GatewayIP   string   `url:"gateway_ip,omitempty"`
+	DNSServers  []string `url:"dns_servers,omitempty"`
+	RDNSMode    int      `url:"rdns_mode,omitempty"`
+	AllowDNS    bool     `url:"allow_dns"`
+	AllowProxy  bool     `url:"allow_proxy"`
+	Managed     bool     `url:"managed"`
 }

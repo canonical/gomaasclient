@@ -9,9 +9,9 @@ import (
 type Subnet interface {
 	Delete(id int) error
 	Get(id int) (*entity.Subnet, error)
-	GetIPAddresses(id int, WithUsername, WithSummary bool) ([]subnet.IPAddress, error)
+	GetIPAddresses(id int) ([]subnet.IPAddress, error)
 	GetReservedIPRanges(id int) ([]subnet.ReservedIPRange, error)
-	GetStatistics(id int, IncludeRanges, IncludeSuggestions bool) (*subnet.Statistics, error)
+	GetStatistics(id int) (*subnet.Statistics, error)
 	GetUnreservedIPRanges(id int) ([]subnet.IPRange, error)
-	Put(id int, params *entity.SubnetParams) (*entity.Subnet, error)
+	Update(id int, params *entity.SubnetParams) (*entity.Subnet, error)
 }

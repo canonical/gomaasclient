@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -24,8 +25,12 @@ func (s *Subnets) Get() (subnets []entity.Subnet, err error) {
 }
 
 func (s *Subnets) Create(params *entity.SubnetParams) (subnet *entity.Subnet, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	subnet = new(entity.Subnet)
-	err = s.client().Post("", ToQSP(params), func(data []byte) error {
+	err = s.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, subnet)
 	})
 	return
