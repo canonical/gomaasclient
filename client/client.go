@@ -27,6 +27,8 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 		NetworkInterfaces:     &NetworkInterfaces{ApiClient: *apiClient},
 		Subnet:                &Subnet{ApiClient: *apiClient},
 		Subnets:               &Subnets{ApiClient: *apiClient},
+		IPRange:               &IPRange{ApiClient: *apiClient},
+		IPRanges:              &IPRanges{ApiClient: *apiClient},
 		Tag:                   &Tag{ApiClient: *apiClient},
 		Tags:                  &Tags{ApiClient: *apiClient},
 		BlockDevice:           &BlockDevice{ApiClient: *apiClient},
@@ -52,6 +54,8 @@ type Client struct {
 	NetworkInterfaces     api.NetworkInterfaces
 	Subnet                api.Subnet
 	Subnets               api.Subnets
+	IPRange               api.IPRange
+	IPRanges              api.IPRanges
 	Tag                   api.Tag
 	Tags                  api.Tags
 	BlockDevice           api.BlockDevice
