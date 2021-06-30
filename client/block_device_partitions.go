@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -24,8 +25,12 @@ func (p *BlockDevicePartitions) Get(systemID string, blockDeviceID int) (partiti
 }
 
 func (p *BlockDevicePartitions) Create(systemID string, blockDeviceID int, params *entity.BlockDevicePartitionParams) (partition *entity.BlockDevicePartition, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	partition = new(entity.BlockDevicePartition)
-	err = p.client(systemID, blockDeviceID).Post("", ToQSP(params), func(data []byte) error {
+	err = p.client(systemID, blockDeviceID).Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, partition)
 	})
 	return

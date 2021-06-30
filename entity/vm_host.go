@@ -47,28 +47,28 @@ type VMHostResource struct {
 
 // VMHostParams enumerates the VMHost configuration options.
 type VMHostParams struct {
-	Name                  string  `json:"name"`
-	Type                  string  `json:"type"`
-	PowerAddress          string  `json:"power_address"`
-	PowerUser             string  `json:"power_user"`
-	PowerPass             string  `json:"power_pass"`
-	Zone                  string  `json:"zone"`
-	Pool                  string  `json:"pool"`
-	DefaultStoragePool    string  `json:"default_storage_pool"`
-	DefaultMacvlanMode    string  `json:"default_macvlan_mode"`
-	CPUOverCommitRatio    float64 `json:"cpu_over_commit_ratio"`
-	MemoryOverCommitRatio float64 `json:"memory_over_commit_ratio"`
-	Tags                  string  `json:"tags"`
+	Type                  string  `url:"type,omitempty"`
+	PowerAddress          string  `url:"power_address,omitempty"`
+	PowerUser             string  `url:"power_user,omitempty"`
+	PowerPass             string  `url:"power_pass,omitempty"`
+	Name                  string  `url:"name,omitempty"`
+	Zone                  string  `url:"zone,omitempty"`
+	Pool                  string  `url:"pool,omitempty"`
+	DefaultStoragePool    string  `url:"default_storage_pool,omitempty"`
+	DefaultMacvlanMode    string  `url:"default_macvlan_mode,omitempty"`
+	CPUOverCommitRatio    float64 `url:"cpu_over_commit_ratio,omitempty"`
+	MemoryOverCommitRatio float64 `url:"memory_over_commit_ratio,omitempty"`
+	Tags                  string  `url:"tags,omitempty"`
 }
 
 // VMHostMachineParams enumerates the VMHost machine configuration options.
 type VMHostMachineParams struct {
-	Cores           int    `json:"cores"`
-	PinnedCores     int    `json:"pinned_cores"`
-	Memory          int    `json:"memory"`
-	HugepagesBacked bool   `json:"hugepages_backed"`
-	Architecture    string `json:"architecture"`
-	Storage         string `json:"storage"`
-	Interfaces      string `json:"interfaces"`
-	Hostname        string `json:"hostname"`
+	Cores           int    `url:"cores,omitempty"`
+	PinnedCores     int    `url:"pinned_cores,omitempty"`
+	Memory          int    `url:"memory,omitempty"`
+	HugepagesBacked bool   `url:"hugepages_backed,omitempty"`
+	Architecture    string `url:"architecture,omitempty"`
+	Storage         string `url:"storage,omitempty"`
+	Interfaces      string `url:"interfaces,omitempty"`
+	Hostname        string `url:"hostname,omitempty"`
 }

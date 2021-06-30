@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -26,7 +27,10 @@ func (m *Machines) Get() (machines []entity.Machine, err error) {
 
 // Create machine.
 func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[string]string) (ma *entity.Machine, err error) {
-	qsp := ToQSP(machineParams)
+	qsp, err := query.Values(machineParams)
+	if err != nil {
+		return
+	}
 	for k, v := range powerParams {
 		qsp.Add(k, v)
 	}
@@ -39,8 +43,12 @@ func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[s
 
 // Allocate machine.
 func (m *Machines) Allocate(params *entity.MachineAllocateParams) (ma *entity.Machine, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	ma = new(entity.Machine)
-	err = m.client().Post("allocate", ToQSP(params), func(data []byte) error {
+	err = m.client().Post("allocate", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
 	return

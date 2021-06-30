@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -25,8 +26,12 @@ func (b *BlockDevice) Get(systemID string, id int) (blockDevice *entity.BlockDev
 }
 
 func (b *BlockDevice) Update(systemID string, id int, params *entity.BlockDeviceParams) (blockDevice *entity.BlockDevice, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	blockDevice = new(entity.BlockDevice)
-	err = b.client(systemID, id).Put(ToQSP(params), func(data []byte) error {
+	err = b.client(systemID, id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, blockDevice)
 	})
 	return

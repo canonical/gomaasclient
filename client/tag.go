@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -24,8 +25,12 @@ func (t *Tag) Get(name string) (tag *entity.Tag, err error) {
 }
 
 func (t *Tag) Update(name string, tagParams *entity.TagParams) (tag *entity.Tag, err error) {
+	qsp, err := query.Values(tagParams)
+	if err != nil {
+		return
+	}
 	tag = new(entity.Tag)
-	err = t.client(name).Put(ToQSP(tagParams), func(data []byte) error {
+	err = t.client(name).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, tag)
 	})
 	return

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -27,7 +28,10 @@ func (m *Machine) Get(systemID string) (ma *entity.Machine, err error) {
 
 // Update machine.
 func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, powerParams map[string]string) (ma *entity.Machine, err error) {
-	qsp := ToQSP(machineParams)
+	qsp, err := query.Values(machineParams)
+	if err != nil {
+		return
+	}
 	for k, v := range powerParams {
 		qsp.Add(k, v)
 	}
@@ -45,8 +49,12 @@ func (m *Machine) Delete(systemID string) error {
 
 // Commission machine.
 func (m *Machine) Commission(systemID string, params *entity.MachineCommissionParams) (ma *entity.Machine, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	ma = new(entity.Machine)
-	err = m.client(systemID).Post("commission", ToQSP(params), func(data []byte) error {
+	err = m.client(systemID).Post("commission", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
 	return
@@ -54,8 +62,12 @@ func (m *Machine) Commission(systemID string, params *entity.MachineCommissionPa
 
 // Deploy machine.
 func (m *Machine) Deploy(systemID string, params *entity.MachineDeployParams) (ma *entity.Machine, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	ma = new(entity.Machine)
-	err = m.client(systemID).Post("deploy", ToQSP(params), func(data []byte) error {
+	err = m.client(systemID).Post("deploy", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
 	return

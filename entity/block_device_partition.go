@@ -25,7 +25,7 @@ type PartitionFileSystem struct {
 }
 
 type BlockDevicePartitionParams struct {
-	Size     int    `json:"size"`
-	UUID     string `json:"uuid"`
-	Bootable bool   `json:"bootable"`
+	Size     int    `url:"size,omitempty"`
+	UUID     string `url:"uuid,omitempty"`
+	Bootable bool   `url:"bootable"`
 }

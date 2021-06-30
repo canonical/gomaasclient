@@ -31,7 +31,7 @@ type SubnetParams struct {
 	VID         int      `url:"vid,omitempty"`
 	GatewayIP   string   `url:"gateway_ip,omitempty"`
 	DNSServers  []string `url:"dns_servers,omitempty"`
-	RDNSMode    int      `url:"rdns_mode,omitempty"`
+	RDNSMode    int      `url:"rdns_mode"`
 	AllowDNS    bool     `url:"allow_dns"`
 	AllowProxy  bool     `url:"allow_proxy"`
 	Managed     bool     `url:"managed"`

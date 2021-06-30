@@ -6,6 +6,7 @@ import (
 	"net/url"
 	"sync"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -28,8 +29,12 @@ func (p *VMHost) Get(id int) (vmHost *entity.VMHost, err error) {
 }
 
 func (p *VMHost) Update(id int, params *entity.VMHostParams) (vmHost *entity.VMHost, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	vmHost = new(entity.VMHost)
-	err = p.client(id).Put(ToQSP(params), func(data []byte) error {
+	err = p.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, vmHost)
 	})
 	return
@@ -44,8 +49,12 @@ func (p *VMHost) Compose(id int, params *entity.VMHostMachineParams) (machine *e
 	p.mutex.Lock()
 	defer p.mutex.Unlock()
 
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	machine = new(entity.Machine)
-	err = p.client(id).Post("compose", ToQSP(params), func(data []byte) error {
+	err = p.client(id).Post("compose", qsp, func(data []byte) error {
 		return json.Unmarshal(data, machine)
 	})
 	return

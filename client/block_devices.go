@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -23,8 +24,12 @@ func (b *BlockDevices) Get(systemID string) (blockDevices []entity.BlockDevice, 
 }
 
 func (b *BlockDevices) Create(systemID string, params *entity.BlockDeviceParams) (blockDevice *entity.BlockDevice, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	blockDevice = new(entity.BlockDevice)
-	err = b.client(systemID).Post("", ToQSP(params), func(data []byte) error {
+	err = b.client(systemID).Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, blockDevice)
 	})
 	return

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -29,8 +30,12 @@ func (v *VLAN) Get(fabricID int, vid int) (vlan *entity.VLAN, err error) {
 }
 
 func (v *VLAN) Update(fabricID int, vid int, params *entity.VLANParams) (vlan *entity.VLAN, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	vlan = new(entity.VLAN)
-	err = v.client(fabricID, vid).Put(ToQSP(params), func(data []byte) error {
+	err = v.client(fabricID, vid).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, vlan)
 	})
 	return

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -25,8 +26,12 @@ func (f *Fabric) Get(id int) (fabric *entity.Fabric, err error) {
 }
 
 func (f *Fabric) Update(id int, fabricParams *entity.FabricParams) (fabric *entity.Fabric, err error) {
+	qsp, err := query.Values(fabricParams)
+	if err != nil {
+		return
+	}
 	fabric = new(entity.Fabric)
-	err = f.client(id).Put(ToQSP(fabricParams), func(data []byte) error {
+	err = f.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, fabric)
 	})
 	return

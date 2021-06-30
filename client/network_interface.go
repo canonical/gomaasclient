@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -13,7 +14,10 @@ type NetworkInterface struct {
 }
 
 func (n *NetworkInterface) client(systemID string, id int) ApiClient {
-	return n.ApiClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("interfaces").GetSubObject(fmt.Sprintf("%v", id))
+	return n.ApiClient.GetSubObject("nodes").
+		GetSubObject(systemID).
+		GetSubObject("interfaces").
+		GetSubObject(fmt.Sprintf("%v", id))
 }
 
 func (n *NetworkInterface) callPost(systemID string, id int, qsp url.Values, op string) (networkInterface *entity.NetworkInterface, err error) {
@@ -33,8 +37,12 @@ func (n *NetworkInterface) Get(systemID string, id int) (networkInterface *entit
 }
 
 func (n *NetworkInterface) Update(systemID string, id int, params interface{}) (networkInterface *entity.NetworkInterface, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	networkInterface = new(entity.NetworkInterface)
-	err = n.client(systemID, id).Put(ToQSP(params), func(data []byte) error {
+	err = n.client(systemID, id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, networkInterface)
 	})
 	return
@@ -61,7 +69,11 @@ func (n *NetworkInterface) RemoveTag(systemID string, id int, tag string) (*enti
 }
 
 func (n *NetworkInterface) LinkSubnet(systemID string, id int, params *entity.NetworkInterfaceLinkParams) (*entity.NetworkInterface, error) {
-	return n.callPost(systemID, id, ToQSP(params), "link_subnet")
+	qsp, err := query.Values(params)
+	if err != nil {
+		return nil, err
+	}
+	return n.callPost(systemID, id, qsp, "link_subnet")
 }
 
 func (n *NetworkInterface) UnlinkSubnet(systemID string, id int, linkID int) (networkInterface *entity.NetworkInterface, err error) {

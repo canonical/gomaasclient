@@ -26,11 +26,11 @@ type BlockDevice struct {
 }
 
 type BlockDeviceParams struct {
-	Name      string `json:"name"`
-	UUID      string `json:"uuid"`
-	Model     string `json:"model"`
-	Serial    string `json:"serial"`
-	IDPath    string `json:"id_path"`
-	Size      int    `json:"size"`
-	BlockSize int    `json:"block_size"`
+	Name      string `url:"name,omitempty"`
+	Size      int    `url:"size,omitempty"`
+	BlockSize int    `url:"block_size,omitempty"`
+	UUID      string `url:"uuid,omitempty"`
+	Model     string `url:"model,omitempty"`
+	Serial    string `url:"serial,omitempty"`
+	IDPath    string `url:"id_path,omitempty"`
 }

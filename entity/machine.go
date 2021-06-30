@@ -95,76 +95,76 @@ type MachineServiceSet struct {
 
 // MachineParams enumerates the parameters for the machine update operation
 type MachineParams struct {
-	CPUCount      int    `json:"cpu_count"`
-	Memory        int    `json:"memory"`
-	SwapSize      int    `json:"swap_size"`
-	PXEMacAddress string `json:"mac_addresses"`
-	Architecture  string `json:"architecture"`
-	MinHWEKernel  string `json:"min_hwe_kernel"`
-	PowerType     string `json:"power_type"`
-	Hostname      string `json:"hostname"`
-	Description   string `json:"description"`
-	Domain        string `json:"domain"`
-	Pool          string `json:"pool"`
-	Zone          string `json:"zone"`
-	Commission    bool   `json:"commission"`
+	CPUCount      int    `url:"cpu_count,omitempty"`
+	Memory        int    `url:"memory,omitempty"`
+	SwapSize      int    `url:"swap_size,omitempty"`
+	PXEMacAddress string `url:"mac_addresses,omitempty"`
+	Architecture  string `url:"architecture,omitempty"`
+	MinHWEKernel  string `url:"min_hwe_kernel,omitempty"`
+	PowerType     string `url:"power_type,omitempty"`
+	Hostname      string `url:"hostname,omitempty"`
+	Description   string `url:"description,omitempty"`
+	Domain        string `url:"domain,omitempty"`
+	Pool          string `url:"pool,omitempty"`
+	Zone          string `url:"zone,omitempty"`
+	Commission    bool   `url:"commission,omitempty"`
 }
 
 // MachineCommissionParams enumerates the parameters for the commission operation
 type MachineCommissionParams struct {
-	EnableSSH            int    `json:"enable_ssh"`
-	SkipBMCConfig        int    `json:"skip_bmc_config"`
-	SkipNetworking       int    `json:"skip_networking"`
-	SkipStorage          int    `json:"skip_storage"`
-	CommissioningScripts string `json:"commissioning_scripts"`
-	TestingScripts       string `json:"testing_scripts"`
+	EnableSSH            int    `url:"enable_ssh,omitempty"`
+	SkipBMCConfig        int    `url:"skip_bmc_config,omitempty"`
+	SkipNetworking       int    `url:"skip_networking,omitempty"`
+	SkipStorage          int    `url:"skip_storage,omitempty"`
+	CommissioningScripts string `url:"commissioning_scripts,omitempty"`
+	TestingScripts       string `url:"testing_scripts,omitempty"`
 }
 
 // MachineAllocateParams enumerates the options for the allocate operation.
 type MachineAllocateParams struct {
-	Tags             []string `json:"tags"`
-	NotTags          []string `json:"not_tags"`
-	NotInZone        []string `json:"not_in_zone"`
-	NotInPool        []string `json:"not_in_pool"`
-	Subnets          []string `json:"subnets"`
-	NotSubnets       []string `json:"not_subnets"`
-	Storage          []string `json:"storage"`
-	Fabrics          []string `json:"fabrics"`
-	NotFabrics       []string `json:"not_fabrics"`
-	FabricClasses    []string `json:"fabric_classes"`
-	NotFabricClasses []string `json:"not_fabric_classes"`
-	Name             string   `json:"name"`
-	SystemID         string   `json:"system_id"`
-	Arch             string   `json:"arch"`
-	Zone             string   `json:"zone"`
-	Pool             string   `json:"pool"`
-	VMHost           string   `json:"pod"`
-	NotVMHost        string   `json:"not_pod"`
-	VMHostType       string   `json:"pod_type"`
-	NotVMHostType    string   `json:"not_pod_type"`
-	Interfaces       string   `json:"interfaces"`
-	AgentName        string   `json:"agent_name"`
-	Comment          string   `json:"comment"`
-	CPUCount         int      `json:"cpu_count"`
-	Mem              int      `json:"mem"`
-	BridgeFD         int      `json:"bridge_fd"`
-	BridgeAll        bool     `json:"bridge_all"`
-	BridgeSTP        bool     `json:"bridge_stp"`
-	DryRun           bool     `json:"dry_run"`
-	Verbose          bool     `json:"verbose"`
+	Tags             []string `url:"tags,omitempty"`
+	NotTags          []string `url:"not_tags,omitempty"`
+	NotInZone        []string `url:"not_in_zone,omitempty"`
+	NotInPool        []string `url:"not_in_pool,omitempty"`
+	Subnets          []string `url:"subnets,omitempty"`
+	NotSubnets       []string `url:"not_subnets,omitempty"`
+	Storage          []string `url:"storage,omitempty"`
+	Fabrics          []string `url:"fabrics,omitempty"`
+	NotFabrics       []string `url:"not_fabrics,omitempty"`
+	FabricClasses    []string `url:"fabric_classes,omitempty"`
+	NotFabricClasses []string `url:"not_fabric_classes,omitempty"`
+	Name             string   `url:"name,omitempty"`
+	SystemID         string   `url:"system_id,omitempty"`
+	Arch             string   `url:"arch,omitempty"`
+	Zone             string   `url:"zone,omitempty"`
+	Pool             string   `url:"pool,omitempty"`
+	VMHost           string   `url:"pod,omitempty"`
+	NotVMHost        string   `url:"not_pod,omitempty"`
+	VMHostType       string   `url:"pod_type,omitempty"`
+	NotVMHostType    string   `url:"not_pod_type,omitempty"`
+	Interfaces       string   `url:"interfaces,omitempty"`
+	AgentName        string   `url:"agent_name,omitempty"`
+	Comment          string   `url:"comment,omitempty"`
+	CPUCount         int      `url:"cpu_count,omitempty"`
+	Mem              int      `url:"mem,omitempty"`
+	BridgeFD         int      `url:"bridge_fd,omitempty"`
+	BridgeAll        bool     `url:"bridge_all,omitempty"`
+	BridgeSTP        bool     `url:"bridge_stp,omitempty"`
+	DryRun           bool     `url:"dry_run,omitempty"`
+	Verbose          bool     `url:"verbose,omitempty"`
 }
 
 // MachineDeployParams enumerates the parameters for the deploy operation
 type MachineDeployParams struct {
-	UserData       string `json:"user_data"`
-	DistroSeries   string `json:"distro_series"`
-	HWEKernel      string `json:"hwe_kernel"`
-	AgentName      string `json:"agent_name"`
-	Comment        string `json:"comment"`
-	BridgeFD       int    `json:"bridge_fd"`
-	BridgeAll      bool   `json:"bridge_all"`
-	BridgeSTP      bool   `json:"bridge_stp"`
-	InstallRackD   bool   `json:"install_rackd"`
-	InstallKVM     bool   `json:"install_kvm"`
-	RegisterVMHost bool   `json:"register_vmhost"`
+	UserData       string `url:"user_data,omitempty"`
+	DistroSeries   string `url:"distro_series,omitempty"`
+	HWEKernel      string `url:"hwe_kernel,omitempty"`
+	AgentName      string `url:"agent_name,omitempty"`
+	Comment        string `url:"comment,omitempty"`
+	BridgeFD       int    `url:"bridge_fd,omitempty"`
+	BridgeAll      bool   `url:"bridge_all,omitempty"`
+	BridgeSTP      bool   `url:"bridge_stp,omitempty"`
+	InstallRackD   bool   `url:"install_rackd,omitempty"`
+	InstallKVM     bool   `url:"install_kvm,omitempty"`
+	RegisterVMHost bool   `url:"register_vmhost,omitempty"`
 }

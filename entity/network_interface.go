@@ -49,52 +49,52 @@ type NetworkInterfaceLink struct {
 // DefaultGateway is ignored unless Mode is AUTO or STATIC.
 // Note: You can parse an IP address into a net.IP via net.ParseIP(string).
 type NetworkInterfaceLinkParams struct {
-	Mode           string `json:"mode"`
-	Subnet         int    `json:"subnet"`
-	IPAddress      string `json:"ip_address"`
-	Force          bool   `json:"force"`
-	DefaultGateway bool   `json:"default_gateway"`
+	Mode           string `url:"mode,omitempty"`
+	Subnet         int    `url:"subnet,omitempty"`
+	Force          bool   `url:"force,omitempty"`
+	DefaultGateway bool   `url:"default_gateway"`
+	IPAddress      string `url:"ip_address,omitempty"`
 }
 
 // NetworkInterfacePhysical is the parameters for the NetworkInterfaces create_physical POST operation.
 type NetworkInterfacePhysicalParams struct {
-	Name       string `json:"name"`
-	MACAddress string `json:"mac_address"`
-	Tags       string `json:"tags"`
-	VLAN       string `json:"vlan"`
-	MTU        int    `json:"mtu"`
-	AcceptRA   bool   `json:"accept_ra"`
-	Autoconf   bool   `json:"autoconf"`
+	MACAddress string `url:"mac_address,omitempty"`
+	Name       string `url:"name,omitempty"`
+	Tags       string `url:"tags,omitempty"`
+	VLAN       string `url:"vlan,omitempty"`
+	MTU        int    `url:"mtu,omitempty"`
+	AcceptRA   bool   `url:"accept_ra,omitempty"`
+	Autoconf   bool   `url:"autoconf,omitempty"`
 }
 
 // NetworkInterfaceBond is the parameters for the NetworkInterfaces create_bond POST operation.
 type NetworkInterfaceBondParams struct {
 	NetworkInterfacePhysicalParams
-	Parents            []int  `json:"parents"`
-	BondMode           string `json:"bond_mode"`
-	BondMiimon         int    `json:"bond_miimon"`
-	BondDownDelay      int    `json:"bond_downdelay"`
-	BondUpDelay        int    `json:"bond_updelay"`
-	BondLACPRate       string `json:"bond_lacp_rate"`
-	BondXMitHashPolicy string `json:"bond_xmit_hash_policy"`
-	BondNumberGratARP  int    `json:"bond_num_grat_arp"`
+	Parents            []int  `url:"parents,omitempty"`
+	BondMode           string `url:"bond_mode,omitempty"`
+	BondMiimon         int    `url:"bond_miimon,omitempty"`
+	BondDownDelay      int    `url:"bond_downdelay,omitempty"`
+	BondUpDelay        int    `url:"bond_updelay,omitempty"`
+	BondLACPRate       string `url:"bond_lacp_rate,omitempty"`
+	BondXMitHashPolicy string `url:"bond_xmit_hash_policy,omitempty"`
+	BondNumberGratARP  int    `url:"bond_num_grat_arp,omitempty"`
 }
 
 // NetworkInterfaceBridge is the parameters for the NetworkInterfaces create_bridge POST operation.
 type NetworkInterfaceBridgeParams struct {
 	NetworkInterfacePhysicalParams
-	Parent     int    `json:"parent"`
-	Bridgetype string `json:"bridge_type"`
-	BridgeSTP  bool   `json:"bridge_stp"`
-	BridgeFD   int    `json:"bridge_fd"`
+	Parent     int    `url:"parent,omitempty"`
+	Bridgetype string `url:"bridge_type,omitempty"`
+	BridgeSTP  bool   `url:"bridge_stp,omitempty"`
+	BridgeFD   int    `url:"bridge_fd,omitempty"`
 }
 
 // NetworkInterfaceVLAN is the parameters for the NetworkInterfaces create_vlan POST operation.
 type NetworkInterfaceVLANParams struct {
-	Tags     []string `json:"tags"`
-	VLAN     string   `json:"vlan"`
-	Parent   int      `json:"parent"`
-	MTU      int      `json:"mtu"`
-	AcceptRA bool     `json:"accept_ra"`
-	Autoconf bool     `json:"autoconf"`
+	VLAN     string   `url:"vlan,omitempty"`
+	Parent   int      `url:"parent,omitempty"`
+	Tags     []string `url:"tags,omitempty"`
+	MTU      int      `url:"mtu,omitempty"`
+	AcceptRA bool     `url:"accept_ra,omitempty"`
+	Autoconf bool     `url:"autoconf,omitempty"`
 }

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
 	"github.com/ionutbalutoiu/gomaasclient/entity"
 )
 
@@ -24,8 +25,12 @@ func (p *VMHosts) Get() (vmHosts []entity.VMHost, err error) {
 }
 
 func (m *VMHosts) Create(params *entity.VMHostParams) (vmHost *entity.VMHost, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
 	vmHost = new(entity.VMHost)
-	err = m.client().Post("", ToQSP(params), func(data []byte) error {
+	err = m.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, vmHost)
 	})
 	return

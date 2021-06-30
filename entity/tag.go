@@ -9,8 +9,8 @@ type Tag struct {
 }
 
 type TagParams struct {
-	Name       string `json:"name"`
-	Definition string `json:"definition"`
-	Comment    string `json:"comment"`
-	KernelOpts string `json:"kernel_opts"`
+	Name       string `url:"name"`
+	Definition string `url:"definition,omitempty"`
+	Comment    string `url:"comment,omitempty"`
+	KernelOpts string `url:"kernel_opts,omitempty"`
 }
