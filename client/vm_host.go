@@ -65,10 +65,10 @@ func (p *VMHost) Refresh(id int) (vmHost *entity.VMHost, err error) {
 	return
 }
 
-func (p *VMHost) GetParameters(id int) (vmHostParams *entity.VMHostParams, err error) {
-	vmHostParams = new(entity.VMHostParams)
+func (p *VMHost) GetParameters(id int) (params map[string]string, err error) {
+	params = map[string]string{}
 	err = p.client(id).Get("parameters", url.Values{}, func(data []byte) error {
-		return json.Unmarshal(data, vmHostParams)
+		return json.Unmarshal(data, &params)
 	})
 	return
 }

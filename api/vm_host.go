@@ -10,5 +10,5 @@ type VMHost interface {
 	Delete(id int) error
 	Compose(id int, params *entity.VMHostMachineParams) (*entity.Machine, error)
 	Refresh(id int) (*entity.VMHost, error)
-	GetParameters(id int) (*entity.VMHostParams, error)
+	GetParameters(id int) (map[string]string, error)
 }
