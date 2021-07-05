@@ -10,3 +10,9 @@ type Domain struct {
 	Authoritative       bool   `json:"authoritative,omitempty"`
 	IsDefault           bool   `json:"is_default,omitempty"`
 }
+
+type DomainParams struct {
+	Name          string `url:"name,omitempty"`
+	TTL           int    `url:"ttl,omitempty"`
+	Authoritative bool   `url:"authoritative"`
+}
