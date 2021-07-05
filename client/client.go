@@ -15,6 +15,8 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 	client := Client{
 		Domain:                &Domain{ApiClient: *apiClient},
 		Domains:               &Domains{ApiClient: *apiClient},
+		DNSResource:           &DNSResource{ApiClient: *apiClient},
+		DNSResources:          &DNSResources{ApiClient: *apiClient},
 		Fabric:                &Fabric{ApiClient: *apiClient},
 		Fabrics:               &Fabrics{ApiClient: *apiClient},
 		VLAN:                  &VLAN{ApiClient: *apiClient},
@@ -42,6 +44,8 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 }
 
 type Client struct {
+	DNSResource           api.DNSResource
+	DNSResources          api.DNSResources
 	Domain                api.Domain
 	Domains               api.Domains
 	Fabric                api.Fabric
