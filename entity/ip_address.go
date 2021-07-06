@@ -12,3 +12,12 @@ type IPAddress struct {
 	InterfaceSet  []NetworkInterface `json:"interface_set,omitempty"`
 	Owner         User               `json:"owner,omitempty"`
 }
+
+type IPAddressesParams struct {
+	All        bool   `url:"all,omitempty"`
+	Discovered bool   `url:"discovered,omitempty"`
+	Force      bool   `url:"force,omitempty"`
+	Subnet     string `url:"subnet,omitempty"`
+	IP         string `url:"ip,omitempty"`
+	Owner      string `url:"owner,omitempty"`
+}
