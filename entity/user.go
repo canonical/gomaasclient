@@ -7,3 +7,10 @@ type User struct {
 	Email       string `json:"email"`
 	ResourceURI string `json:"resource_uri"`
 }
+
+type UserParams struct {
+	UserName    string `url:"username"`
+	Password    string `url:"password"`
+	Email       string `url:"email"`
+	IsSuperUser bool   `url:"is_superuser,int"`
+}

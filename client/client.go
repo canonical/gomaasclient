@@ -42,6 +42,8 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 		BlockDevices:          &BlockDevices{ApiClient: *apiClient},
 		BlockDevicePartition:  &BlockDevicePartition{ApiClient: *apiClient},
 		BlockDevicePartitions: &BlockDevicePartitions{ApiClient: *apiClient},
+		User:                  &User{ApiClient: *apiClient},
+		Users:                 &Users{ApiClient: *apiClient},
 	}
 	return &client, nil
 }
@@ -76,6 +78,8 @@ type Client struct {
 	BlockDevices          api.BlockDevices
 	BlockDevicePartition  api.BlockDevicePartition
 	BlockDevicePartitions api.BlockDevicePartitions
+	User                  api.User
+	Users                 api.Users
 }
 
 func GetApiClient(apiURL string, apiKey string, apiVersion string) (*ApiClient, error) {
