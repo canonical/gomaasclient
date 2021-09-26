@@ -9,6 +9,6 @@ type VolumeGroup struct {
     Size               int                    `json:"size,omitempty"`
     AvailableSize      int                    `json:"available_size,omitempty"`
     ID                 int                    `json:"id,omitempty"`
-	ResourceURI        string                 `json:"resource_uri,omitempty"`
+    ResourceURI        string                 `json:"resource_uri,omitempty"`
 }
 
