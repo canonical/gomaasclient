@@ -173,7 +173,16 @@
     "storage_test_status_name": "Passed",
     "owner": "user2",
     "status": 20,
-    "volume_groups": [],
+    "volume_groups": [{
+      "system_id": "ccrfnk",
+      "uuid": "5b805aa2-3614-4b70-b99c-9c3ff65df4c3",
+      "used_size": 0,
+      "name": "my_volume_group-my_logical_volume",
+      "size": 4194304,
+      "available_size": 4194304,
+      "id": 2,
+      "resource_uri": "/MAAS/api/2.0/nodes/g8xyqs/blockdevices/2/"
+    }],
     "hwe_kernel": null,
     "netboot": true,
     "current_testing_result_id": 199,

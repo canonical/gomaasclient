@@ -28,7 +28,7 @@ type Machine struct {
 	IPAddresses                  []net.IP            `json:"ip_addresses,omitempty"`
 	BlockDeviceSet               []BlockDevice       `json:"blockdevice_set,omitempty"`
 	CacheSets                    []string            `json:"cache_sets,omitempty"`
-	VolumeGroups                 []string            `json:"volume_groups,omitempty"`
+	VolumeGroups                 []VolumeGroup       `json:"volume_groups,omitempty"`
 	InterfaceSet                 []NetworkInterface  `json:"interface_set,omitempty"`
 	BCaches                      []string            `json:"bcaches,omitempty"`
 	RAIDs                        []string            `json:"raids,omitempty"`
