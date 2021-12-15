@@ -31,7 +31,7 @@ type Machine struct {
 	VolumeGroups                 []VolumeGroup       `json:"volume_groups,omitempty"`
 	InterfaceSet                 []NetworkInterface  `json:"interface_set,omitempty"`
 	BCaches                      []string            `json:"bcaches,omitempty"`
-	RAIDs                        []string            `json:"raids,omitempty"`
+	RAIDs                        []interface{}       `json:"raids,omitempty"`
 	SpecialFilesystems           []string            `json:"special_filesystems,omitempty"`
 	ServiceSet                   []MachineServiceSet `json:"service_set,omitempty"`
 	PhysicalBlockDeviceSet       []BlockDevice       `json:"physicalblockdevice_set,omitempty"`
