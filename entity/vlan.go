@@ -6,7 +6,7 @@ type VLAN struct {
 	MTU           int    `json:"mtu,omitempty"`
 	DHCPOn        bool   `json:"dhcp_on,omitempty"`
 	ExternalDHCP  string `json:"external_dhcp,omitempty"`
-	RelayVLAN     int    `json:"relay_vlan,omitempty"`
+	RelayVLAN     *VLAN  `json:"relay_vlan,omitempty"`
 	FabricID      int    `json:"fabric_id,omitempty"`
 	Name          string `json:"name,omitempty"`
 	Description   string `json:"description,omitempty"`
