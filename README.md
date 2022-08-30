@@ -10,7 +10,7 @@ This repository contains the following  packages:
 
 ```Go
 import (
-    gomaasclient "github.com/ionutbalutoiu/gomaasclient/client"
+    gomaasclient "github.com/maas/gomaasclient/client"
 )
 
 c, _ := gomaasclient.GetClient("<MAAS_URL>", "<API_KEY>", "2.0")

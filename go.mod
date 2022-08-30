@@ -1,4 +1,4 @@
-module github.com/ionutbalutoiu/gomaasclient
+module github.com/maas/gomaasclient
 
 go 1.12
 

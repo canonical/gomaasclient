@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 
-	"github.com/ionutbalutoiu/gomaasclient/test/helper"
+	"github.com/maas/gomaasclient/test/helper"
 )
 
 var sampleVLAN VLAN = VLAN{

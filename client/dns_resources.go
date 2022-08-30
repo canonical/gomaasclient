@@ -5,7 +5,7 @@ import (
 	"net/url"
 
 	"github.com/google/go-querystring/query"
-	"github.com/ionutbalutoiu/gomaasclient/entity"
+	"github.com/maas/gomaasclient/entity"
 )
 
 type DNSResources struct {
