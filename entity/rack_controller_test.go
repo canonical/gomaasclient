@@ -3,7 +3,7 @@ package entity
 import (
 	"testing"
 
-	"github.com/ionutbalutoiu/gomaasclient/test/helper"
+	"github.com/maas/gomaasclient/test/helper"
 )
 
 func TestRackControllert(t *testing.T) {

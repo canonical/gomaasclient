@@ -1,6 +1,6 @@
 package api
 
-import "github.com/ionutbalutoiu/gomaasclient/entity"
+import "github.com/maas/gomaasclient/entity"
 
 type BlockDevicePartition interface {
 	Get(systemID string, blockDeviceID int, id int) (*entity.BlockDevicePartition, error)

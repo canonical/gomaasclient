@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/ionutbalutoiu/gomaasclient/entity"
+	"github.com/maas/gomaasclient/entity"
 )
 
 type Tag interface {

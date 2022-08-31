@@ -1,6 +1,6 @@
 package api
 
-import "github.com/ionutbalutoiu/gomaasclient/entity"
+import "github.com/maas/gomaasclient/entity"
 
 type Users interface {
 	Get() ([]entity.User, error)

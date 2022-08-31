@@ -7,8 +7,8 @@ import (
 	"net/url"
 
 	"github.com/google/go-querystring/query"
-	"github.com/ionutbalutoiu/gomaasclient/entity"
-	"github.com/ionutbalutoiu/gomaasclient/entity/subnet"
+	"github.com/maas/gomaasclient/entity"
+	"github.com/maas/gomaasclient/entity/subnet"
 )
 
 type Subnet struct {

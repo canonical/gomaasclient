@@ -3,7 +3,7 @@ package entity
 import (
 	"net"
 
-	"github.com/ionutbalutoiu/gomaasclient/entity/node"
+	"github.com/maas/gomaasclient/entity/node"
 )
 
 // Machine represents the MaaS Machine endpoint.

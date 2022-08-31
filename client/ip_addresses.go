@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/google/go-querystring/query"
-	"github.com/ionutbalutoiu/gomaasclient/entity"
+	"github.com/maas/gomaasclient/entity"
 )
 
 type IPAddresses struct {

@@ -3,8 +3,8 @@ package client
 import (
 	"net/url"
 
-	"github.com/ionutbalutoiu/gomaasclient/api"
 	"github.com/juju/gomaasapi"
+	"github.com/maas/gomaasclient/api"
 )
 
 func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error) {

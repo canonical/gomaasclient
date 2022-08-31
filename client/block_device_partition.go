@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/ionutbalutoiu/gomaasclient/entity"
 	"github.com/juju/gomaasapi"
+	"github.com/maas/gomaasclient/entity"
 )
 
 type BlockDevicePartition struct {
