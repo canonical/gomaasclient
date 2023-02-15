@@ -3,7 +3,7 @@ package client
 import (
 	"net/url"
 
-	"github.com/juju/gomaasapi"
+	gomaasapi "github.com/juju/gomaasapi/v2"
 	"github.com/maas/gomaasclient/api"
 )
 
