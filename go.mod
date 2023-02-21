@@ -1,12 +1,19 @@
 module github.com/maas/gomaasclient
 
-go 1.12
+go 1.17
 
 require (
-	github.com/google/go-cmp v0.5.5
+	github.com/google/go-cmp v0.5.6
 	github.com/google/go-querystring v1.1.0
-	github.com/juju/gomaasapi v0.0.0-20200602032615-aa561369c767
-	github.com/juju/schema v1.0.0 // indirect
-	github.com/juju/testing v0.0.0-20210324180055-18c50b0c2098 // indirect
-	github.com/juju/version v0.0.0-20210303051006-2015802527a8 // indirect
+	github.com/juju/gomaasapi/v2 v2.0.1
+)
+
+require (
+	github.com/juju/collections v0.0.0-20220203020748-febd7cad8a7a // indirect
+	github.com/juju/errors v0.0.0-20220203013757-bd733f3c86b9 // indirect
+	github.com/juju/loggo v0.0.0-20210728185423-eebad3a902c4 // indirect
+	github.com/juju/mgo/v2 v2.0.0-20220111072304-f200228f1090 // indirect
+	github.com/juju/schema v1.0.1-0.20190814234152-1f8aaeef0989 // indirect
+	github.com/juju/version v0.0.0-20191219164919-81c1be00b9a6 // indirect
+	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22 // indirect
 )
