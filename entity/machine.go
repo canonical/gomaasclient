@@ -157,6 +157,7 @@ type MachineAllocateParams struct {
 // MachineDeployParams enumerates the parameters for the deploy operation
 type MachineDeployParams struct {
 	UserData       string `url:"user_data,omitempty"`
+	OSSystem       string `url:"osystem"`
 	DistroSeries   string `url:"distro_series,omitempty"`
 	HWEKernel      string `url:"hwe_kernel,omitempty"`
 	AgentName      string `url:"agent_name,omitempty"`
