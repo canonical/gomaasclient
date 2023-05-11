@@ -152,6 +152,7 @@ type MachineAllocateParams struct {
 	BridgeSTP        bool     `url:"bridge_stp,omitempty"`
 	DryRun           bool     `url:"dry_run,omitempty"`
 	Verbose          bool     `url:"verbose,omitempty"`
+	EnableHwSync     bool     `url:"enable_hw_sync,omitempty"`
 }
 
 // MachineDeployParams enumerates the parameters for the deploy operation
@@ -167,4 +168,5 @@ type MachineDeployParams struct {
 	InstallRackD   bool   `url:"install_rackd,omitempty"`
 	InstallKVM     bool   `url:"install_kvm,omitempty"`
 	RegisterVMHost bool   `url:"register_vmhost,omitempty"`
+	EnableHwSync   bool   `url:"enable_hw_sync,omitempty"`
 }
