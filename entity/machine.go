@@ -83,7 +83,6 @@ type Machine struct {
 	DisableIPv4                  bool                `json:"disable_ipv4,omitempty"`
 	Netboot                      bool                `json:"netboot,omitempty"`
 	Locked                       bool                `json:"locked,omitempty"`
-	EnableHwSync                 bool                `json:"enable_hw_sync,omitempty"`
 }
 
 // MachineServiceSet represents a Machine's "service_set".
