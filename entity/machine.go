@@ -115,9 +115,7 @@ func (m *Machine) UnmarshalJSON(data []byte) error {
 
 // MAASTime is a custom time format returned by MAAS API
 // which is not RFC3339
-type MAASTime struct {
-	time.Time
-}
+type MAASTime time.Time
 
 func (t *MAASTime) UnmarshalJSON(data []byte) error {
 	str, err := strconv.Unquote(string(data))
@@ -131,13 +129,14 @@ func (t *MAASTime) UnmarshalJSON(data []byte) error {
 	if err != nil {
 		return err
 	}
-	*t = MAASTime{temp}
+	*t = MAASTime(temp)
 	return nil
 }
 
 // String returns MAASTime in RFC3339Nano format
-func (t *MAASTime) String() string {
-	return t.Format(time.RFC3339Nano)
+func (t MAASTime) String() string {
+	temp := time.Time(t)
+	return temp.Format(time.RFC3339Nano)
 }
 
 // MachineServiceSet represents a Machine's "service_set".
