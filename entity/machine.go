@@ -1,7 +1,11 @@
 package entity
 
 import (
+	"encoding/json"
+	"errors"
 	"net"
+	"strconv"
+	"time"
 
 	"github.com/maas/gomaasclient/entity/node"
 )
@@ -54,6 +58,10 @@ type Machine struct {
 	PowerType                    string              `json:"power_type,omitempty"`
 	OwnerData                    interface{}         `json:"owner_data,omitempty"`
 	Hostname                     string              `json:"hostname,omitempty"`
+	EnableHwSync                 bool                `json:"enable_hw_sync,omitempty"`
+	HwLastSync                   MAASTime            `json:"last_sync,omitempty"`
+	HwSyncInterval               int                 `json:"sync_interval,omitempty"`
+	HwNextSync                   MAASTime            `json:"next_sync,omitempty"`
 	Description                  string              `json:"description,omitempty"`
 	StatusAction                 string              `json:"status_action,omitempty"`
 	StatusMessage                string              `json:"status_message,omitempty"`
@@ -83,6 +91,52 @@ type Machine struct {
 	DisableIPv4                  bool                `json:"disable_ipv4,omitempty"`
 	Netboot                      bool                `json:"netboot,omitempty"`
 	Locked                       bool                `json:"locked,omitempty"`
+}
+
+func (m *Machine) UnmarshalJSON(data []byte) error {
+	type machine Machine
+
+	if err := json.Unmarshal(data, (*machine)(m)); err != nil {
+		return err
+	}
+
+	// NOTE: deduce field value for backward compatibility
+	// `enable_hw_sync` field is exposed via API in MAAS 3.4+
+	// but hardware sync feature was added in 3.2
+	if !m.EnableHwSync {
+		t := MAASTime{}
+		if m.HwSyncInterval != 0 && (m.HwNextSync != t || m.HwLastSync != t) {
+			m.EnableHwSync = true
+		}
+	}
+
+	return nil
+}
+
+// MAASTime is a custom time format returned by MAAS API
+// which is not RFC3339
+type MAASTime time.Time
+
+func (t *MAASTime) UnmarshalJSON(data []byte) error {
+	str, err := strconv.Unquote(string(data))
+	if errors.Is(err, strconv.ErrSyntax) {
+		return nil
+	} else if err != nil {
+		return err
+	}
+
+	temp, err := time.Parse("2006-01-02T15:04:05.999", str)
+	if err != nil {
+		return err
+	}
+	*t = MAASTime(temp)
+	return nil
+}
+
+// String returns MAASTime in RFC3339Nano format
+func (t MAASTime) String() string {
+	temp := time.Time(t)
+	return temp.Format(time.RFC3339Nano)
 }
 
 // MachineServiceSet represents a Machine's "service_set".
