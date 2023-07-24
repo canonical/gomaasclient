@@ -65,3 +65,8 @@ func (m *Machines) Release(systemIDs []string, comment string) error {
 	}
 	return m.client().Post("release", qsp, func(data []byte) error { return nil })
 }
+
+func (m *Machines) AcceptAll() error {
+	qsp := url.Values{}
+	return m.client().Post("accept_all", qsp, func(data []byte) error { return nil })
+}
