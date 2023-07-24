@@ -1,0 +1,76 @@
+{
+    "id": 10,
+    "spare_devices": [],
+    "size": 3992715264,
+    "virtual_device": {
+        "system_id": "qkhm8f",
+        "partitions": [],
+        "type": "virtual",
+        "uuid": "649ac60d-61bc-423e-956a-a3eb7b7ef241",
+        "tags": [],
+        "size": 3992715264,
+        "block_size": 512,
+        "used_size": 0,
+        "serial": null,
+        "available_size": 3984588800,
+        "numa_node": null,
+        "id": 63,
+        "path": "/dev/disk/by-dname/md0",
+        "name": "md0",
+        "model": null,
+        "storage_pool": null,
+        "partition_table_type": null,
+        "id_path": null,
+        "used_for": "Unused",
+        "filesystem": null,
+        "resource_uri": "/MAAS/api/2.0/nodes/qkhm8f/blockdevices/63/"
+    },
+    "system_id": "qkhm8f",
+    "devices": [
+        {
+            "uuid": "0a615842-f4af-4484-ae3f-0d44eb9705ee",
+            "size": 1996488704,
+            "bootable": false,
+            "tags": [],
+            "id": 124,
+            "system_id": "qkhm8f",
+            "path": "/dev/disk/by-dname/sda-part1",
+            "type": "partition",
+            "used_for": "Active raid-0 device for md0",
+            "device_id": 61,
+            "filesystem": {
+                "fstype": "raid",
+                "label": null,
+                "uuid": "5f9c237c-844f-4562-9585-dda917d820b6",
+                "mount_point": null,
+                "mount_options": null
+            },
+            "resource_uri": "/MAAS/api/2.0/nodes/qkhm8f/blockdevices/61/partition/124"
+        },
+        {
+            "uuid": "d9a179c1-3637-4481-ba9a-6e3ca4bbb1c3",
+            "size": 1996488704,
+            "bootable": false,
+            "tags": [],
+            "id": 125,
+            "system_id": "qkhm8f",
+            "path": "/dev/disk/by-dname/sda-part2",
+            "type": "partition",
+            "used_for": "Active raid-0 device for md0",
+            "device_id": 61,
+            "filesystem": {
+                "fstype": "raid",
+                "label": null,
+                "uuid": "04e0f246-9681-47ec-b917-e62b344c2a38",
+                "mount_point": null,
+                "mount_options": null
+            },
+            "resource_uri": "/MAAS/api/2.0/nodes/qkhm8f/blockdevices/61/partition/125"
+        }
+    ],
+    "level": "raid-0",
+    "uuid": "0bb9f827-a201-4e27-a16a-8e51822fc9bc",
+    "human_size": "4.0 GB",
+    "name": "md0",
+    "resource_uri": "/MAAS/api/2.0/nodes/qkhm8f/raid/10/"
+}

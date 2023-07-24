@@ -49,6 +49,8 @@ func constructClient(apiClient *ApiClient) *Client {
 		VMHosts:               &VMHosts{ApiClient: *apiClient},
 		NetworkInterface:      &NetworkInterface{ApiClient: *apiClient},
 		NetworkInterfaces:     &NetworkInterfaces{ApiClient: *apiClient},
+		RAID:                  &RAID{ApiClient: *apiClient},
+		RAIDs:                 &RAIDs{ApiClient: *apiClient},
 		Subnet:                &Subnet{ApiClient: *apiClient},
 		Subnets:               &Subnets{ApiClient: *apiClient},
 		IPRange:               &IPRange{ApiClient: *apiClient},
@@ -88,6 +90,8 @@ type Client struct {
 	VMHosts               api.VMHosts
 	NetworkInterface      api.NetworkInterface
 	NetworkInterfaces     api.NetworkInterfaces
+	RAID                  api.RAID
+	RAIDs                 api.RAIDs
 	Subnet                api.Subnet
 	Subnets               api.Subnets
 	IPRange               api.IPRange
