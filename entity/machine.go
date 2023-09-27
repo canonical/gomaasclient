@@ -26,71 +26,71 @@ type Machine struct {
 			LinkID    int    `json:"link_id,omitempty"`
 		} `json:"ipv6,omitempty"`
 	} `json:"default_gateways,omitempty"`
-	Pool                         ResourcePool        `json:"pool,omitempty"`
-	Zone                         Zone                `json:"zone,omitempty"`
-	TagNames                     []string            `json:"tag_names,omitempty"`
-	IPAddresses                  []net.IP            `json:"ip_addresses,omitempty"`
-	BlockDeviceSet               []BlockDevice       `json:"blockdevice_set,omitempty"`
-	CacheSets                    []string            `json:"cache_sets,omitempty"`
-	VolumeGroups                 []VolumeGroup       `json:"volume_groups,omitempty"`
-	InterfaceSet                 []NetworkInterface  `json:"interface_set,omitempty"`
-	BCaches                      []string            `json:"bcaches,omitempty"`
-	RAIDs                        []string            `json:"raids,omitempty"`
-	SpecialFilesystems           []string            `json:"special_filesystems,omitempty"`
-	ServiceSet                   []MachineServiceSet `json:"service_set,omitempty"`
-	PhysicalBlockDeviceSet       []BlockDevice       `json:"physicalblockdevice_set,omitempty"`
-	ISCSIBlockDeviceSet          []BlockDevice       `json:"iscsiblockdevice_set,omitempty"`
-	VirtualBlockDeviceSet        []BlockDevice       `json:"virtualblockdevice_set,omitempty"`
-	FQDN                         string              `json:"fqdn,omitempty"`
-	DistroSeries                 string              `json:"distro_series,omitempty"`
-	MinHWEKernel                 string              `json:"min_hwe_kernel,omitempty"`
-	CommissioningStatusName      string              `json:"commissioning_status_name,omitempty"`
-	SystemID                     string              `json:"system_id,omitempty"`
-	NodeTypeName                 string              `json:"node_type_name,omitempty"`
-	StorageTestStatusName        string              `json:"storage_test_status_name,omitempty"`
-	Owner                        string              `json:"owner,omitempty"`
-	HWEKernel                    string              `json:"hwe_kernel,omitempty"`
-	TestingStatusName            string              `json:"testing_status_name,omitempty"`
-	Version                      string              `json:"version,omitempty"`
-	Architecture                 string              `json:"architecture,omitempty"`
-	PowerState                   string              `json:"power_state,omitempty"`
-	MemoryTestStatusName         string              `json:"memory_test_status_name,omitempty"`
-	PowerType                    string              `json:"power_type,omitempty"`
-	OwnerData                    interface{}         `json:"owner_data,omitempty"`
-	Hostname                     string              `json:"hostname,omitempty"`
-	EnableHwSync                 bool                `json:"enable_hw_sync,omitempty"`
-	HwLastSync                   MAASTime            `json:"last_sync,omitempty"`
-	HwSyncInterval               int                 `json:"sync_interval,omitempty"`
-	HwNextSync                   MAASTime            `json:"next_sync,omitempty"`
-	Description                  string              `json:"description,omitempty"`
-	StatusAction                 string              `json:"status_action,omitempty"`
-	StatusMessage                string              `json:"status_message,omitempty"`
-	StatusName                   string              `json:"status_name,omitempty"`
-	OSystem                      string              `json:"osystem,omitempty"`
-	CPUTestStatusName            string              `json:"cpu_test_status_name,omitempty"`
-	OtherTestStatusName          string              `json:"other_test_status_name,omitempty"`
-	ResourceURI                  string              `json:"resource_uri,omitempty"`
-	Memory                       int                 `json:"memory,omitempty"`
-	NodeType                     int                 `json:"node_type,omitempty"`
-	CurrentCommissioningResultID int                 `json:"current_commissioning_result_id,omitempty"`
-	CPUTestStatus                int                 `json:"cpu_test_status,omitempty"`
-	AddressTTL                   int                 `json:"address_ttl,omitempty"`
-	Storage                      float64             `json:"storage,omitempty"`
-	HardwareInfo                 map[string]string   `json:"hardware_info,omitempty"`
-	CPUCount                     int                 `json:"cpu_count,omitempty"`
-	Status                       node.Status         `json:"status,omitempty"`
-	CurrentInstallationResultID  int                 `json:"current_installation_result_id,omitempty"`
-	CurrentTestingResultID       int                 `json:"current_testing_result_id,omitempty"`
-	CommissioningStatus          int                 `json:"commissioning_status,omitempty"`
-	OtherTestStatus              int                 `json:"other_test_status,omitempty"`
-	TestingStatus                int                 `json:"testing_status,omitempty"`
-	StorageTestStatus            int                 `json:"storage_test_status,omitempty"`
-	SwapSize                     int                 `json:"swap_size,omitempty"`
-	MemoryTestStatus             int                 `json:"memory_test_status,omitempty"`
-	CPUSpeed                     int                 `json:"cpu_speed,omitempty"`
-	DisableIPv4                  bool                `json:"disable_ipv4,omitempty"`
-	Netboot                      bool                `json:"netboot,omitempty"`
-	Locked                       bool                `json:"locked,omitempty"`
+	Pool                         ResourcePool               `json:"pool,omitempty"`
+	Zone                         Zone                       `json:"zone,omitempty"`
+	TagNames                     []string                   `json:"tag_names,omitempty"`
+	IPAddresses                  []net.IP                   `json:"ip_addresses,omitempty"`
+	BlockDeviceSet               []BlockDevice              `json:"blockdevice_set,omitempty"`
+	CacheSets                    []MachineCacheSet          `json:"cache_sets,omitempty"`
+	VolumeGroups                 []MachineVolumeGroup       `json:"volume_groups,omitempty"`
+	InterfaceSet                 []NetworkInterface         `json:"interface_set,omitempty"`
+	BCaches                      []MachineBCache            `json:"bcaches,omitempty"`
+	RAIDs                        []MachineRAID              `json:"raids,omitempty"`
+	SpecialFilesystems           []MachineSpecialFilesystem `json:"special_filesystems,omitempty"`
+	ServiceSet                   []MachineServiceSet        `json:"service_set,omitempty"`
+	PhysicalBlockDeviceSet       []BlockDevice              `json:"physicalblockdevice_set,omitempty"`
+	ISCSIBlockDeviceSet          []BlockDevice              `json:"iscsiblockdevice_set,omitempty"`
+	VirtualBlockDeviceSet        []BlockDevice              `json:"virtualblockdevice_set,omitempty"`
+	FQDN                         string                     `json:"fqdn,omitempty"`
+	DistroSeries                 string                     `json:"distro_series,omitempty"`
+	MinHWEKernel                 string                     `json:"min_hwe_kernel,omitempty"`
+	CommissioningStatusName      string                     `json:"commissioning_status_name,omitempty"`
+	SystemID                     string                     `json:"system_id,omitempty"`
+	NodeTypeName                 string                     `json:"node_type_name,omitempty"`
+	StorageTestStatusName        string                     `json:"storage_test_status_name,omitempty"`
+	Owner                        string                     `json:"owner,omitempty"`
+	HWEKernel                    string                     `json:"hwe_kernel,omitempty"`
+	TestingStatusName            string                     `json:"testing_status_name,omitempty"`
+	Version                      string                     `json:"version,omitempty"`
+	Architecture                 string                     `json:"architecture,omitempty"`
+	PowerState                   string                     `json:"power_state,omitempty"`
+	MemoryTestStatusName         string                     `json:"memory_test_status_name,omitempty"`
+	PowerType                    string                     `json:"power_type,omitempty"`
+	OwnerData                    interface{}                `json:"owner_data,omitempty"`
+	Hostname                     string                     `json:"hostname,omitempty"`
+	EnableHwSync                 bool                       `json:"enable_hw_sync,omitempty"`
+	HwLastSync                   MAASTime                   `json:"last_sync,omitempty"`
+	HwSyncInterval               int                        `json:"sync_interval,omitempty"`
+	HwNextSync                   MAASTime                   `json:"next_sync,omitempty"`
+	Description                  string                     `json:"description,omitempty"`
+	StatusAction                 string                     `json:"status_action,omitempty"`
+	StatusMessage                string                     `json:"status_message,omitempty"`
+	StatusName                   string                     `json:"status_name,omitempty"`
+	OSystem                      string                     `json:"osystem,omitempty"`
+	CPUTestStatusName            string                     `json:"cpu_test_status_name,omitempty"`
+	OtherTestStatusName          string                     `json:"other_test_status_name,omitempty"`
+	ResourceURI                  string                     `json:"resource_uri,omitempty"`
+	Memory                       int                        `json:"memory,omitempty"`
+	NodeType                     int                        `json:"node_type,omitempty"`
+	CurrentCommissioningResultID int                        `json:"current_commissioning_result_id,omitempty"`
+	CPUTestStatus                int                        `json:"cpu_test_status,omitempty"`
+	AddressTTL                   int                        `json:"address_ttl,omitempty"`
+	Storage                      float64                    `json:"storage,omitempty"`
+	HardwareInfo                 map[string]string          `json:"hardware_info,omitempty"`
+	CPUCount                     int                        `json:"cpu_count,omitempty"`
+	Status                       node.Status                `json:"status,omitempty"`
+	CurrentInstallationResultID  int                        `json:"current_installation_result_id,omitempty"`
+	CurrentTestingResultID       int                        `json:"current_testing_result_id,omitempty"`
+	CommissioningStatus          int                        `json:"commissioning_status,omitempty"`
+	OtherTestStatus              int                        `json:"other_test_status,omitempty"`
+	TestingStatus                int                        `json:"testing_status,omitempty"`
+	StorageTestStatus            int                        `json:"storage_test_status,omitempty"`
+	SwapSize                     int                        `json:"swap_size,omitempty"`
+	MemoryTestStatus             int                        `json:"memory_test_status,omitempty"`
+	CPUSpeed                     int                        `json:"cpu_speed,omitempty"`
+	DisableIPv4                  bool                       `json:"disable_ipv4,omitempty"`
+	Netboot                      bool                       `json:"netboot,omitempty"`
+	Locked                       bool                       `json:"locked,omitempty"`
 }
 
 func (m *Machine) UnmarshalJSON(data []byte) error {
@@ -137,6 +137,48 @@ func (t *MAASTime) UnmarshalJSON(data []byte) error {
 func (t MAASTime) String() string {
 	temp := time.Time(t)
 	return temp.Format(time.RFC3339Nano)
+}
+
+// MachineCacheSet represents a Machine's "cache_sets" list item.
+// This type should not be used directly.
+type MachineCacheSet struct {
+	SystemID   string `json:"system_id,omitempty"`
+	ID         int    `json:"id,omitempty"`
+	Incomplete bool   `json:"__incomplete__,omitempty"`
+}
+
+// MachineVolumeGroup represents a Machine's "volume_groups" list item.
+// This type should not be used directly.
+type MachineVolumeGroup struct {
+	SystemID   string `json:"system_id,omitempty"`
+	ID         int    `json:"id,omitempty"`
+	Incomplete bool   `json:"__incomplete__,omitempty"`
+}
+
+// MachineBCache represents a Machine's "bcaches" list item.
+// This type should not be used directly.
+type MachineBCache struct {
+	SystemID   string `json:"system_id,omitempty"`
+	ID         int    `json:"id,omitempty"`
+	Incomplete bool   `json:"__incomplete__,omitempty"`
+}
+
+// MachineRAID represents a Machine's "raids" list item.
+// This type should not be used directly.
+type MachineRAID struct {
+	SystemID   string `json:"system_id,omitempty"`
+	ID         int    `json:"id,omitempty"`
+	Incomplete bool   `json:"__incomplete__,omitempty"`
+}
+
+// MachineSpecialFilesystem represents a Machine's "special_filesystems" list item.
+// This type should not be used directly.
+type MachineSpecialFilesystem struct {
+	FSType       string `json:"fstype,omitempty"`
+	Label        string `json:"label,omitempty"`
+	UUID         string `json:"uuid,omitempty"`
+	MountPoint   string `json:"mount_point,omitempty"`
+	MountOptions string `json:"mount_options,omitempty"`
 }
 
 // MachineServiceSet represents a Machine's "service_set".

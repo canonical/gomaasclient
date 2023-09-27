@@ -155,7 +155,13 @@
     "current_commissioning_result_id": 198,
     "cpu_test_status": 2,
     "address_ttl": null,
-    "cache_sets": [],
+    "cache_sets": [
+        {
+            "system_id": "dqatxp",
+            "id": 5,
+            "__incomplete__": true
+        }
+    ],
     "storage": 3693.436416,
     "node_type_name": "Machine",
     "hardware_info": {
@@ -173,42 +179,13 @@
     "storage_test_status_name": "Passed",
     "owner": "user2",
     "status": 20,
-    "volume_groups": [{
-        "human_used_size": "0 bytes",
-        "uuid": "36f9585d-3ae0-429c-abb7-9d584bc6f941",
-        "human_available_size": "8.0 GB",
-        "system_id": "ccrfnk",
-        "id": 1,
-        "logical_volumes": [],
-        "size": 7990149120,
-        "devices": [
-            {
-                "uuid": "ecfa7d5b-bb76-4443-83ab-ad600c23b4de",
-                "size": 7994343424,
-                "bootable": false,
-                "tags": [],
-                "system_id": "ccrfnk",
-                "id": 2,
-                "used_for": "LVM volume for my_volume_group",
-                "type": "partition",
-                "path": "/dev/disk/by-dname/vda-part1",
-                "device_id": 1,
-                "filesystem": {
-                    "fstype": "lvm-pv",
-                    "label": null,
-                    "uuid": "cad18fde-2fc7-4aa5-a15b-739f88c3b671",
-                    "mount_point": null,
-                    "mount_options": null
-                },
-                "resource_uri": "/MAAS/api/2.0/nodes/ccrfnk/blockdevices/1/partition/2"
-            }
-        ],
-        "available_size": 7990149120,
-        "used_size": 0,
-        "human_size": "8.0 GB",
-        "name": "my_volume_group",
-        "resource_uri": "/MAAS/api/2.0/nodes/ccrfnk/volume-group/1/"
-    }],
+    "volume_groups": [
+        {
+            "system_id": "dqatxp",
+            "id": 4,
+            "__incomplete__": true
+        }
+    ],
     "hwe_kernel": null,
     "netboot": true,
     "current_testing_result_id": 199,
@@ -384,13 +361,33 @@
         }
     ],
     "owner_data": {},
-    "bcaches": [],
+    "bcaches": [
+        {
+            "system_id": "3gf1k4",
+            "id": 3,
+            "__incomplete__": true
+        }
+    ],
     "hostname": "causal-quagga",
     "description": "Optional description for the node.",
-    "raids": [],
+    "raids": [
+        {
+            "system_id": "rdt4fa",
+            "id": 2,
+            "__incomplete__": true
+        }
+    ],
     "other_test_status": 2,
     "status_action": "action-BqENyW",
-    "special_filesystems": [],
+    "special_filesystems": [
+        {
+            "fstype": "ramfs",
+            "label": "special",
+            "uuid": "0e8b2c73-c31f-4fd0-b3b9-8dde74406afe",
+            "mount_point": "/MqbWGqzmWV/KrM409CMFO/CsDtuVxjpQ",
+            "mount_options": "mount-options-552Rua"
+        }
+    ],
     "physicalblockdevice_set": [
         {
             "firmware_version": "firmware_version-tnhqNO",
@@ -476,4 +473,3 @@
     "cpu_speed": 0,
     "resource_uri": "/MAAS/api/2.0/machines/g8xyqs/"
 }
-
