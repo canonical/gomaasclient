@@ -7,8 +7,8 @@ import (
 	"github.com/maas/gomaasclient/api"
 )
 
-func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error) {
-	apiClient, err := GetApiClient(apiURL, apiKey, apiVersion)
+func GetClient(apiURL string, apiKey string, apiVersion string, insecure bool) (*Client, error) {
+	apiClient, err := GetApiClient(apiURL, apiKey, apiVersion, insecure)
 	if err != nil {
 		return nil, err
 	}
@@ -82,9 +82,9 @@ type Client struct {
 	Users                 api.Users
 }
 
-func GetApiClient(apiURL string, apiKey string, apiVersion string) (*ApiClient, error) {
+func GetApiClient(apiURL string, apiKey string, apiVersion string, insecure bool) (*ApiClient, error) {
 	versionedURL := gomaasapi.AddAPIVersionToURL(apiURL, apiVersion)
-	authClient, err := gomaasapi.NewAuthenticatedClient(versionedURL, apiKey)
+	authClient, err := gomaasapi.NewAuthenticatedClient(versionedURL, apiKey, insecure)
 	if err != nil {
 		return nil, err
 	}
