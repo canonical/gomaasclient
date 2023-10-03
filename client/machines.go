@@ -26,13 +26,14 @@ func (m *Machines) Get() (machines []entity.Machine, err error) {
 }
 
 // Create machine.
-func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[string]string) (ma *entity.Machine, err error) {
+func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[string]interface{}) (ma *entity.Machine, err error) {
 	qsp, err := query.Values(machineParams)
 	if err != nil {
 		return
 	}
-	for k, v := range powerParams {
-		qsp.Add(k, v)
+	for k, v := range powerParamsToURLValues(powerParams) {
+		// Since qsp.Add(k, v...) is not allowed
+		qsp[k] = append(qsp[k], v...)
 	}
 	ma = new(entity.Machine)
 	err = m.client().Post("", qsp, func(data []byte) error {
