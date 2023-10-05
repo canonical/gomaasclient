@@ -27,13 +27,14 @@ func (m *Machine) Get(systemID string) (ma *entity.Machine, err error) {
 }
 
 // Update machine.
-func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, powerParams map[string]string) (ma *entity.Machine, err error) {
+func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, powerParams map[string]interface{}) (ma *entity.Machine, err error) {
 	qsp, err := query.Values(machineParams)
 	if err != nil {
 		return
 	}
-	for k, v := range powerParams {
-		qsp.Add(k, v)
+	for k, v := range powerParamsToURLValues(powerParams) {
+		// Since qsp.Add(k, v...) is not allowed
+		qsp[k] = append(qsp[k], v...)
 	}
 	ma = new(entity.Machine)
 	err = m.client(systemID).Put(qsp, func(data []byte) error {
@@ -95,8 +96,8 @@ func (m *Machine) ClearDefaultGateways(systemID string) (ma *entity.Machine, err
 	return
 }
 
-func (m *Machine) GetPowerParameters(systemID string) (params map[string]string, err error) {
-	params = map[string]string{}
+func (m *Machine) GetPowerParameters(systemID string) (params map[string]interface{}, err error) {
+	params = map[string]interface{}{}
 	err = m.client(systemID).Get("power_parameters", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &params)
 	})
