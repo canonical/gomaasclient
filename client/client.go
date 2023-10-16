@@ -1,17 +1,33 @@
 package client
 
 import (
+	"crypto/tls"
+	"net/http"
 	"net/url"
 
 	gomaasapi "github.com/juju/gomaasapi/v2"
 	"github.com/maas/gomaasclient/api"
 )
 
-func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error) {
-	apiClient, err := GetApiClient(apiURL, apiKey, apiVersion)
+func GetTLSClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tls.Config) (*Client, error) {
+	apiClient, err := getApiClient(apiURL, apiKey, apiVersion, tlsConfig)
 	if err != nil {
 		return nil, err
 	}
+
+	return constructClient(apiClient), nil
+}
+
+func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error) {
+	apiClient, err := getApiClient(apiURL, apiKey, apiVersion, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return constructClient(apiClient), nil
+}
+
+func constructClient(apiClient *ApiClient) *Client {
 	client := Client{
 		Domain:                &Domain{ApiClient: *apiClient},
 		Domains:               &Domains{ApiClient: *apiClient},
@@ -45,7 +61,8 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 		User:                  &User{ApiClient: *apiClient},
 		Users:                 &Users{ApiClient: *apiClient},
 	}
-	return &client, nil
+
+	return &client
 }
 
 type Client struct {
@@ -82,11 +99,22 @@ type Client struct {
 	Users                 api.Users
 }
 
+// Deprecated: The gomaasapi client will be no longer exposed.
+// Instead, please use GetClient which instantiate all MAAS resources endpoints with gomaasapi client.
 func GetApiClient(apiURL string, apiKey string, apiVersion string) (*ApiClient, error) {
+	return getApiClient(apiURL, apiKey, apiVersion, nil)
+}
+
+func getApiClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tls.Config) (*ApiClient, error) {
 	versionedURL := gomaasapi.AddAPIVersionToURL(apiURL, apiVersion)
 	authClient, err := gomaasapi.NewAuthenticatedClient(versionedURL, apiKey)
 	if err != nil {
 		return nil, err
+	}
+	if tlsConfig != nil {
+		tr := &http.Transport{TLSClientConfig: tlsConfig}
+		httpClient := &http.Client{Transport: tr}
+		authClient.HTTPClient = httpClient
 	}
 	return &ApiClient{*authClient, gomaasapi.NewMAAS(*authClient)}, nil
 }
