@@ -70,8 +70,12 @@ func (p *VMHost) Compose(id int, params *entity.VMHostMachineParams) (*entity.Ma
 
 // Refresh refreshes resource info and VM status of a given VMHost
 func (p *VMHost) Refresh(id int) (*entity.VMHost, error) {
-	err := p.client(id).Post("refresh", url.Values{}, func(data []byte) error { return nil })
-	return nil, err
+	vmHost := new(entity.VMHost)
+	err := p.client(id).Post("refresh", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, vmHost)
+	})
+
+	return vmHost, err
 }
 
 // GetParameters fetches the configured parameters of a given VMHost

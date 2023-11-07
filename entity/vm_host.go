@@ -47,18 +47,20 @@ type VMHostResource struct {
 
 // VMHostParams enumerates the VMHost configuration options.
 type VMHostParams struct {
+	Pool                  string  `url:"pool,omitempty"`
 	Type                  string  `url:"type,omitempty"`
-	PowerAddress          string  `url:"power_address,omitempty"`
 	PowerUser             string  `url:"power_user,omitempty"`
 	PowerPass             string  `url:"power_pass,omitempty"`
 	Name                  string  `url:"name,omitempty"`
 	Zone                  string  `url:"zone,omitempty"`
-	Pool                  string  `url:"pool,omitempty"`
+	PowerAddress          string  `url:"power_address,omitempty"`
 	DefaultStoragePool    string  `url:"default_storage_pool,omitempty"`
-	DefaultMacvlanMode    string  `url:"default_macvlan_mode,omitempty"`
+	Key                   string  `url:"key,omitempty"`
 	Tags                  string  `url:"tags,omitempty"`
-	CPUOverCommitRatio    float64 `url:"cpu_over_commit_ratio,omitempty"`
+	DefaultMacvlanMode    string  `url:"default_macvlan_mode,omitempty"`
+	Certificate           string  `url:"certificate,omitempty"`
 	MemoryOverCommitRatio float64 `url:"memory_over_commit_ratio,omitempty"`
+	CPUOverCommitRatio    float64 `url:"cpu_over_commit_ratio,omitempty"`
 }
 
 // VMHostMachineParams enumerates the VMHost machine configuration options.
