@@ -36,7 +36,7 @@ func (n *NetworkInterface) Get(systemID string, id int) (networkInterface *entit
 	return
 }
 
-func (n *NetworkInterface) Update(systemID string, id int, params interface{}) (networkInterface *entity.NetworkInterface, err error) {
+func (n *NetworkInterface) Update(systemID string, id int, params *entity.NetworkInterfaceUpdateParams) (networkInterface *entity.NetworkInterface, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return
