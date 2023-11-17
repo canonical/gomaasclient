@@ -29,6 +29,8 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 
 func constructClient(apiClient *ApiClient) *Client {
 	client := Client{
+		Device:                &Device{ApiClient: *apiClient},
+		Devices:               &Devices{ApiClient: *apiClient},
 		Domain:                &Domain{ApiClient: *apiClient},
 		Domains:               &Domains{ApiClient: *apiClient},
 		DNSResource:           &DNSResource{ApiClient: *apiClient},
@@ -66,6 +68,8 @@ func constructClient(apiClient *ApiClient) *Client {
 }
 
 type Client struct {
+	Device                api.Device
+	Devices               api.Devices
 	DNSResource           api.DNSResource
 	DNSResources          api.DNSResources
 	DNSResourceRecord     api.DNSResourceRecord
