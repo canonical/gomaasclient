@@ -70,12 +70,12 @@ type Machine struct {
 	CPUTestStatusName            string                     `json:"cpu_test_status_name,omitempty"`
 	OtherTestStatusName          string                     `json:"other_test_status_name,omitempty"`
 	ResourceURI                  string                     `json:"resource_uri,omitempty"`
-	Memory                       int                        `json:"memory,omitempty"`
+	Memory                       int64                      `json:"memory,omitempty"`
 	NodeType                     int                        `json:"node_type,omitempty"`
 	CurrentCommissioningResultID int                        `json:"current_commissioning_result_id,omitempty"`
 	CPUTestStatus                int                        `json:"cpu_test_status,omitempty"`
 	AddressTTL                   int                        `json:"address_ttl,omitempty"`
-	Storage                      float64                    `json:"storage,omitempty"`
+	Storage                      int64                      `json:"storage,omitempty"`
 	HardwareInfo                 map[string]string          `json:"hardware_info,omitempty"`
 	CPUCount                     int                        `json:"cpu_count,omitempty"`
 	Status                       node.Status                `json:"status,omitempty"`
@@ -85,7 +85,7 @@ type Machine struct {
 	OtherTestStatus              int                        `json:"other_test_status,omitempty"`
 	TestingStatus                int                        `json:"testing_status,omitempty"`
 	StorageTestStatus            int                        `json:"storage_test_status,omitempty"`
-	SwapSize                     int                        `json:"swap_size,omitempty"`
+	SwapSize                     int64                      `json:"swap_size,omitempty"`
 	MemoryTestStatus             int                        `json:"memory_test_status,omitempty"`
 	CPUSpeed                     int                        `json:"cpu_speed,omitempty"`
 	DisableIPv4                  bool                       `json:"disable_ipv4,omitempty"`
@@ -192,8 +192,8 @@ type MachineServiceSet struct {
 // MachineParams enumerates the parameters for the machine update operation
 type MachineParams struct {
 	CPUCount      int    `url:"cpu_count,omitempty"`
-	Memory        int    `url:"memory,omitempty"`
-	SwapSize      int    `url:"swap_size,omitempty"`
+	Memory        int64  `url:"memory,omitempty"`
+	SwapSize      int64  `url:"swap_size,omitempty"`
 	PXEMacAddress string `url:"mac_addresses,omitempty"`
 	Architecture  string `url:"architecture,omitempty"`
 	MinHWEKernel  string `url:"min_hwe_kernel,omitempty"`
@@ -242,7 +242,7 @@ type MachineAllocateParams struct {
 	AgentName        string   `url:"agent_name,omitempty"`
 	Comment          string   `url:"comment,omitempty"`
 	CPUCount         int      `url:"cpu_count,omitempty"`
-	Mem              int      `url:"mem,omitempty"`
+	Mem              int64    `url:"mem,omitempty"`
 	BridgeFD         int      `url:"bridge_fd,omitempty"`
 	BridgeAll        bool     `url:"bridge_all,omitempty"`
 	BridgeSTP        bool     `url:"bridge_stp,omitempty"`

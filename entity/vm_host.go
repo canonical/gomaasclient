@@ -31,18 +31,18 @@ type VMHostStoragePool struct {
 	Name      string `json:"name,omitempty"`
 	Type      string `json:"type,omitempty"`
 	Path      string `json:"path,omitempty"`
-	Total     int    `json:"total,omitempty"`
-	Used      int    `json:"used,omitempty"`
-	Available int    `json:"available,omitempty"`
+	Total     int64  `json:"total,omitempty"`
+	Used      int64  `json:"used,omitempty"`
+	Available int64  `json:"available,omitempty"`
 	Default   bool   `json:"default,omitempty"`
 }
 
 // VMHostResource represents the "used", "available", and "total" objects in a VMHost
 // This type should not be used directly.
 type VMHostResource struct {
-	Cores        int `json:"cores,omitempty"`
-	Memory       int `json:"memory,omitempty"`
-	LocalStorage int `json:"local_storage,omitempty"`
+	Cores        int   `json:"cores,omitempty"`
+	Memory       int64 `json:"memory,omitempty"`
+	LocalStorage int64 `json:"local_storage,omitempty"`
 }
 
 // VMHostParams enumerates the VMHost configuration options.
@@ -65,7 +65,7 @@ type VMHostParams struct {
 type VMHostMachineParams struct {
 	Cores           int    `url:"cores,omitempty"`
 	PinnedCores     int    `url:"pinned_cores,omitempty"`
-	Memory          int    `url:"memory,omitempty"`
+	Memory          int64  `url:"memory,omitempty"`
 	HugepagesBacked bool   `url:"hugepages_backed,omitempty"`
 	Architecture    string `url:"architecture,omitempty"`
 	Storage         string `url:"storage,omitempty"`
