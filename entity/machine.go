@@ -75,7 +75,7 @@ type Machine struct {
 	CurrentCommissioningResultID int                        `json:"current_commissioning_result_id,omitempty"`
 	CPUTestStatus                int                        `json:"cpu_test_status,omitempty"`
 	AddressTTL                   int                        `json:"address_ttl,omitempty"`
-	Storage                      int64                      `json:"storage,omitempty"`
+	Storage                      float64                    `json:"storage,omitempty"`
 	HardwareInfo                 map[string]string          `json:"hardware_info,omitempty"`
 	CPUCount                     int                        `json:"cpu_count,omitempty"`
 	Status                       node.Status                `json:"status,omitempty"`
