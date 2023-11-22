@@ -74,6 +74,19 @@ func (m *Machine) Deploy(systemID string, params *entity.MachineDeployParams) (m
 	return
 }
 
+// Release machine.
+func (m *Machine) Release(systemID string, params *entity.MachineReleaseParams) (ma *entity.Machine, err error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return
+	}
+	ma = new(entity.Machine)
+	err = m.client(systemID).Post("release", qsp, func(data []byte) error {
+		return json.Unmarshal(data, ma)
+	})
+	return
+}
+
 // Lock machine.
 func (m *Machine) Lock(systemID string, comment string) (ma *entity.Machine, err error) {
 	qsp := make(url.Values)

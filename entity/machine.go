@@ -265,3 +265,12 @@ type MachineDeployParams struct {
 	RegisterVMHost bool   `url:"register_vmhost,omitempty"`
 	EnableHwSync   bool   `url:"enable_hw_sync,omitempty"`
 }
+
+// MachineDeployParams enumerates the parameters for the release operation
+type MachineReleaseParams struct {
+	Comment     string `url:"comment,omitempty"`
+	Erase       string `url:"erase,omitempty"`
+	Force       string `url:"force,omitempty"`
+	QuickErase  string `url:"quick_erase,omitempty"`
+	SecureErase string `url:"secure_erase,omitempty"`
+}
