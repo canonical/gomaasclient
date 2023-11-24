@@ -101,6 +101,8 @@ type Client struct {
 	BlockDevicePartitions api.BlockDevicePartitions
 	User                  api.User
 	Users                 api.Users
+	ResourcePool          api.ResourcePool
+	ResourcePools         api.ResourcePools
 }
 
 // Deprecated: The gomaasapi client will be no longer exposed.
