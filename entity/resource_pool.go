@@ -7,3 +7,8 @@ type ResourcePool struct {
 	Description string `json:"description,omitempty"`
 	ResourceURI string `json:"resource_uri,omitempty"`
 }
+
+type ResourcePoolParams struct {
+	Name        string `url:"name,omitempty"`
+	Description string `url:"description,omitempty"`
+}
