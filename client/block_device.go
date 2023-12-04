@@ -9,6 +9,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// BlockDevice implements the api.BlockDevice interface
 type BlockDevice struct {
 	ApiClient ApiClient
 }
@@ -17,6 +18,7 @@ func (b *BlockDevice) client(systemID string, id int) ApiClient {
 	return b.ApiClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("blockdevices").GetSubObject(fmt.Sprintf("%v", id))
 }
 
+// Get fetches a given BlockDevice based on the given Node's system_id and BlockDevice's id
 func (b *BlockDevice) Get(systemID string, id int) (blockDevice *entity.BlockDevice, err error) {
 	blockDevice = new(entity.BlockDevice)
 	err = b.client(systemID, id).Get("", url.Values{}, func(data []byte) error {
@@ -25,6 +27,7 @@ func (b *BlockDevice) Get(systemID string, id int) (blockDevice *entity.BlockDev
 	return
 }
 
+// Update updates a given BlockDevice
 func (b *BlockDevice) Update(systemID string, id int, params *entity.BlockDeviceParams) (blockDevice *entity.BlockDevice, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {
@@ -37,10 +40,12 @@ func (b *BlockDevice) Update(systemID string, id int, params *entity.BlockDevice
 	return
 }
 
+// Delete deletes a given BlockDevice
 func (b *BlockDevice) Delete(systemID string, id int) error {
 	return b.client(systemID, id).Delete()
 }
 
+// AddTag adds a tag to a given BlockDevice
 func (b *BlockDevice) AddTag(systemID string, id int, tag string) (blockDevice *entity.BlockDevice, err error) {
 	qsp := url.Values{}
 	qsp.Set("tag", tag)
@@ -51,6 +56,7 @@ func (b *BlockDevice) AddTag(systemID string, id int, tag string) (blockDevice *
 	return
 }
 
+// RemoveTag removes a tag from a given BlockDevice
 func (b *BlockDevice) RemoveTag(systemID string, id int, tag string) (blockDevice *entity.BlockDevice, err error) {
 	qsp := url.Values{}
 	qsp.Set("tag", tag)
@@ -61,6 +67,7 @@ func (b *BlockDevice) RemoveTag(systemID string, id int, tag string) (blockDevic
 	return
 }
 
+// Format configures a BlockDevice to be formatted for a new file system
 func (b *BlockDevice) Format(systemID string, id int, fsType string) (blockDevice *entity.BlockDevice, err error) {
 	qsp := url.Values{}
 	qsp.Set("fstype", fsType)
@@ -71,6 +78,7 @@ func (b *BlockDevice) Format(systemID string, id int, fsType string) (blockDevic
 	return
 }
 
+// Unformat removes the configured file system
 func (b *BlockDevice) Unformat(systemID string, id int) (blockDevice *entity.BlockDevice, err error) {
 	blockDevice = new(entity.BlockDevice)
 	err = b.client(systemID, id).Post("unformat", url.Values{}, func(data []byte) error {
@@ -79,6 +87,7 @@ func (b *BlockDevice) Unformat(systemID string, id int) (blockDevice *entity.Blo
 	return
 }
 
+// Mount sets the mount point and options of a given BlockDevice
 func (b *BlockDevice) Mount(systemID string, id int, mountPoint string, mountOptions string) (blockDevice *entity.BlockDevice, err error) {
 	qsp := url.Values{}
 	qsp.Set("mount_point", mountPoint)
@@ -90,6 +99,7 @@ func (b *BlockDevice) Mount(systemID string, id int, mountPoint string, mountOpt
 	return
 }
 
+// Unmount unsets the mount of a BlockDevice
 func (b *BlockDevice) Unmount(systemID string, id int) (blockDevice *entity.BlockDevice, err error) {
 	blockDevice = new(entity.BlockDevice)
 	err = b.client(systemID, id).Post("unmount", url.Values{}, func(data []byte) error {
@@ -98,6 +108,7 @@ func (b *BlockDevice) Unmount(systemID string, id int) (blockDevice *entity.Bloc
 	return
 }
 
+// SetBootDisk configures the given BlockDevice as the boot disk
 func (b *BlockDevice) SetBootDisk(systemID string, id int) error {
 	return b.client(systemID, id).Post("set_boot_disk", url.Values{}, func(data []byte) error { return nil })
 }

@@ -8,6 +8,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// NetworkInterfaces implements api.NetworkInterfaces
 type NetworkInterfaces struct {
 	ApiClient ApiClient
 }
@@ -16,6 +17,7 @@ func (n *NetworkInterfaces) client(systemID string) ApiClient {
 	return n.ApiClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("interfaces")
 }
 
+// Get fetches a list of NetworkInterface objects
 func (n *NetworkInterfaces) Get(systemID string) (networkInterfaces []entity.NetworkInterface, err error) {
 	err = n.client(systemID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &networkInterfaces)
@@ -23,6 +25,7 @@ func (n *NetworkInterfaces) Get(systemID string) (networkInterfaces []entity.Net
 	return
 }
 
+// CreateBond creates a Bond interface from two or more given NetworkInterface objects
 func (n *NetworkInterfaces) CreateBond(systemID string, params *entity.NetworkInterfaceBondParams) (networkInterface *entity.NetworkInterface, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {
@@ -35,6 +38,7 @@ func (n *NetworkInterfaces) CreateBond(systemID string, params *entity.NetworkIn
 	return
 }
 
+// CreateBridge creates a Bridge type interface
 func (n *NetworkInterfaces) CreateBridge(systemID string, params *entity.NetworkInterfaceBridgeParams) (networkInterface *entity.NetworkInterface, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {
@@ -47,6 +51,7 @@ func (n *NetworkInterfaces) CreateBridge(systemID string, params *entity.Network
 	return
 }
 
+// CreatePhysical creates a new physical interface
 func (n *NetworkInterfaces) CreatePhysical(systemID string, params *entity.NetworkInterfacePhysicalParams) (networkInterface *entity.NetworkInterface, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {
@@ -59,6 +64,7 @@ func (n *NetworkInterfaces) CreatePhysical(systemID string, params *entity.Netwo
 	return
 }
 
+// CreateVLAN creates an interface tagged for a given VLAN
 func (n *NetworkInterfaces) CreateVLAN(systemID string, params *entity.NetworkInterfaceVLANParams) (networkInterface *entity.NetworkInterface, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {

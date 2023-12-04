@@ -8,6 +8,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// DNSResourceRecords implements api.DNSResourceRecords
 type DNSResourceRecords struct {
 	ApiClient ApiClient
 }
@@ -16,6 +17,7 @@ func (d *DNSResourceRecords) client() ApiClient {
 	return d.ApiClient.GetSubObject("dnsresourcerecords")
 }
 
+// Get fetches a list of DNSResourceRecord objectts
 func (d *DNSResourceRecords) Get() (dnsResourceRecords []entity.DNSResourceRecord, err error) {
 	err = d.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &dnsResourceRecords)
@@ -23,6 +25,7 @@ func (d *DNSResourceRecords) Get() (dnsResourceRecords []entity.DNSResourceRecor
 	return
 }
 
+// Create creates a new DNSResourceRecord
 func (d *DNSResourceRecords) Create(params *entity.DNSResourceRecordParams) (dnsResourceRecord *entity.DNSResourceRecord, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {

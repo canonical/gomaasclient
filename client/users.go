@@ -8,6 +8,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// Users implements api.Users
 type Users struct {
 	ApiClient ApiClient
 }
@@ -16,6 +17,7 @@ func (u *Users) client() ApiClient {
 	return u.ApiClient.GetSubObject("users")
 }
 
+// Get fetches a list of User objects
 func (u *Users) Get() (users []entity.User, err error) {
 	err = u.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &users)
@@ -23,6 +25,7 @@ func (u *Users) Get() (users []entity.User, err error) {
 	return
 }
 
+// Create creates a new User
 func (u *Users) Create(params *entity.UserParams) (user *entity.User, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {

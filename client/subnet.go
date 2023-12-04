@@ -11,6 +11,7 @@ import (
 	"github.com/maas/gomaasclient/entity/subnet"
 )
 
+// Subnet implements api.Subnet
 type Subnet struct {
 	ApiClient ApiClient
 }
@@ -19,10 +20,12 @@ func (s *Subnet) client(id int) ApiClient {
 	return s.ApiClient.GetSubObject("subnets").GetSubObject(fmt.Sprintf("%v", id))
 }
 
+// Delete deletes a given Subnet
 func (s *Subnet) Delete(id int) error {
 	return s.client(id).Delete()
 }
 
+// Get fetches a given Subnet
 func (s *Subnet) Get(id int) (subnet *entity.Subnet, err error) {
 	subnet = new(entity.Subnet)
 	err = s.client(id).Get("", url.Values{}, func(data []byte) error {
@@ -31,6 +34,7 @@ func (s *Subnet) Get(id int) (subnet *entity.Subnet, err error) {
 	return
 }
 
+// GetIPAddresses fetches the allocated IPAddresses in the given subnet
 func (s *Subnet) GetIPAddresses(id int) (subnetIPAddresses []subnet.IPAddress, err error) {
 	qsp := url.Values{}
 	qsp.Set("with_username", "1")
@@ -41,6 +45,7 @@ func (s *Subnet) GetIPAddresses(id int) (subnetIPAddresses []subnet.IPAddress, e
 	return
 }
 
+// GetReservedIPRanges fetches the reserved IPRange objects for the given Subnet
 func (s *Subnet) GetReservedIPRanges(id int) (subnetReservedIPRanges []subnet.ReservedIPRange, err error) {
 	err = s.client(id).Get("reserved_ip_ranges", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &subnetReservedIPRanges)
@@ -48,6 +53,7 @@ func (s *Subnet) GetReservedIPRanges(id int) (subnetReservedIPRanges []subnet.Re
 	return
 }
 
+// GetStatistics gets the stats of the given subnet
 func (s *Subnet) GetStatistics(id int) (stats *subnet.Statistics, err error) {
 	stats = new(subnet.Statistics)
 	err = s.client(id).Get("statistics", url.Values{}, func(data []byte) error {
@@ -56,6 +62,7 @@ func (s *Subnet) GetStatistics(id int) (stats *subnet.Statistics, err error) {
 	return
 }
 
+// GetUnreservedIPRanges gets the IPRange objects for allocation use
 func (s *Subnet) GetUnreservedIPRanges(id int) (ipRanges []subnet.IPRange, err error) {
 	err = s.client(id).Get("unreserved_ip_ranges", url.Values{}, func(data []byte) error {
 		log.Printf("%s\n", data)
@@ -64,6 +71,7 @@ func (s *Subnet) GetUnreservedIPRanges(id int) (ipRanges []subnet.IPRange, err e
 	return
 }
 
+// Update updates the given Subnet
 func (s *Subnet) Update(id int, params *entity.SubnetParams) (subnet *entity.Subnet, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {

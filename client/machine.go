@@ -8,7 +8,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
-// Contains functionality for manipulating the Machine entity.
+// Machine contains functionality for manipulating the Machine entity.
 type Machine struct {
 	ApiClient ApiClient
 }
@@ -109,6 +109,7 @@ func (m *Machine) ClearDefaultGateways(systemID string) (ma *entity.Machine, err
 	return
 }
 
+// GetPowerParameters fetches the power parameters of a given Machine
 func (m *Machine) GetPowerParameters(systemID string) (params map[string]interface{}, err error) {
 	params = map[string]interface{}{}
 	err = m.client(systemID).Get("power_parameters", url.Values{}, func(data []byte) error {

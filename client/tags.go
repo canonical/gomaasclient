@@ -8,6 +8,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// Tags implements api.Tags
 type Tags struct {
 	ApiClient ApiClient
 }
@@ -16,6 +17,7 @@ func (t *Tags) client() ApiClient {
 	return t.ApiClient.GetSubObject("tags")
 }
 
+// Get fetches a list of Tag objects
 func (t *Tags) Get() (tags []entity.Tag, err error) {
 	err = t.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &tags)
@@ -23,6 +25,7 @@ func (t *Tags) Get() (tags []entity.Tag, err error) {
 	return
 }
 
+// Create creates a new Tag
 func (t *Tags) Create(tagParams *entity.TagParams) (tag *entity.Tag, err error) {
 	qsp, err := query.Values(tagParams)
 	if err != nil {

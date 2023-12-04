@@ -9,6 +9,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// BlockDevicePartitions implements api.BlockDevicePartitions
 type BlockDevicePartitions struct {
 	ApiClient ApiClient
 }
@@ -17,6 +18,7 @@ func (p *BlockDevicePartitions) client(systemID string, blockDeviceID int) ApiCl
 	return p.ApiClient.GetSubObject(fmt.Sprintf("nodes/%s/blockdevices/%v/partitions", systemID, blockDeviceID))
 }
 
+// Get lists the BlockDevicePartition objects for a given system_id and BlockDevice id
 func (p *BlockDevicePartitions) Get(systemID string, blockDeviceID int) (partitions []entity.BlockDevicePartition, err error) {
 	err = p.client(systemID, blockDeviceID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &partitions)
@@ -24,6 +26,7 @@ func (p *BlockDevicePartitions) Get(systemID string, blockDeviceID int) (partiti
 	return
 }
 
+// Create creats a new BlockDevicePartition for a given system_id and BlockDevice id
 func (p *BlockDevicePartitions) Create(systemID string, blockDeviceID int, params *entity.BlockDevicePartitionParams) (partition *entity.BlockDevicePartition, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {

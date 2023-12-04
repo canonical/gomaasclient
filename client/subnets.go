@@ -8,7 +8,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
-// Contains functionality for manipulating the Subnets entity.
+// Subnets contains functionality for manipulating the Subnets entity.
 type Subnets struct {
 	ApiClient ApiClient
 }
@@ -17,6 +17,7 @@ func (s *Subnets) client() ApiClient {
 	return s.ApiClient.GetSubObject("subnets")
 }
 
+// Get fetches a list of Subnet objects
 func (s *Subnets) Get() (subnets []entity.Subnet, err error) {
 	err = s.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &subnets)
@@ -24,6 +25,7 @@ func (s *Subnets) Get() (subnets []entity.Subnet, err error) {
 	return
 }
 
+// Create creates a new Subnet
 func (s *Subnets) Create(params *entity.SubnetParams) (subnet *entity.Subnet, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {

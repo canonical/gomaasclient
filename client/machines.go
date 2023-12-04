@@ -8,7 +8,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
-// Contains functionality for manipulating the Machines entity.
+// Machines contains functionality for manipulating the Machines entity.
 type Machines struct {
 	ApiClient ApiClient
 }
@@ -17,7 +17,7 @@ func (m *Machines) client() ApiClient {
 	return m.ApiClient.GetSubObject("machines")
 }
 
-// List machines.
+// Get fetches a list machines.
 func (m *Machines) Get() (machines []entity.Machine, err error) {
 	err = m.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &machines)
@@ -67,6 +67,7 @@ func (m *Machines) Release(systemIDs []string, comment string) error {
 	return m.client().Post("release", qsp, func(data []byte) error { return nil })
 }
 
+// AcceptAll accepts all pending enlistments
 func (m *Machines) AcceptAll() error {
 	qsp := url.Values{}
 	return m.client().Post("accept_all", qsp, func(data []byte) error { return nil })
