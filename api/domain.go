@@ -4,6 +4,8 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// Domain is an interface defining API behaviour for
+// domain objects
 type Domain interface {
 	Get(id int) (*entity.Domain, error)
 	SetDefault(id int) (*entity.Domain, error)

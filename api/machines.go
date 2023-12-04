@@ -4,6 +4,8 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// Machines is an interface for listing, creating, allocating,
+// bulk-accepting enlistments and releasing Machine records
 type Machines interface {
 	Get() ([]entity.Machine, error)
 	Create(machineParams *entity.MachineParams, powerParams map[string]interface{}) (*entity.Machine, error)

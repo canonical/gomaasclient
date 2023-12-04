@@ -1,4 +1,4 @@
-/*package api defines an interface to each MaaS API endpoint.
+/*Package api defines an interface to each MaaS API endpoint.
 
 Each interface correlates to one endpoint, such as Subnets for the Subnets
 endpoint (ie /subnets) and Subnet for the Subnet endpoint (eg subnets/<subnet_id>).

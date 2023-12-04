@@ -4,6 +4,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// IPRange is an interface defining API behaviour for IP ranges
 type IPRange interface {
 	Get(id int) (*entity.IPRange, error)
 	Update(id int, params *entity.IPRangeParams) (*entity.IPRange, error)

@@ -4,6 +4,8 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// BlockDevice is an interface providing API behaviour for
+// block devices
 type BlockDevice interface {
 	Get(systemID string, id int) (*entity.BlockDevice, error)
 	Update(systemID string, id int, params *entity.BlockDeviceParams) (*entity.BlockDevice, error)

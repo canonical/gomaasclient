@@ -4,6 +4,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// Machine is an interface defining API behaviour for Machine objects
 type Machine interface {
 	Get(systemID string) (*entity.Machine, error)
 	Update(systemID string, machineParams *entity.MachineParams, powerParams map[string]interface{}) (*entity.Machine, error)

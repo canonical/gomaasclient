@@ -4,6 +4,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// Tag is an interface defining API behaviour for Tag objects
 type Tag interface {
 	Get(name string) (*entity.Tag, error)
 	Update(name string, tagParams *entity.TagParams) (*entity.Tag, error)

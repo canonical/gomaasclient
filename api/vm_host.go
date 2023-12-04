@@ -4,6 +4,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// VMHost is an interface defining API behaviour for VMHost objects
 type VMHost interface {
 	Get(id int) (*entity.VMHost, error)
 	Update(id int, params *entity.VMHostParams) (*entity.VMHost, error)

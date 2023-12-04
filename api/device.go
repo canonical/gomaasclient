@@ -4,6 +4,8 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// Device is an interface defining API behaviour for
+// devices
 type Device interface {
 	Get(systemID string) (*entity.Device, error)
 	Update(systemID string, deviceParams *entity.DeviceUpdateParams) (*entity.Device, error)
