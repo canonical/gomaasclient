@@ -2,6 +2,8 @@ package api
 
 import "github.com/maas/gomaasclient/entity"
 
+// BlockDevicePartition is an interface providing API behaviour for
+// block device partitions
 type BlockDevicePartition interface {
 	Get(systemID string, blockDeviceID int, id int) (*entity.BlockDevicePartition, error)
 	Delete(systemID string, blockDeviceID int, id int) error
