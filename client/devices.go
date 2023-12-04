@@ -8,6 +8,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// Devices implements api.Devices
 type Devices struct {
 	ApiClient ApiClient
 }
@@ -16,6 +17,7 @@ func (d *Devices) client() ApiClient {
 	return d.ApiClient.GetSubObject("devices")
 }
 
+// Get fetches a list of Devices
 func (d *Devices) Get() (devices []entity.Device, err error) {
 	err = d.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &devices)
@@ -23,6 +25,7 @@ func (d *Devices) Get() (devices []entity.Device, err error) {
 	return
 }
 
+// Create creates a new Device
 func (d *Devices) Create(deviceParams *entity.DeviceCreateParams) (device *entity.Device, err error) {
 	qsp, err := query.Values(deviceParams)
 	if err != nil {

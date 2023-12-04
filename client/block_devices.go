@@ -8,6 +8,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// BlockDevices implements api.BlockDevices
 type BlockDevices struct {
 	ApiClient ApiClient
 }
@@ -16,6 +17,7 @@ func (b *BlockDevices) client(systemID string) ApiClient {
 	return b.ApiClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("blockdevices")
 }
 
+// Get fetches a list of BlockDevices for a given system_id
 func (b *BlockDevices) Get(systemID string) (blockDevices []entity.BlockDevice, err error) {
 	err = b.client(systemID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &blockDevices)
@@ -23,6 +25,7 @@ func (b *BlockDevices) Get(systemID string) (blockDevices []entity.BlockDevice, 
 	return
 }
 
+// Create creates a new BlockDevice for a given system_id
 func (b *BlockDevices) Create(systemID string, params *entity.BlockDeviceParams) (blockDevice *entity.BlockDevice, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {

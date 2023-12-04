@@ -8,7 +8,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
-// Contains functionality for manipulating the VMHosts entity.
+// VMHosts contains functionality for manipulating the VMHosts entity.
 type VMHosts struct {
 	ApiClient ApiClient
 }
@@ -17,6 +17,7 @@ func (p *VMHosts) client() ApiClient {
 	return p.ApiClient.GetSubObject("pods")
 }
 
+// Get fetches a list of VMHost objects
 func (p *VMHosts) Get() (vmHosts []entity.VMHost, err error) {
 	err = p.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &vmHosts)
@@ -24,13 +25,14 @@ func (p *VMHosts) Get() (vmHosts []entity.VMHost, err error) {
 	return
 }
 
-func (m *VMHosts) Create(params *entity.VMHostParams) (vmHost *entity.VMHost, err error) {
+// Create creates a new VMHost
+func (p *VMHosts) Create(params *entity.VMHostParams) (vmHost *entity.VMHost, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return
 	}
 	vmHost = new(entity.VMHost)
-	err = m.client().Post("", qsp, func(data []byte) error {
+	err = p.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, vmHost)
 	})
 	return

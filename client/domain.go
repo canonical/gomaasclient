@@ -9,6 +9,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// Domain implements api.Domain
 type Domain struct {
 	ApiClient ApiClient
 }
@@ -17,6 +18,7 @@ func (d *Domain) client(id int) ApiClient {
 	return d.ApiClient.GetSubObject(fmt.Sprintf("domains/%v", id))
 }
 
+// Get fetches a given Domain
 func (d *Domain) Get(id int) (domain *entity.Domain, err error) {
 	domain = new(entity.Domain)
 	err = d.client(id).Get("", url.Values{}, func(data []byte) error {
@@ -25,6 +27,7 @@ func (d *Domain) Get(id int) (domain *entity.Domain, err error) {
 	return
 }
 
+// SetDefault sets the given Domain as the default Domain
 func (d *Domain) SetDefault(id int) (domain *entity.Domain, err error) {
 	domain = new(entity.Domain)
 	err = d.client(id).Post("set_default", url.Values{}, func(data []byte) error {
@@ -33,6 +36,7 @@ func (d *Domain) SetDefault(id int) (domain *entity.Domain, err error) {
 	return
 }
 
+// Update updates the given Domain
 func (d *Domain) Update(id int, params *entity.DomainParams) (domain *entity.Domain, err error) {
 	qsp, err := query.Values(params)
 	if err != nil {
@@ -45,6 +49,7 @@ func (d *Domain) Update(id int, params *entity.DomainParams) (domain *entity.Dom
 	return
 }
 
+// Delete deletes a given Domain
 func (d *Domain) Delete(id int) error {
 	return d.client(id).Delete()
 }

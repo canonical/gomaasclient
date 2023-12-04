@@ -9,6 +9,7 @@ import (
 	"github.com/maas/gomaasclient/api"
 )
 
+// GetTLSClient creates a Client configured with TLS
 func GetTLSClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tls.Config) (*Client, error) {
 	apiClient, err := getApiClient(apiURL, apiKey, apiVersion, tlsConfig)
 	if err != nil {
@@ -18,6 +19,7 @@ func GetTLSClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tl
 	return constructClient(apiClient), nil
 }
 
+// GetClient creates a client
 func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error) {
 	apiClient, err := getApiClient(apiURL, apiKey, apiVersion, nil)
 	if err != nil {
@@ -67,6 +69,8 @@ func constructClient(apiClient *ApiClient) *Client {
 	return &client
 }
 
+// Client is an object providing API interactions
+// with a configured MAAS installation
 type Client struct {
 	Device                api.Device
 	Devices               api.Devices

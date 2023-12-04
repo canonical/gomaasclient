@@ -8,6 +8,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
+// Fabrics implements api.Fabrics
 type Fabrics struct {
 	ApiClient ApiClient
 }
@@ -16,6 +17,7 @@ func (f *Fabrics) client() ApiClient {
 	return f.ApiClient.GetSubObject("fabrics")
 }
 
+// Get fetches a list of Fabric objects
 func (f *Fabrics) Get() (fabrics []entity.Fabric, err error) {
 	err = f.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &fabrics)
@@ -23,6 +25,7 @@ func (f *Fabrics) Get() (fabrics []entity.Fabric, err error) {
 	return
 }
 
+// Create creates a new Fabric object
 func (f *Fabrics) Create(fabricParams *entity.FabricParams) (fabric *entity.Fabric, err error) {
 	qsp, err := query.Values(fabricParams)
 	if err != nil {
