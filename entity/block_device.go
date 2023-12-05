@@ -23,6 +23,7 @@ type BlockDevice struct {
 	Type               string                 `json:"type,omitempty"`
 	UUID               string                 `json:"uuid,omitempty"`
 	ResourceURI        string                 `json:"resource_uri,omitempty"`
+	NUMANode           int                    `json:"numa_node,omitempty"`
 }
 
 type BlockDeviceParams struct {
