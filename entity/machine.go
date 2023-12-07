@@ -266,11 +266,11 @@ type MachineDeployParams struct {
 	EnableHwSync   bool   `url:"enable_hw_sync,omitempty"`
 }
 
-// MachineDeployParams enumerates the parameters for the release operation
+// MachineReleaseParams enumerates the parameters for the release operation
 type MachineReleaseParams struct {
 	Comment     string `url:"comment,omitempty"`
-	Erase       string `url:"erase,omitempty"`
-	Force       string `url:"force,omitempty"`
-	QuickErase  string `url:"quick_erase,omitempty"`
-	SecureErase string `url:"secure_erase,omitempty"`
+	Erase       bool   `url:"erase,omitempty"`
+	Force       bool   `url:"force,omitempty"`
+	QuickErase  bool   `url:"quick_erase,omitempty"`
+	SecureErase bool   `url:"secure_erase,omitempty"`
 }
