@@ -1,3 +1,4 @@
+// Package helper contains helper functions for unit tests.
 package helper
 
 import (
@@ -26,12 +27,15 @@ func init() {
 
 	RepoBasePkg = func(fpath string) string {
 		type foo struct{}
+
 		pkgPath := reflect.TypeOf(foo{}).PkgPath()
 		fpath = filepath.Dir(fpath)
+
 		for path.Base(pkgPath) == filepath.Base(fpath) && filepath.Base(fpath) != filepath.Base(RepoBaseDir) {
 			pkgPath = path.Dir(pkgPath)
 			fpath = filepath.Dir(fpath)
 		}
+
 		return pkgPath
 	}(file)
 }

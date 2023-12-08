@@ -5,7 +5,7 @@ import (
 	"github.com/maas/gomaasclient/entity/subnet"
 )
 
-// Subnet represents the MaaS Subnet endpoint
+// Subnet represents the MAAS Subnet endpoint
 type Subnet interface {
 	Delete(id int) error
 	Get(id int) (*entity.Subnet, error)

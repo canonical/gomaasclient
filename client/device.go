@@ -11,33 +11,36 @@ import (
 
 // Device implements api.Device
 type Device struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (d *Device) client(systemID string) ApiClient {
-	return d.ApiClient.GetSubObject("devices").GetSubObject(fmt.Sprintf("%v", systemID))
+func (d *Device) client(systemID string) APIClient {
+	return d.APIClient.GetSubObject("devices").GetSubObject(fmt.Sprintf("%v", systemID))
 }
 
 // Get fetches a device with a given system_id
-func (d *Device) Get(systemID string) (device *entity.Device, err error) {
-	device = new(entity.Device)
-	err = d.client(systemID).Get("", url.Values{}, func(data []byte) error {
+func (d *Device) Get(systemID string) (*entity.Device, error) {
+	device := new(entity.Device)
+	err := d.client(systemID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, device)
 	})
-	return
+
+	return device, err
 }
 
 // Update updates a given Device
-func (d *Device) Update(systemID string, deviceParams *entity.DeviceUpdateParams) (device *entity.Device, err error) {
+func (d *Device) Update(systemID string, deviceParams *entity.DeviceUpdateParams) (*entity.Device, error) {
 	qsp, err := query.Values(deviceParams)
 	if err != nil {
-		return
+		return nil, err
 	}
-	device = new(entity.Device)
+
+	device := new(entity.Device)
 	err = d.client(systemID).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, device)
 	})
-	return
+
+	return device, err
 }
 
 // Delete deletes a given Device

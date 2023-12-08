@@ -33,5 +33,6 @@ func powerParamsToURLValues(params map[string]interface{}) url.Values {
 			}
 		}
 	}
+
 	return qsp
 }

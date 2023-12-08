@@ -1,3 +1,4 @@
+//nolint:dupl // disable dupl check on client for now
 package client
 
 import (
@@ -10,30 +11,34 @@ import (
 
 // Tags implements api.Tags
 type Tags struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (t *Tags) client() ApiClient {
-	return t.ApiClient.GetSubObject("tags")
+func (t *Tags) client() APIClient {
+	return t.APIClient.GetSubObject("tags")
 }
 
 // Get fetches a list of Tag objects
-func (t *Tags) Get() (tags []entity.Tag, err error) {
-	err = t.client().Get("", url.Values{}, func(data []byte) error {
+func (t *Tags) Get() ([]entity.Tag, error) {
+	tags := make([]entity.Tag, 0)
+	err := t.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &tags)
 	})
-	return
+
+	return tags, err
 }
 
 // Create creates a new Tag
-func (t *Tags) Create(tagParams *entity.TagParams) (tag *entity.Tag, err error) {
+func (t *Tags) Create(tagParams *entity.TagParams) (*entity.Tag, error) {
 	qsp, err := query.Values(tagParams)
 	if err != nil {
-		return
+		return nil, err
 	}
-	tag = new(entity.Tag)
+
+	tag := new(entity.Tag)
 	err = t.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, tag)
 	})
-	return
+
+	return tag, err
 }

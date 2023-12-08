@@ -2,6 +2,7 @@ package helper
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -11,7 +12,7 @@ import (
 // The path should be relative to the /test/testdata directory.
 func Testdata(path string) (io.ReadCloser, error) {
 	path = filepath.Join(RepoBaseDir, "test", "testdata", filepath.FromSlash(path))
-	return os.Open(path)
+	return os.Open(filepath.Clean(path))
 }
 
 // TestdataFromJSON fetches a testdata file and decodes it into a type.
@@ -22,9 +23,15 @@ func TestdataFromJSON(path string, target interface{}) error {
 	if err != nil {
 		return err
 	}
-	defer rc.Close()
+
+	defer func() {
+		if err := rc.Close(); err != nil {
+			fmt.Println("Error when closing:", err)
+		}
+	}()
 
 	dec := json.NewDecoder(rc)
 	dec.DisallowUnknownFields()
+
 	return dec.Decode(target)
 }

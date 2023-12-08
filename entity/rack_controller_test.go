@@ -14,6 +14,7 @@ func TestRackControllert(t *testing.T) {
 	if err := helper.TestdataFromJSON("maas/rack_controller.json", rackController); err != nil {
 		t.Fatal(err)
 	}
+
 	if err := helper.TestdataFromJSON("maas/rack_controllers.json", rackControllers); err != nil {
 		t.Fatal(err)
 	}

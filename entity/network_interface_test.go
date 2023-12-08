@@ -498,6 +498,7 @@ func TestNetworkInterface(t *testing.T) {
 	if err := helper.TestdataFromJSON("maas/interface.json", ifc); err != nil {
 		t.Fatal(err)
 	}
+
 	if err := helper.TestdataFromJSON("maas/interfaces.json", ifcs); err != nil {
 		t.Fatal(err)
 	}
@@ -506,6 +507,7 @@ func TestNetworkInterface(t *testing.T) {
 	if diff := cmp.Diff(&sampleNetworkInterface, ifc); diff != "" {
 		t.Fatalf("json.Decode(NetworkInterface) mismatch (-want +got):\n%s", diff)
 	}
+
 	if diff := cmp.Diff(&sampleNetworkInterfaces, ifcs); diff != "" {
 		t.Fatalf("json.Decode([]NetworkInterface) mismatch (-want +got):\n%s", diff)
 	}

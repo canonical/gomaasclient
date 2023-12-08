@@ -1,19 +1,19 @@
 package entity
 
-// BlockDevicePartition represents the MaaS block device partition endpoint.
+// BlockDevicePartition represents the MAAS block device partition endpoint.
 type BlockDevicePartition struct {
-	UUID        string              `json:"uuid"`
-	Size        int64               `json:"size"`
-	Bootable    bool                `json:"bootable"`
-	Tags        []string            `json:"tags,omitempty"`
-	SystemID    string              `json:"system_id"`
-	ID          int                 `json:"id"`
-	DeviceID    int                 `json:"device_id"`
 	FileSystem  PartitionFileSystem `json:"filesystem"`
+	UUID        string              `json:"uuid"`
+	SystemID    string              `json:"system_id"`
 	UsedFor     string              `json:"used_for,omitempty"`
 	Type        string              `json:"type"`
 	Path        string              `json:"path"`
 	ResourceURI string              `json:"resource_uri"`
+	Tags        []string            `json:"tags,omitempty"`
+	Size        int64               `json:"size"`
+	ID          int                 `json:"id"`
+	DeviceID    int                 `json:"device_id"`
+	Bootable    bool                `json:"bootable"`
 }
 
 type PartitionFileSystem struct {
@@ -25,7 +25,7 @@ type PartitionFileSystem struct {
 }
 
 type BlockDevicePartitionParams struct {
-	Size     int64  `url:"size,omitempty"`
 	UUID     string `url:"uuid,omitempty"`
+	Size     int64  `url:"size,omitempty"`
 	Bootable bool   `url:"bootable"`
 }

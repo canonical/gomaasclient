@@ -1,3 +1,4 @@
+//nolint:dupl // disable dupl check on client for now
 package client
 
 import (
@@ -10,30 +11,34 @@ import (
 
 // DNSResources implements api.DNSResources
 type DNSResources struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (d *DNSResources) client() ApiClient {
-	return d.ApiClient.GetSubObject("dnsresources")
+func (d *DNSResources) client() APIClient {
+	return d.APIClient.GetSubObject("dnsresources")
 }
 
 // Get fetches a list of DNSResource objects
-func (d *DNSResources) Get() (dnsresources []entity.DNSResource, err error) {
-	err = d.client().Get("", url.Values{}, func(data []byte) error {
+func (d *DNSResources) Get() ([]entity.DNSResource, error) {
+	dnsresources := make([]entity.DNSResource, 0)
+	err := d.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &dnsresources)
 	})
-	return
+
+	return dnsresources, err
 }
 
 // Create creates a new DNSResource
-func (d *DNSResources) Create(params *entity.DNSResourceParams) (dnsResource *entity.DNSResource, err error) {
+func (d *DNSResources) Create(params *entity.DNSResourceParams) (*entity.DNSResource, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
-	dnsResource = new(entity.DNSResource)
+
+	dnsResource := new(entity.DNSResource)
 	err = d.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, dnsResource)
 	})
-	return
+
+	return dnsResource, err
 }

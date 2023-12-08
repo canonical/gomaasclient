@@ -10,33 +10,36 @@ import (
 
 // Tag implements api.Tag
 type Tag struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (t *Tag) client(name string) ApiClient {
-	return t.ApiClient.GetSubObject("tags").GetSubObject(name)
+func (t *Tag) client(name string) APIClient {
+	return t.APIClient.GetSubObject("tags").GetSubObject(name)
 }
 
 // Get fetches a given tag by name
-func (t *Tag) Get(name string) (tag *entity.Tag, err error) {
-	tag = new(entity.Tag)
-	err = t.client(name).Get("", url.Values{}, func(data []byte) error {
+func (t *Tag) Get(name string) (*entity.Tag, error) {
+	tag := new(entity.Tag)
+	err := t.client(name).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, tag)
 	})
-	return
+
+	return tag, err
 }
 
 // Update updates a given tag
-func (t *Tag) Update(name string, tagParams *entity.TagParams) (tag *entity.Tag, err error) {
+func (t *Tag) Update(name string, tagParams *entity.TagParams) (*entity.Tag, error) {
 	qsp, err := query.Values(tagParams)
 	if err != nil {
-		return
+		return nil, err
 	}
-	tag = new(entity.Tag)
+
+	tag := new(entity.Tag)
 	err = t.client(name).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, tag)
 	})
-	return
+
+	return tag, err
 }
 
 // Delete deletes a given tag
@@ -45,11 +48,13 @@ func (t *Tag) Delete(name string) error {
 }
 
 // GetMachines fetches a list of machines with a given tag
-func (t *Tag) GetMachines(name string) (machines []entity.Machine, err error) {
-	err = t.client(name).Get("machines", url.Values{}, func(data []byte) error {
+func (t *Tag) GetMachines(name string) ([]entity.Machine, error) {
+	machines := make([]entity.Machine, 0)
+	err := t.client(name).Get("machines", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &machines)
 	})
-	return
+
+	return machines, err
 }
 
 // AddMachines adds a set of Machines to a given tag
@@ -67,5 +72,6 @@ func (t *Tag) updateNodes(name string, machineIds []string, op string) error {
 	for _, id := range machineIds {
 		qsp.Add(op, id)
 	}
+
 	return t.client(name).Post("update_nodes", qsp, func(data []byte) error { return nil })
 }

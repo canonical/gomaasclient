@@ -1,4 +1,4 @@
 package entity
 
-// Node represents the MaaS Node endpoint.
+// Node represents the MAAS Node endpoint.
 type Node Machine

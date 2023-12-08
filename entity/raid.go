@@ -2,48 +2,45 @@ package entity
 
 // RAID represents the MAAS RAID endpoint.
 type RAID struct {
-	ID            int          `json:"id,omitempty"`
 	UUID          string       `json:"uuid,omitempty"`
 	Name          string       `json:"name,omitempty"`
 	Level         string       `json:"level,omitempty"`
-	Devices       []RAIDDevice `json:"devices,omitempty"`
-	SpareDevices  []RAIDDevice `json:"spare_devices,omitempty"`
-	Size          int64        `json:"size,omitempty"`
 	HumanSize     string       `json:"human_size,omitempty"`
-	VirtualDevice BlockDevice  `json:"virtual_device,omitempty"`
 	ResourceURI   string       `json:"resource_uri"`
 	SystemID      string       `json:"system_id"`
+	Devices       []RAIDDevice `json:"devices,omitempty"`
+	SpareDevices  []RAIDDevice `json:"spare_devices,omitempty"`
+	VirtualDevice BlockDevice  `json:"virtual_device,omitempty"`
+	ID            int          `json:"id,omitempty"`
+	Size          int64        `json:"size,omitempty"`
 }
 
 // RAIDDevice is a combination of a BlockDevice and BlockDevicePartition since a RAID can contain either at devices field
 type RAIDDevice struct {
-	// BlockDevice fields
-	BlockSize          int                    `json:"block_size,omitempty"`
-	ID                 int                    `json:"id,omitempty"`
-	IDPath             string                 `json:"id_path,omitempty"`
+	Filesystem         PartitionFileSystem    `json:"filesystem,omitempty"`
+	Type               string                 `json:"type,omitempty"`
 	Model              string                 `json:"model,omitempty"`
+	ResourceURI        string                 `json:"resource_uri,omitempty"`
 	Name               string                 `json:"name,omitempty"`
 	Path               string                 `json:"path,omitempty"`
 	Serial             string                 `json:"serial,omitempty"`
-	Size               int64                  `json:"size,omitempty"`
-	Tags               []string               `json:"tags,omitempty"`
-	FirmwareVersion    string                 `json:"firmware_version,omitempty"`
-	SystemID           string                 `json:"system_id,omitempty"`
-	AvailableSize      int64                  `json:"available_size,omitempty"`
-	UsedSize           int64                  `json:"used_size,omitempty"`
-	PartitionTableType string                 `json:"partition_table_type,omitempty"`
-	Partitions         []BlockDevicePartition `json:"partitions,omitempty"`
-	Filesystem         PartitionFileSystem    `json:"filesystem,omitempty"`
-	StoragePool        string                 `json:"storage_pool,omitempty"`
+	IDPath             string                 `json:"id_path,omitempty"`
 	UsedFor            string                 `json:"used_for,omitempty"`
-	Type               string                 `json:"type,omitempty"`
+	FirmwareVersion    string                 `json:"firmware_version,omitempty"`
+	PartitionTableType string                 `json:"partition_table_type,omitempty"`
+	StoragePool        string                 `json:"storage_pool,omitempty"`
 	UUID               string                 `json:"uuid,omitempty"`
-	ResourceURI        string                 `json:"resource_uri,omitempty"`
+	SystemID           string                 `json:"system_id,omitempty"`
+	Partitions         []BlockDevicePartition `json:"partitions,omitempty"`
+	Tags               []string               `json:"tags,omitempty"`
+	Size               int64                  `json:"size,omitempty"`
+	ID                 int                    `json:"id,omitempty"`
+	BlockSize          int                    `json:"block_size,omitempty"`
+	DeviceID           int                    `json:"device_id,omitempty"`
+	AvailableSize      int64                  `json:"available_size,omitempty"`
 	NUMANode           int                    `json:"numa_node,omitempty"`
-
-	// BlockDevicePartition unique fields
-	Bootable bool `json:"bootable,omitempty"`
-	DeviceID int  `json:"device_id,omitempty"`
+	UsedSize           int64                  `json:"used_size,omitempty"`
+	Bootable           bool                   `json:"bootable,omitempty"`
 }
 
 // RAIDUpdateParams enumerates the parameters for the RAID update operation

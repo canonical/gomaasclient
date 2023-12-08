@@ -1,6 +1,6 @@
 package entity
 
-// RackController represents the MaaS RackController endpoint.
+// RackController represents the MAAS RackController endpoint.
 type RackController Machine
 
 // RackControllerSearch narrows down the list in RackController.Get().

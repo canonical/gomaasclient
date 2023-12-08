@@ -1,3 +1,4 @@
+//nolint:dupl // disable dupl check on client for now
 package client
 
 import (
@@ -10,30 +11,34 @@ import (
 
 // ResourcePools implements api.ResourcePools
 type ResourcePools struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (r *ResourcePools) client() ApiClient {
-	return r.ApiClient.GetSubObject("resourcepools")
+func (r *ResourcePools) client() APIClient {
+	return r.APIClient.GetSubObject("resourcepools")
 }
 
 // Get fetches a list of ResourcePool objects
-func (r *ResourcePools) Get() (resourcePools []entity.ResourcePool, err error) {
-	err = r.client().Get("", url.Values{}, func(data []byte) error {
+func (r *ResourcePools) Get() ([]entity.ResourcePool, error) {
+	resourcePools := make([]entity.ResourcePool, 0)
+	err := r.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &resourcePools)
 	})
-	return
+
+	return resourcePools, err
 }
 
 // Create creates a new ResourcePool
-func (r *ResourcePools) Create(params *entity.ResourcePoolParams) (resourcePool *entity.ResourcePool, err error) {
+func (r *ResourcePools) Create(params *entity.ResourcePoolParams) (*entity.ResourcePool, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
-	resourcePool = new(entity.ResourcePool)
+
+	resourcePool := new(entity.ResourcePool)
 	err = r.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, resourcePool)
 	})
-	return
+
+	return resourcePool, err
 }

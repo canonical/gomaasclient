@@ -1,3 +1,4 @@
+// Package client contains the implementation of CRUD operations on MAAS resources.
 package client
 
 import (
@@ -11,7 +12,7 @@ import (
 
 // GetTLSClient creates a Client configured with TLS
 func GetTLSClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tls.Config) (*Client, error) {
-	apiClient, err := getApiClient(apiURL, apiKey, apiVersion, tlsConfig)
+	apiClient, err := getAPIClient(apiURL, apiKey, apiVersion, tlsConfig)
 	if err != nil {
 		return nil, err
 	}
@@ -21,7 +22,7 @@ func GetTLSClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tl
 
 // GetClient creates a client
 func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error) {
-	apiClient, err := getApiClient(apiURL, apiKey, apiVersion, nil)
+	apiClient, err := getAPIClient(apiURL, apiKey, apiVersion, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -29,43 +30,43 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 	return constructClient(apiClient), nil
 }
 
-func constructClient(apiClient *ApiClient) *Client {
+func constructClient(apiClient *APIClient) *Client {
 	client := Client{
-		Device:                &Device{ApiClient: *apiClient},
-		Devices:               &Devices{ApiClient: *apiClient},
-		Domain:                &Domain{ApiClient: *apiClient},
-		Domains:               &Domains{ApiClient: *apiClient},
-		DNSResource:           &DNSResource{ApiClient: *apiClient},
-		DNSResources:          &DNSResources{ApiClient: *apiClient},
-		DNSResourceRecord:     &DNSResourceRecord{ApiClient: *apiClient},
-		DNSResourceRecords:    &DNSResourceRecords{ApiClient: *apiClient},
-		Fabric:                &Fabric{ApiClient: *apiClient},
-		Fabrics:               &Fabrics{ApiClient: *apiClient},
-		VLAN:                  &VLAN{ApiClient: *apiClient},
-		VLANs:                 &VLANs{ApiClient: *apiClient},
-		Space:                 &Space{ApiClient: *apiClient},
-		Spaces:                &Spaces{ApiClient: *apiClient},
-		Machine:               &Machine{ApiClient: *apiClient},
-		Machines:              &Machines{ApiClient: *apiClient},
-		VMHost:                &VMHost{ApiClient: *apiClient},
-		VMHosts:               &VMHosts{ApiClient: *apiClient},
-		NetworkInterface:      &NetworkInterface{ApiClient: *apiClient},
-		NetworkInterfaces:     &NetworkInterfaces{ApiClient: *apiClient},
-		RAID:                  &RAID{ApiClient: *apiClient},
-		RAIDs:                 &RAIDs{ApiClient: *apiClient},
-		Subnet:                &Subnet{ApiClient: *apiClient},
-		Subnets:               &Subnets{ApiClient: *apiClient},
-		IPRange:               &IPRange{ApiClient: *apiClient},
-		IPRanges:              &IPRanges{ApiClient: *apiClient},
-		IPAddresses:           &IPAddresses{ApiClient: *apiClient},
-		Tag:                   &Tag{ApiClient: *apiClient},
-		Tags:                  &Tags{ApiClient: *apiClient},
-		BlockDevice:           &BlockDevice{ApiClient: *apiClient},
-		BlockDevices:          &BlockDevices{ApiClient: *apiClient},
-		BlockDevicePartition:  &BlockDevicePartition{ApiClient: *apiClient},
-		BlockDevicePartitions: &BlockDevicePartitions{ApiClient: *apiClient},
-		User:                  &User{ApiClient: *apiClient},
-		Users:                 &Users{ApiClient: *apiClient},
+		Device:                &Device{APIClient: *apiClient},
+		Devices:               &Devices{APIClient: *apiClient},
+		Domain:                &Domain{APIClient: *apiClient},
+		Domains:               &Domains{APIClient: *apiClient},
+		DNSResource:           &DNSResource{APIClient: *apiClient},
+		DNSResources:          &DNSResources{APIClient: *apiClient},
+		DNSResourceRecord:     &DNSResourceRecord{APIClient: *apiClient},
+		DNSResourceRecords:    &DNSResourceRecords{APIClient: *apiClient},
+		Fabric:                &Fabric{APIClient: *apiClient},
+		Fabrics:               &Fabrics{APIClient: *apiClient},
+		VLAN:                  &VLAN{APIClient: *apiClient},
+		VLANs:                 &VLANs{APIClient: *apiClient},
+		Space:                 &Space{APIClient: *apiClient},
+		Spaces:                &Spaces{APIClient: *apiClient},
+		Machine:               &Machine{APIClient: *apiClient},
+		Machines:              &Machines{APIClient: *apiClient},
+		VMHost:                &VMHost{APIClient: *apiClient},
+		VMHosts:               &VMHosts{APIClient: *apiClient},
+		NetworkInterface:      &NetworkInterface{APIClient: *apiClient},
+		NetworkInterfaces:     &NetworkInterfaces{APIClient: *apiClient},
+		RAID:                  &RAID{APIClient: *apiClient},
+		RAIDs:                 &RAIDs{APIClient: *apiClient},
+		Subnet:                &Subnet{APIClient: *apiClient},
+		Subnets:               &Subnets{APIClient: *apiClient},
+		IPRange:               &IPRange{APIClient: *apiClient},
+		IPRanges:              &IPRanges{APIClient: *apiClient},
+		IPAddresses:           &IPAddresses{APIClient: *apiClient},
+		Tag:                   &Tag{APIClient: *apiClient},
+		Tags:                  &Tags{APIClient: *apiClient},
+		BlockDevice:           &BlockDevice{APIClient: *apiClient},
+		BlockDevices:          &BlockDevices{APIClient: *apiClient},
+		BlockDevicePartition:  &BlockDevicePartition{APIClient: *apiClient},
+		BlockDevicePartitions: &BlockDevicePartitions{APIClient: *apiClient},
+		User:                  &User{APIClient: *apiClient},
+		Users:                 &Users{APIClient: *apiClient},
 	}
 
 	return &client
@@ -113,68 +114,79 @@ type Client struct {
 	ResourcePools         api.ResourcePools
 }
 
+// GetAPIClient returns a MAAS API client.
+//
 // Deprecated: The gomaasapi client will be no longer exposed.
 // Instead, please use GetClient which instantiate all MAAS resources endpoints with gomaasapi client.
-func GetApiClient(apiURL string, apiKey string, apiVersion string) (*ApiClient, error) {
-	return getApiClient(apiURL, apiKey, apiVersion, nil)
+func GetAPIClient(apiURL string, apiKey string, apiVersion string) (*APIClient, error) {
+	return getAPIClient(apiURL, apiKey, apiVersion, nil)
 }
 
-func getApiClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tls.Config) (*ApiClient, error) {
+func getAPIClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tls.Config) (*APIClient, error) {
 	versionedURL := gomaasapi.AddAPIVersionToURL(apiURL, apiVersion)
+
 	authClient, err := gomaasapi.NewAuthenticatedClient(versionedURL, apiKey)
 	if err != nil {
 		return nil, err
 	}
+
 	if tlsConfig != nil {
 		tr := &http.Transport{TLSClientConfig: tlsConfig}
 		httpClient := &http.Client{Transport: tr}
 		authClient.HTTPClient = httpClient
 	}
-	return &ApiClient{*authClient, gomaasapi.NewMAAS(*authClient)}, nil
+
+	return &APIClient{*authClient, gomaasapi.NewMAAS(*authClient)}, nil
 }
 
-type ApiClient struct {
+type APIClient struct {
 	AuthClient gomaasapi.Client
 	*gomaasapi.MAASObject
 }
 
-func (c ApiClient) Get(op string, params url.Values, f func([]byte) error) error {
+func (c APIClient) Get(op string, params url.Values, f func([]byte) error) error {
 	res, err := c.CallGet(op, params)
 	if err != nil {
 		return err
 	}
+
 	data, err := res.GetBytes()
 	if err != nil {
 		return err
 	}
+
 	return f(data)
 }
 
-func (c ApiClient) GetSubObject(name string) ApiClient {
+func (c APIClient) GetSubObject(name string) APIClient {
 	mc := c.MAASObject.GetSubObject(name)
-	return ApiClient{c.AuthClient, &mc}
+	return APIClient{c.AuthClient, &mc}
 }
 
-func (c ApiClient) Post(op string, params url.Values, f func([]byte) error) error {
+func (c APIClient) Post(op string, params url.Values, f func([]byte) error) error {
 	res, err := c.CallPost(op, params)
 	if err != nil {
 		return err
 	}
+
 	data, err := res.GetBytes()
 	if err != nil {
 		return err
 	}
+
 	return f(data)
 }
 
-func (c ApiClient) Put(params url.Values, f func([]byte) error) error {
+func (c APIClient) Put(params url.Values, f func([]byte) error) error {
 	res, err := c.Update(params)
 	if err != nil {
 		return err
 	}
+
 	data, err := res.MarshalJSON()
 	if err != nil {
 		return err
 	}
+
 	return f(data)
 }

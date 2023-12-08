@@ -1,6 +1,6 @@
 module github.com/maas/gomaasclient
 
-go 1.17
+go 1.20
 
 require (
 	github.com/google/go-cmp v0.5.6
@@ -18,6 +18,5 @@ require (
 	github.com/juju/schema v1.0.1 // indirect
 	github.com/juju/version v0.0.0-20210303051006-2015802527a8 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
