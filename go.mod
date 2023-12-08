@@ -3,7 +3,7 @@ module github.com/maas/gomaasclient
 go 1.20
 
 require (
-	github.com/google/go-cmp v0.5.6
+	github.com/google/go-cmp v0.6.0
 	github.com/google/go-querystring v1.1.0
 	github.com/juju/gomaasapi/v2 v2.2.0
 	github.com/stretchr/testify v1.8.4
