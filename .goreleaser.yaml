@@ -1,0 +1,24 @@
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - skip: true
+release:
+  name_template: "v{{ .Version }}"
+  draft: true
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+  groups:
+    - title: Features
+      regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+      order: 0
+    - title: "Bug fixes"
+      regexp: '^.*?bug(\([[:word:]]+\))??!?:.+$'
+      order: 1
+    - title: Others
+      order: 999
