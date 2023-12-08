@@ -5,14 +5,14 @@ import (
 )
 
 type IPRange struct {
-	ID          int    `json:"id"`
 	Type        string `json:"type"`
+	Comment     string `json:"comment,omitempty"`
+	ResourceURI string `json:"resource_uri"`
+	User        User   `json:"user,omitempty"`
 	StartIP     net.IP `json:"start_ip"`
 	EndIP       net.IP `json:"end_ip"`
 	Subnet      Subnet `json:"subnet"`
-	User        User   `json:"user,omitempty"`
-	Comment     string `json:"comment,omitempty"`
-	ResourceURI string `json:"resource_uri"`
+	ID          int    `json:"id"`
 }
 
 type IPRangeParams struct {
