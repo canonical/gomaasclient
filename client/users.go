@@ -10,11 +10,11 @@ import (
 
 // Users implements api.Users
 type Users struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (u *Users) client() ApiClient {
-	return u.ApiClient.GetSubObject("users")
+func (u *Users) client() APIClient {
+	return u.APIClient.GetSubObject("users")
 }
 
 // Get fetches a list of User objects

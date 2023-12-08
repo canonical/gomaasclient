@@ -4,7 +4,7 @@ import (
 	"net"
 )
 
-// Subnet represents the MaaS Subnet endpoint.
+// Subnet represents the MAAS Subnet endpoint.
 type Subnet struct {
 	Name            string   `json:"name,omitempty"`
 	VLAN            VLAN     `json:"vlan,omitempty"`

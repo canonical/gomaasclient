@@ -11,11 +11,11 @@ import (
 
 // DNSResource implements api.DNSResource
 type DNSResource struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (d *DNSResource) client(id int) ApiClient {
-	return d.ApiClient.GetSubObject(fmt.Sprintf("dnsresources/%v", id))
+func (d *DNSResource) client(id int) APIClient {
+	return d.APIClient.GetSubObject(fmt.Sprintf("dnsresources/%v", id))
 }
 
 // Get fetches a given DNSResource

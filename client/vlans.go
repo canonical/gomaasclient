@@ -11,11 +11,11 @@ import (
 
 // VLANs implements api.VLANs
 type VLANs struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (v *VLANs) client(fabricID int) ApiClient {
-	return v.ApiClient.GetSubObject("fabrics").GetSubObject(fmt.Sprintf("%v", fabricID)).GetSubObject("vlans")
+func (v *VLANs) client(fabricID int) APIClient {
+	return v.APIClient.GetSubObject("fabrics").GetSubObject(fmt.Sprintf("%v", fabricID)).GetSubObject("vlans")
 }
 
 // Get fetches a list of VLAN objects

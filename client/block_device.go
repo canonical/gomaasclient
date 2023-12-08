@@ -11,11 +11,11 @@ import (
 
 // BlockDevice implements the api.BlockDevice interface
 type BlockDevice struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (b *BlockDevice) client(systemID string, id int) ApiClient {
-	return b.ApiClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("blockdevices").GetSubObject(fmt.Sprintf("%v", id))
+func (b *BlockDevice) client(systemID string, id int) APIClient {
+	return b.APIClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("blockdevices").GetSubObject(fmt.Sprintf("%v", id))
 }
 
 // Get fetches a given BlockDevice based on the given Node's system_id and BlockDevice's id

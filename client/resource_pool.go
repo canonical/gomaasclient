@@ -11,11 +11,11 @@ import (
 
 // ResourcePool implements api.ResourcePool
 type ResourcePool struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (r *ResourcePool) client(id int) ApiClient {
-	return r.ApiClient.GetSubObject(fmt.Sprintf("resourcepool/%v", id))
+func (r *ResourcePool) client(id int) APIClient {
+	return r.APIClient.GetSubObject(fmt.Sprintf("resourcepool/%v", id))
 }
 
 // Get fetches a given ResourcePool

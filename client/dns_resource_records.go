@@ -10,11 +10,11 @@ import (
 
 // DNSResourceRecords implements api.DNSResourceRecords
 type DNSResourceRecords struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (d *DNSResourceRecords) client() ApiClient {
-	return d.ApiClient.GetSubObject("dnsresourcerecords")
+func (d *DNSResourceRecords) client() APIClient {
+	return d.APIClient.GetSubObject("dnsresourcerecords")
 }
 
 // Get fetches a list of DNSResourceRecord objectts

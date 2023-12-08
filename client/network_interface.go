@@ -11,11 +11,11 @@ import (
 
 // NetworkInterface implements api.NetworkInterface
 type NetworkInterface struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (n *NetworkInterface) client(systemID string, id int) ApiClient {
-	return n.ApiClient.GetSubObject("nodes").
+func (n *NetworkInterface) client(systemID string, id int) APIClient {
+	return n.APIClient.GetSubObject("nodes").
 		GetSubObject(systemID).
 		GetSubObject("interfaces").
 		GetSubObject(fmt.Sprintf("%v", id))

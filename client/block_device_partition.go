@@ -12,16 +12,16 @@ import (
 // BlockDevicePartition implements the api.BlockDevicePartition
 // interface
 type BlockDevicePartition struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (p *BlockDevicePartition) client(systemID string, blockDeviceID int, id int) (*ApiClient, error) {
-	uri := p.ApiClient.URI()
+func (p *BlockDevicePartition) client(systemID string, blockDeviceID int, id int) (*APIClient, error) {
+	uri := p.APIClient.URI()
 	newURL := url.URL{Path: fmt.Sprintf("nodes/%s/blockdevices/%v/partition/%v", systemID, blockDeviceID, id)}
-	resUrl := uri.ResolveReference(&newURL)
-	input := map[string]interface{}{"resource_uri": resUrl.String()}
+	resURL := uri.ResolveReference(&newURL)
+	input := map[string]interface{}{"resource_uri": resURL.String()}
 
-	jsonObj, err := gomaasapi.JSONObjectFromStruct(p.ApiClient.AuthClient, input)
+	jsonObj, err := gomaasapi.JSONObjectFromStruct(p.APIClient.AuthClient, input)
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func (p *BlockDevicePartition) client(systemID string, blockDeviceID int, id int
 		return nil, err
 	}
 
-	return &ApiClient{p.ApiClient.AuthClient, &maasObj}, nil
+	return &APIClient{p.APIClient.AuthClient, &maasObj}, nil
 }
 
 // Get fetches a given BlockDevicePartion for a given system_id, BlockDevice id and partition id

@@ -10,11 +10,11 @@ import (
 
 // Subnets contains functionality for manipulating the Subnets entity.
 type Subnets struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (s *Subnets) client() ApiClient {
-	return s.ApiClient.GetSubObject("subnets")
+func (s *Subnets) client() APIClient {
+	return s.APIClient.GetSubObject("subnets")
 }
 
 // Get fetches a list of Subnet objects

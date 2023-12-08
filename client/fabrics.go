@@ -10,11 +10,11 @@ import (
 
 // Fabrics implements api.Fabrics
 type Fabrics struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (f *Fabrics) client() ApiClient {
-	return f.ApiClient.GetSubObject("fabrics")
+func (f *Fabrics) client() APIClient {
+	return f.APIClient.GetSubObject("fabrics")
 }
 
 // Get fetches a list of Fabric objects

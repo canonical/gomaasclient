@@ -10,11 +10,11 @@ import (
 
 // Devices implements api.Devices
 type Devices struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (d *Devices) client() ApiClient {
-	return d.ApiClient.GetSubObject("devices")
+func (d *Devices) client() APIClient {
+	return d.APIClient.GetSubObject("devices")
 }
 
 // Get fetches a list of Devices

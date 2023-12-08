@@ -1,6 +1,6 @@
 package entity
 
-// VMHost represents the MaaS VM host endpoint.
+// VMHost represents the MAAS VM host endpoint.
 type VMHost struct {
 	Zone      Zone           `json:"zone,omitempty"`
 	Pool      ResourcePool   `json:"pool,omitempty"`

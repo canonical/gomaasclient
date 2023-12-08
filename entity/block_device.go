@@ -1,6 +1,6 @@
 package entity
 
-// BlockDevice represents the MaaS BlockDevice endpoint.
+// BlockDevice represents the MAAS BlockDevice endpoint.
 type BlockDevice struct {
 	BlockSize          int                    `json:"block_size,omitempty"`
 	ID                 int                    `json:"id,omitempty"`

@@ -10,11 +10,11 @@ import (
 
 // Machine contains functionality for manipulating the Machine entity.
 type Machine struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (m *Machine) client(systemID string) ApiClient {
-	return m.ApiClient.GetSubObject("machines").GetSubObject(systemID)
+func (m *Machine) client(systemID string) APIClient {
+	return m.APIClient.GetSubObject("machines").GetSubObject(systemID)
 }
 
 // Get machine details.
@@ -112,7 +112,7 @@ func (m *Machine) Lock(systemID string, comment string) (ma *entity.Machine, err
 	return
 }
 
-// Clear default gateways.
+// ClearDefaultGateways clears default gateways.
 func (m *Machine) ClearDefaultGateways(systemID string) (ma *entity.Machine, err error) {
 	ma = new(entity.Machine)
 	err = m.client(systemID).Post("clear_default_gateways", url.Values{}, func(data []byte) error {

@@ -11,11 +11,11 @@ import (
 
 // Fabric implments api.Fabric
 type Fabric struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (f *Fabric) client(id int) ApiClient {
-	return f.ApiClient.GetSubObject("fabrics").GetSubObject(fmt.Sprintf("%v", id))
+func (f *Fabric) client(id int) APIClient {
+	return f.APIClient.GetSubObject("fabrics").GetSubObject(fmt.Sprintf("%v", id))
 }
 
 // Get fetchs a Fabric object

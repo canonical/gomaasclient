@@ -1,6 +1,6 @@
 package entity
 
-// Zone represents the MaaS Zone endpoint
+// Zone represents the MAAS Zone endpoint
 type Zone struct {
 	ID          int    `json:"id,omitempty"`
 	Name        string `json:"name,omitempty"`

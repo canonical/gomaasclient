@@ -13,11 +13,11 @@ import (
 
 // Subnet implements api.Subnet
 type Subnet struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (s *Subnet) client(id int) ApiClient {
-	return s.ApiClient.GetSubObject("subnets").GetSubObject(fmt.Sprintf("%v", id))
+func (s *Subnet) client(id int) APIClient {
+	return s.APIClient.GetSubObject("subnets").GetSubObject(fmt.Sprintf("%v", id))
 }
 
 // Delete deletes a given Subnet

@@ -11,11 +11,11 @@ import (
 
 // Device implements api.Device
 type Device struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (d *Device) client(systemID string) ApiClient {
-	return d.ApiClient.GetSubObject("devices").GetSubObject(fmt.Sprintf("%v", systemID))
+func (d *Device) client(systemID string) APIClient {
+	return d.APIClient.GetSubObject("devices").GetSubObject(fmt.Sprintf("%v", systemID))
 }
 
 // Get fetches a device with a given system_id

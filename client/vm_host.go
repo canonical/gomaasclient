@@ -12,12 +12,12 @@ import (
 
 // VMHost contains functionality for manipulating the VMHost entity.
 type VMHost struct {
-	ApiClient ApiClient
+	APIClient APIClient
 	mutex     sync.Mutex
 }
 
-func (p *VMHost) client(id int) ApiClient {
-	return p.ApiClient.GetSubObject("pods").GetSubObject(fmt.Sprintf("%v", id))
+func (p *VMHost) client(id int) APIClient {
+	return p.APIClient.GetSubObject("pods").GetSubObject(fmt.Sprintf("%v", id))
 }
 
 // Get fetches a given VMHost

@@ -1,6 +1,6 @@
 package entity
 
-// VolumeGroup represents the MaaS VolumeGroup endpoint.
+// VolumeGroup represents the MAAS VolumeGroup endpoint.
 type VolumeGroup struct {
 	HumanUsedSize      string      `json:"human_used_size,omitempty"`
 	UUID               string      `json:"uuid,omitempty"`

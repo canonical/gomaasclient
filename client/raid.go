@@ -11,11 +11,11 @@ import (
 
 // RAID Contains functionality for manipulating the RAID entity.
 type RAID struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (r *RAID) client(systemID string, id int) ApiClient {
-	return r.ApiClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("raid").GetSubObject(fmt.Sprintf("%v", id))
+func (r *RAID) client(systemID string, id int) APIClient {
+	return r.APIClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("raid").GetSubObject(fmt.Sprintf("%v", id))
 }
 
 // Get RAID details.

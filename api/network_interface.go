@@ -4,7 +4,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
-// NetworkInterface represents the MaaS Server Interface endpoint
+// NetworkInterface represents the MAAS Server Interface endpoint
 type NetworkInterface interface {
 	Get(systemID string, id int) (*entity.NetworkInterface, error)
 	Update(systemID string, id int, params *entity.NetworkInterfaceUpdateParams) (*entity.NetworkInterface, error)

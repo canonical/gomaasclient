@@ -1,6 +1,6 @@
 package entity
 
-// ResourcePool represents the MaaS ResourcePool endpoint
+// ResourcePool represents the MAAS ResourcePool endpoint
 type ResourcePool struct {
 	ID          int    `json:"id,omitempty"`
 	Name        string `json:"name,omitempty"`

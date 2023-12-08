@@ -10,11 +10,11 @@ import (
 
 // Tag implements api.Tag
 type Tag struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (t *Tag) client(name string) ApiClient {
-	return t.ApiClient.GetSubObject("tags").GetSubObject(name)
+func (t *Tag) client(name string) APIClient {
+	return t.APIClient.GetSubObject("tags").GetSubObject(name)
 }
 
 // Get fetches a given tag by name

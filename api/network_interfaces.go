@@ -4,7 +4,7 @@ import (
 	"github.com/maas/gomaasclient/entity"
 )
 
-// NetworkInterfaces represents the MaaS Server Interfaces endpoint
+// NetworkInterfaces represents the MAAS Server Interfaces endpoint
 type NetworkInterfaces interface {
 	Get(systemID string) ([]entity.NetworkInterface, error)
 	CreateBond(systemID string, params *entity.NetworkInterfaceBondParams) (*entity.NetworkInterface, error)

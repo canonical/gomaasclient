@@ -10,11 +10,11 @@ import (
 
 // Machines contains functionality for manipulating the Machines entity.
 type Machines struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (m *Machines) client() ApiClient {
-	return m.ApiClient.GetSubObject("machines")
+func (m *Machines) client() APIClient {
+	return m.APIClient.GetSubObject("machines")
 }
 
 // Get fetches a list machines.

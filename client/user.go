@@ -10,11 +10,11 @@ import (
 
 // User implements api.User
 type User struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (u *User) client(userName string) ApiClient {
-	return u.ApiClient.GetSubObject(fmt.Sprintf("users/%s", userName))
+func (u *User) client(userName string) APIClient {
+	return u.APIClient.GetSubObject(fmt.Sprintf("users/%s", userName))
 }
 
 // Get fetches a User by username

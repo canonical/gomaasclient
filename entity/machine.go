@@ -10,7 +10,7 @@ import (
 	"github.com/maas/gomaasclient/entity/node"
 )
 
-// Machine represents the MaaS Machine endpoint.
+// Machine represents the MAAS Machine endpoint.
 type Machine struct {
 	BootInterface   NetworkInterface `json:"boot_interface,omitempty"`
 	VMHost          VMHost           `json:"pod,omitempty"`

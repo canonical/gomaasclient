@@ -1,5 +1,5 @@
 /*
-package entity defines types for the MaaS API endpoints' return types.
+Package entity defines types for the MAAS API endpoints' return types.
 
 Each endpoint returns JSON that describes the object it represents. For example,
 GETting the Subnets endpoint will return an array of Subnet, while GETting the

@@ -1,3 +1,4 @@
+// Package helper contains helper functions for unit tests.
 package helper
 
 import (

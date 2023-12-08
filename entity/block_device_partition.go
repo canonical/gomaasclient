@@ -1,6 +1,6 @@
 package entity
 
-// BlockDevicePartition represents the MaaS block device partition endpoint.
+// BlockDevicePartition represents the MAAS block device partition endpoint.
 type BlockDevicePartition struct {
 	UUID        string              `json:"uuid"`
 	Size        int64               `json:"size"`

@@ -10,11 +10,11 @@ import (
 
 // ResourcePools implements api.ResourcePools
 type ResourcePools struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (r *ResourcePools) client() ApiClient {
-	return r.ApiClient.GetSubObject("resourcepools")
+func (r *ResourcePools) client() APIClient {
+	return r.APIClient.GetSubObject("resourcepools")
 }
 
 // Get fetches a list of ResourcePool objects

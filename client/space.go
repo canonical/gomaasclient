@@ -10,11 +10,11 @@ import (
 
 // Space implements api.Space
 type Space struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (s *Space) client(id int) ApiClient {
-	return s.ApiClient.GetSubObject("spaces").GetSubObject(fmt.Sprintf("%v", id))
+func (s *Space) client(id int) APIClient {
+	return s.APIClient.GetSubObject("spaces").GetSubObject(fmt.Sprintf("%v", id))
 }
 
 // Get fetches a given Space

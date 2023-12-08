@@ -1,6 +1,6 @@
 package entity
 
-// VLAN represents the MaaS VLAN endpoint.
+// VLAN represents the MAAS VLAN endpoint.
 type VLAN struct {
 	VID           int    `json:"vid,omitempty"`
 	MTU           int    `json:"mtu,omitempty"`

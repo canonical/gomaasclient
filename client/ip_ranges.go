@@ -10,11 +10,11 @@ import (
 
 // IPRanges implements api.IPRanges
 type IPRanges struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (i *IPRanges) client() ApiClient {
-	return i.ApiClient.GetSubObject("ipranges")
+func (i *IPRanges) client() APIClient {
+	return i.APIClient.GetSubObject("ipranges")
 }
 
 // Get fetches a list of IPRange objects

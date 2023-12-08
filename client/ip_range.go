@@ -11,11 +11,11 @@ import (
 
 // IPRange implements api.IPRange
 type IPRange struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (i *IPRange) client(id int) ApiClient {
-	return i.ApiClient.GetSubObject("ipranges").GetSubObject(fmt.Sprintf("%v", id))
+func (i *IPRange) client(id int) APIClient {
+	return i.APIClient.GetSubObject("ipranges").GetSubObject(fmt.Sprintf("%v", id))
 }
 
 // Get fetches a given IPRange

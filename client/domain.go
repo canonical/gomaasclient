@@ -11,11 +11,11 @@ import (
 
 // Domain implements api.Domain
 type Domain struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (d *Domain) client(id int) ApiClient {
-	return d.ApiClient.GetSubObject(fmt.Sprintf("domains/%v", id))
+func (d *Domain) client(id int) APIClient {
+	return d.APIClient.GetSubObject(fmt.Sprintf("domains/%v", id))
 }
 
 // Get fetches a given Domain

@@ -9,11 +9,11 @@ import (
 
 // IPAddresses implements api.IPAddresses
 type IPAddresses struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (i *IPAddresses) client() ApiClient {
-	return i.ApiClient.GetSubObject("ipaddresses")
+func (i *IPAddresses) client() APIClient {
+	return i.APIClient.GetSubObject("ipaddresses")
 }
 
 // Get fetches a specified set of IPAddresses

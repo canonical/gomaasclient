@@ -11,11 +11,11 @@ import (
 
 // RAIDs contains functionality for manipulating the RAIDs entity.
 type RAIDs struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (r *RAIDs) client(systemID string) ApiClient {
-	return r.ApiClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("raids")
+func (r *RAIDs) client(systemID string) APIClient {
+	return r.APIClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("raids")
 }
 
 // Get RAIDs of a machine.

@@ -1,6 +1,6 @@
 package entity
 
-// NetworkInterface represents the MaaS Interface endpoint.
+// NetworkInterface represents the MAAS Interface endpoint.
 type NetworkInterface struct {
 	Children        []string                       `json:"children,omitempty"`
 	Discovered      []NetworkInterfaceDiscoveredIP `json:"discovered,omitempty"`

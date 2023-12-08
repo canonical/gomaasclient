@@ -10,11 +10,11 @@ import (
 
 // VMHosts contains functionality for manipulating the VMHosts entity.
 type VMHosts struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (p *VMHosts) client() ApiClient {
-	return p.ApiClient.GetSubObject("pods")
+func (p *VMHosts) client() APIClient {
+	return p.APIClient.GetSubObject("pods")
 }
 
 // Get fetches a list of VMHost objects

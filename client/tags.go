@@ -10,11 +10,11 @@ import (
 
 // Tags implements api.Tags
 type Tags struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (t *Tags) client() ApiClient {
-	return t.ApiClient.GetSubObject("tags")
+func (t *Tags) client() APIClient {
+	return t.APIClient.GetSubObject("tags")
 }
 
 // Get fetches a list of Tag objects

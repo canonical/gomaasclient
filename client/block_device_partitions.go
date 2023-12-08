@@ -11,11 +11,11 @@ import (
 
 // BlockDevicePartitions implements api.BlockDevicePartitions
 type BlockDevicePartitions struct {
-	ApiClient ApiClient
+	APIClient APIClient
 }
 
-func (p *BlockDevicePartitions) client(systemID string, blockDeviceID int) ApiClient {
-	return p.ApiClient.GetSubObject(fmt.Sprintf("nodes/%s/blockdevices/%v/partitions", systemID, blockDeviceID))
+func (p *BlockDevicePartitions) client(systemID string, blockDeviceID int) APIClient {
+	return p.APIClient.GetSubObject(fmt.Sprintf("nodes/%s/blockdevices/%v/partitions", systemID, blockDeviceID))
 }
 
 // Get lists the BlockDevicePartition objects for a given system_id and BlockDevice id

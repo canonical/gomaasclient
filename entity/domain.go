@@ -1,6 +1,6 @@
 package entity
 
-// Domain represents the MaaS Domain endpoint
+// Domain represents the MAAS Domain endpoint
 type Domain struct {
 	Name                string `json:"name,omitempty"`
 	ResourceURI         string `json:"resource_uri,omitempty"`
