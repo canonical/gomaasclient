@@ -9,7 +9,7 @@ type VMHost struct {
 	Total     VMHostResource `json:"total,omitempty"`
 	Host      struct {
 		SystemID   string `json:"system_id,omitempty"`
-		Incomplete bool   `json:"__incomplete__,omitempty"`
+		Incomplete bool   `json:"__incomplete__,omitempty"` //nolint:tagliatelle // MAAS returns this field intentionally
 	} `json:"host,omitempty"`
 	StoragePools          []VMHostStoragePool `json:"storage_pools,omitempty"`
 	Architectures         []string            `json:"architectures,omitempty"`

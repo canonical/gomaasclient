@@ -146,7 +146,7 @@ func (t MAASTime) String() string {
 type MachineCacheSet struct {
 	SystemID   string `json:"system_id,omitempty"`
 	ID         int    `json:"id,omitempty"`
-	Incomplete bool   `json:"__incomplete__,omitempty"`
+	Incomplete bool   `json:"__incomplete__,omitempty"` //nolint:tagliatelle // MAAS returns this field intentionally
 }
 
 // MachineVolumeGroup represents a Machine's "volume_groups" list item.
@@ -154,7 +154,7 @@ type MachineCacheSet struct {
 type MachineVolumeGroup struct {
 	SystemID   string `json:"system_id,omitempty"`
 	ID         int    `json:"id,omitempty"`
-	Incomplete bool   `json:"__incomplete__,omitempty"`
+	Incomplete bool   `json:"__incomplete__,omitempty"` //nolint:tagliatelle // MAAS returns this field intentionally
 }
 
 // MachineBCache represents a Machine's "bcaches" list item.
@@ -162,7 +162,7 @@ type MachineVolumeGroup struct {
 type MachineBCache struct {
 	SystemID   string `json:"system_id,omitempty"`
 	ID         int    `json:"id,omitempty"`
-	Incomplete bool   `json:"__incomplete__,omitempty"`
+	Incomplete bool   `json:"__incomplete__,omitempty"` //nolint:tagliatelle // MAAS returns this field intentionally
 }
 
 // MachineRAID represents a Machine's "raids" list item.
@@ -170,7 +170,7 @@ type MachineBCache struct {
 type MachineRAID struct {
 	SystemID   string `json:"system_id,omitempty"`
 	ID         int    `json:"id,omitempty"`
-	Incomplete bool   `json:"__incomplete__,omitempty"`
+	Incomplete bool   `json:"__incomplete__,omitempty"` //nolint:tagliatelle // MAAS returns this field intentionally
 }
 
 // MachineSpecialFilesystem represents a Machine's "special_filesystems" list item.
