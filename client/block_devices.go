@@ -22,6 +22,7 @@ func (b *BlockDevices) Get(systemID string) (blockDevices []entity.BlockDevice, 
 	err = b.client(systemID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &blockDevices)
 	})
+
 	return
 }
 
@@ -31,9 +32,11 @@ func (b *BlockDevices) Create(systemID string, params *entity.BlockDeviceParams)
 	if err != nil {
 		return
 	}
+
 	blockDevice = new(entity.BlockDevice)
 	err = b.client(systemID).Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, blockDevice)
 	})
+
 	return
 }

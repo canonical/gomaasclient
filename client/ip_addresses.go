@@ -22,9 +22,11 @@ func (i *IPAddresses) Get(params *entity.IPAddressesParams) (ipAddresses []entit
 	if err != nil {
 		return
 	}
+
 	err = i.client().Get("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, &ipAddresses)
 	})
+
 	return
 }
 
@@ -34,6 +36,7 @@ func (i *IPAddresses) Release(params *entity.IPAddressesParams) error {
 	if err != nil {
 		return err
 	}
+
 	return i.client().Post("release", qsp, func(data []byte) error { return nil })
 }
 
@@ -43,9 +46,11 @@ func (i *IPAddresses) Reserve(params *entity.IPAddressesParams) (ipAddress *enti
 	if err != nil {
 		return
 	}
+
 	ipAddress = new(entity.IPAddress)
 	err = i.client().Post("reserve", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ipAddress)
 	})
+
 	return
 }

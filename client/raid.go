@@ -24,6 +24,7 @@ func (r *RAID) Get(systemID string, id int) (raid *entity.RAID, err error) {
 	err = r.client(systemID, id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, raid)
 	})
+
 	return
 }
 
@@ -33,10 +34,12 @@ func (r *RAID) Update(systemID string, id int, params *entity.RAIDUpdateParams) 
 	if err != nil {
 		return
 	}
+
 	raid = new(entity.RAID)
 	err = r.client(systemID, id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, raid)
 	})
+
 	return
 }
 

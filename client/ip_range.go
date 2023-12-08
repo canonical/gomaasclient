@@ -24,6 +24,7 @@ func (i *IPRange) Get(id int) (ipRange *entity.IPRange, err error) {
 	err = i.client(id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, ipRange)
 	})
+
 	return
 }
 
@@ -33,10 +34,12 @@ func (i *IPRange) Update(id int, params *entity.IPRangeParams) (ipRange *entity.
 	if err != nil {
 		return
 	}
+
 	ipRange = new(entity.IPRange)
 	err = i.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, ipRange)
 	})
+
 	return
 }
 

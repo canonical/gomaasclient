@@ -22,6 +22,7 @@ func (s *Subnets) Get() (subnets []entity.Subnet, err error) {
 	err = s.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &subnets)
 	})
+
 	return
 }
 
@@ -31,9 +32,11 @@ func (s *Subnets) Create(params *entity.SubnetParams) (subnet *entity.Subnet, er
 	if err != nil {
 		return
 	}
+
 	subnet = new(entity.Subnet)
 	err = s.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, subnet)
 	})
+
 	return
 }

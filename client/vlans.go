@@ -23,6 +23,7 @@ func (v *VLANs) Get(fabricID int) (vlans []entity.VLAN, err error) {
 	err = v.client(fabricID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &vlans)
 	})
+
 	return
 }
 
@@ -32,9 +33,11 @@ func (v *VLANs) Create(fabricID int, params *entity.VLANParams) (vlan *entity.VL
 	if err != nil {
 		return
 	}
+
 	vlan = new(entity.VLAN)
 	err = v.client(fabricID).Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, vlan)
 	})
+
 	return
 }

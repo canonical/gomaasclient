@@ -14,6 +14,7 @@ func TestResourcePoolt(t *testing.T) {
 	if err := helper.TestdataFromJSON("maas/resource_pool.json", pool); err != nil {
 		t.Fatal(err)
 	}
+
 	if err := helper.TestdataFromJSON("maas/resource_pools.json", pools); err != nil {
 		t.Fatal(err)
 	}

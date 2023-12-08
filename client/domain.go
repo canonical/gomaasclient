@@ -24,6 +24,7 @@ func (d *Domain) Get(id int) (domain *entity.Domain, err error) {
 	err = d.client(id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, domain)
 	})
+
 	return
 }
 
@@ -33,6 +34,7 @@ func (d *Domain) SetDefault(id int) (domain *entity.Domain, err error) {
 	err = d.client(id).Post("set_default", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, domain)
 	})
+
 	return
 }
 
@@ -42,10 +44,12 @@ func (d *Domain) Update(id int, params *entity.DomainParams) (domain *entity.Dom
 	if err != nil {
 		return
 	}
+
 	domain = new(entity.Domain)
 	err = d.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, domain)
 	})
+
 	return
 }
 

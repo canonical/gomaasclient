@@ -129,7 +129,9 @@ func (t *MAASTime) UnmarshalJSON(data []byte) error {
 	if err != nil {
 		return err
 	}
+
 	*t = MAASTime(temp)
+
 	return nil
 }
 

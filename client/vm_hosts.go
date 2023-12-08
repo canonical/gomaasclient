@@ -22,6 +22,7 @@ func (p *VMHosts) Get() (vmHosts []entity.VMHost, err error) {
 	err = p.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &vmHosts)
 	})
+
 	return
 }
 
@@ -31,9 +32,11 @@ func (p *VMHosts) Create(params *entity.VMHostParams) (vmHost *entity.VMHost, er
 	if err != nil {
 		return
 	}
+
 	vmHost = new(entity.VMHost)
 	err = p.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, vmHost)
 	})
+
 	return
 }

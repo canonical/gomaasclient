@@ -1,4 +1,5 @@
-/*Package api defines an interface to each MaaS API endpoint.
+/*
+Package api defines an interface to each MaaS API endpoint.
 
 Each interface correlates to one endpoint, such as Subnets for the Subnets
 endpoint (ie /subnets) and Subnet for the Subnet endpoint (eg subnets/<subnet_id>).
@@ -9,5 +10,6 @@ endpoint package).
 Some endpoint operations require multiple parameters, such as the Rack Controllers
 GET operation, which takes a number of QSP that can be used to filter results. These
 parameters are encapsulated in the params subpackage, providing a quick reference
-for performing API operations.*/
+for performing API operations.
+*/
 package api

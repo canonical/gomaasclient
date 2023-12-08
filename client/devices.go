@@ -22,6 +22,7 @@ func (d *Devices) Get() (devices []entity.Device, err error) {
 	err = d.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &devices)
 	})
+
 	return
 }
 
@@ -31,9 +32,11 @@ func (d *Devices) Create(deviceParams *entity.DeviceCreateParams) (device *entit
 	if err != nil {
 		return
 	}
+
 	device = new(entity.Device)
 	err = d.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, device)
 	})
+
 	return
 }

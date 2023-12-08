@@ -22,6 +22,7 @@ func (u *Users) Get() (users []entity.User, err error) {
 	err = u.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &users)
 	})
+
 	return
 }
 
@@ -31,9 +32,11 @@ func (u *Users) Create(params *entity.UserParams) (user *entity.User, err error)
 	if err != nil {
 		return nil, err
 	}
+
 	user = new(entity.User)
 	err = u.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, user)
 	})
+
 	return
 }

@@ -22,6 +22,7 @@ func (m *Machines) Get() (machines []entity.Machine, err error) {
 	err = m.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &machines)
 	})
+
 	return
 }
 
@@ -31,14 +32,17 @@ func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[s
 	if err != nil {
 		return
 	}
+
 	for k, v := range powerParamsToURLValues(powerParams) {
 		// Since qsp.Add(k, v...) is not allowed
 		qsp[k] = append(qsp[k], v...)
 	}
+
 	ma = new(entity.Machine)
 	err = m.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
+
 	return
 }
 
@@ -48,10 +52,12 @@ func (m *Machines) Allocate(params *entity.MachineAllocateParams) (ma *entity.Ma
 	if err != nil {
 		return
 	}
+
 	ma = new(entity.Machine)
 	err = m.client().Post("allocate", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
+
 	return
 }
 
@@ -61,9 +67,11 @@ func (m *Machines) Release(systemIDs []string, comment string) error {
 	for _, val := range systemIDs {
 		qsp.Add("machines", val)
 	}
+
 	if comment != "" {
 		qsp.Add("comment", comment)
 	}
+
 	return m.client().Post("release", qsp, func(data []byte) error { return nil })
 }
 

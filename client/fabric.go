@@ -24,6 +24,7 @@ func (f *Fabric) Get(id int) (fabric *entity.Fabric, err error) {
 	err = f.client(id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, fabric)
 	})
+
 	return
 }
 
@@ -33,10 +34,12 @@ func (f *Fabric) Update(id int, fabricParams *entity.FabricParams) (fabric *enti
 	if err != nil {
 		return
 	}
+
 	fabric = new(entity.Fabric)
 	err = f.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, fabric)
 	})
+
 	return
 }
 

@@ -26,6 +26,7 @@ func (p *VMHost) Get(id int) (vmHost *entity.VMHost, err error) {
 	err = p.client(id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, vmHost)
 	})
+
 	return
 }
 
@@ -35,10 +36,12 @@ func (p *VMHost) Update(id int, params *entity.VMHostParams) (vmHost *entity.VMH
 	if err != nil {
 		return
 	}
+
 	vmHost = new(entity.VMHost)
 	err = p.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, vmHost)
 	})
+
 	return
 }
 
@@ -57,10 +60,12 @@ func (p *VMHost) Compose(id int, params *entity.VMHostMachineParams) (machine *e
 	if err != nil {
 		return
 	}
+
 	machine = new(entity.Machine)
 	err = p.client(id).Post("compose", qsp, func(data []byte) error {
 		return json.Unmarshal(data, machine)
 	})
+
 	return
 }
 
@@ -76,5 +81,6 @@ func (p *VMHost) GetParameters(id int) (params map[string]string, err error) {
 	err = p.client(id).Get("parameters", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &params)
 	})
+
 	return
 }

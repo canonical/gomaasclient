@@ -14,6 +14,7 @@ func TestVMHostt(t *testing.T) {
 	if err := helper.TestdataFromJSON("maas/vm_host.json", vmHost); err != nil {
 		t.Fatal(err)
 	}
+
 	if err := helper.TestdataFromJSON("maas/vm_hosts.json", vmHosts); err != nil {
 		t.Fatal(err)
 	}

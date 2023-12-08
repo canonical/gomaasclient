@@ -23,6 +23,7 @@ func (s *Space) Get(id int) (space *entity.Space, err error) {
 	err = s.client(id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, space)
 	})
+
 	return
 }
 
@@ -34,6 +35,7 @@ func (s *Space) Update(id int, name string) (space *entity.Space, err error) {
 	err = s.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, space)
 	})
+
 	return
 }
 

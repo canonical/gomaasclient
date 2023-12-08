@@ -121,15 +121,18 @@ func GetApiClient(apiURL string, apiKey string, apiVersion string) (*ApiClient, 
 
 func getApiClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tls.Config) (*ApiClient, error) {
 	versionedURL := gomaasapi.AddAPIVersionToURL(apiURL, apiVersion)
+
 	authClient, err := gomaasapi.NewAuthenticatedClient(versionedURL, apiKey)
 	if err != nil {
 		return nil, err
 	}
+
 	if tlsConfig != nil {
 		tr := &http.Transport{TLSClientConfig: tlsConfig}
 		httpClient := &http.Client{Transport: tr}
 		authClient.HTTPClient = httpClient
 	}
+
 	return &ApiClient{*authClient, gomaasapi.NewMAAS(*authClient)}, nil
 }
 
@@ -143,10 +146,12 @@ func (c ApiClient) Get(op string, params url.Values, f func([]byte) error) error
 	if err != nil {
 		return err
 	}
+
 	data, err := res.GetBytes()
 	if err != nil {
 		return err
 	}
+
 	return f(data)
 }
 
@@ -160,10 +165,12 @@ func (c ApiClient) Post(op string, params url.Values, f func([]byte) error) erro
 	if err != nil {
 		return err
 	}
+
 	data, err := res.GetBytes()
 	if err != nil {
 		return err
 	}
+
 	return f(data)
 }
 
@@ -172,9 +179,11 @@ func (c ApiClient) Put(params url.Values, f func([]byte) error) error {
 	if err != nil {
 		return err
 	}
+
 	data, err := res.MarshalJSON()
 	if err != nil {
 		return err
 	}
+
 	return f(data)
 }

@@ -22,6 +22,7 @@ func (n *NetworkInterfaces) Get(systemID string) (networkInterfaces []entity.Net
 	err = n.client(systemID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &networkInterfaces)
 	})
+
 	return
 }
 
@@ -31,10 +32,12 @@ func (n *NetworkInterfaces) CreateBond(systemID string, params *entity.NetworkIn
 	if err != nil {
 		return
 	}
+
 	networkInterface = new(entity.NetworkInterface)
 	err = n.client(systemID).Post("create_bond", qsp, func(data []byte) error {
 		return json.Unmarshal(data, networkInterface)
 	})
+
 	return
 }
 
@@ -44,10 +47,12 @@ func (n *NetworkInterfaces) CreateBridge(systemID string, params *entity.Network
 	if err != nil {
 		return
 	}
+
 	networkInterface = new(entity.NetworkInterface)
 	err = n.client(systemID).Post("create_bridge", qsp, func(data []byte) error {
 		return json.Unmarshal(data, networkInterface)
 	})
+
 	return
 }
 
@@ -57,10 +62,12 @@ func (n *NetworkInterfaces) CreatePhysical(systemID string, params *entity.Netwo
 	if err != nil {
 		return
 	}
+
 	networkInterface = new(entity.NetworkInterface)
 	err = n.client(systemID).Post("create_physical", qsp, func(data []byte) error {
 		return json.Unmarshal(data, networkInterface)
 	})
+
 	return
 }
 
@@ -70,9 +77,11 @@ func (n *NetworkInterfaces) CreateVLAN(systemID string, params *entity.NetworkIn
 	if err != nil {
 		return
 	}
+
 	networkInterface = new(entity.NetworkInterface)
 	err = n.client(systemID).Post("create_vlan", qsp, func(data []byte) error {
 		return json.Unmarshal(data, networkInterface)
 	})
+
 	return
 }

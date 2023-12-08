@@ -23,6 +23,7 @@ func (r *RAIDs) Get(systemID string) (raids []entity.RAID, err error) {
 	err = r.client(systemID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &raids)
 	})
+
 	return
 }
 
@@ -32,9 +33,11 @@ func (r *RAIDs) Create(systemID string, params *entity.RAIDCreateParams) (raid *
 	if err != nil {
 		return
 	}
+
 	raid = new(entity.RAID)
 	err = r.client(systemID).Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, raid)
 	})
+
 	return
 }

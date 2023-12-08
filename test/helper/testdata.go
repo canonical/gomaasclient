@@ -26,5 +26,6 @@ func TestdataFromJSON(path string, target interface{}) error {
 
 	dec := json.NewDecoder(rc)
 	dec.DisallowUnknownFields()
+
 	return dec.Decode(target)
 }

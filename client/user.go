@@ -23,6 +23,7 @@ func (u *User) Get(userName string) (user *entity.User, err error) {
 	err = u.client(userName).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, user)
 	})
+
 	return
 }
 

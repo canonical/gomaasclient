@@ -75,6 +75,7 @@ func TestVLAN(t *testing.T) {
 	if err := helper.TestdataFromJSON("maas/vlan.json", vlan); err != nil {
 		t.Fatal(err)
 	}
+
 	if err := helper.TestdataFromJSON("maas/vlans.json", vlans); err != nil {
 		t.Fatal(err)
 	}
@@ -83,6 +84,7 @@ func TestVLAN(t *testing.T) {
 	if diff := cmp.Diff(&sampleVLAN, vlan); diff != "" {
 		t.Fatalf("json.Decode(VLAN) mismatch (-want +got):\n%s", diff)
 	}
+
 	if diff := cmp.Diff(&sampleVLANs, vlans); diff != "" {
 		t.Fatalf("json.Decode([]VLAN) mismatch (-want +got):\n%s", diff)
 	}

@@ -23,6 +23,7 @@ func (t *Tag) Get(name string) (tag *entity.Tag, err error) {
 	err = t.client(name).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, tag)
 	})
+
 	return
 }
 
@@ -32,10 +33,12 @@ func (t *Tag) Update(name string, tagParams *entity.TagParams) (tag *entity.Tag,
 	if err != nil {
 		return
 	}
+
 	tag = new(entity.Tag)
 	err = t.client(name).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, tag)
 	})
+
 	return
 }
 
@@ -49,6 +52,7 @@ func (t *Tag) GetMachines(name string) (machines []entity.Machine, err error) {
 	err = t.client(name).Get("machines", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &machines)
 	})
+
 	return
 }
 
@@ -67,5 +71,6 @@ func (t *Tag) updateNodes(name string, machineIds []string, op string) error {
 	for _, id := range machineIds {
 		qsp.Add(op, id)
 	}
+
 	return t.client(name).Post("update_nodes", qsp, func(data []byte) error { return nil })
 }

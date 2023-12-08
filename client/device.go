@@ -24,6 +24,7 @@ func (d *Device) Get(systemID string) (device *entity.Device, err error) {
 	err = d.client(systemID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, device)
 	})
+
 	return
 }
 
@@ -33,10 +34,12 @@ func (d *Device) Update(systemID string, deviceParams *entity.DeviceUpdateParams
 	if err != nil {
 		return
 	}
+
 	device = new(entity.Device)
 	err = d.client(systemID).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, device)
 	})
+
 	return
 }
 

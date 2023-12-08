@@ -24,6 +24,7 @@ func (r *ResourcePool) Get(id int) (resourcePool *entity.ResourcePool, err error
 	err = r.client(id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, resourcePool)
 	})
+
 	return
 }
 
@@ -33,10 +34,12 @@ func (r *ResourcePool) Update(id int, params *entity.ResourcePoolParams) (resour
 	if err != nil {
 		return
 	}
+
 	resourcePool = new(entity.ResourcePool)
 	err = r.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, resourcePool)
 	})
+
 	return
 }
 

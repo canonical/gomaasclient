@@ -22,6 +22,7 @@ func (d *DNSResources) Get() (dnsresources []entity.DNSResource, err error) {
 	err = d.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &dnsresources)
 	})
+
 	return
 }
 
@@ -31,9 +32,11 @@ func (d *DNSResources) Create(params *entity.DNSResourceParams) (dnsResource *en
 	if err != nil {
 		return
 	}
+
 	dnsResource = new(entity.DNSResource)
 	err = d.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, dnsResource)
 	})
+
 	return
 }

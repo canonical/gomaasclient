@@ -28,6 +28,7 @@ func (v *VLAN) Get(fabricID int, vid int) (vlan *entity.VLAN, err error) {
 	err = v.client(fabricID, vid).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, vlan)
 	})
+
 	return
 }
 
@@ -37,10 +38,12 @@ func (v *VLAN) Update(fabricID int, vid int, params *entity.VLANParams) (vlan *e
 	if err != nil {
 		return
 	}
+
 	vlan = new(entity.VLAN)
 	err = v.client(fabricID, vid).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, vlan)
 	})
+
 	return
 }
 

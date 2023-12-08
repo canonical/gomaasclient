@@ -21,6 +21,7 @@ func (s *Spaces) Get() (spaces []entity.Space, err error) {
 	err = s.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &spaces)
 	})
+
 	return
 }
 
@@ -32,5 +33,6 @@ func (s *Spaces) Create(name string) (space *entity.Space, err error) {
 	err = s.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, space)
 	})
+
 	return
 }

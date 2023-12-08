@@ -16,6 +16,7 @@ func TestMachinet(t *testing.T) {
 	if err := helper.TestdataFromJSON("maas/machine.json", machine); err != nil {
 		t.Fatal(err)
 	}
+
 	if err := helper.TestdataFromJSON("maas/machines.json", machines); err != nil {
 		t.Fatal(err)
 	}
@@ -73,11 +74,13 @@ func TestMachineWithDeducedHwSync(t *testing.T) {
 
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
+
 			machine := Machine{}
 
 			if err := json.Unmarshal(tc.in, &machine); err != nil {
 				t.Fatal(err, string(tc.in))
 			}
+
 			if tc.out != machine.EnableHwSync {
 				t.Fatalf("expected %v, got %v", tc.out, machine.EnableHwSync)
 			}

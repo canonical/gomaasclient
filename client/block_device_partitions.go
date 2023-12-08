@@ -23,6 +23,7 @@ func (p *BlockDevicePartitions) Get(systemID string, blockDeviceID int) (partiti
 	err = p.client(systemID, blockDeviceID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &partitions)
 	})
+
 	return
 }
 
@@ -32,9 +33,11 @@ func (p *BlockDevicePartitions) Create(systemID string, blockDeviceID int, param
 	if err != nil {
 		return
 	}
+
 	partition = new(entity.BlockDevicePartition)
 	err = p.client(systemID, blockDeviceID).Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, partition)
 	})
+
 	return
 }

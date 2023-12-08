@@ -23,6 +23,7 @@ func (m *Machine) Get(systemID string) (ma *entity.Machine, err error) {
 	err = m.client(systemID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
+
 	return
 }
 
@@ -32,14 +33,17 @@ func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, p
 	if err != nil {
 		return
 	}
+
 	for k, v := range powerParamsToURLValues(powerParams) {
 		// Since qsp.Add(k, v...) is not allowed
 		qsp[k] = append(qsp[k], v...)
 	}
+
 	ma = new(entity.Machine)
 	err = m.client(systemID).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
+
 	return
 }
 
@@ -54,10 +58,12 @@ func (m *Machine) Commission(systemID string, params *entity.MachineCommissionPa
 	if err != nil {
 		return
 	}
+
 	ma = new(entity.Machine)
 	err = m.client(systemID).Post("commission", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
+
 	return
 }
 
@@ -67,10 +73,12 @@ func (m *Machine) Deploy(systemID string, params *entity.MachineDeployParams) (m
 	if err != nil {
 		return
 	}
+
 	ma = new(entity.Machine)
 	err = m.client(systemID).Post("deploy", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
+
 	return
 }
 
@@ -80,10 +88,12 @@ func (m *Machine) Release(systemID string, params *entity.MachineReleaseParams) 
 	if err != nil {
 		return
 	}
+
 	ma = new(entity.Machine)
 	err = m.client(systemID).Post("release", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
+
 	return
 }
 
@@ -93,10 +103,12 @@ func (m *Machine) Lock(systemID string, comment string) (ma *entity.Machine, err
 	if comment != "" {
 		qsp.Set("comment", comment)
 	}
+
 	ma = new(entity.Machine)
 	err = m.client(systemID).Post("lock", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
+
 	return
 }
 
@@ -106,6 +118,7 @@ func (m *Machine) ClearDefaultGateways(systemID string) (ma *entity.Machine, err
 	err = m.client(systemID).Post("clear_default_gateways", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, ma)
 	})
+
 	return
 }
 
@@ -115,5 +128,6 @@ func (m *Machine) GetPowerParameters(systemID string) (params map[string]interfa
 	err = m.client(systemID).Get("power_parameters", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &params)
 	})
+
 	return
 }
