@@ -19,25 +19,26 @@ func (d *Devices) client() APIClient {
 }
 
 // Get fetches a list of Devices
-func (d *Devices) Get() (devices []entity.Device, err error) {
-	err = d.client().Get("", url.Values{}, func(data []byte) error {
+func (d *Devices) Get() ([]entity.Device, error) {
+	devices := make([]entity.Device, 0)
+	err := d.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &devices)
 	})
 
-	return
+	return devices, err
 }
 
 // Create creates a new Device
-func (d *Devices) Create(deviceParams *entity.DeviceCreateParams) (device *entity.Device, err error) {
+func (d *Devices) Create(deviceParams *entity.DeviceCreateParams) (*entity.Device, error) {
 	qsp, err := query.Values(deviceParams)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	device = new(entity.Device)
+	device := new(entity.Device)
 	err = d.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, device)
 	})
 
-	return
+	return device, err
 }

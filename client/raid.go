@@ -19,28 +19,28 @@ func (r *RAID) client(systemID string, id int) APIClient {
 }
 
 // Get RAID details.
-func (r *RAID) Get(systemID string, id int) (raid *entity.RAID, err error) {
-	raid = new(entity.RAID)
-	err = r.client(systemID, id).Get("", url.Values{}, func(data []byte) error {
+func (r *RAID) Get(systemID string, id int) (*entity.RAID, error) {
+	raid := new(entity.RAID)
+	err := r.client(systemID, id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, raid)
 	})
 
-	return
+	return raid, err
 }
 
 // Update RAID.
-func (r *RAID) Update(systemID string, id int, params *entity.RAIDUpdateParams) (raid *entity.RAID, err error) {
+func (r *RAID) Update(systemID string, id int, params *entity.RAIDUpdateParams) (*entity.RAID, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	raid = new(entity.RAID)
+	raid := new(entity.RAID)
 	err = r.client(systemID, id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, raid)
 	})
 
-	return
+	return raid, err
 }
 
 // Delete RAID.

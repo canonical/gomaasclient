@@ -19,28 +19,28 @@ func (f *Fabric) client(id int) APIClient {
 }
 
 // Get fetchs a Fabric object
-func (f *Fabric) Get(id int) (fabric *entity.Fabric, err error) {
-	fabric = new(entity.Fabric)
-	err = f.client(id).Get("", url.Values{}, func(data []byte) error {
+func (f *Fabric) Get(id int) (*entity.Fabric, error) {
+	fabric := new(entity.Fabric)
+	err := f.client(id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, fabric)
 	})
 
-	return
+	return fabric, err
 }
 
 // Update updates a given Fabric
-func (f *Fabric) Update(id int, fabricParams *entity.FabricParams) (fabric *entity.Fabric, err error) {
+func (f *Fabric) Update(id int, fabricParams *entity.FabricParams) (*entity.Fabric, error) {
 	qsp, err := query.Values(fabricParams)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	fabric = new(entity.Fabric)
+	fabric := new(entity.Fabric)
 	err = f.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, fabric)
 	})
 
-	return
+	return fabric, err
 }
 
 // Delete deletes a given Fabric

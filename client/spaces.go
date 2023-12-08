@@ -17,22 +17,23 @@ func (s *Spaces) client() APIClient {
 }
 
 // Get fetches a list of Space objects
-func (s *Spaces) Get() (spaces []entity.Space, err error) {
-	err = s.client().Get("", url.Values{}, func(data []byte) error {
+func (s *Spaces) Get() ([]entity.Space, error) {
+	spaces := make([]entity.Space, 0)
+	err := s.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &spaces)
 	})
 
-	return
+	return spaces, err
 }
 
 // Create creates a new Space
-func (s *Spaces) Create(name string) (space *entity.Space, err error) {
-	space = new(entity.Space)
+func (s *Spaces) Create(name string) (*entity.Space, error) {
+	space := new(entity.Space)
 	qsp := url.Values{}
 	qsp.Set("name", name)
-	err = s.client().Post("", qsp, func(data []byte) error {
+	err := s.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, space)
 	})
 
-	return
+	return space, err
 }

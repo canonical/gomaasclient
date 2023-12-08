@@ -19,25 +19,26 @@ func (d *DNSResourceRecords) client() APIClient {
 }
 
 // Get fetches a list of DNSResourceRecord objectts
-func (d *DNSResourceRecords) Get() (dnsResourceRecords []entity.DNSResourceRecord, err error) {
-	err = d.client().Get("", url.Values{}, func(data []byte) error {
+func (d *DNSResourceRecords) Get() ([]entity.DNSResourceRecord, error) {
+	dnsResourceRecords := make([]entity.DNSResourceRecord, 0)
+	err := d.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &dnsResourceRecords)
 	})
 
-	return
+	return dnsResourceRecords, err
 }
 
 // Create creates a new DNSResourceRecord
-func (d *DNSResourceRecords) Create(params *entity.DNSResourceRecordParams) (dnsResourceRecord *entity.DNSResourceRecord, err error) {
+func (d *DNSResourceRecords) Create(params *entity.DNSResourceRecordParams) (*entity.DNSResourceRecord, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	dnsResourceRecord = new(entity.DNSResourceRecord)
+	dnsResourceRecord := new(entity.DNSResourceRecord)
 	err = d.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, dnsResourceRecord)
 	})
 
-	return
+	return dnsResourceRecord, err
 }

@@ -18,20 +18,20 @@ func (m *Machine) client(systemID string) APIClient {
 }
 
 // Get machine details.
-func (m *Machine) Get(systemID string) (ma *entity.Machine, err error) {
-	ma = new(entity.Machine)
-	err = m.client(systemID).Get("", url.Values{}, func(data []byte) error {
-		return json.Unmarshal(data, ma)
+func (m *Machine) Get(systemID string) (*entity.Machine, error) {
+	machine := new(entity.Machine)
+	err := m.client(systemID).Get("", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, machine)
 	})
 
-	return
+	return machine, err
 }
 
 // Update machine.
-func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, powerParams map[string]interface{}) (ma *entity.Machine, err error) {
+func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, powerParams map[string]interface{}) (*entity.Machine, error) {
 	qsp, err := query.Values(machineParams)
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	for k, v := range powerParamsToURLValues(powerParams) {
@@ -39,12 +39,12 @@ func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, p
 		qsp[k] = append(qsp[k], v...)
 	}
 
-	ma = new(entity.Machine)
+	machine := new(entity.Machine)
 	err = m.client(systemID).Put(qsp, func(data []byte) error {
-		return json.Unmarshal(data, ma)
+		return json.Unmarshal(data, machine)
 	})
 
-	return
+	return machine, err
 }
 
 // Delete machine.
@@ -53,81 +53,81 @@ func (m *Machine) Delete(systemID string) error {
 }
 
 // Commission machine.
-func (m *Machine) Commission(systemID string, params *entity.MachineCommissionParams) (ma *entity.Machine, err error) {
+func (m *Machine) Commission(systemID string, params *entity.MachineCommissionParams) (*entity.Machine, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	ma = new(entity.Machine)
+	machine := new(entity.Machine)
 	err = m.client(systemID).Post("commission", qsp, func(data []byte) error {
-		return json.Unmarshal(data, ma)
+		return json.Unmarshal(data, machine)
 	})
 
-	return
+	return machine, err
 }
 
 // Deploy machine.
-func (m *Machine) Deploy(systemID string, params *entity.MachineDeployParams) (ma *entity.Machine, err error) {
+func (m *Machine) Deploy(systemID string, params *entity.MachineDeployParams) (*entity.Machine, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	ma = new(entity.Machine)
+	machine := new(entity.Machine)
 	err = m.client(systemID).Post("deploy", qsp, func(data []byte) error {
-		return json.Unmarshal(data, ma)
+		return json.Unmarshal(data, machine)
 	})
 
-	return
+	return machine, err
 }
 
 // Release machine.
-func (m *Machine) Release(systemID string, params *entity.MachineReleaseParams) (ma *entity.Machine, err error) {
+func (m *Machine) Release(systemID string, params *entity.MachineReleaseParams) (*entity.Machine, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	ma = new(entity.Machine)
+	machine := new(entity.Machine)
 	err = m.client(systemID).Post("release", qsp, func(data []byte) error {
-		return json.Unmarshal(data, ma)
+		return json.Unmarshal(data, machine)
 	})
 
-	return
+	return machine, err
 }
 
 // Lock machine.
-func (m *Machine) Lock(systemID string, comment string) (ma *entity.Machine, err error) {
+func (m *Machine) Lock(systemID string, comment string) (*entity.Machine, error) {
 	qsp := make(url.Values)
 	if comment != "" {
 		qsp.Set("comment", comment)
 	}
 
-	ma = new(entity.Machine)
-	err = m.client(systemID).Post("lock", qsp, func(data []byte) error {
-		return json.Unmarshal(data, ma)
+	machine := new(entity.Machine)
+	err := m.client(systemID).Post("lock", qsp, func(data []byte) error {
+		return json.Unmarshal(data, machine)
 	})
 
-	return
+	return machine, err
 }
 
 // ClearDefaultGateways clears default gateways.
-func (m *Machine) ClearDefaultGateways(systemID string) (ma *entity.Machine, err error) {
-	ma = new(entity.Machine)
-	err = m.client(systemID).Post("clear_default_gateways", url.Values{}, func(data []byte) error {
-		return json.Unmarshal(data, ma)
+func (m *Machine) ClearDefaultGateways(systemID string) (*entity.Machine, error) {
+	machine := new(entity.Machine)
+	err := m.client(systemID).Post("clear_default_gateways", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, machine)
 	})
 
-	return
+	return machine, err
 }
 
 // GetPowerParameters fetches the power parameters of a given Machine
-func (m *Machine) GetPowerParameters(systemID string) (params map[string]interface{}, err error) {
-	params = map[string]interface{}{}
-	err = m.client(systemID).Get("power_parameters", url.Values{}, func(data []byte) error {
+func (m *Machine) GetPowerParameters(systemID string) (map[string]interface{}, error) {
+	params := map[string]interface{}{}
+	err := m.client(systemID).Get("power_parameters", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &params)
 	})
 
-	return
+	return params, err
 }

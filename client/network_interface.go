@@ -21,38 +21,38 @@ func (n *NetworkInterface) client(systemID string, id int) APIClient {
 		GetSubObject(fmt.Sprintf("%v", id))
 }
 
-func (n *NetworkInterface) callPost(systemID string, id int, qsp url.Values, op string) (networkInterface *entity.NetworkInterface, err error) {
-	networkInterface = new(entity.NetworkInterface)
-	err = n.client(systemID, id).Post(op, qsp, func(data []byte) error {
+func (n *NetworkInterface) callPost(systemID string, id int, qsp url.Values, op string) (*entity.NetworkInterface, error) {
+	networkInterface := new(entity.NetworkInterface)
+	err := n.client(systemID, id).Post(op, qsp, func(data []byte) error {
 		return json.Unmarshal(data, networkInterface)
 	})
 
-	return
+	return networkInterface, err
 }
 
 // Get fetches a NetworkInterface for the given system_id and NetworkInterface id
-func (n *NetworkInterface) Get(systemID string, id int) (networkInterface *entity.NetworkInterface, err error) {
-	networkInterface = new(entity.NetworkInterface)
-	err = n.client(systemID, id).Get("", url.Values{}, func(data []byte) error {
+func (n *NetworkInterface) Get(systemID string, id int) (*entity.NetworkInterface, error) {
+	networkInterface := new(entity.NetworkInterface)
+	err := n.client(systemID, id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, networkInterface)
 	})
 
-	return
+	return networkInterface, err
 }
 
 // Update updates a give NetworkInterface
-func (n *NetworkInterface) Update(systemID string, id int, params *entity.NetworkInterfaceUpdateParams) (networkInterface *entity.NetworkInterface, err error) {
+func (n *NetworkInterface) Update(systemID string, id int, params *entity.NetworkInterfaceUpdateParams) (*entity.NetworkInterface, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	networkInterface = new(entity.NetworkInterface)
+	networkInterface := new(entity.NetworkInterface)
 	err = n.client(systemID, id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, networkInterface)
 	})
 
-	return
+	return networkInterface, err
 }
 
 // Delete deletes a given NetworkInterface
@@ -61,7 +61,7 @@ func (n *NetworkInterface) Delete(systemID string, id int) error {
 }
 
 // Disconnect marks a given NetworkInterface as disconnected
-func (n *NetworkInterface) Disconnect(systemID string, id int) (networkInterface *entity.NetworkInterface, err error) {
+func (n *NetworkInterface) Disconnect(systemID string, id int) (*entity.NetworkInterface, error) {
 	return n.callPost(systemID, id, url.Values{}, "disconnect")
 }
 
@@ -92,7 +92,7 @@ func (n *NetworkInterface) LinkSubnet(systemID string, id int, params *entity.Ne
 }
 
 // UnlinkSubnet removes a given link
-func (n *NetworkInterface) UnlinkSubnet(systemID string, id int, linkID int) (networkInterface *entity.NetworkInterface, err error) {
+func (n *NetworkInterface) UnlinkSubnet(systemID string, id int, linkID int) (*entity.NetworkInterface, error) {
 	qsp := url.Values{}
 	qsp.Add("id", fmt.Sprintf("%v", linkID))
 
@@ -100,7 +100,7 @@ func (n *NetworkInterface) UnlinkSubnet(systemID string, id int, linkID int) (ne
 }
 
 // SetDefaultGateway sets the default gateway of the given NetworkInterface
-func (n *NetworkInterface) SetDefaultGateway(systemID string, id int, linkID int) (networkInterface *entity.NetworkInterface, err error) {
+func (n *NetworkInterface) SetDefaultGateway(systemID string, id int, linkID int) (*entity.NetworkInterface, error) {
 	qsp := url.Values{}
 	qsp.Add("link_id", fmt.Sprintf("%v", linkID))
 

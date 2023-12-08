@@ -19,25 +19,26 @@ func (i *IPRanges) client() APIClient {
 }
 
 // Get fetches a list of IPRange objects
-func (i *IPRanges) Get() (ipRanges []entity.IPRange, err error) {
-	err = i.client().Get("", url.Values{}, func(data []byte) error {
+func (i *IPRanges) Get() ([]entity.IPRange, error) {
+	ipRanges := make([]entity.IPRange, 0)
+	err := i.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &ipRanges)
 	})
 
-	return
+	return ipRanges, err
 }
 
 // Create creates a new IPRange object
-func (i *IPRanges) Create(params *entity.IPRangeParams) (ipRange *entity.IPRange, err error) {
+func (i *IPRanges) Create(params *entity.IPRangeParams) (*entity.IPRange, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	ipRange = new(entity.IPRange)
+	ipRange := new(entity.IPRange)
 	err = i.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ipRange)
 	})
 
-	return
+	return ipRange, err
 }

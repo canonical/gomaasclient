@@ -19,38 +19,38 @@ func (d *Domain) client(id int) APIClient {
 }
 
 // Get fetches a given Domain
-func (d *Domain) Get(id int) (domain *entity.Domain, err error) {
-	domain = new(entity.Domain)
-	err = d.client(id).Get("", url.Values{}, func(data []byte) error {
+func (d *Domain) Get(id int) (*entity.Domain, error) {
+	domain := new(entity.Domain)
+	err := d.client(id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, domain)
 	})
 
-	return
+	return domain, err
 }
 
 // SetDefault sets the given Domain as the default Domain
-func (d *Domain) SetDefault(id int) (domain *entity.Domain, err error) {
-	domain = new(entity.Domain)
-	err = d.client(id).Post("set_default", url.Values{}, func(data []byte) error {
+func (d *Domain) SetDefault(id int) (*entity.Domain, error) {
+	domain := new(entity.Domain)
+	err := d.client(id).Post("set_default", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, domain)
 	})
 
-	return
+	return domain, err
 }
 
 // Update updates the given Domain
-func (d *Domain) Update(id int, params *entity.DomainParams) (domain *entity.Domain, err error) {
+func (d *Domain) Update(id int, params *entity.DomainParams) (*entity.Domain, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	domain = new(entity.Domain)
+	domain := new(entity.Domain)
 	err = d.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, domain)
 	})
 
-	return
+	return domain, err
 }
 
 // Delete deletes a given Domain

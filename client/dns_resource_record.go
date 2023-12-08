@@ -20,28 +20,28 @@ func (d *DNSResourceRecord) client(id int) APIClient {
 }
 
 // Get fetches a given DNSResourceRecord
-func (d *DNSResourceRecord) Get(id int) (dnsResourceRecord *entity.DNSResourceRecord, err error) {
-	dnsResourceRecord = new(entity.DNSResourceRecord)
-	err = d.client(id).Get("", url.Values{}, func(data []byte) error {
+func (d *DNSResourceRecord) Get(id int) (*entity.DNSResourceRecord, error) {
+	dnsResourceRecord := new(entity.DNSResourceRecord)
+	err := d.client(id).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, dnsResourceRecord)
 	})
 
-	return
+	return dnsResourceRecord, err
 }
 
 // Update updates a given DNSResourceRecord
-func (d *DNSResourceRecord) Update(id int, params *entity.DNSResourceRecordParams) (dnsResourceRecord *entity.DNSResourceRecord, err error) {
+func (d *DNSResourceRecord) Update(id int, params *entity.DNSResourceRecordParams) (*entity.DNSResourceRecord, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	dnsResourceRecord = new(entity.DNSResourceRecord)
+	dnsResourceRecord := new(entity.DNSResourceRecord)
 	err = d.client(id).Put(qsp, func(data []byte) error {
 		return json.Unmarshal(data, dnsResourceRecord)
 	})
 
-	return
+	return dnsResourceRecord, err
 }
 
 // Delete deletes a given DNSResourceRecord

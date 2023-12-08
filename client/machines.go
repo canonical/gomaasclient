@@ -18,19 +18,20 @@ func (m *Machines) client() APIClient {
 }
 
 // Get fetches a list machines.
-func (m *Machines) Get() (machines []entity.Machine, err error) {
-	err = m.client().Get("", url.Values{}, func(data []byte) error {
+func (m *Machines) Get() ([]entity.Machine, error) {
+	machines := make([]entity.Machine, 0)
+	err := m.client().Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &machines)
 	})
 
-	return
+	return machines, err
 }
 
 // Create machine.
-func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[string]interface{}) (ma *entity.Machine, err error) {
+func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[string]interface{}) (*entity.Machine, error) {
 	qsp, err := query.Values(machineParams)
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	for k, v := range powerParamsToURLValues(powerParams) {
@@ -38,27 +39,27 @@ func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[s
 		qsp[k] = append(qsp[k], v...)
 	}
 
-	ma = new(entity.Machine)
+	machine := new(entity.Machine)
 	err = m.client().Post("", qsp, func(data []byte) error {
-		return json.Unmarshal(data, ma)
+		return json.Unmarshal(data, machine)
 	})
 
-	return
+	return machine, err
 }
 
 // Allocate machine.
-func (m *Machines) Allocate(params *entity.MachineAllocateParams) (ma *entity.Machine, err error) {
+func (m *Machines) Allocate(params *entity.MachineAllocateParams) (*entity.Machine, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	ma = new(entity.Machine)
+	machine := new(entity.Machine)
 	err = m.client().Post("allocate", qsp, func(data []byte) error {
-		return json.Unmarshal(data, ma)
+		return json.Unmarshal(data, machine)
 	})
 
-	return
+	return machine, err
 }
 
 // Release machine.

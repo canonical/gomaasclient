@@ -20,25 +20,26 @@ func (r *RAIDs) client(systemID string) APIClient {
 }
 
 // Get RAIDs of a machine.
-func (r *RAIDs) Get(systemID string) (raids []entity.RAID, err error) {
-	err = r.client(systemID).Get("", url.Values{}, func(data []byte) error {
+func (r *RAIDs) Get(systemID string) ([]entity.RAID, error) {
+	raids := make([]entity.RAID, 0)
+	err := r.client(systemID).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &raids)
 	})
 
-	return
+	return raids, err
 }
 
 // Create a RAID of a machine.
-func (r *RAIDs) Create(systemID string, params *entity.RAIDCreateParams) (raid *entity.RAID, err error) {
+func (r *RAIDs) Create(systemID string, params *entity.RAIDCreateParams) (*entity.RAID, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
-		return
+		return nil, err
 	}
 
-	raid = new(entity.RAID)
+	raid := new(entity.RAID)
 	err = r.client(systemID).Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, raid)
 	})
 
-	return
+	return raid, err
 }
