@@ -40,6 +40,7 @@ func (s *Subnet) GetIPAddresses(id int) ([]subnet.IPAddress, error) {
 	qsp := url.Values{}
 	qsp.Set("with_username", "1")
 	qsp.Set("with_summary", "1")
+
 	subnetIPAddresses := make([]subnet.IPAddress, 0)
 	err := s.client(id).Get("ip_addresses", qsp, func(data []byte) error {
 		return json.Unmarshal(data, &subnetIPAddresses)

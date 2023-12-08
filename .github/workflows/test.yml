@@ -49,7 +49,7 @@ jobs:
           go-version-file: 'go.mod'
           cache: true
       - run: go mod download
-      - run: go build -v .
+      - run: go build -v ./...
 
   # Run unit tests
   test:
