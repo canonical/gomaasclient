@@ -191,6 +191,11 @@ type MachineServiceSet struct {
 	StatusInfo string `json:"status_info,omitempty"`
 }
 
+// MachinePowerState represent current machines power state
+type MachinePowerState struct {
+	State string `json:"state,omitempty"`
+}
+
 // MachineParams enumerates the parameters for the machine update operation
 type MachineParams struct {
 	PowerType     string `url:"power_type,omitempty"`

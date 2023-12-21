@@ -131,3 +131,33 @@ func (m *Machine) GetPowerParameters(systemID string) (map[string]interface{}, e
 
 	return params, err
 }
+
+// PowerOn machine
+func (m *Machine) PowerOn(systemID string) (*entity.Machine, error) {
+	machine := new(entity.Machine)
+	err := m.client(systemID).Post("power_on", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, machine)
+	})
+
+	return machine, err
+}
+
+// PowerOff machine
+func (m *Machine) PowerOff(systemID string) (*entity.Machine, error) {
+	machine := new(entity.Machine)
+	err := m.client(systemID).Post("power_off", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, machine)
+	})
+
+	return machine, err
+}
+
+// GetPowerState of the machine
+func (m *Machine) GetPowerState(systemID string) (*entity.MachinePowerState, error) {
+	ps := new(entity.MachinePowerState)
+	err := m.client(systemID).Get("query_power_state", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, ps)
+	})
+
+	return ps, err
+}
