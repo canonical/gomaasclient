@@ -67,6 +67,8 @@ func constructClient(apiClient *APIClient) *Client {
 		BlockDevicePartitions: &BlockDevicePartitions{APIClient: *apiClient},
 		User:                  &User{APIClient: *apiClient},
 		Users:                 &Users{APIClient: *apiClient},
+		ResourcePool:          &ResourcePool{APIClient: *apiClient},
+		ResourcePools:         &ResourcePools{APIClient: *apiClient},
 	}
 
 	return &client
