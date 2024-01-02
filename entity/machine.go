@@ -191,6 +191,11 @@ type MachineServiceSet struct {
 	StatusInfo string `json:"status_info,omitempty"`
 }
 
+// MachinePowerState represent current machines power state
+type MachinePowerState struct {
+	State string `json:"state,omitempty"`
+}
+
 // MachineParams enumerates the parameters for the machine update operation
 type MachineParams struct {
 	PowerType     string `url:"power_type,omitempty"`
@@ -275,4 +280,17 @@ type MachineReleaseParams struct {
 	Force       bool   `url:"force,omitempty"`
 	QuickErase  bool   `url:"quick_erase,omitempty"`
 	SecureErase bool   `url:"secure_erase,omitempty"`
+}
+
+// MachinePowerOnParams enumerates the parameters for the machine power on operation
+// UserData should be Base64-encoded data
+type MachinePowerOnParams struct {
+	Comment  string `url:"comment,omitempty"`
+	UserData string `url:"user_data,omitempty"`
+}
+
+// MachinePowerOffParams enumerates the parameters for the machine power off operation
+type MachinePowerOffParams struct {
+	Comment  string `url:"comment,omitempty"`
+	StopMode string `url:"stop_mode,omitempty"`
 }
