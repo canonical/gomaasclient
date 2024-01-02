@@ -281,3 +281,16 @@ type MachineReleaseParams struct {
 	QuickErase  bool   `url:"quick_erase,omitempty"`
 	SecureErase bool   `url:"secure_erase,omitempty"`
 }
+
+// MachinePowerOnParams enumerates the parameters for the machine power on operation
+// UserData should be Base64-encoded data
+type MachinePowerOnParams struct {
+	Comment  string `url:"comment,omitempty"`
+	UserData string `url:"user_data,omitempty"`
+}
+
+// MachinePowerOffParams enumerates the parameters for the machine power off operation
+type MachinePowerOffParams struct {
+	Comment  string `url:"comment,omitempty"`
+	StopMode string `url:"stop_mode,omitempty"`
+}
