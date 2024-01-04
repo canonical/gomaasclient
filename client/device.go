@@ -48,3 +48,18 @@ func (d *Device) Update(systemID string, deviceParams *entity.DeviceUpdateParams
 func (d *Device) Delete(systemID string) error {
 	return d.client(systemID).Delete()
 }
+
+// SetWorkloadAnnotations add, modify or remove workload annotations for given Device
+func (m *Device) SetWorkloadAnnotations(systemID string, params map[string]string) (*entity.Device, error) {
+	qsp := url.Values{}
+	for k, v := range params {
+		qsp.Add(k, v)
+	}
+
+	device := new(entity.Device)
+	err := m.client(systemID).Post("set_workload_annotations", qsp, func(data []byte) error {
+		return json.Unmarshal(data, &device)
+	})
+
+	return device, err
+}
