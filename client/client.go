@@ -69,6 +69,7 @@ func constructClient(apiClient *APIClient) *Client {
 		Users:                 &Users{APIClient: *apiClient},
 		ResourcePool:          &ResourcePool{APIClient: *apiClient},
 		ResourcePools:         &ResourcePools{APIClient: *apiClient},
+		MAASServer:            &MAASServer{APIClient: *apiClient},
 	}
 
 	return &client
@@ -114,6 +115,7 @@ type Client struct {
 	Users                 api.Users
 	ResourcePool          api.ResourcePool
 	ResourcePools         api.ResourcePools
+	MAASServer            api.MAASServer
 }
 
 // GetAPIClient returns a MAAS API client.
