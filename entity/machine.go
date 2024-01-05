@@ -16,6 +16,7 @@ type Machine struct {
 	HwLastSync              MAASTime                   `json:"last_sync,omitempty"`
 	OwnerData               interface{}                `json:"owner_data,omitempty"`
 	HardwareInfo            map[string]string          `json:"hardware_info,omitempty"`
+	WorkloadAnnotations     map[string]string          `json:"workload_annotations,omitempty"`
 	OSystem                 string                     `json:"osystem,omitempty"`
 	FQDN                    string                     `json:"fqdn,omitempty"`
 	StatusName              string                     `json:"status_name,omitempty"`
@@ -65,33 +66,32 @@ type Machine struct {
 			LinkID    int    `json:"link_id,omitempty"`
 		} `json:"ipv6,omitempty"`
 	} `json:"default_gateways,omitempty"`
-	Domain                       Domain            `json:"domain,omitempty"`
-	BootDisk                     BlockDevice       `json:"boot_disk,omitempty"`
-	BootInterface                NetworkInterface  `json:"boot_interface,omitempty"`
-	VMHost                       VMHost            `json:"pod,omitempty"`
-	CurrentTestingResultID       int               `json:"current_testing_result_id,omitempty"`
-	Memory                       int64             `json:"memory,omitempty"`
-	NodeType                     int               `json:"node_type,omitempty"`
-	HwSyncInterval               int               `json:"sync_interval,omitempty"`
-	CPUTestStatus                int               `json:"cpu_test_status,omitempty"`
-	AddressTTL                   int               `json:"address_ttl,omitempty"`
-	Storage                      float64           `json:"storage,omitempty"`
-	CPUSpeed                     int               `json:"cpu_speed,omitempty"`
-	CPUCount                     int               `json:"cpu_count,omitempty"`
-	Status                       node.Status       `json:"status,omitempty"`
-	CurrentInstallationResultID  int               `json:"current_installation_result_id,omitempty"`
-	CurrentCommissioningResultID int               `json:"current_commissioning_result_id,omitempty"`
-	CommissioningStatus          int               `json:"commissioning_status,omitempty"`
-	OtherTestStatus              int               `json:"other_test_status,omitempty"`
-	TestingStatus                int               `json:"testing_status,omitempty"`
-	StorageTestStatus            int               `json:"storage_test_status,omitempty"`
-	SwapSize                     int64             `json:"swap_size,omitempty"`
-	MemoryTestStatus             int               `json:"memory_test_status,omitempty"`
-	EnableHwSync                 bool              `json:"enable_hw_sync,omitempty"`
-	DisableIPv4                  bool              `json:"disable_ipv4,omitempty"`
-	Netboot                      bool              `json:"netboot,omitempty"`
-	Locked                       bool              `json:"locked,omitempty"`
-	WorkloadAnnotations          map[string]string `json:"workload_annotations,omitempty"`
+	Domain                       Domain           `json:"domain,omitempty"`
+	BootDisk                     BlockDevice      `json:"boot_disk,omitempty"`
+	BootInterface                NetworkInterface `json:"boot_interface,omitempty"`
+	VMHost                       VMHost           `json:"pod,omitempty"`
+	CurrentTestingResultID       int              `json:"current_testing_result_id,omitempty"`
+	Memory                       int64            `json:"memory,omitempty"`
+	NodeType                     int              `json:"node_type,omitempty"`
+	HwSyncInterval               int              `json:"sync_interval,omitempty"`
+	CPUTestStatus                int              `json:"cpu_test_status,omitempty"`
+	AddressTTL                   int              `json:"address_ttl,omitempty"`
+	Storage                      float64          `json:"storage,omitempty"`
+	CPUSpeed                     int              `json:"cpu_speed,omitempty"`
+	CPUCount                     int              `json:"cpu_count,omitempty"`
+	Status                       node.Status      `json:"status,omitempty"`
+	CurrentInstallationResultID  int              `json:"current_installation_result_id,omitempty"`
+	CurrentCommissioningResultID int              `json:"current_commissioning_result_id,omitempty"`
+	CommissioningStatus          int              `json:"commissioning_status,omitempty"`
+	OtherTestStatus              int              `json:"other_test_status,omitempty"`
+	TestingStatus                int              `json:"testing_status,omitempty"`
+	StorageTestStatus            int              `json:"storage_test_status,omitempty"`
+	SwapSize                     int64            `json:"swap_size,omitempty"`
+	MemoryTestStatus             int              `json:"memory_test_status,omitempty"`
+	EnableHwSync                 bool             `json:"enable_hw_sync,omitempty"`
+	DisableIPv4                  bool             `json:"disable_ipv4,omitempty"`
+	Netboot                      bool             `json:"netboot,omitempty"`
+	Locked                       bool             `json:"locked,omitempty"`
 }
 
 func (m *Machine) UnmarshalJSON(data []byte) error {

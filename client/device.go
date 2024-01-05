@@ -1,4 +1,3 @@
-//nolint:dupl // disable dupl check on client for now
 package client
 
 import (
