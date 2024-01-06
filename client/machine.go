@@ -171,3 +171,18 @@ func (m *Machine) GetPowerState(systemID string) (*entity.MachinePowerState, err
 
 	return ps, err
 }
+
+// SetWorkloadAnnotations add, modify or remove workload annotations for given Machine
+func (m *Machine) SetWorkloadAnnotations(systemID string, params map[string]string) (*entity.Machine, error) {
+	qsp := url.Values{}
+	for k, v := range params {
+		qsp.Add(k, v)
+	}
+
+	machine := new(entity.Machine)
+	err := m.client(systemID).Post("set_workload_annotations", qsp, func(data []byte) error {
+		return json.Unmarshal(data, &machine)
+	})
+
+	return machine, err
+}

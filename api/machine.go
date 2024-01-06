@@ -18,4 +18,5 @@ type Machine interface {
 	PowerOn(systemID string, params *entity.MachinePowerOnParams) (*entity.Machine, error)
 	PowerOff(systemID string, params *entity.MachinePowerOffParams) (*entity.Machine, error)
 	GetPowerState(systemID string) (*entity.MachinePowerState, error)
+	SetWorkloadAnnotations(systemID string, params map[string]string) (*entity.Machine, error)
 }

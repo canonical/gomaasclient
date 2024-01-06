@@ -16,6 +16,7 @@ type Machine struct {
 	HwLastSync              MAASTime                   `json:"last_sync,omitempty"`
 	OwnerData               interface{}                `json:"owner_data,omitempty"`
 	HardwareInfo            map[string]string          `json:"hardware_info,omitempty"`
+	WorkloadAnnotations     map[string]string          `json:"workload_annotations,omitempty"`
 	OSystem                 string                     `json:"osystem,omitempty"`
 	FQDN                    string                     `json:"fqdn,omitempty"`
 	StatusName              string                     `json:"status_name,omitempty"`
