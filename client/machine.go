@@ -112,6 +112,21 @@ func (m *Machine) Lock(systemID string, comment string) (*entity.Machine, error)
 	return machine, err
 }
 
+// Unlock marks a machine as ‘Unlocked’, to allow changes
+func (m *Machine) Unlock(systemID string, comment string) (*entity.Machine, error) {
+	qsp := make(url.Values)
+	if comment != "" {
+		qsp.Set("comment", comment)
+	}
+
+	machine := new(entity.Machine)
+	err := m.client(systemID).Post("unlock", qsp, func(data []byte) error {
+		return json.Unmarshal(data, machine)
+	})
+
+	return machine, err
+}
+
 // ClearDefaultGateways clears default gateways.
 func (m *Machine) ClearDefaultGateways(systemID string) (*entity.Machine, error) {
 	machine := new(entity.Machine)
@@ -185,4 +200,79 @@ func (m *Machine) SetWorkloadAnnotations(systemID string, params map[string]stri
 	})
 
 	return machine, err
+}
+
+// RescueMode begins the rescue mode process on a given machine
+func (m *Machine) RescueMode(systemID string) (*entity.Machine, error) {
+	machine := new(entity.Machine)
+	err := m.client(systemID).Post("rescue_mode", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, &machine)
+	})
+
+	return machine, err
+}
+
+// ExitRescueMode exits the rescue mode process on a given machine
+func (m *Machine) ExitRescueMode(systemID string) (*entity.Machine, error) {
+	machine := new(entity.Machine)
+	err := m.client(systemID).Post("exit_rescue_mode", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, &machine)
+	})
+
+	return machine, err
+}
+
+// Abort aborts machine's current operation
+func (m *Machine) Abort(systemID string, comment string) (*entity.Machine, error) {
+	qsp := make(url.Values)
+	if comment != "" {
+		qsp.Set("comment", comment)
+	}
+
+	machine := new(entity.Machine)
+	err := m.client(systemID).Post("abort", qsp, func(data []byte) error {
+		return json.Unmarshal(data, machine)
+	})
+
+	return machine, err
+}
+
+// MarkBroken marks a machine as ‘Broken’
+func (m *Machine) MarkBroken(systemID string, comment string) (*entity.Machine, error) {
+	qsp := make(url.Values)
+	if comment != "" {
+		qsp.Set("comment", comment)
+	}
+
+	machine := new(entity.Machine)
+	err := m.client(systemID).Post("mark_broken", qsp, func(data []byte) error {
+		return json.Unmarshal(data, machine)
+	})
+
+	return machine, err
+}
+
+// MarkFixed marks a machine as ‘Fixed’
+func (m *Machine) MarkFixed(systemID string, comment string) (*entity.Machine, error) {
+	qsp := make(url.Values)
+	if comment != "" {
+		qsp.Set("comment", comment)
+	}
+
+	machine := new(entity.Machine)
+	err := m.client(systemID).Post("mark_fixed", qsp, func(data []byte) error {
+		return json.Unmarshal(data, machine)
+	})
+
+	return machine, err
+}
+
+// GetToken gets the machine token for a given machine
+func (m *Machine) GetToken(systemID string) (*entity.MachineToken, error) {
+	machineToken := new(entity.MachineToken)
+	err := m.client(systemID).Get("get_token", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, machineToken)
+	})
+
+	return machineToken, err
 }
