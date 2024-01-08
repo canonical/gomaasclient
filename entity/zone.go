@@ -7,3 +7,8 @@ type Zone struct {
 	ResourceURI string `json:"resource_uri,omitempty"`
 	ID          int    `json:"id,omitempty"`
 }
+
+type ZoneParams struct {
+	Name        string `url:"name,omitempty"`
+	Description string `url:"description,omitempty"`
+}
