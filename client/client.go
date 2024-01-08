@@ -72,6 +72,12 @@ func constructClient(apiClient *APIClient) *Client {
 		MAASServer:            &MAASServer{APIClient: *apiClient},
 		PackageRepository:     &PackageRepository{APIClient: *apiClient},
 		PackageRepositories:   &PackageRepositories{APIClient: *apiClient},
+		BootSource:            &BootSource{APIClient: *apiClient},
+		BootSources:           &BootSources{APIClient: *apiClient},
+		BootSourceSelection:   &BootSourceSelection{APIClient: *apiClient},
+		BootSourceSelections:  &BootSourceSelections{APIClient: *apiClient},
+		BootResource:          &BootResource{APIClient: *apiClient},
+		BootResources:         &BootResources{APIClient: *apiClient},
 	}
 
 	return &client
@@ -120,6 +126,12 @@ type Client struct {
 	MAASServer            api.MAASServer
 	PackageRepository     api.PackageRepository
 	PackageRepositories   api.PackageRepositories
+	BootSource            api.BootSource
+	BootSources           api.BootSources
+	BootSourceSelection   api.BootSourceSelection
+	BootSourceSelections  api.BootSourceSelections
+	BootResource          api.BootResource
+	BootResources         api.BootResources
 }
 
 // GetAPIClient returns a MAAS API client.
