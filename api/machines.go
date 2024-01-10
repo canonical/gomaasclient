@@ -12,4 +12,5 @@ type Machines interface {
 	Allocate(params *entity.MachineAllocateParams) (*entity.Machine, error)
 	AcceptAll() error
 	Release(systemID []string, comment string) error
+	ListAllocated() ([]entity.Machine, error)
 }

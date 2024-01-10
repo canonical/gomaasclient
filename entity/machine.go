@@ -197,6 +197,13 @@ type MachinePowerState struct {
 	State string `json:"state,omitempty"`
 }
 
+// MachineToken represents Machine token
+type MachineToken struct {
+	TokenKey    string `json:"token_key,omitempty"`
+	TokenSecret string `json:"token_secret,omitempty"`
+	ConsumerKey string `json:"consumer_key,omitempty"`
+}
+
 // MachineParams enumerates the parameters for the machine update operation
 type MachineParams struct {
 	PowerType     string `url:"power_type,omitempty"`

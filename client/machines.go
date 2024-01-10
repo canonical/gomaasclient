@@ -81,3 +81,13 @@ func (m *Machines) AcceptAll() error {
 	qsp := url.Values{}
 	return m.client().Post("accept_all", qsp, func(data []byte) error { return nil })
 }
+
+// ListAllocated lists allocated machines
+func (m *Machines) ListAllocated() ([]entity.Machine, error) {
+	machines := make([]entity.Machine, 0)
+	err := m.client().Get("list_allocated", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, &machines)
+	})
+
+	return machines, err
+}
