@@ -80,6 +80,10 @@ func constructClient(apiClient *APIClient) *Client {
 		BootResources:         &BootResources{APIClient: *apiClient},
 		Zone:                  &Zone{APIClient: *apiClient},
 		Zones:                 &Zones{APIClient: *apiClient},
+		BCache:                &BCache{APIClient: *apiClient},
+		BCaches:               &BCaches{APIClient: *apiClient},
+		BCacheCacheSet:        &BCacheCacheSet{APIClient: *apiClient},
+		BCacheCacheSets:       &BCacheCacheSets{APIClient: *apiClient},
 	}
 
 	return &client
@@ -136,6 +140,10 @@ type Client struct {
 	BootResources         api.BootResources
 	Zone                  api.Zone
 	Zones                 api.Zones
+	BCache                api.BCache
+	BCaches               api.BCaches
+	BCacheCacheSet        api.BCacheCacheSet
+	BCacheCacheSets       api.BCacheCacheSets
 }
 
 // GetAPIClient returns a MAAS API client.
