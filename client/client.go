@@ -88,6 +88,7 @@ func constructClient(apiClient *APIClient) *Client {
 		SSHKeys:               &SSHKeys{APIClient: *apiClient},
 		SSLKey:                &SSLKey{APIClient: *apiClient},
 		SSLKeys:               &SSLKeys{APIClient: *apiClient},
+		Account:               &Account{APIClient: *apiClient},
 	}
 
 	return &client
@@ -152,6 +153,7 @@ type Client struct {
 	SSHKeys               api.SSHKeys
 	SSLKey                api.SSLKey
 	SSLKeys               api.SSLKeys
+	Account               api.Account
 }
 
 // GetAPIClient returns a MAAS API client.
