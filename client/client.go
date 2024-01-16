@@ -84,6 +84,10 @@ func constructClient(apiClient *APIClient) *Client {
 		BCaches:               &BCaches{APIClient: *apiClient},
 		BCacheCacheSet:        &BCacheCacheSet{APIClient: *apiClient},
 		BCacheCacheSets:       &BCacheCacheSets{APIClient: *apiClient},
+		SSHKey:                &SSHKey{APIClient: *apiClient},
+		SSHKeys:               &SSHKeys{APIClient: *apiClient},
+		SSLKey:                &SSLKey{APIClient: *apiClient},
+		SSLKeys:               &SSLKeys{APIClient: *apiClient},
 	}
 
 	return &client
@@ -144,6 +148,10 @@ type Client struct {
 	BCaches               api.BCaches
 	BCacheCacheSet        api.BCacheCacheSet
 	BCacheCacheSets       api.BCacheCacheSets
+	SSHKey                api.SSHKey
+	SSHKeys               api.SSHKeys
+	SSLKey                api.SSLKey
+	SSLKeys               api.SSLKeys
 }
 
 // GetAPIClient returns a MAAS API client.
