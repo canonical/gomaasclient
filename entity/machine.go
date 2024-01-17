@@ -302,3 +302,8 @@ type MachinePowerOffParams struct {
 	Comment  string `url:"comment,omitempty"`
 	StopMode string `url:"stop_mode,omitempty"`
 }
+
+type MachineDetails struct {
+	LLDP string `json:"lldp,omitempty"`
+	LSHW string `json:"lshw,omitempty"`
+}

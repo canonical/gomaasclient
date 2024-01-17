@@ -6,6 +6,7 @@ import (
 
 	"github.com/google/go-querystring/query"
 	"github.com/maas/gomaasclient/entity"
+	"gopkg.in/mgo.v2/bson"
 )
 
 // Machine contains functionality for manipulating the Machine entity.
@@ -275,4 +276,13 @@ func (m *Machine) GetToken(systemID string) (*entity.MachineToken, error) {
 	})
 
 	return machineToken, err
+}
+
+func (m *Machine) Details(systemID string) (*entity.MachineDetails, error) {
+	machineDetails := new(entity.MachineDetails)
+	err := m.client(systemID).Get("details", url.Values{}, func(data []byte) error {
+		return bson.Unmarshal(data, machineDetails)
+	})
+
+	return machineDetails, err
 }
