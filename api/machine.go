@@ -26,4 +26,5 @@ type Machine interface {
 	MarkBroken(systemID string, comment string) (*entity.Machine, error)
 	MarkFixed(systemID string, comment string) (*entity.Machine, error)
 	GetToken(systemID string) (*entity.MachineToken, error)
+	Details(systemID string) (*entity.MachineDetails, error)
 }

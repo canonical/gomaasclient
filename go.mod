@@ -7,6 +7,7 @@ require (
 	github.com/google/go-querystring v1.1.0
 	github.com/juju/gomaasapi/v2 v2.2.0
 	github.com/stretchr/testify v1.8.4
+	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 )
 
 require (
