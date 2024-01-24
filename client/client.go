@@ -40,6 +40,7 @@ func constructClient(apiClient *APIClient) *Client {
 		DNSResources:          &DNSResources{APIClient: *apiClient},
 		DNSResourceRecord:     &DNSResourceRecord{APIClient: *apiClient},
 		DNSResourceRecords:    &DNSResourceRecords{APIClient: *apiClient},
+		Events:                &Events{APIClient: *apiClient},
 		Fabric:                &Fabric{APIClient: *apiClient},
 		Fabrics:               &Fabrics{APIClient: *apiClient},
 		VLAN:                  &VLAN{APIClient: *apiClient},
@@ -105,6 +106,7 @@ type Client struct {
 	DNSResourceRecords    api.DNSResourceRecords
 	Domain                api.Domain
 	Domains               api.Domains
+	Events                api.Events
 	Fabric                api.Fabric
 	Fabrics               api.Fabrics
 	VLAN                  api.VLAN
