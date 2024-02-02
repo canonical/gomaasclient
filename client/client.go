@@ -12,7 +12,13 @@ import (
 
 // GetTLSClient creates a Client configured with TLS
 func GetTLSClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tls.Config) (*Client, error) {
-	apiClient, err := getAPIClient(apiURL, apiKey, apiVersion, tlsConfig)
+	var tr *http.Transport
+	if tlsConfig != nil {
+		tr = &http.Transport{TLSClientConfig: tlsConfig}
+	}
+
+	apiClient, err := getAPIClient(apiURL, apiKey, apiVersion, tr)
+
 	if err != nil {
 		return nil, err
 	}
@@ -23,6 +29,16 @@ func GetTLSClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tl
 // GetClient creates a client
 func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error) {
 	apiClient, err := getAPIClient(apiURL, apiKey, apiVersion, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return constructClient(apiClient), nil
+}
+
+// GetClientWithTransport creates a Client configured with the specified http.Transport
+func GetClientWithTransport(apiURL string, apiKey string, apiVersion string, tr *http.Transport) (*Client, error) {
+	apiClient, err := getAPIClient(apiURL, apiKey, apiVersion, tr)
 	if err != nil {
 		return nil, err
 	}
@@ -166,7 +182,7 @@ func GetAPIClient(apiURL string, apiKey string, apiVersion string) (*APIClient, 
 	return getAPIClient(apiURL, apiKey, apiVersion, nil)
 }
 
-func getAPIClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tls.Config) (*APIClient, error) {
+func getAPIClient(apiURL string, apiKey string, apiVersion string, tr *http.Transport) (*APIClient, error) {
 	versionedURL := gomaasapi.AddAPIVersionToURL(apiURL, apiVersion)
 
 	authClient, err := gomaasapi.NewAuthenticatedClient(versionedURL, apiKey)
@@ -174,11 +190,12 @@ func getAPIClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tl
 		return nil, err
 	}
 
-	if tlsConfig != nil {
-		tr := &http.Transport{TLSClientConfig: tlsConfig}
-		httpClient := &http.Client{Transport: tr}
-		authClient.HTTPClient = httpClient
+	if tr == nil {
+		tr = &http.Transport{}
 	}
+
+	httpClient := &http.Client{Transport: tr}
+	authClient.HTTPClient = httpClient
 
 	return &APIClient{*authClient, gomaasapi.NewMAAS(*authClient)}, nil
 }
