@@ -12,7 +12,7 @@ import (
 
 // GetTLSClient creates a Client configured with TLS
 func GetTLSClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tls.Config) (*Client, error) {
-	var tr *http.Transport
+	var tr http.RoundTripper
 	if tlsConfig != nil {
 		tr = &http.Transport{TLSClientConfig: tlsConfig}
 	}
@@ -37,7 +37,7 @@ func GetClient(apiURL string, apiKey string, apiVersion string) (*Client, error)
 }
 
 // GetClientWithTransport creates a Client configured with the specified http.Transport
-func GetClientWithTransport(apiURL string, apiKey string, apiVersion string, tr *http.Transport) (*Client, error) {
+func GetClientWithTransport(apiURL string, apiKey string, apiVersion string, tr http.RoundTripper) (*Client, error) {
 	apiClient, err := getAPIClient(apiURL, apiKey, apiVersion, tr)
 	if err != nil {
 		return nil, err
@@ -182,7 +182,7 @@ func GetAPIClient(apiURL string, apiKey string, apiVersion string) (*APIClient, 
 	return getAPIClient(apiURL, apiKey, apiVersion, nil)
 }
 
-func getAPIClient(apiURL string, apiKey string, apiVersion string, tr *http.Transport) (*APIClient, error) {
+func getAPIClient(apiURL string, apiKey string, apiVersion string, tr http.RoundTripper) (*APIClient, error) {
 	versionedURL := gomaasapi.AddAPIVersionToURL(apiURL, apiVersion)
 
 	authClient, err := gomaasapi.NewAuthenticatedClient(versionedURL, apiKey)
