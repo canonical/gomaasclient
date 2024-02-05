@@ -191,7 +191,7 @@ func getAPIClient(apiURL string, apiKey string, apiVersion string, tr http.Round
 	}
 
 	if tr == nil {
-		tr = &http.Transport{}
+		tr = http.DefaultTransport
 	}
 
 	httpClient := &http.Client{Transport: tr}
