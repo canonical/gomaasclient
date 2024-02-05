@@ -3,15 +3,17 @@ package client
 
 import (
 	"crypto/tls"
-	gomaasapi "github.com/juju/gomaasapi/v2"
-	"github.com/maas/gomaasclient/api"
 	"net/http"
 	"net/url"
+
+	gomaasapi "github.com/juju/gomaasapi/v2"
+	"github.com/maas/gomaasclient/api"
 )
 
 // GetTLSClient creates a Client configured with TLS
 func GetTLSClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tls.Config) (*Client, error) {
 	var tr http.RoundTripper
+
 	if tlsConfig != nil {
 		defaultTransportCopy := http.DefaultTransport.(*http.Transport).Clone()
 		defaultTransportCopy.TLSClientConfig = tlsConfig
