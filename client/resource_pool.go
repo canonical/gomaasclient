@@ -1,4 +1,3 @@
-//nolint:dupl // disable dupl check on client for now
 package client
 
 import (
@@ -17,6 +16,40 @@ type ResourcePool struct {
 
 func (r *ResourcePool) client(id int) APIClient {
 	return r.APIClient.GetSubObject(fmt.Sprintf("resourcepool/%v", id))
+}
+
+func (r *ResourcePool) clientByName(name string) APIClient {
+	return r.APIClient.GetSubObject(fmt.Sprintf("resourcepool/%v", name))
+}
+
+// GetByName fetches a given ResourcePool
+func (r *ResourcePool) GetByName(name string) (*entity.ResourcePool, error) {
+	resourcePool := new(entity.ResourcePool)
+	err := r.clientByName(name).Get("", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, resourcePool)
+	})
+
+	return resourcePool, err
+}
+
+// UpdateByName updates a given ResourcePool
+func (r *ResourcePool) UpdateByName(name string, params *entity.ResourcePoolParams) (*entity.ResourcePool, error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return nil, err
+	}
+
+	resourcePool := new(entity.ResourcePool)
+	err = r.clientByName(name).Put(qsp, func(data []byte) error {
+		return json.Unmarshal(data, resourcePool)
+	})
+
+	return resourcePool, err
+}
+
+// DeleteByName deletes a given ResourcePool
+func (r *ResourcePool) DeleteByName(name string) error {
+	return r.clientByName(name).Delete()
 }
 
 // Get fetches a given ResourcePool
