@@ -41,6 +41,7 @@ type Machine struct {
 	HWEKernel               string                     `json:"hwe_kernel,omitempty"`
 	TestingStatusName       string                     `json:"testing_status_name,omitempty"`
 	Version                 string                     `json:"version,omitempty"`
+	BiosBootMethod          string                     `json:"bios_boot_method,omitempty"`
 	Pool                    ResourcePool               `json:"pool,omitempty"`
 	Zone                    Zone                       `json:"zone,omitempty"`
 	SpecialFilesystems      []MachineSpecialFilesystem `json:"special_filesystems,omitempty"`
