@@ -57,6 +57,7 @@ type Machine struct {
 	VolumeGroups            []MachineVolumeGroup       `json:"volume_groups,omitempty"`
 	CacheSets               []MachineCacheSet          `json:"cache_sets,omitempty"`
 	BlockDeviceSet          []BlockDevice              `json:"blockdevice_set,omitempty"`
+	NUMANodeSet             []NUMANode                 `json:"numanode_set,omitempty"`
 	DefaultGateways         struct {
 		IPv4 struct {
 			GatewayIP net.IP `json:"gateway_ip,omitempty"`
