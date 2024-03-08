@@ -100,6 +100,7 @@ func constructClient(apiClient *APIClient) *Client {
 		BootSourceSelections:  &BootSourceSelections{APIClient: *apiClient},
 		BootResource:          &BootResource{APIClient: *apiClient},
 		BootResources:         &BootResources{APIClient: *apiClient},
+		NodeResults:           &NodeResults{APIClient: *apiClient},
 		Zone:                  &Zone{APIClient: *apiClient},
 		Zones:                 &Zones{APIClient: *apiClient},
 		BCache:                &BCache{APIClient: *apiClient},
@@ -168,6 +169,7 @@ type Client struct {
 	BootSourceSelections  api.BootSourceSelections
 	BootResource          api.BootResource
 	BootResources         api.BootResources
+	NodeResults           api.NodeResults
 	Zone                  api.Zone
 	Zones                 api.Zones
 	BCache                api.BCache
