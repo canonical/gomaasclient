@@ -4,7 +4,7 @@ package node
 type Status int
 
 // The statuses are defined in src/maasserver/enum.py as of 06-2018, which can
-// be found at https://github.com/maas/maas/blob/master/src/maasserver/enum.py
+// be found at https://github.com/canonical/maas/blob/master/src/maasserver/enum.py
 // The definitions are in `class NODE_STATUS`, which starts on L48 right now.
 // The statuses map to sequential ints, hence the iota - if a status is added or
 // changed, presumably they will maintain the sequential numbering. This way we only

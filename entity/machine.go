@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/maas/gomaasclient/entity/node"
+	"github.com/canonical/gomaasclient/entity/node"
 )
 
 // Machine represents the MAAS Machine endpoint.

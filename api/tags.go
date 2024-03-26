@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/maas/gomaasclient/entity"
+	"github.com/canonical/gomaasclient/entity"
 )
 
 // Tags is an interface for listing and creating Tag objects

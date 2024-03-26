@@ -5,7 +5,7 @@ import (
 	"net/url"
 
 	"github.com/google/go-querystring/query"
-	"github.com/maas/gomaasclient/entity"
+	"github.com/canonical/gomaasclient/entity"
 )
 
 // Zone Contains functionality for manipulating the Zone entity.

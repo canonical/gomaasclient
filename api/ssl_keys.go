@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/maas/gomaasclient/entity"
+	"github.com/canonical/gomaasclient/entity"
 )
 
 // SSLKeys is an interface for listing and creating SSLKey objects

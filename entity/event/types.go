@@ -3,7 +3,7 @@ package event
 // LogLevel correlates to a log level for MAAS events.
 type LogLevel string
 
-// Log levels referring from MAAS server https://github.com/maas/maas/blob/master/src/maasserver/models/eventtype.py#L25
+// Log levels referring from MAAS server https://github.com/canonical/maas/blob/master/src/maasserver/models/eventtype.py#L25
 const (
 	AUDIT    LogLevel = "AUDIT"
 	CRITICAL LogLevel = "CRITICAL"

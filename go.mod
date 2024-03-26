@@ -1,4 +1,4 @@
-module github.com/maas/gomaasclient
+module github.com/canonical/gomaasclient
 
 go 1.20
 

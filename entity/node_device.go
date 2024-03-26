@@ -3,7 +3,7 @@ package entity
 type HardwareType int
 
 // HardwareType referring from MAAS server
-// https://github.com/maas/maas/blob/deab73792a4fe839a2e84a926a6c728d510fc9ad/src/metadataserver/enum.py#L126
+// https://github.com/canonical/maas/blob/deab73792a4fe839a2e84a926a6c728d510fc9ad/src/metadataserver/enum.py#L126
 const (
 	NODE HardwareType = iota
 	CPU
@@ -16,7 +16,7 @@ const (
 type NodeDeviceBus int
 
 // NodeDeviceBus referring from MAAS server
-// https://github.com/maas/maas/blob/deab73792a4fe839a2e84a926a6c728d510fc9ad/src/maasserver/enum.py#L910
+// https://github.com/canonical/maas/blob/deab73792a4fe839a2e84a926a6c728d510fc9ad/src/maasserver/enum.py#L910
 const (
 	PCIE NodeDeviceBus = iota + 1
 	USB

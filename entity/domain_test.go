@@ -3,7 +3,7 @@ package entity
 import (
 	"testing"
 
-	"github.com/maas/gomaasclient/test/helper"
+	"github.com/canonical/gomaasclient/test/helper"
 )
 
 func TestDomaint(t *testing.T) {
