@@ -1,5 +1,23 @@
 # Golang MAAS Client
 
+**Notice**
+
+* **GoMAASClient is moving!**
+
+The GoMAASClient codebase will be accessed through the [Canonical GitHub organisation](https://github.com/canonical/gomaasclient), but go imports will still use the original link until further notice.
+
+ie: `go get github.com/maas/gomaasclient`.
+
+if you encounter as error along the likes of:
+```go
+module declares its path as: github.com/canonical/maas
+        but was required as: github.com/maas/maas
+```
+
+Ensure you are pointing at the original library URL.
+
+**/Notice**
+
 This repository contains the following  packages:
 
 * `api` - defines an interface to each MAAS API endpoint.
