@@ -7,6 +7,7 @@ import (
 	"github.com/google/go-querystring/query"
 	"github.com/maas/gomaasclient/entity"
 	"gopkg.in/mgo.v2/bson"
+	"gopkg.in/yaml.v3"
 )
 
 // Machine contains functionality for manipulating the Machine entity.
@@ -278,6 +279,7 @@ func (m *Machine) GetToken(systemID string) (*entity.MachineToken, error) {
 	return machineToken, err
 }
 
+// Details gets the details for a given machine
 func (m *Machine) Details(systemID string) (*entity.MachineDetails, error) {
 	machineDetails := new(entity.MachineDetails)
 	err := m.client(systemID).Get("details", url.Values{}, func(data []byte) error {
@@ -285,4 +287,14 @@ func (m *Machine) Details(systemID string) (*entity.MachineDetails, error) {
 	})
 
 	return machineDetails, err
+}
+
+// GetCurtinConfig gets the curtin config for a given machine
+func (m *Machine) GetCurtinConfig(systemID string) (map[string]interface{}, error) {
+	curtinConfig := map[string]interface{}{}
+	err := m.client(systemID).Get("get_curtin_config", url.Values{}, func(data []byte) error {
+		return yaml.Unmarshal(data, &curtinConfig)
+	})
+
+	return curtinConfig, err
 }

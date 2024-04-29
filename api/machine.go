@@ -27,4 +27,5 @@ type Machine interface {
 	MarkFixed(systemID string, comment string) (*entity.Machine, error)
 	GetToken(systemID string) (*entity.MachineToken, error)
 	Details(systemID string) (*entity.MachineDetails, error)
+	GetCurtinConfig(systemID string) (map[string]interface{}, error)
 }
