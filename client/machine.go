@@ -286,3 +286,18 @@ func (m *Machine) Details(systemID string) (*entity.MachineDetails, error) {
 
 	return machineDetails, err
 }
+
+// RestoreDefaultConfiguration sets the configuration to default values for a given machine
+func (m *Machine) RestoreDefaultConfiguration(systemID string) error {
+	return m.client(systemID).Post("restore_default_configuration", url.Values{}, func(data []byte) error { return nil })
+}
+
+// RestoreNetworkingConfiguration sets the network configuration to default values for a given machine
+func (m *Machine) RestoreNetworkingConfiguration(systemID string) error {
+	return m.client(systemID).Post("restore_networking_configuration", url.Values{}, func(data []byte) error { return nil })
+}
+
+// RestoreStorageConfiguration sets the storage configuration to default values for a given machine
+func (m *Machine) RestoreStorageConfiguration(systemID string) error {
+	return m.client(systemID).Post("restore_storage_configuration", url.Values{}, func(data []byte) error { return nil })
+}

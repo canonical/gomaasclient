@@ -27,4 +27,7 @@ type Machine interface {
 	MarkFixed(systemID string, comment string) (*entity.Machine, error)
 	GetToken(systemID string) (*entity.MachineToken, error)
 	Details(systemID string) (*entity.MachineDetails, error)
+	RestoreDefaultConfiguration(systemID string) error
+	RestoreNetworkingConfiguration(systemID string) error
+	RestoreStorageConfiguration(systemID string) error
 }
