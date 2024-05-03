@@ -115,6 +115,8 @@ func constructClient(apiClient *APIClient) *Client {
 		Version:               &Version{APIClient: *apiClient},
 		RackController:        &RackController{APIClient: *apiClient},
 		RackControllers:       &RackControllers{APIClient: *apiClient},
+		NodeScript:            &NodeScript{APIClient: *apiClient},
+		NodeScripts:           &NodeScripts{APIClient: *apiClient},
 	}
 
 	return &client
@@ -187,6 +189,8 @@ type Client struct {
 	Version               api.Version
 	RackController        api.RackController
 	RackControllers       api.RackControllers
+	NodeScript            api.NodeScript
+	NodeScripts           api.NodeScripts
 }
 
 // GetAPIClient returns a MAAS API client.
@@ -253,8 +257,36 @@ func (c APIClient) Post(op string, params url.Values, f func([]byte) error) erro
 	return f(data)
 }
 
+func (c APIClient) PostFiles(op string, params url.Values, files map[string][]byte, f func([]byte) error) error {
+	res, err := c.CallPostFiles(op, params, files)
+	if err != nil {
+		return err
+	}
+
+	data, err := res.GetBytes()
+	if err != nil {
+		return err
+	}
+
+	return f(data)
+}
+
 func (c APIClient) Put(params url.Values, f func([]byte) error) error {
 	res, err := c.Update(params)
+	if err != nil {
+		return err
+	}
+
+	data, err := res.MarshalJSON()
+	if err != nil {
+		return err
+	}
+
+	return f(data)
+}
+
+func (c APIClient) PutFiles(params url.Values, files map[string][]byte, f func([]byte) error) error {
+	res, err := c.UpdateFiles(params, files)
 	if err != nil {
 		return err
 	}
