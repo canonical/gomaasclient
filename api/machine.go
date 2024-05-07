@@ -30,5 +30,5 @@ type Machine interface {
 	RestoreDefaultConfiguration(systemID string) error
 	RestoreNetworkingConfiguration(systemID string) error
 	RestoreStorageConfiguration(systemID string) error
-  GetCurtinConfig(systemID string) (map[string]interface{}, error)
+	GetCurtinConfig(systemID string) (map[string]interface{}, error)
 }
