@@ -18,9 +18,14 @@ func (m *Machines) client() APIClient {
 }
 
 // Get fetches a list machines.
-func (m *Machines) Get() ([]entity.Machine, error) {
+func (m *Machines) Get(machinesParams *entity.MachinesParams) ([]entity.Machine, error) {
+	qsp, err := query.Values(machinesParams)
+	if err != nil {
+		return nil, err
+	}
+
 	machines := make([]entity.Machine, 0)
-	err := m.client().Get("", url.Values{}, func(data []byte) error {
+	err = m.client().Get("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, &machines)
 	})
 
