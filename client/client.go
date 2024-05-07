@@ -112,6 +112,7 @@ func constructClient(apiClient *APIClient) *Client {
 		SSLKey:                &SSLKey{APIClient: *apiClient},
 		SSLKeys:               &SSLKeys{APIClient: *apiClient},
 		Account:               &Account{APIClient: *apiClient},
+		Version:               &Version{APIClient: *apiClient},
 	}
 
 	return &client
@@ -181,6 +182,7 @@ type Client struct {
 	SSLKey                api.SSLKey
 	SSLKeys               api.SSLKeys
 	Account               api.Account
+	Version               api.Version
 }
 
 // GetAPIClient returns a MAAS API client.
