@@ -6,5 +6,9 @@ import (
 
 // RackControllers represents the MAAS Rack Controllers endpoint
 type RackControllers interface {
-	Get(*entity.RackControllerSearch) ([]entity.RackController, error)
+	DescribePowerTypes() ([]entity.PowerType, error)
+	IsRegistered(macAddress string) (bool, error)
+	GetPowerParameters(systemIDs []string) (map[string]interface{}, error)
+	Get(*entity.RackControllersGetParams) ([]entity.RackController, error)
+	SetZone(*entity.RackControllerSetZoneParams) error
 }
