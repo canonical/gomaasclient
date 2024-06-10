@@ -6,19 +6,21 @@ import (
 
 // Subnet represents the MAAS Subnet endpoint.
 type Subnet struct {
-	Space           string   `json:"space,omitempty"`
-	CIDR            string   `json:"cidr,omitempty"`
-	Name            string   `json:"name,omitempty"`
-	ResourceURI     string   `json:"resource_uri,omitempty"`
-	DNSServers      []net.IP `json:"dns_servers,omitempty"`
-	GatewayIP       net.IP   `json:"gateway_ip,omitempty"`
-	VLAN            VLAN     `json:"vlan,omitempty"`
-	ID              int      `json:"id,omitempty"`
-	RDNSMode        int      `json:"rdns_mode,omitempty"`
-	AllowDNS        bool     `json:"allow_dns,omitempty"`
-	Managed         bool     `json:"managed,omitempty"`
-	ActiveDiscovery bool     `json:"active_discovery,omitempty"`
-	AllowProxy      bool     `json:"allow_proxy,omitempty"`
+	Space                     string   `json:"space,omitempty"`
+	CIDR                      string   `json:"cidr,omitempty"`
+	Name                      string   `json:"name,omitempty"`
+	ResourceURI               string   `json:"resource_uri,omitempty"`
+	Description               string   `json:"description,omitempty"`
+	GatewayIP                 net.IP   `json:"gateway_ip,omitempty"`
+	DNSServers                []net.IP `json:"dns_servers,omitempty"`
+	DisabledBootArchitectures []string `json:"disabled_boot_architectures,omitempty"`
+	VLAN                      VLAN     `json:"vlan,omitempty"`
+	ID                        int      `json:"id,omitempty"`
+	RDNSMode                  int      `json:"rdns_mode,omitempty"`
+	AllowDNS                  bool     `json:"allow_dns,omitempty"`
+	Managed                   bool     `json:"managed,omitempty"`
+	ActiveDiscovery           bool     `json:"active_discovery,omitempty"`
+	AllowProxy                bool     `json:"allow_proxy,omitempty"`
 }
 
 // SubnetParams contains the parameters for the POST operation on the Subnets endpoint.

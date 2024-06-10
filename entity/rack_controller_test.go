@@ -6,7 +6,7 @@ import (
 	"github.com/maas/gomaasclient/test/helper"
 )
 
-func TestRackControllert(t *testing.T) {
+func TestRackController(t *testing.T) {
 	rackController := new(RackController)
 	rackControllers := new([]RackController)
 

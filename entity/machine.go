@@ -42,6 +42,9 @@ type Machine struct {
 	TestingStatusName       string                     `json:"testing_status_name,omitempty"`
 	Version                 string                     `json:"version,omitempty"`
 	BiosBootMethod          string                     `json:"bios_boot_method,omitempty"`
+	HardwareUUID            string                     `json:"hardware_uuid,omitempty"`
+	InterfaceTestStatusName string                     `json:"interface_test_status_name,omitempty"`
+	NetworkTestStatusName   string                     `json:"network_test_status_name,omitempty"`
 	Pool                    ResourcePool               `json:"pool,omitempty"`
 	Zone                    Zone                       `json:"zone,omitempty"`
 	SpecialFilesystems      []MachineSpecialFilesystem `json:"special_filesystems,omitempty"`
@@ -87,6 +90,8 @@ type Machine struct {
 	CommissioningStatus          int              `json:"commissioning_status,omitempty"`
 	OtherTestStatus              int              `json:"other_test_status,omitempty"`
 	TestingStatus                int              `json:"testing_status,omitempty"`
+	InterfaceTestStatus          int              `json:"interface_test_status,omitempty"`
+	NetworkTestStatus            int              `json:"network_test_status,omitempty"`
 	StorageTestStatus            int              `json:"storage_test_status,omitempty"`
 	SwapSize                     int64            `json:"swap_size,omitempty"`
 	MemoryTestStatus             int              `json:"memory_test_status,omitempty"`
@@ -195,9 +200,7 @@ type MachineServiceSet struct {
 }
 
 // MachinePowerState represent current machines power state
-type MachinePowerState struct {
-	State string `json:"state,omitempty"`
-}
+type MachinePowerState NodePowerState
 
 // MachineToken represents Machine token
 type MachineToken struct {
@@ -294,66 +297,13 @@ type MachineReleaseParams struct {
 
 // MachinePowerOnParams enumerates the parameters for the machine power on operation
 // UserData should be Base64-encoded data
-type MachinePowerOnParams struct {
-	Comment  string `url:"comment,omitempty"`
-	UserData string `url:"user_data,omitempty"`
-}
+type MachinePowerOnParams NodePowerOnParams
 
 // MachinePowerOffParams enumerates the parameters for the machine power off operation
-type MachinePowerOffParams struct {
-	Comment  string `url:"comment,omitempty"`
-	StopMode string `url:"stop_mode,omitempty"`
-}
+type MachinePowerOffParams NodePowerOffParams
 
 // MachinesParams enumerates the parameters for the get machines operation
-type MachinesParams struct {
-	ID               []string `url:"id,omitempty"`
-	NotID            []string `url:"not_id,omitempty"`
-	Hostname         []string `url:"hostname,omitempty"`
-	NotHostname      []string `url:"not_hostname,omitempty"`
-	MACAddress       []string `url:"mac_address,omitempty"`
-	Domain           []string `url:"domain,omitempty"`
-	NotDomain        []string `url:"not_domain,omitempty"`
-	AgentName        []string `url:"agent_name,omitempty"`
-	NotAgentName     []string `url:"not_agent_name,omitempty"`
-	Status           []string `url:"status,omitempty"`
-	NotStatus        []string `url:"not_status,omitempty"`
-	SimpleStatus     []string `url:"simple_status,omitempty"`
-	NotSimpleStatus  []string `url:"not_simple_status,omitempty"`
-	Arch             []string `url:"arch,omitempty"`
-	NotArch          []string `url:"not_arch,omitempty"`
-	Tags             []string `url:"tags,omitempty"`
-	NotTags          []string `url:"not_tags,omitempty"`
-	Fabrics          []string `url:"fabrics,omitempty"`
-	NotFabrics       []string `url:"not_fabrics,omitempty"`
-	FabricClasses    []string `url:"fabric_classes,omitempty"`
-	NotFabricClasses []string `url:"not_fabric_classes,omitempty"`
-	Subnets          []string `url:"subnets,omitempty"`
-	NotSubnets       []string `url:"not_subnets,omitempty"`
-	LinkSpeed        []int    `url:"link_speed,omitempty"`
-	VLANs            []string `url:"vlans,omitempty"`
-	NotVLANs         []string `url:"not_vlans,omitempty"`
-	Zone             []string `url:"zone,omitempty"`
-	NotInZone        []string `url:"not_in_zone,omitempty"`
-	Pool             []string `url:"pool,omitempty"`
-	NotInPool        []string `url:"not_in_pool,omitempty"`
-	Storage          string   `url:"storage,omitempty"`
-	Interfaces       string   `url:"devices,omitempty"`
-	Devices          string   `url:"devices,omitempty"`
-	CPUCount         []int    `url:"cpu_count,omitempty"`
-	CPUSpeed         []int    `url:"cpu_speed,omitempty"`
-	Mem              []int64  `url:"mem,omitempty"`
-	Pod              []string `url:"pod,omitempty"`
-	NotPod           []string `url:"not_pod,omitempty"`
-	PodType          []string `url:"pod_type,omitempty"`
-	NotPodType       []string `url:"not_pod_type,omitempty"`
-	Owner            []string `url:"owner,omitempty"`
-	NotOwner         []string `url:"not_owner,omitempty"`
-	PowerState       []string `url:"power_state,omitempty"`
-	NotPowerState    []string `url:"not_power_state,omitempty"`
-}
+type MachinesParams NodeGetParams
 
-type MachineDetails struct {
-	LLDP string `json:"lldp,omitempty"`
-	LSHW string `json:"lshw,omitempty"`
-}
+// MachineDetails represent the MAAS machine details
+type MachineDetails NodeDetails
