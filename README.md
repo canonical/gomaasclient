@@ -1,22 +1,27 @@
 # Golang MAAS Client
 
-**Notice**
+## :warning: Repository ownership and module name change
 
-* **GoMAASClient is moving!**
+The GoMAASClient repository is moving to the [Canonical GitHub organisation](https://github.com/canonical) and will have a new module name `github.com/canonical/gomaasclient`.
 
-The GoMAASClient codebase will be accessed through the [Canonical GitHub organisation](https://github.com/canonical/gomaasclient), but go imports will still use the original link until further notice.
+If you are not using `GOPROXY=https://proxy.golang.org/cached-only` or not caching
+modules, your development environment or CI might encounter failures when trying
+to retrieve the module by its old name.
 
-ie: `go get github.com/maas/gomaasclient`.
 
-if you encounter as error along the likes of:
+If you encounter as error along the likes of:
 ```go
-module declares its path as: github.com/canonical/maas
-        but was required as: github.com/maas/maas
+module declares its path as: github.com/canonical/gomaasclient
+        but was required as: github.com/maas/gomaasclient
 ```
 
-Ensure you are pointing at the original library URL.
+Ensure you are pointing at the new module URL, which is `github.com/canonical/gomaasclient`.
+You can use [replace](https://go.dev/ref/mod#go-mod-file-replace) directive, so
+you don't have to replace imports all over the place.
 
-**/Notice**
+We are planning to make this change on the 26th of June at 11:00 UTC
+
+---
 
 This repository contains the following  packages:
 
