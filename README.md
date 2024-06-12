@@ -9,17 +9,17 @@ modules, your development environment or CI might encounter failures when trying
 to retrieve the module by its old name.
 
 
-If you encounter as error along the likes of:
+If you encounter an error to the likes of:
 ```go
 module declares its path as: github.com/canonical/gomaasclient
         but was required as: github.com/maas/gomaasclient
 ```
 
 Ensure you are pointing at the new module URL, which is `github.com/canonical/gomaasclient`.
-You can use [replace](https://go.dev/ref/mod#go-mod-file-replace) directive, so
-you don't have to replace imports all over the place.
+You can use the [replace](https://go.dev/ref/mod#go-mod-file-replace) directive, so
+you don't have to change old imports everywhere.
 
-We are planning to make this change on the 26th of June at 11:00 UTC
+:warning: We are planning to make this change on the **26th of June at 11:00 UTC** :warning:
 
 ---
 
