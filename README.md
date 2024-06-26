@@ -31,7 +31,7 @@ This repository contains the following  packages:
 
 ```Go
 import (
-    gomaasclient "github.com/maas/gomaasclient/client"
+    gomaasclient "github.com/canonical/gomaasclient/client"
 )
 
 c, _ := gomaasclient.GetClient("<MAAS_URL>", "<API_KEY>", "2.0")
