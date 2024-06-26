@@ -1,6 +1,6 @@
 package api
 
-import "github.com/maas/gomaasclient/entity"
+import "github.com/canonical/gomaasclient/entity"
 
 // NodeResults is an interface for node script results
 type NodeResults interface {

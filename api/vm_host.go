@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/maas/gomaasclient/entity"
+	"github.com/canonical/gomaasclientlient/entity"
 )
 
 // VMHost is an interface defining API behaviour for VMHost objects

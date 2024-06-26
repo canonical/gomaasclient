@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/maas/gomaasclient/entity"
+	"github.com/canonical/gomaasclientlient/entity"
 )
 
 // BootResource implements api.BootResource

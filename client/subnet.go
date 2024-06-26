@@ -7,8 +7,8 @@ import (
 	"net/url"
 
 	"github.com/google/go-querystring/query"
-	"github.com/maas/gomaasclient/entity"
-	"github.com/maas/gomaasclient/entity/subnet"
+	"github.com/canonical/gomaasclient/entity"
+	"github.com/canonical/gomaasclient/entity/subnet"
 )
 
 // Subnet implements api.Subnet

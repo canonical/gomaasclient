@@ -5,7 +5,7 @@ import (
 	"net/url"
 
 	"github.com/google/go-querystring/query"
-	"github.com/maas/gomaasclient/entity"
+	"github.com/canonical/gomaasclient/entity"
 	"gopkg.in/mgo.v2/bson"
 	"gopkg.in/yaml.v3"
 )

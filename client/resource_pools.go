@@ -6,7 +6,7 @@ import (
 	"net/url"
 
 	"github.com/google/go-querystring/query"
-	"github.com/maas/gomaasclient/entity"
+	"github.com/canonical/gomaasclientlient/entity"
 )
 
 // ResourcePools implements api.ResourcePools

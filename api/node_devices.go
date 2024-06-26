@@ -1,6 +1,6 @@
 package api
 
-import "github.com/maas/gomaasclient/entity"
+import "github.com/canonical/gomaasclient/entity"
 
 // NodeDevices is an interface for listing Node Devices objects
 type NodeDevices interface {

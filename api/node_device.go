@@ -1,6 +1,6 @@
 package api
 
-import "github.com/maas/gomaasclient/entity"
+import "github.com/canonical/gomaasclient/entity"
 
 // NodeDevice is an interface defining API behaviour for Node Devices
 type NodeDevice interface {

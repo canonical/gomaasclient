@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/maas/gomaasclient/entity"
+	"github.com/canonical/gomaasclientlient/entity"
 )
 
 // SSHKeys is an interface for listing and creating SSHKey objects

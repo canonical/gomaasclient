@@ -1,6 +1,6 @@
 package api
 
-import "github.com/maas/gomaasclient/entity"
+import "github.com/canonical/gomaasclient/entity"
 
 // BlockDevicePartition is an interface providing API behaviour for
 // block device partitions
