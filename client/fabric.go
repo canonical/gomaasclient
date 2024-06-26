@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/google/go-querystring/query"
 	"github.com/canonical/gomaasclient/entity"
+	"github.com/google/go-querystring/query"
 )
 
 // Fabric implments api.Fabric

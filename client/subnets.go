@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"net/url"
 
-	"github.com/google/go-querystring/query"
 	"github.com/canonical/gomaasclient/entity"
+	"github.com/google/go-querystring/query"
 )
 
 // Subnets contains functionality for manipulating the Subnets entity.

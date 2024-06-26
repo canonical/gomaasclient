@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/url"
 
-	"github.com/google/go-querystring/query"
 	"github.com/canonical/gomaasclient/entity"
+	"github.com/google/go-querystring/query"
 )
 
 // Zone Contains functionality for manipulating the Zone entity.

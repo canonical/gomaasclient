@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/google/go-querystring/query"
 	"github.com/canonical/gomaasclient/entity"
+	"github.com/google/go-querystring/query"
 )
 
 // NodeDevices implements api.NodeDevices

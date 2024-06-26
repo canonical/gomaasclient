@@ -6,9 +6,9 @@ import (
 	"net/url"
 	"strconv"
 
+	"github.com/canonical/gomaasclient/entity"
 	"github.com/google/go-querystring/query"
 	gomaasapi "github.com/juju/gomaasapi/v2"
-	"github.com/canonical/gomaasclient/entity"
 )
 
 // NodeScript implements api.NodeScript

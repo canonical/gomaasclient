@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"net/url"
 
-	gomaasapi "github.com/juju/gomaasapi/v2"
 	"github.com/canonical/gomaasclient/api"
+	gomaasapi "github.com/juju/gomaasapi/v2"
 )
 
 // GetTLSClient creates a Client configured with TLS
