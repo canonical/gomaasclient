@@ -6,7 +6,7 @@ import (
 	"net/url"
 
 	"github.com/google/go-querystring/query"
-	"github.com/canonical/gomaasclientlient/entity"
+	"github.com/canonical/gomaasclient/entity"
 )
 
 // BlockDevicePartitions implements api.BlockDevicePartitions

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/canonical/gomaasclientlientlient/entity"
+	"github.com/canonical/gomaasclientlient/entity"
 )
 
 // SSHKey implements api.SSHKey

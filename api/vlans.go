@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/canonical/gomaasclientlient/entity"
+	"github.com/canonical/gomaasclient/entity"
 )
 
 // VLANs represents the MAAS Vlans endpoint

@@ -5,7 +5,7 @@ import (
 	"net/url"
 
 	"github.com/google/go-querystring/query"
-	"github.com/canonical/gomaasclientlient/entity"
+	"github.com/canonical/gomaasclient/entity"
 )
 
 // Machines contains functionality for manipulating the Machines entity.

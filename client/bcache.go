@@ -7,7 +7,7 @@ import (
 	"net/url"
 
 	"github.com/google/go-querystring/query"
-	"github.com/canonical/gomaasclientlient/entity"
+	"github.com/canonical/gomaasclient/entity"
 )
 
 // BCache Contains functionality for manipulating the BCache entity.
