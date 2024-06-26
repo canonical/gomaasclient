@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/url"
 
+	"github.com/canonical/gomaasclient/entity"
 	"github.com/google/go-querystring/query"
-	"github.com/maas/gomaasclient/entity"
 )
 
 // BootResources implements api.BootResources

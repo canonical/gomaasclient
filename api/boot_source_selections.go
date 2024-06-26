@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/maas/gomaasclient/entity"
+	"github.com/canonical/gomaasclient/entity"
 )
 
 // BootSourceSelections is an interface for listing and creating

@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/url"
 
+	"github.com/canonical/gomaasclient/entity"
 	"github.com/google/go-querystring/query"
-	"github.com/maas/gomaasclient/entity"
 )
 
 // Machines contains functionality for manipulating the Machines entity.

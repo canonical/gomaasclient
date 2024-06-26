@@ -1,6 +1,6 @@
 package api
 
-import "github.com/maas/gomaasclient/entity"
+import "github.com/canonical/gomaasclient/entity"
 
 // ResourcePools is an interface for listing and creating ResourcePool records
 type ResourcePools interface {

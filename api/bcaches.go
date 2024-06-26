@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/maas/gomaasclient/entity"
+	"github.com/canonical/gomaasclient/entity"
 )
 
 // BCaches declares the API operations related to MAAS `nodes/{systemID}/bcaches` endpoint.

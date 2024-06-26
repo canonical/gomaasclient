@@ -1,6 +1,6 @@
 package api
 
-import "github.com/maas/gomaasclient/entity"
+import "github.com/canonical/gomaasclient/entity"
 
 type Discoveries interface {
 	Get() ([]entity.Discovery, error)

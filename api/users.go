@@ -1,6 +1,6 @@
 package api
 
-import "github.com/maas/gomaasclient/entity"
+import "github.com/canonical/gomaasclient/entity"
 
 // Users is an interface for listing and creating users
 type Users interface {

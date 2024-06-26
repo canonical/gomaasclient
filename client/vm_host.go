@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"sync"
 
+	"github.com/canonical/gomaasclient/entity"
 	"github.com/google/go-querystring/query"
-	"github.com/maas/gomaasclient/entity"
 )
 
 // VMHost contains functionality for manipulating the VMHost entity.

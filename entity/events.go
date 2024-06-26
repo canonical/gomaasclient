@@ -1,6 +1,6 @@
 package entity
 
-import "github.com/maas/gomaasclient/entity/event"
+import "github.com/canonical/gomaasclient/entity/event"
 
 // Event represents an event for MAAS node
 type Event struct {

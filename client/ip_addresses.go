@@ -3,8 +3,8 @@ package client
 import (
 	"encoding/json"
 
+	"github.com/canonical/gomaasclient/entity"
 	"github.com/google/go-querystring/query"
-	"github.com/maas/gomaasclient/entity"
 )
 
 // IPAddresses implements api.IPAddresses

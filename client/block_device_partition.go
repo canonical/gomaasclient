@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/url"
 
+	"github.com/canonical/gomaasclient/entity"
 	gomaasapi "github.com/juju/gomaasapi/v2"
-	"github.com/maas/gomaasclient/entity"
 )
 
 // BlockDevicePartition implements the api.BlockDevicePartition
