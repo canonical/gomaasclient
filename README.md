@@ -2,7 +2,7 @@
 
 ## :warning: Repository ownership and module name change
 
-The GoMAASClient repository is moving to the [Canonical GitHub organisation](https://github.com/canonical) and will have a new module name `github.com/canonical/gomaasclient`.
+The GoMAASClient repository now lives under the [Canonical GitHub organisation](https://github.com/canonical) with a new module name `github.com/canonical/gomaasclient`.
 
 If you are not using `GOPROXY=https://proxy.golang.org/cached-only` or not caching
 modules, your development environment or CI might encounter failures when trying
@@ -18,8 +18,6 @@ module declares its path as: github.com/canonical/gomaasclient
 Ensure you are pointing at the new module URL, which is `github.com/canonical/gomaasclient`.
 You can use the [replace](https://go.dev/ref/mod#go-mod-file-replace) directive, so
 you don't have to change old imports everywhere.
-
-:warning: We are planning to make this change on the **26th of June at 11:00 UTC** :warning:
 
 ---
 
