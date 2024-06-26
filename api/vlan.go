@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/canonical/gomaasclientlientlient/entity"
+	"github.com/canonical/gomaasclient/entity"
 )
 
 // VLAN is an interface defining API behaviour for VLAN objects
