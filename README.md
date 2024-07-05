@@ -32,12 +32,13 @@ This repository contains the following  packages:
 ```Go
 import (
     gomaasclient "github.com/canonical/gomaasclient/client"
+    "github.com/canonical/gomaasclient/entity"
 )
 
 c, _ := gomaasclient.GetClient("<MAAS_URL>", "<API_KEY>", "2.0")
 
 // List MAAS machines
-machines, _ := c.Machines.Get()
+machines, _ := c.Machines.Get(&entity.MachinesParams{})
 
 // Get MAAS machine details
 machine, _ := c.Machine.Get(machines[0].SystemID)
