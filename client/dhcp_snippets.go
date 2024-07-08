@@ -1,3 +1,4 @@
+//nolint:dupl // disable dupl check on client for now
 package client
 
 import (
@@ -33,6 +34,7 @@ func (d *DHCPSnippets) Create(params *entity.DHCPSnippetParams) (*entity.DHCPSni
 	if err != nil {
 		return nil, err
 	}
+
 	snippet := new(entity.DHCPSnippet)
 	err = d.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, snippet)
