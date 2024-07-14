@@ -99,6 +99,7 @@ type Machine struct {
 	DisableIPv4                  bool             `json:"disable_ipv4,omitempty"`
 	Netboot                      bool             `json:"netboot,omitempty"`
 	Locked                       bool             `json:"locked,omitempty"`
+	EphemeralDeploy              bool             `json:"ephemeral_deploy,omitempty"`
 }
 
 func (m *Machine) UnmarshalJSON(data []byte) error {
@@ -272,18 +273,19 @@ type MachineAllocateParams struct {
 
 // MachineDeployParams enumerates the parameters for the deploy operation
 type MachineDeployParams struct {
-	UserData       string `url:"user_data,omitempty"`
-	DistroSeries   string `url:"distro_series,omitempty"`
-	HWEKernel      string `url:"hwe_kernel,omitempty"`
-	AgentName      string `url:"agent_name,omitempty"`
-	Comment        string `url:"comment,omitempty"`
-	BridgeFD       int    `url:"bridge_fd,omitempty"`
-	BridgeAll      bool   `url:"bridge_all,omitempty"`
-	BridgeSTP      bool   `url:"bridge_stp,omitempty"`
-	InstallRackD   bool   `url:"install_rackd,omitempty"`
-	InstallKVM     bool   `url:"install_kvm,omitempty"`
-	RegisterVMHost bool   `url:"register_vmhost,omitempty"`
-	EnableHwSync   bool   `url:"enable_hw_sync,omitempty"`
+	UserData        string `url:"user_data,omitempty"`
+	DistroSeries    string `url:"distro_series,omitempty"`
+	HWEKernel       string `url:"hwe_kernel,omitempty"`
+	AgentName       string `url:"agent_name,omitempty"`
+	Comment         string `url:"comment,omitempty"`
+	BridgeFD        int    `url:"bridge_fd,omitempty"`
+	BridgeAll       bool   `url:"bridge_all,omitempty"`
+	BridgeSTP       bool   `url:"bridge_stp,omitempty"`
+	InstallRackD    bool   `url:"install_rackd,omitempty"`
+	InstallKVM      bool   `url:"install_kvm,omitempty"`
+	RegisterVMHost  bool   `url:"register_vmhost,omitempty"`
+	EnableHwSync    bool   `url:"enable_hw_sync,omitempty"`
+	EphemeralDeploy bool   `url:"ephemeral_deploy,omitempty"`
 }
 
 // MachineReleaseParams enumerates the parameters for the release operation
