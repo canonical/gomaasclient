@@ -16,3 +16,10 @@ type DNSResourceParams struct {
 	IPAddresses string `url:"ip_addresses,omitempty"`
 	AddressTTL  int    `url:"address_ttl"`
 }
+
+type DNSResourcesParams struct {
+	All    bool   `url:"all,omitempty"`
+	Domain string `url:"domain,omitempty"`
+	Name   string `url:"name,omitempty"`
+	RRType string `url:"rrtype,omitempty"`
+}

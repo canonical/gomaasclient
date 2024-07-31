@@ -17,3 +17,9 @@ type DNSResourceRecordParams struct {
 	RRData string `url:"rrdata,omitempty"`
 	TTL    int    `url:"ttl"`
 }
+
+type DNSResourceRecordsParams struct {
+	Domain string `url:"domain,omitempty"`
+	Name   string `url:"name,omitempty"`
+	RRType string `url:"rrtype,omitempty"`
+}
