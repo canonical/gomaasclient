@@ -14,7 +14,7 @@ type RackControllers struct {
 }
 
 func (r *RackControllers) client() APIClient {
-	return r.APIClient.GetSubObject("rackControllers")
+	return r.APIClient.GetSubObject("rackcontrollers")
 }
 
 // Get fetches a list rackControllers.
