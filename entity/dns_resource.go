@@ -18,8 +18,9 @@ type DNSResourceParams struct {
 }
 
 type DNSResourcesParams struct {
-	All    bool   `url:"all,omitempty"`
 	Domain string `url:"domain,omitempty"`
+	FQDN   string `url:"fqdn,omitempty"`
 	Name   string `url:"name,omitempty"`
 	RRType string `url:"rrtype,omitempty"`
+	All    bool   `url:"all,omitempty"`
 }

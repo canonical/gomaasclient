@@ -20,6 +20,7 @@ type DNSResourceRecordParams struct {
 
 type DNSResourceRecordsParams struct {
 	Domain string `url:"domain,omitempty"`
+	FQDN   string `url:"fqdn,omitmepty"`
 	Name   string `url:"name,omitempty"`
 	RRType string `url:"rrtype,omitempty"`
 }
