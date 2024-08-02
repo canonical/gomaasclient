@@ -3,7 +3,6 @@ package client
 
 import (
 	"encoding/json"
-	"net/url"
 
 	"github.com/canonical/gomaasclient/entity"
 	"github.com/google/go-querystring/query"
@@ -19,9 +18,14 @@ func (d *DNSResources) client() APIClient {
 }
 
 // Get fetches a list of DNSResource objects
-func (d *DNSResources) Get() ([]entity.DNSResource, error) {
+func (d *DNSResources) Get(params *entity.DNSResourcesParams) ([]entity.DNSResource, error) {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return nil, err
+	}
+
 	dnsresources := make([]entity.DNSResource, 0)
-	err := d.client().Get("", url.Values{}, func(data []byte) error {
+	err = d.client().Get("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, &dnsresources)
 	})
 
