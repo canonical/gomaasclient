@@ -210,21 +210,21 @@ type MachineToken struct {
 	ConsumerKey string `json:"consumer_key,omitempty"`
 }
 
-// MachineParams enumerates the parameters for the machine update operation
+// MachineParams enumerates the parameters for the machine create/update operation
 type MachineParams struct {
-	PowerType     string `url:"power_type,omitempty"`
-	PXEMacAddress string `url:"mac_addresses,omitempty"`
-	Architecture  string `url:"architecture,omitempty"`
-	MinHWEKernel  string `url:"min_hwe_kernel,omitempty"`
-	Hostname      string `url:"hostname,omitempty"`
-	Description   string `url:"description,omitempty"`
-	Domain        string `url:"domain,omitempty"`
-	Pool          string `url:"pool,omitempty"`
-	Zone          string `url:"zone,omitempty"`
-	Memory        int64  `url:"memory,omitempty"`
-	SwapSize      int64  `url:"swap_size,omitempty"`
-	CPUCount      int    `url:"cpu_count,omitempty"`
-	Commission    bool   `url:"commission,omitempty"`
+	Domain       string   `url:"domain,omitempty"`
+	Architecture string   `url:"architecture,omitempty"`
+	MinHWEKernel string   `url:"min_hwe_kernel,omitempty"`
+	Hostname     string   `url:"hostname,omitempty"`
+	Description  string   `url:"description,omitempty"`
+	PowerType    string   `url:"power_type,omitempty"`
+	Pool         string   `url:"pool,omitempty"`
+	Zone         string   `url:"zone,omitempty"`
+	MACAddresses []string `url:"mac_addresses,omitempty"`
+	Memory       int64    `url:"memory,omitempty"`
+	SwapSize     int64    `url:"swap_size,omitempty"`
+	CPUCount     int      `url:"cpu_count,omitempty"`
+	Commission   bool     `url:"commission,omitempty"`
 }
 
 // MachineCommissionParams enumerates the parameters for the commission operation
