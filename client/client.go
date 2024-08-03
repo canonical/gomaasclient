@@ -117,6 +117,8 @@ func constructClient(apiClient *APIClient) *Client {
 		RackControllers:       &RackControllers{APIClient: *apiClient},
 		NodeScript:            &NodeScript{APIClient: *apiClient},
 		NodeScripts:           &NodeScripts{APIClient: *apiClient},
+		VolumeGroup:           &VolumeGroup{APIClient: *apiClient},
+		VolumeGroups:          &VolumeGroups{APIClient: *apiClient},
 	}
 
 	return &client
@@ -191,6 +193,8 @@ type Client struct {
 	RackControllers       api.RackControllers
 	NodeScript            api.NodeScript
 	NodeScripts           api.NodeScripts
+	VolumeGroup           api.VolumeGroup
+	VolumeGroups          api.VolumeGroups
 }
 
 // GetAPIClient returns a MAAS API client.
