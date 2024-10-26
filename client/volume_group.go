@@ -50,18 +50,18 @@ func (v *VolumeGroup) Delete(systemID string, id int) error {
 }
 
 // CreateLogicalVolume creates a new LogicalVolume for a given system_id and VolumeGroup's ID
-func (v *VolumeGroup) CreateLogicalVolume(systemID string, id int, params *entity.LogicalVolumeParams) (*entity.LogicalVolume, error) {
+func (v *VolumeGroup) CreateLogicalVolume(systemID string, id int, params *entity.LogicalVolumeParams) (*entity.BlockDevice, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
-	logicalVolume := new(entity.LogicalVolume)
+	blockDevice := new(entity.BlockDevice)
 	err = v.client(systemID, id).Post("create_logical_volume", qsp, func(data []byte) error {
-		return json.Unmarshal(data, logicalVolume)
+		return json.Unmarshal(data, blockDevice)
 	})
 
-	return logicalVolume, err
+	return blockDevice, err
 }
 
 // DeleteLogicalVolume deletes a given LogicalVolume
