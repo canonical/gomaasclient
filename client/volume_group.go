@@ -30,7 +30,7 @@ func (v *VolumeGroup) Get(systemID string, id int) (*entity.VolumeGroup, error) 
 }
 
 // Update updates a given VolumeGroup
-func (v *VolumeGroup) Update(systemID string, id int, params *entity.VolumeGroupParams) (*entity.VolumeGroup, error) {
+func (v *VolumeGroup) Update(systemID string, id int, params *entity.VolumeGroupUpdateParams) (*entity.VolumeGroup, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err

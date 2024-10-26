@@ -8,5 +8,5 @@ import (
 // VolumeGroup records
 type VolumeGroups interface {
 	Get(systemID string) ([]entity.VolumeGroup, error)
-	Create(systemID string, params *entity.VolumeGroupParams) (*entity.VolumeGroup, error)
+	Create(systemID string, params *entity.VolumeGroupCreateParams) (*entity.VolumeGroup, error)
 }

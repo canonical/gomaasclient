@@ -17,12 +17,22 @@ type VolumeGroup struct {
 	ID                 int             `json:"id,omitempty"`
 }
 
-// VolumeGroupParams enumerates the parameters for the volume group operation
-type VolumeGroupParams struct {
+// VolumeGroupCreateParams enumerates the parameters for the volume group create operation.
+type VolumeGroupCreateParams struct {
 	Name         string   `url:"name,omitempty"`
 	UUID         string   `url:"uuid,omitempty"`
 	BlockDevices []string `url:"block_devices,omitempty"`
 	Partitions   []string `url:"partitions,omitempty"`
+}
+
+// VolumeGroupUpdateParams enumerates the parameters for the volume group update operation.
+type VolumeGroupUpdateParams struct {
+	Name               string   `url:"name,omitempty"`
+	UUID               string   `url:"uuid,omitempty"`
+	AddBlockDevices    []string `url:"add_block_devices,omitempty"`
+	RemoveBlockDevices []string `url:"remove_block_devices,omitempty"`
+	AddPartitions      []string `url:"add_partitions,omitempty"`
+	RemovePartitions   []string `url:"remove_partitions,omitempty"`
 }
 
 // LogicalVolume represents the LogicalVolume object.

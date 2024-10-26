@@ -29,7 +29,7 @@ func (v *VolumeGroups) Get(systemID string) ([]entity.VolumeGroup, error) {
 }
 
 // Create creates a new VolumeGroup for a given system_id
-func (v *VolumeGroups) Create(systemID string, params *entity.VolumeGroupParams) (*entity.VolumeGroup, error) {
+func (v *VolumeGroups) Create(systemID string, params *entity.VolumeGroupCreateParams) (*entity.VolumeGroup, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
