@@ -17,6 +17,7 @@ type Machine struct {
 	OwnerData               interface{}                `json:"owner_data,omitempty"`
 	HardwareInfo            map[string]string          `json:"hardware_info,omitempty"`
 	WorkloadAnnotations     map[string]string          `json:"workload_annotations,omitempty"`
+	VMHost                  *MachineVMHost             `json:"pod,omitempty"`
 	OSystem                 string                     `json:"osystem,omitempty"`
 	FQDN                    string                     `json:"fqdn,omitempty"`
 	StatusName              string                     `json:"status_name,omitempty"`
@@ -74,7 +75,6 @@ type Machine struct {
 	Domain                       Domain           `json:"domain,omitempty"`
 	BootDisk                     BlockDevice      `json:"boot_disk,omitempty"`
 	BootInterface                NetworkInterface `json:"boot_interface,omitempty"`
-	VMHost                       VMHost           `json:"pod,omitempty"`
 	CurrentTestingResultID       int              `json:"current_testing_result_id,omitempty"`
 	Memory                       int64            `json:"memory,omitempty"`
 	NodeType                     int              `json:"node_type,omitempty"`
@@ -148,6 +148,14 @@ func (t *MAASTime) UnmarshalJSON(data []byte) error {
 func (t MAASTime) String() string {
 	temp := time.Time(t)
 	return temp.Format(time.RFC3339Nano)
+}
+
+// MachineVMHost represents a Machine's "pod" item.
+// This type should not be used directly.
+type MachineVMHost struct {
+	Name        string `json:"name,omitempty"`
+	ResourceURI string `json:"resource_uri,omitempty"`
+	ID          int    `json:"id,omitempty"`
 }
 
 // MachineCacheSet represents a Machine's "cache_sets" list item.
