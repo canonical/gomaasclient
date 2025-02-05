@@ -53,6 +53,8 @@ func constructClient(apiClient *APIClient) *Client {
 	client := Client{
 		Device:                &Device{APIClient: *apiClient},
 		Devices:               &Devices{APIClient: *apiClient},
+		DHCPSnippet:           &DHCPSnippet{APIClient: *apiClient},
+		DHCPSnippets:          &DHCPSnippets{APIClient: *apiClient},
 		Domain:                &Domain{APIClient: *apiClient},
 		Domains:               &Domains{APIClient: *apiClient},
 		DNSResource:           &DNSResource{APIClient: *apiClient},
@@ -129,6 +131,8 @@ func constructClient(apiClient *APIClient) *Client {
 type Client struct {
 	Device                api.Device
 	Devices               api.Devices
+	DHCPSnippet           api.DHCPSnippet
+	DHCPSnippets          api.DHCPSnippets
 	DNSResource           api.DNSResource
 	DNSResources          api.DNSResources
 	DNSResourceRecord     api.DNSResourceRecord
