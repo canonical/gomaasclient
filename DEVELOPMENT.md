@@ -81,15 +81,19 @@ To test the provider:
 1. An example development directory is provided in the `examples/clientdemo` directory. Copy this to a new directory, or ensure you don't push `env.sh` if you choose to work in the repository.
 1. Add your environment variables to the `env.sh` file. If you need to find the MAAS API key, you can run the following command in your MAAS environment:
     ```bash
-       sudo maas apikey --username=maas
-       ```
-2. Ensure the path in the `replace` directive in `go.mod` points to your local copy of the provider, the root of this repository.
-3. In that directory, run:
+    sudo maas apikey --username=maas
+    ```
+1. Source the `env.sh` file:
+   ```bash
+   source env.sh
+   ```
+1. Ensure the path in the `replace` directive in `go.mod` points to your local copy of the provider, the root of this repository.
+1. In that directory, run:
    ```bash
    go mod tidy
    go run main.go
    ```
-4. You should be able to see MAAS machine info in the output. Congratulations, you've used the GO MAAS client running locally! Modify the client as you see fit and submit a PR. Happy coding! 
+1. You should be able to see MAAS machine info in the output. Congratulations, you've used the GO MAAS client running locally! Modify the client as you see fit and submit a PR. Happy coding! 
 
 ## Testing
 
