@@ -17,6 +17,6 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-// Replace the path after => with the path to your local copy of the repository, if required. 
+// Replace the path after => with the path to your local copy of the repository, if required.
 // e.g. /home/username/repos/gomaasclient
 replace github.com/canonical/gomaasclient v0.0.0-20230912053103-eb0ecc7ab134 => ../../../gomaasclient
