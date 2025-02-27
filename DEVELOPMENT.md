@@ -1,6 +1,6 @@
-# Contributing to the Golang MAAS Client
+# Contributing to the Go MAAS Client
 
-Thank you for your interest in contributing to the Golang MAAS Client! We appreciate your help in making this project better. This document provides information on how to set up your development environment and best practices for contributing to the project. 
+Thank you for your interest in contributing to the Go MAAS Client! We appreciate your help in making this project better. This document provides information on how to set up your development environment and best practices for contributing to the project. 
 
 ## Requirements
 
