@@ -32,7 +32,7 @@ func main() {
 	fmt.Println("MAAS Machines:")
 	fmt.Println("-------------")
 	for _, machine := range machines {
-		fmt.Printf("System ID: %s, Hostname: %s\n", 
+		fmt.Printf("System ID: %s, Hostname: %s\n",
 			machine.SystemID, machine.Hostname)
 	}
 }
