@@ -3,6 +3,7 @@ package entity
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net"
 	"strconv"
 	"time"
@@ -134,14 +135,22 @@ func (t *MAASTime) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	temp, err := time.Parse("2006-01-02T15:04:05.999", str)
-	if err != nil {
-		return err
+	formats := []string{
+		"2006-01-02T15:04:05.999+00:00",
+		"2006-01-02T15:04:05.999Z",
+		"2006-01-02T15:04:05.999",
 	}
 
-	*t = MAASTime(temp)
+	for _, format := range formats {
+		foundTime, err := time.Parse(format, str)
+		if err == nil {
+			*t = MAASTime(foundTime)
 
-	return nil
+			return nil
+		}
+	}
+
+	return fmt.Errorf("unsupported time format for %q", str)
 }
 
 // String returns MAASTime in RFC3339Nano format
