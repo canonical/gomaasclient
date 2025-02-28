@@ -75,9 +75,9 @@ Where
 
 ## Development
 
-To test the client: 
+To test the Go MAAS client: 
 
-1. Ensure you have a MAAS installation running for the client to connect to.
+1. Ensure you have a MAAS installation running for the Go MAAS client to connect to.
 1. An example development directory is provided in the `examples/clientdemo` directory. Copy this to a new directory, or ensure you don't push `env.sh` if you choose to work in the repository.
 1. Add your environment variables to the `env.sh` file. If you need to find the MAAS API key, you can run the following command in your MAAS environment:
     ```bash
