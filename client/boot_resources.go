@@ -48,7 +48,7 @@ func (b *BootResources) Import() error {
 // IsImporting returns importing status of boot resources importing to rack controllers
 func (b *BootResources) IsImporting() (bool, error) {
 	isImporting := new(bool)
-	err := b.client().Get("is-importing", url.Values{}, func(data []byte) error {
+	err := b.client().Get("is_importing", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, isImporting)
 	})
 
@@ -57,7 +57,7 @@ func (b *BootResources) IsImporting() (bool, error) {
 
 // StopImport stops importing boot resources to rack controllers
 func (b *BootResources) StopImport() error {
-	return b.client().Post("stop-import", url.Values{}, func(data []byte) error {
+	return b.client().Post("stop_import", url.Values{}, func(data []byte) error {
 		return nil
 	})
 }
