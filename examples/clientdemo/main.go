@@ -2,18 +2,23 @@ package main
 
 import (
 	"log"
-	"os"
 
 	"fmt"
 
 	gomaasclient "github.com/canonical/gomaasclient/client"
 )
 
+const (
+	MAAS_URL      = "..."    // "http://10.10.0.22:5240/MAAS/"
+	MAAS_API_KEY  = "..."    //"xxxxxxxxxxxxxxxxx:yyyyyyyyyyyyyyyyyy:zzzzzzzzzzzzzzzzzz"
+	MAAS_API_VERSION = "2.0"
+)
+
 func main() {
 	client, err := gomaasclient.GetClient(
-		os.Getenv("MAAS_URL"),
-		os.Getenv("MAAS_API_KEY"),
-		os.Getenv("MAAS_API_VERSION"),
+		MAAS_URL,
+		MAAS_API_KEY,
+		MAAS_API_VERSION,
 	)
 	if err != nil {
 		log.Fatalf("Error getting client: %v", err)
