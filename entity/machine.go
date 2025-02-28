@@ -136,6 +136,7 @@ func (t *MAASTime) UnmarshalJSON(data []byte) error {
 	}
 
 	formats := []string{
+		"2006-01-02T15:04:05.999+00:00",
 		"2006-01-02T15:04:05.999Z",
 		"2006-01-02T15:04:05.999",
 	}
