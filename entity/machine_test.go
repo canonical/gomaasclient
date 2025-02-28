@@ -2,6 +2,7 @@ package entity
 
 import (
 	"encoding/json"
+	"fmt"
 	"testing"
 
 	"github.com/canonical/gomaasclient/test/helper"
