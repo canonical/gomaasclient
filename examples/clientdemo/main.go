@@ -1,12 +1,8 @@
 package main
 
 import (
-
-	// "time"
 	"log"
 	"os"
-
-	// "math/rand"
 
 	"fmt"
 
