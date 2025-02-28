@@ -75,9 +75,9 @@ Where
 
 ## Development
 
-To test the provider: 
+To test the client: 
 
-1. Ensure you have a MAAS installation running for the provider to connect to.
+1. Ensure you have a MAAS installation running for the client to connect to.
 1. An example development directory is provided in the `examples/clientdemo` directory. Copy this to a new directory, or ensure you don't push `env.sh` if you choose to work in the repository.
 1. Add your environment variables to the `env.sh` file. If you need to find the MAAS API key, you can run the following command in your MAAS environment:
     ```bash
@@ -87,7 +87,7 @@ To test the provider:
    ```bash
    source env.sh
    ```
-1. Ensure the path in the `replace` directive in `go.mod` points to your local copy of the provider, the root of this repository.
+1. Ensure the path in the `replace` directive in `go.mod` points to your local copy of the c, the root of this repository.
 1. In that directory, run:
    ```bash
    go mod tidy
