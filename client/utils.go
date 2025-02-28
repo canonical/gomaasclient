@@ -15,11 +15,17 @@ func powerParamsToURLValues(params map[string]interface{}) url.Values {
 		val := reflect.ValueOf(v)
 		switch val.Kind() {
 		case reflect.String:
-			qsp.Add(k, v.(string))
+			if val, ok := v.(string); ok {
+				qsp.Add(k, val)
+			}
 		case reflect.Int:
-			qsp.Add(k, fmt.Sprintf("%d", v.(int)))
+			if val, ok := v.(int); ok {
+				qsp.Add(k, fmt.Sprintf("%d", val))
+			}
 		case reflect.Bool:
-			qsp.Add(k, fmt.Sprintf("%t", v.(bool)))
+			if val, ok := v.(bool); ok {
+				qsp.Add(k, fmt.Sprintf("%t", val))
+			}
 		case reflect.Slice:
 			for i := 0; i < val.Len(); i++ {
 				switch val.Index(0).Elem().Kind() {

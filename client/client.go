@@ -3,6 +3,7 @@ package client
 
 import (
 	"crypto/tls"
+	"fmt"
 	"net/http"
 	"net/url"
 
@@ -15,7 +16,12 @@ func GetTLSClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tl
 	var tr http.RoundTripper
 
 	if tlsConfig != nil {
-		defaultTransportCopy := http.DefaultTransport.(*http.Transport).Clone()
+		val, ok := http.DefaultTransport.(*http.Transport)
+		if !ok {
+			return nil, fmt.Errorf("unexpected error")
+		}
+
+		defaultTransportCopy := val.Clone()
 		defaultTransportCopy.TLSClientConfig = tlsConfig
 		tr = defaultTransportCopy
 	}

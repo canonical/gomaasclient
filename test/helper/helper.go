@@ -22,6 +22,7 @@ func init() {
 				return fpath
 			}
 		}
+
 		panic("could not find go.mod")
 	}(file)
 
