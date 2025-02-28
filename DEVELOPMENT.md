@@ -78,17 +78,13 @@ Where
 To test the Go MAAS client: 
 
 1. Ensure you have a MAAS installation running for the Go MAAS client to connect to.
-1. An example development directory is provided in the `examples/clientdemo` directory. Copy this to a new directory, or ensure you don't push `env.sh` if you choose to work in the repository.
-1. Add your environment variables to the `env.sh` file. If you need to find the MAAS API key, you can run the following command in your MAAS environment:
+1. An example development directory is provided in the `examples/clientdemo` directory. Copy this to a new directory, or ensure you don't push `main.go` with your secrets if you choose to work in the repository.
+1. Add your MAAS URL and API key to the `main.go` file. If you need to find the MAAS API key, you can run the following command in your MAAS environment:
     ```bash
     sudo maas apikey --username=maas
     ```
-1. Source the `env.sh` file:
-   ```bash
-   source env.sh
-   ```
-1. Ensure the path in the `replace` directive in `go.mod` points to your local copy of the c, the root of this repository.
-1. In that directory, run:
+1. Ensure the path in the `replace` directive in `go.mod` points to this repository.
+1. In your `clientdemo` directory, run:
    ```bash
    go mod tidy
    go run main.go
