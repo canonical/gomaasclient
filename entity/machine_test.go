@@ -102,6 +102,26 @@ func TestMAASTimeUnmarshalJSON(t *testing.T) {
 	if temp.Time.String() != expected {
 		t.Fatalf("expected %v, got %v", expected, temp.Time.String())
 	}
+
+	data := []byte(`{"Time": "2023-05-11T21:15:04.208Z"}`)
+	if err := json.Unmarshal(data, &temp); err != nil {
+		t.Fatal(err)
+	}
+
+	expected := "2023-05-11T21:15:04.208Z"
+	if temp.Time.String() != expected {
+		t.Fatalf("expected %v, got %v", expected, temp.Time.String())
+	}
+
+	data := []byte(`{"Time": "2023-05-11T21:15:04.208+00:00"}`)
+	if err := json.Unmarshal(data, &temp); err != nil {
+		t.Fatal(err)
+	}
+
+	expected := "2023-05-11T21:15:04.208Z"
+	if temp.Time.String() != expected {
+		t.Fatalf("expected %v, got %v", expected, temp.Time.String())
+	}
 }
 
 func TestMAASUnMarshal(t *testing.T) {

@@ -149,6 +149,7 @@ func (t *MAASTime) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
+
 	return fmt.Errorf("unsupported time format for %q", str)
 }
 
