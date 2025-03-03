@@ -56,7 +56,7 @@ This project follows a fork-based development model with a single long-running m
 
 ## Commit messages
 
-We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification. Conventional Commits defines the following structure for the Git commit message:
+We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification when committing and raising pull requests. We adopt the following structure:
 
 ```bash
 <type>[!]: <description>
@@ -74,8 +74,6 @@ Where
   - **test**: Adding missing tests or correcting existing tests
   - **chore**: Something that doesn’t fit the other possible types, e.g. updating external package references to a new minor version
   - **docs**: Documentation only changes
-
-
 - `!` MUST be added if commit introduces a breaking change.
 - `description` is a brief summary of a change (try to keep it short, so overall title no more than 72 characters).
 - `footer` is detailed information about the change (e.g. breaking change, related bugs, etc.).
