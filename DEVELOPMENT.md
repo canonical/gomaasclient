@@ -59,7 +59,7 @@ This project follows a fork-based development model with a single long-running m
 We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification. Conventional Commits defines the following structure for the Git commit message:
 
 ```bash
-<type>[scope][!]: <description>
+<type>[!]: <description>
 
 [body]
 
@@ -68,7 +68,6 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0
 
 Where 
 - `type` is the kind of the change (e.g. feature, bug fix, documentation change, refactor).
-- `scope` may be used to provide additional contextual information (e.g. which system component is affected). If scope is provided, it’s enclosed in parentheses.
 - `!` MUST be added if commit introduces a breaking change.
 - `description` is a brief summary of a change (try to keep it short, so overall title no more than 72 characters).
 - `footer` is detailed information about the change (e.g. breaking change, related bugs, etc.).
@@ -93,7 +92,7 @@ To test the Go MAAS client:
 
 ## Testing
 
-To run the unit tests, run the following command:
+To run the unit tests, run:
 ```bash
 make test
 ```
