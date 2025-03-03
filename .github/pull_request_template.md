@@ -8,7 +8,7 @@
 
 ## Checklist
 
-- [ ] I have written a PR title that follows the advice in DEVELOPMENT.md with the title format `type(scope): title`
+- [ ] I have written a PR title that follows the advice in DEVELOPMENT.md with the title format `type: title`
 - [ ] I have written a description of the changes in the PR that is clear and concise.
 - [ ] I have updated the documentation to reflect the changes.
 - [ ] I have added or updated the tests to reflect the changes.
