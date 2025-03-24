@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -13,14 +14,14 @@ type BootResource struct {
 	APIClient APIClient
 }
 
-func (b *BootResource) client(id int) APIClient {
-	return b.APIClient.GetSubObject("boot-resources").GetSubObject(fmt.Sprintf("%v", id))
+func (b *BootResource) client(id int) *APIClient {
+	return b.APIClient.SubClient("boot-resources").SubClient(fmt.Sprintf("%v", id))
 }
 
 // Get fetches a boot resource with a given id
-func (b *BootResource) Get(id int) (*entity.BootResource, error) {
+func (b *BootResource) Get(ctx context.Context, id int) (*entity.BootResource, error) {
 	bootResource := new(entity.BootResource)
-	err := b.client(id).Get("", url.Values{}, func(data []byte) error {
+	err := b.client(id).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, bootResource)
 	})
 
@@ -28,6 +29,6 @@ func (b *BootResource) Get(id int) (*entity.BootResource, error) {
 }
 
 // Delete deletes a given boot resource
-func (b *BootResource) Delete(id int) error {
-	return b.client(id).Delete()
+func (b *BootResource) Delete(ctx context.Context, id int) error {
+	return b.client(id).Delete(ctx)
 }

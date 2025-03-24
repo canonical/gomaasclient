@@ -2,6 +2,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -15,14 +16,14 @@ type DNSResourceRecord struct {
 	APIClient APIClient
 }
 
-func (d *DNSResourceRecord) client(id int) APIClient {
-	return d.APIClient.GetSubObject(fmt.Sprintf("dnsresourcerecords/%v", id))
+func (d *DNSResourceRecord) client(id int) *APIClient {
+	return d.APIClient.SubClient(fmt.Sprintf("dnsresourcerecords/%v", id))
 }
 
 // Get fetches a given DNSResourceRecord
-func (d *DNSResourceRecord) Get(id int) (*entity.DNSResourceRecord, error) {
+func (d *DNSResourceRecord) Get(ctx context.Context, id int) (*entity.DNSResourceRecord, error) {
 	dnsResourceRecord := new(entity.DNSResourceRecord)
-	err := d.client(id).Get("", url.Values{}, func(data []byte) error {
+	err := d.client(id).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, dnsResourceRecord)
 	})
 
@@ -30,14 +31,14 @@ func (d *DNSResourceRecord) Get(id int) (*entity.DNSResourceRecord, error) {
 }
 
 // Update updates a given DNSResourceRecord
-func (d *DNSResourceRecord) Update(id int, params *entity.DNSResourceRecordParams) (*entity.DNSResourceRecord, error) {
+func (d *DNSResourceRecord) Update(ctx context.Context, id int, params *entity.DNSResourceRecordParams) (*entity.DNSResourceRecord, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	dnsResourceRecord := new(entity.DNSResourceRecord)
-	err = d.client(id).Put(qsp, func(data []byte) error {
+	err = d.client(id).Put(ctx, qsp, func(data []byte) error {
 		return json.Unmarshal(data, dnsResourceRecord)
 	})
 
@@ -45,6 +46,6 @@ func (d *DNSResourceRecord) Update(id int, params *entity.DNSResourceRecordParam
 }
 
 // Delete deletes a given DNSResourceRecord
-func (d *DNSResourceRecord) Delete(id int) error {
-	return d.client(id).Delete()
+func (d *DNSResourceRecord) Delete(ctx context.Context, id int) error {
+	return d.client(id).Delete(ctx)
 }

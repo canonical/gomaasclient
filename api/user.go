@@ -1,9 +1,13 @@
 package api
 
-import "github.com/canonical/gomaasclient/entity"
+import (
+	"context"
+
+	"github.com/canonical/gomaasclient/entity"
+)
 
 // User is an interface for getting and deleting users
 type User interface {
-	Get(userName string) (*entity.User, error)
-	Delete(userName string) error
+	Get(ctx context.Context, userName string) (*entity.User, error)
+	Delete(ctx context.Context, userName string) error
 }

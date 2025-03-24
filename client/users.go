@@ -2,6 +2,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -14,14 +15,14 @@ type Users struct {
 	APIClient APIClient
 }
 
-func (u *Users) client() APIClient {
-	return u.APIClient.GetSubObject("users")
+func (u *Users) client() *APIClient {
+	return u.APIClient.SubClient("users")
 }
 
 // Get fetches a list of User objects
-func (u *Users) Get() ([]entity.User, error) {
+func (u *Users) Get(ctx context.Context) ([]entity.User, error) {
 	users := make([]entity.User, 0)
-	err := u.client().Get("", url.Values{}, func(data []byte) error {
+	err := u.client().Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &users)
 	})
 
@@ -29,14 +30,14 @@ func (u *Users) Get() ([]entity.User, error) {
 }
 
 // Create creates a new User
-func (u *Users) Create(params *entity.UserParams) (*entity.User, error) {
+func (u *Users) Create(ctx context.Context, params *entity.UserParams) (*entity.User, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	user := new(entity.User)
-	err = u.client().Post("", qsp, func(data []byte) error {
+	err = u.client().Post(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, user)
 	})
 

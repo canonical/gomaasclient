@@ -2,6 +2,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -14,14 +15,14 @@ type PackageRepositories struct {
 	APIClient APIClient
 }
 
-func (p *PackageRepositories) client() APIClient {
-	return p.APIClient.GetSubObject("package-repositories")
+func (p *PackageRepositories) client() *APIClient {
+	return p.APIClient.SubClient("package-repositories")
 }
 
 // Get fetches a list of PackageRepositories
-func (p *PackageRepositories) Get() ([]entity.PackageRepository, error) {
+func (p *PackageRepositories) Get(ctx context.Context) ([]entity.PackageRepository, error) {
 	packageRepositories := make([]entity.PackageRepository, 0)
-	err := p.client().Get("", url.Values{}, func(data []byte) error {
+	err := p.client().Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &packageRepositories)
 	})
 
@@ -29,14 +30,14 @@ func (p *PackageRepositories) Get() ([]entity.PackageRepository, error) {
 }
 
 // Create creates a new PackageRepository
-func (p *PackageRepositories) Create(packageRepositoryParams *entity.PackageRepositoryParams) (*entity.PackageRepository, error) {
+func (p *PackageRepositories) Create(ctx context.Context, packageRepositoryParams *entity.PackageRepositoryParams) (*entity.PackageRepository, error) {
 	qsp, err := query.Values(packageRepositoryParams)
 	if err != nil {
 		return nil, err
 	}
 
 	packageRepository := new(entity.PackageRepository)
-	err = p.client().Post("", qsp, func(data []byte) error {
+	err = p.client().Post(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, packageRepository)
 	})
 

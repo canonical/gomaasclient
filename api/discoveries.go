@@ -1,12 +1,16 @@
 package api
 
-import "github.com/canonical/gomaasclient/entity"
+import (
+	"context"
+
+	"github.com/canonical/gomaasclient/entity"
+)
 
 type Discoveries interface {
-	Get() ([]entity.Discovery, error)
-	GetByUnknownIP() ([]entity.Discovery, error)
-	GetByUnknownMAC() ([]entity.Discovery, error)
-	GetByUnknownIpAndMAC() ([]entity.Discovery, error)
-	Clear(params *entity.DiscoveryClearParams) error
-	ClearByMACAndIP(mac, ip string) error
+	Get(ctx context.Context) ([]entity.Discovery, error)
+	GetByUnknownIP(ctx context.Context) ([]entity.Discovery, error)
+	GetByUnknownMAC(ctx context.Context) ([]entity.Discovery, error)
+	GetByUnknownIpAndMAC(ctx context.Context) ([]entity.Discovery, error)
+	Clear(ctx context.Context, params *entity.DiscoveryClearParams) error
+	ClearByMACAndIP(ctx context.Context, mac, ip string) error
 }

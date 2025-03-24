@@ -1,8 +1,12 @@
 package api
 
-import "github.com/canonical/gomaasclient/entity"
+import (
+	"context"
+
+	"github.com/canonical/gomaasclient/entity"
+)
 
 // Events is an interface for node events
 type Events interface {
-	Get(params *entity.EventParams) (*entity.EventsResp, error)
+	Get(ctx context.Context, params *entity.EventParams) (*entity.EventsResp, error)
 }

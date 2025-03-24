@@ -1,12 +1,14 @@
 package api
 
 import (
+	"context"
+
 	"github.com/canonical/gomaasclient/entity"
 )
 
 // DNSResources is an interface for listing and creating
 // DNSResource records
 type DNSResources interface {
-	Get(params *entity.DNSResourcesParams) ([]entity.DNSResource, error)
-	Create(params *entity.DNSResourceParams) (*entity.DNSResource, error)
+	Get(ctx context.Context, params *entity.DNSResourcesParams) ([]entity.DNSResource, error)
+	Create(ctx context.Context, params *entity.DNSResourceParams) (*entity.DNSResource, error)
 }

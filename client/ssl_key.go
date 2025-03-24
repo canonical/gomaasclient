@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -13,14 +14,14 @@ type SSLKey struct {
 	APIClient APIClient
 }
 
-func (s *SSLKey) client(id int) APIClient {
-	return s.APIClient.GetSubObject("account/prefs/sslkeys").GetSubObject(fmt.Sprintf("%v", id))
+func (s *SSLKey) client(id int) *APIClient {
+	return s.APIClient.SubClient("account/prefs/sslkeys").SubClient(fmt.Sprintf("%v", id))
 }
 
 // Get fetches a given SSLKey
-func (s *SSLKey) Get(id int) (*entity.SSLKey, error) {
+func (s *SSLKey) Get(ctx context.Context, id int) (*entity.SSLKey, error) {
 	sslKey := new(entity.SSLKey)
-	err := s.client(id).Get("", url.Values{}, func(data []byte) error {
+	err := s.client(id).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, sslKey)
 	})
 
@@ -28,6 +29,6 @@ func (s *SSLKey) Get(id int) (*entity.SSLKey, error) {
 }
 
 // Delete deletes a given SSLKey
-func (s *SSLKey) Delete(id int) error {
-	return s.client(id).Delete()
+func (s *SSLKey) Delete(ctx context.Context, id int) error {
+	return s.client(id).Delete(ctx)
 }

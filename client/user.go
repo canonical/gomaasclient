@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -13,14 +14,14 @@ type User struct {
 	APIClient APIClient
 }
 
-func (u *User) client(userName string) APIClient {
-	return u.APIClient.GetSubObject(fmt.Sprintf("users/%s", userName))
+func (u *User) client(userName string) *APIClient {
+	return u.APIClient.SubClient(fmt.Sprintf("users/%s", userName))
 }
 
 // Get fetches a User by username
-func (u *User) Get(userName string) (*entity.User, error) {
+func (u *User) Get(ctx context.Context, userName string) (*entity.User, error) {
 	user := new(entity.User)
-	err := u.client(userName).Get("", url.Values{}, func(data []byte) error {
+	err := u.client(userName).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, user)
 	})
 
@@ -28,6 +29,6 @@ func (u *User) Get(userName string) (*entity.User, error) {
 }
 
 // Delete deletes a given User
-func (u *User) Delete(userName string) error {
-	return u.client(userName).Delete()
+func (u *User) Delete(ctx context.Context, userName string) error {
+	return u.client(userName).Delete(ctx)
 }

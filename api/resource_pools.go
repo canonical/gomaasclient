@@ -1,9 +1,13 @@
 package api
 
-import "github.com/canonical/gomaasclient/entity"
+import (
+	"context"
+
+	"github.com/canonical/gomaasclient/entity"
+)
 
 // ResourcePools is an interface for listing and creating ResourcePool records
 type ResourcePools interface {
-	Get() ([]entity.ResourcePool, error)
-	Create(params *entity.ResourcePoolParams) (*entity.ResourcePool, error)
+	Get(ctx context.Context) ([]entity.ResourcePool, error)
+	Create(ctx context.Context, params *entity.ResourcePoolParams) (*entity.ResourcePool, error)
 }

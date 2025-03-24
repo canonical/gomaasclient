@@ -5,10 +5,8 @@ import (
 	"crypto/tls"
 	"fmt"
 	"net/http"
-	"net/url"
 
 	"github.com/canonical/gomaasclient/api"
-	gomaasapi "github.com/juju/gomaasapi/v2"
 )
 
 // GetTLSClient creates a Client configured with TLS
@@ -203,108 +201,94 @@ type Client struct {
 	VolumeGroups          api.VolumeGroups
 }
 
-// GetAPIClient returns a MAAS API client.
-//
-// Deprecated: The gomaasapi client will be no longer exposed.
-// Instead, please use GetClient which instantiate all MAAS resources endpoints with gomaasapi client.
-func GetAPIClient(apiURL string, apiKey string, apiVersion string) (*APIClient, error) {
-	return getAPIClient(apiURL, apiKey, apiVersion, nil)
-}
-
 func getAPIClient(apiURL string, apiKey string, apiVersion string, tr http.RoundTripper) (*APIClient, error) {
-	versionedURL := gomaasapi.AddAPIVersionToURL(apiURL, apiVersion)
-
-	authClient, err := gomaasapi.NewAuthenticatedClient(versionedURL, apiKey)
-	if err != nil {
-		return nil, err
+	httpClient := &http.Client{
+		Transport: tr,
 	}
 
 	if tr == nil {
-		tr = http.DefaultTransport
+		httpClient.Transport = http.DefaultTransport
 	}
 
-	httpClient := &http.Client{Transport: tr}
-	authClient.HTTPClient = httpClient
-
-	return &APIClient{*authClient, gomaasapi.NewMAAS(*authClient)}, nil
+	return NewAPIClient(apiURL, apiVersion, apiKey, httpClient)
 }
 
-type APIClient struct {
-	AuthClient gomaasapi.Client
-	*gomaasapi.MAASObject
-}
+// type APIClient struct {
+// 	AuthClient gomaasapi.Client
+// 	*gomaasapi.MAASObject
+// }
 
-func (c APIClient) Get(op string, params url.Values, f func([]byte) error) error {
-	res, err := c.CallGet(op, params)
-	if err != nil {
-		return err
-	}
+// func (c APIClient) Get(op string, params url.Values, f func([]byte) error) error {
+// 	res, err := c.CallGet(op, params)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	data, err := res.GetBytes()
-	if err != nil {
-		return err
-	}
+// 	data, err := res.GetBytes()
+// 	if err != nil {
+// 		return err
+// 	}
 
-	return f(data)
-}
+// 	return f(data)
+// }
 
-func (c APIClient) GetSubObject(name string) APIClient {
-	mc := c.MAASObject.GetSubObject(name)
-	return APIClient{c.AuthClient, &mc}
-}
+// func (c APIClient) SubClient(name string) *APIClient {
+// 	mc := c.MAASObject.SubClient(name)
+// 	return APIClient{c.AuthClient, &mc}
+// }
 
-func (c APIClient) Post(op string, params url.Values, f func([]byte) error) error {
-	res, err := c.CallPost(op, params)
-	if err != nil {
-		return err
-	}
+// func (c APIClient) Post(op string, params url.Values, f func([]byte) error) error {
+// 	res, err := c.CallPost(op, params)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	data, err := res.GetBytes()
-	if err != nil {
-		return err
-	}
+// 	data, err := res.GetBytes()
+// 	if err != nil {
+// 		return err
+// 	}
 
-	return f(data)
-}
+// 	return f(data)
+// }
 
-func (c APIClient) PostFiles(op string, params url.Values, files map[string][]byte, f func([]byte) error) error {
-	res, err := c.CallPostFiles(op, params, files)
-	if err != nil {
-		return err
-	}
+// func (c APIClient) PostFiles(op string, params url.Values, files map[string][]byte, f func([]byte) error) error {
+// 	res, err := c.CallPostFiles(op, params, files)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	data, err := res.GetBytes()
-	if err != nil {
-		return err
-	}
+// 	data, err := res.GetBytes()
+// 	if err != nil {
+// 		return err
+// 	}
 
-	return f(data)
-}
+// 	return f(data)
+// }
 
-func (c APIClient) Put(params url.Values, f func([]byte) error) error {
-	res, err := c.Update(params)
-	if err != nil {
-		return err
-	}
+// func (c APIClient) Put(params url.Values, f func([]byte) error) error {
+// 	res, err := c.Update(params)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	data, err := res.MarshalJSON()
-	if err != nil {
-		return err
-	}
+// 	data, err := res.MarshalJSON()
+// 	if err != nil {
+// 		return err
+// 	}
 
-	return f(data)
-}
+// 	return f(data)
+// }
 
-func (c APIClient) PutFiles(params url.Values, files map[string][]byte, f func([]byte) error) error {
-	res, err := c.UpdateFiles(params, files)
-	if err != nil {
-		return err
-	}
+// func (c APIClient) PutFiles(params url.Values, files map[string][]byte, f func([]byte) error) error {
+// 	res, err := c.UpdateFiles(params, files)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	data, err := res.MarshalJSON()
-	if err != nil {
-		return err
-	}
+// 	data, err := res.MarshalJSON()
+// 	if err != nil {
+// 		return err
+// 	}
 
-	return f(data)
-}
+// 	return f(data)
+// }

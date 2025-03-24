@@ -1,7 +1,11 @@
 package api
 
-import "github.com/canonical/gomaasclient/entity"
+import (
+	"context"
+
+	"github.com/canonical/gomaasclient/entity"
+)
 
 type Discovery interface {
-	Get(id string) (*entity.Discovery, error)
+	Get(ctx context.Context, id string) (*entity.Discovery, error)
 }

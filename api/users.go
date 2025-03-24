@@ -1,9 +1,13 @@
 package api
 
-import "github.com/canonical/gomaasclient/entity"
+import (
+	"context"
+
+	"github.com/canonical/gomaasclient/entity"
+)
 
 // Users is an interface for listing and creating users
 type Users interface {
-	Get() ([]entity.User, error)
-	Create(params *entity.UserParams) (*entity.User, error)
+	Get(ctx context.Context) ([]entity.User, error)
+	Create(ctx context.Context, params *entity.UserParams) (*entity.User, error)
 }

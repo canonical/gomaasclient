@@ -1,16 +1,20 @@
 package api
 
-import "github.com/canonical/gomaasclient/entity"
+import (
+	"context"
+
+	"github.com/canonical/gomaasclient/entity"
+)
 
 // BlockDevicePartition is an interface providing API behaviour for
 // block device partitions
 type BlockDevicePartition interface {
-	Get(systemID string, blockDeviceID int, id int) (*entity.BlockDevicePartition, error)
-	Delete(systemID string, blockDeviceID int, id int) error
-	AddTag(systemID string, blockDeviceID int, id int, tag string) (*entity.BlockDevicePartition, error)
-	RemoveTag(systemID string, blockDeviceID int, id int, tag string) (*entity.BlockDevicePartition, error)
-	Format(systemID string, blockDeviceID int, id int, fsType string, label string) (*entity.BlockDevicePartition, error)
-	Unformat(systemID string, blockDeviceID int, id int) (*entity.BlockDevicePartition, error)
-	Mount(systemID string, blockDeviceID int, id int, mountPoint string, mountOptions string) (*entity.BlockDevicePartition, error)
-	Unmount(systemID string, blockDeviceID int, id int) (*entity.BlockDevicePartition, error)
+	Get(ctx context.Context, systemID string, blockDeviceID int, id int) (*entity.BlockDevicePartition, error)
+	Delete(ctx context.Context, systemID string, blockDeviceID int, id int) error
+	AddTag(ctx context.Context, systemID string, blockDeviceID int, id int, tag string) (*entity.BlockDevicePartition, error)
+	RemoveTag(ctx context.Context, systemID string, blockDeviceID int, id int, tag string) (*entity.BlockDevicePartition, error)
+	Format(ctx context.Context, systemID string, blockDeviceID int, id int, fsType string, label string) (*entity.BlockDevicePartition, error)
+	Unformat(ctx context.Context, systemID string, blockDeviceID int, id int) (*entity.BlockDevicePartition, error)
+	Mount(ctx context.Context, systemID string, blockDeviceID int, id int, mountPoint string, mountOptions string) (*entity.BlockDevicePartition, error)
+	Unmount(ctx context.Context, systemID string, blockDeviceID int, id int) (*entity.BlockDevicePartition, error)
 }

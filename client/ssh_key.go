@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -13,14 +14,14 @@ type SSHKey struct {
 	APIClient APIClient
 }
 
-func (s *SSHKey) client(id int) APIClient {
-	return s.APIClient.GetSubObject("account/prefs/sshkeys").GetSubObject(fmt.Sprintf("%v", id))
+func (s *SSHKey) client(id int) *APIClient {
+	return s.APIClient.SubClient("account/prefs/sshkeys").SubClient(fmt.Sprintf("%v", id))
 }
 
 // Get fetches a given SSHKey
-func (s *SSHKey) Get(id int) (*entity.SSHKey, error) {
+func (s *SSHKey) Get(ctx context.Context, id int) (*entity.SSHKey, error) {
 	sshKey := new(entity.SSHKey)
-	err := s.client(id).Get("", url.Values{}, func(data []byte) error {
+	err := s.client(id).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, sshKey)
 	})
 
@@ -28,6 +29,6 @@ func (s *SSHKey) Get(id int) (*entity.SSHKey, error) {
 }
 
 // Delete deletes a given SSHKey
-func (s *SSHKey) Delete(id int) error {
-	return s.client(id).Delete()
+func (s *SSHKey) Delete(ctx context.Context, id int) error {
+	return s.client(id).Delete(ctx)
 }

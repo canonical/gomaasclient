@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -12,14 +13,14 @@ type SSHKeys struct {
 	APIClient APIClient
 }
 
-func (s *SSHKeys) client() APIClient {
-	return s.APIClient.GetSubObject("account/prefs/sshkeys")
+func (s *SSHKeys) client() *APIClient {
+	return s.APIClient.SubClient("account/prefs/sshkeys")
 }
 
 // Get fetches a list of SSHKey objects
-func (s *SSHKeys) Get() ([]entity.SSHKey, error) {
+func (s *SSHKeys) Get(ctx context.Context) ([]entity.SSHKey, error) {
 	sshKeys := make([]entity.SSHKey, 0)
-	err := s.client().Get("", url.Values{}, func(data []byte) error {
+	err := s.client().Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &sshKeys)
 	})
 
@@ -27,11 +28,11 @@ func (s *SSHKeys) Get() ([]entity.SSHKey, error) {
 }
 
 // Create creates a new SSHKey
-func (s *SSHKeys) Create(key string) (*entity.SSHKey, error) {
+func (s *SSHKeys) Create(ctx context.Context, key string) (*entity.SSHKey, error) {
 	sshKey := new(entity.SSHKey)
 	qsp := url.Values{}
 	qsp.Set("key", key)
-	err := s.client().Post("", qsp, func(data []byte) error {
+	err := s.client().Post(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, sshKey)
 	})
 
@@ -39,11 +40,11 @@ func (s *SSHKeys) Create(key string) (*entity.SSHKey, error) {
 }
 
 // Import creates a new SSHKey
-func (s *SSHKeys) Import(keysource string) ([]entity.SSHKey, error) {
+func (s *SSHKeys) Import(ctx context.Context, keysource string) ([]entity.SSHKey, error) {
 	sshKeys := make([]entity.SSHKey, 0)
 	qsp := url.Values{}
 	qsp.Set("keysource", keysource)
-	err := s.client().Post("import", qsp, func(data []byte) error {
+	err := s.client().Post(ctx, "import", qsp, func(data []byte) error {
 		return json.Unmarshal(data, &sshKeys)
 	})
 
