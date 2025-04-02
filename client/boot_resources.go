@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -14,19 +15,19 @@ type BootResources struct {
 	APIClient APIClient
 }
 
-func (b *BootResources) client() APIClient {
-	return b.APIClient.GetSubObject("boot-resources")
+func (b *BootResources) client() *APIClient {
+	return b.APIClient.SubClient("boot-resources")
 }
 
 // Get fetches a list of boot resources
-func (b *BootResources) Get(params *entity.BootResourcesReadParams) ([]entity.BootResource, error) {
+func (b *BootResources) Get(ctx context.Context, params *entity.BootResourcesReadParams) ([]entity.BootResource, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	bootResources := make([]entity.BootResource, 0)
-	err = b.client().Get("", qsp, func(data []byte) error {
+	err = b.client().Get(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, &bootResources)
 	})
 
@@ -34,21 +35,21 @@ func (b *BootResources) Get(params *entity.BootResourcesReadParams) ([]entity.Bo
 }
 
 // Create creates a new boot source
-func (b *BootResources) Create(params *entity.BootResourceParams) (*entity.BootResource, error) {
+func (b *BootResources) Create(ctx context.Context, params *entity.BootResourceParams) (*entity.BootResource, error) {
 	return nil, fmt.Errorf("not implemented")
 }
 
 // Import imports boot resources to rack controllers
-func (b *BootResources) Import() error {
-	return b.client().Post("import", url.Values{}, func(data []byte) error {
+func (b *BootResources) Import(ctx context.Context) error {
+	return b.client().Post(ctx, "import", url.Values{}, func(data []byte) error {
 		return nil
 	})
 }
 
 // IsImporting returns importing status of boot resources importing to rack controllers
-func (b *BootResources) IsImporting() (bool, error) {
+func (b *BootResources) IsImporting(ctx context.Context) (bool, error) {
 	isImporting := new(bool)
-	err := b.client().Get("is_importing", url.Values{}, func(data []byte) error {
+	err := b.client().Get(ctx, "is_importing", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, isImporting)
 	})
 
@@ -56,8 +57,8 @@ func (b *BootResources) IsImporting() (bool, error) {
 }
 
 // StopImport stops importing boot resources to rack controllers
-func (b *BootResources) StopImport() error {
-	return b.client().Post("stop_import", url.Values{}, func(data []byte) error {
+func (b *BootResources) StopImport(ctx context.Context) error {
+	return b.client().Post(ctx, "stop_import", url.Values{}, func(data []byte) error {
 		return nil
 	})
 }

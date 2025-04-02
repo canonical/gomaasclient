@@ -2,6 +2,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -15,14 +16,14 @@ type RAID struct {
 	APIClient APIClient
 }
 
-func (r *RAID) client(systemID string, id int) APIClient {
-	return r.APIClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("raid").GetSubObject(fmt.Sprintf("%v", id))
+func (r *RAID) client(systemID string, id int) *APIClient {
+	return r.APIClient.SubClient("nodes").SubClient(systemID).SubClient("raid").SubClient(fmt.Sprintf("%v", id))
 }
 
 // Get RAID details.
-func (r *RAID) Get(systemID string, id int) (*entity.RAID, error) {
+func (r *RAID) Get(ctx context.Context, systemID string, id int) (*entity.RAID, error) {
 	raid := new(entity.RAID)
-	err := r.client(systemID, id).Get("", url.Values{}, func(data []byte) error {
+	err := r.client(systemID, id).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, raid)
 	})
 
@@ -30,14 +31,14 @@ func (r *RAID) Get(systemID string, id int) (*entity.RAID, error) {
 }
 
 // Update RAID.
-func (r *RAID) Update(systemID string, id int, params *entity.RAIDUpdateParams) (*entity.RAID, error) {
+func (r *RAID) Update(ctx context.Context, systemID string, id int, params *entity.RAIDUpdateParams) (*entity.RAID, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	raid := new(entity.RAID)
-	err = r.client(systemID, id).Put(qsp, func(data []byte) error {
+	err = r.client(systemID, id).Put(ctx, qsp, func(data []byte) error {
 		return json.Unmarshal(data, raid)
 	})
 
@@ -45,6 +46,6 @@ func (r *RAID) Update(systemID string, id int, params *entity.RAIDUpdateParams) 
 }
 
 // Delete RAID.
-func (r *RAID) Delete(systemID string, id int) error {
-	return r.client(systemID, id).Delete()
+func (r *RAID) Delete(ctx context.Context, systemID string, id int) error {
+	return r.client(systemID, id).Delete(ctx)
 }

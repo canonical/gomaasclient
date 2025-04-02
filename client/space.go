@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -13,14 +14,14 @@ type Space struct {
 	APIClient APIClient
 }
 
-func (s *Space) client(id int) APIClient {
-	return s.APIClient.GetSubObject("spaces").GetSubObject(fmt.Sprintf("%v", id))
+func (s *Space) client(id int) *APIClient {
+	return s.APIClient.SubClient("spaces").SubClient(fmt.Sprintf("%v", id))
 }
 
 // Get fetches a given Space
-func (s *Space) Get(id int) (*entity.Space, error) {
+func (s *Space) Get(ctx context.Context, id int) (*entity.Space, error) {
 	space := new(entity.Space)
-	err := s.client(id).Get("", url.Values{}, func(data []byte) error {
+	err := s.client(id).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, space)
 	})
 
@@ -28,11 +29,11 @@ func (s *Space) Get(id int) (*entity.Space, error) {
 }
 
 // Update updates a given Space
-func (s *Space) Update(id int, name string) (*entity.Space, error) {
+func (s *Space) Update(ctx context.Context, id int, name string) (*entity.Space, error) {
 	space := new(entity.Space)
 	qsp := url.Values{}
 	qsp.Set("name", name)
-	err := s.client(id).Put(qsp, func(data []byte) error {
+	err := s.client(id).Put(ctx, qsp, func(data []byte) error {
 		return json.Unmarshal(data, space)
 	})
 
@@ -40,6 +41,6 @@ func (s *Space) Update(id int, name string) (*entity.Space, error) {
 }
 
 // Delete deletes a given Space
-func (s *Space) Delete(id int) error {
-	return s.client(id).Delete()
+func (s *Space) Delete(ctx context.Context, id int) error {
+	return s.client(id).Delete(ctx)
 }

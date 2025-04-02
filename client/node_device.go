@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -13,17 +14,17 @@ type NodeDevice struct {
 	APIClient APIClient
 }
 
-func (a *NodeDevice) client(systemID string, id int) APIClient {
-	return a.APIClient.GetSubObject("nodes").
-		GetSubObject(fmt.Sprintf("%v", systemID)).
-		GetSubObject("devices").
-		GetSubObject(fmt.Sprintf("%v", id))
+func (a *NodeDevice) client(systemID string, id int) *APIClient {
+	return a.APIClient.SubClient("nodes").
+		SubClient(fmt.Sprintf("%v", systemID)).
+		SubClient("devices").
+		SubClient(fmt.Sprintf("%v", id))
 }
 
 // Get fetches NodeDevice object with id for given systemID
-func (a *NodeDevice) Get(systemID string, id int) (*entity.NodeDevice, error) {
+func (a *NodeDevice) Get(ctx context.Context, systemID string, id int) (*entity.NodeDevice, error) {
 	nodeDevice := new(entity.NodeDevice)
-	err := a.client(systemID, id).Get("", url.Values{}, func(data []byte) error {
+	err := a.client(systemID, id).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, nodeDevice)
 	})
 
@@ -31,6 +32,6 @@ func (a *NodeDevice) Get(systemID string, id int) (*entity.NodeDevice, error) {
 }
 
 // Delete deletes NodeDevice object with id for given systemID
-func (a *NodeDevice) Delete(systemID string, id int) error {
-	return a.client(systemID, id).Delete()
+func (a *NodeDevice) Delete(ctx context.Context, systemID string, id int) error {
+	return a.client(systemID, id).Delete(ctx)
 }

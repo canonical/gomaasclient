@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -12,14 +13,14 @@ type Version struct {
 	APIClient APIClient
 }
 
-func (v *Version) client() APIClient {
-	return v.APIClient.GetSubObject("version")
+func (v *Version) client() *APIClient {
+	return v.APIClient.SubClient("version")
 }
 
 // Get fetches MAAS version details
-func (v *Version) Get() (*entity.Version, error) {
+func (v *Version) Get(ctx context.Context) (*entity.Version, error) {
 	version := new(entity.Version)
-	err := v.client().Get("", url.Values{}, func(data []byte) error {
+	err := v.client().Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, version)
 	})
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"net/url"
 )
 
@@ -9,17 +10,17 @@ type MAASServer struct {
 	APIClient APIClient
 }
 
-func (m *MAASServer) client() APIClient {
-	return m.APIClient.GetSubObject("maas")
+func (m *MAASServer) client() *APIClient {
+	return m.APIClient.SubClient("maas")
 }
 
 // Get MAAS server configuration value.
-func (m *MAASServer) Get(name string) ([]byte, error) {
+func (m *MAASServer) Get(ctx context.Context, name string) ([]byte, error) {
 	qsp := url.Values{}
 	qsp.Set("name", name)
 
 	value := new([]byte)
-	err := m.client().Get("get_config", qsp, func(data []byte) error {
+	err := m.client().Get(ctx, "get_config", qsp, func(data []byte) error {
 		*value = data
 		return nil
 	})
@@ -28,12 +29,12 @@ func (m *MAASServer) Get(name string) ([]byte, error) {
 }
 
 // Post (Set) MAAS server configuration value.
-func (m *MAASServer) Post(name, value string) error {
+func (m *MAASServer) Post(ctx context.Context, name, value string) error {
 	qsp := url.Values{}
 	qsp.Set("name", name)
 	qsp.Set("value", value)
 
-	err := m.client().Post("set_config", qsp, func(data []byte) error {
+	err := m.client().Post(ctx, "set_config", qsp, func(data []byte) error {
 		return nil
 	})
 

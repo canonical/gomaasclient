@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/canonical/gomaasclient/entity"
@@ -12,19 +13,19 @@ type IPAddresses struct {
 	APIClient APIClient
 }
 
-func (i *IPAddresses) client() APIClient {
-	return i.APIClient.GetSubObject("ipaddresses")
+func (i *IPAddresses) client() *APIClient {
+	return i.APIClient.SubClient("ipaddresses")
 }
 
 // Get fetches a specified set of IPAddresses
-func (i *IPAddresses) Get(params *entity.IPAddressesParams) ([]entity.IPAddress, error) {
+func (i *IPAddresses) Get(ctx context.Context, params *entity.IPAddressesParams) ([]entity.IPAddress, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	ipAddresses := make([]entity.IPAddress, 0)
-	err = i.client().Get("", qsp, func(data []byte) error {
+	err = i.client().Get(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, &ipAddresses)
 	})
 
@@ -32,24 +33,24 @@ func (i *IPAddresses) Get(params *entity.IPAddressesParams) ([]entity.IPAddress,
 }
 
 // Release releases a set of allocated IPAddresses
-func (i *IPAddresses) Release(params *entity.IPAddressesParams) error {
+func (i *IPAddresses) Release(ctx context.Context, params *entity.IPAddressesParams) error {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return err
 	}
 
-	return i.client().Post("release", qsp, func(data []byte) error { return nil })
+	return i.client().Post(ctx, "release", qsp, func(data []byte) error { return nil })
 }
 
 // Reserve reserves a set of IPAddresses
-func (i *IPAddresses) Reserve(params *entity.IPAddressesParams) (*entity.IPAddress, error) {
+func (i *IPAddresses) Reserve(ctx context.Context, params *entity.IPAddressesParams) (*entity.IPAddress, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	ipAddress := new(entity.IPAddress)
-	err = i.client().Post("reserve", qsp, func(data []byte) error {
+	err = i.client().Post(ctx, "reserve", qsp, func(data []byte) error {
 		return json.Unmarshal(data, ipAddress)
 	})
 
