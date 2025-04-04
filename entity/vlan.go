@@ -22,13 +22,13 @@ type VLAN struct {
 // Only the VID field is required. If Space is empty or the string "undefined",
 // the VLAN will be created in the 'undefined' space.
 type VLANParams struct {
-	Name          string `url:"name,omitempty"`
-	Description   string `url:"description,omitempty"`
-	Space         string `url:"space,omitempty"`
-	PrimaryRack   string `url:"primary_rack,omitempty"`
-	SecondaryRack string `url:"secondary_rack,omitempty"`
-	VID           int    `url:"vid,omitempty"`
-	MTU           int    `url:"mtu,omitempty"`
-	RelayVLAN     int    `url:"relay_vlan,omitempty"`
-	DHCPOn        bool   `url:"dhcp_on"`
+	PrimaryRack   *string `url:"primary_rack,omitempty"`
+	SecondaryRack *string `url:"secondary_rack,omitempty"`
+	RelayVLAN     *string `url:"relay_vlan,omitempty"`
+	Name          string  `url:"name,omitempty"`
+	Description   string  `url:"description,omitempty"`
+	Space         string  `url:"space,omitempty"`
+	VID           int     `url:"vid,omitempty"`
+	MTU           int     `url:"mtu,omitempty"`
+	DHCPOn        bool    `url:"dhcp_on"`
 }
