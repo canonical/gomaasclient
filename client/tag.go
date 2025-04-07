@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -13,14 +14,14 @@ type Tag struct {
 	APIClient APIClient
 }
 
-func (t *Tag) client(name string) APIClient {
-	return t.APIClient.GetSubObject("tags").GetSubObject(name)
+func (t *Tag) client(name string) *APIClient {
+	return t.APIClient.SubClient("tags").SubClient(name)
 }
 
 // Get fetches a given tag by name
-func (t *Tag) Get(name string) (*entity.Tag, error) {
+func (t *Tag) Get(ctx context.Context, name string) (*entity.Tag, error) {
 	tag := new(entity.Tag)
-	err := t.client(name).Get("", url.Values{}, func(data []byte) error {
+	err := t.client(name).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, tag)
 	})
 
@@ -28,14 +29,14 @@ func (t *Tag) Get(name string) (*entity.Tag, error) {
 }
 
 // Update updates a given tag
-func (t *Tag) Update(name string, tagParams *entity.TagParams) (*entity.Tag, error) {
+func (t *Tag) Update(ctx context.Context, name string, tagParams *entity.TagParams) (*entity.Tag, error) {
 	qsp, err := query.Values(tagParams)
 	if err != nil {
 		return nil, err
 	}
 
 	tag := new(entity.Tag)
-	err = t.client(name).Put(qsp, func(data []byte) error {
+	err = t.client(name).Put(ctx, qsp, func(data []byte) error {
 		return json.Unmarshal(data, tag)
 	})
 
@@ -43,14 +44,14 @@ func (t *Tag) Update(name string, tagParams *entity.TagParams) (*entity.Tag, err
 }
 
 // Delete deletes a given tag
-func (t *Tag) Delete(name string) error {
-	return t.client(name).Delete()
+func (t *Tag) Delete(ctx context.Context, name string) error {
+	return t.client(name).Delete(ctx)
 }
 
 // GetMachines fetches a list of machines with a given tag
-func (t *Tag) GetMachines(name string) ([]entity.Machine, error) {
+func (t *Tag) GetMachines(ctx context.Context, name string) ([]entity.Machine, error) {
 	machines := make([]entity.Machine, 0)
-	err := t.client(name).Get("machines", url.Values{}, func(data []byte) error {
+	err := t.client(name).Get(ctx, "machines", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &machines)
 	})
 
@@ -58,20 +59,20 @@ func (t *Tag) GetMachines(name string) ([]entity.Machine, error) {
 }
 
 // AddMachines adds a set of Machines to a given tag
-func (t *Tag) AddMachines(name string, machineIds []string) error {
-	return t.updateNodes(name, machineIds, "add")
+func (t *Tag) AddMachines(ctx context.Context, name string, machineIds []string) error {
+	return t.updateNodes(ctx, name, machineIds, "add")
 }
 
 // RemoveMachines removes a set of Machines
-func (t *Tag) RemoveMachines(name string, machineIds []string) error {
-	return t.updateNodes(name, machineIds, "remove")
+func (t *Tag) RemoveMachines(ctx context.Context, name string, machineIds []string) error {
+	return t.updateNodes(ctx, name, machineIds, "remove")
 }
 
-func (t *Tag) updateNodes(name string, machineIds []string, op string) error {
+func (t *Tag) updateNodes(ctx context.Context, name string, machineIds []string, op string) error {
 	qsp := url.Values{}
 	for _, id := range machineIds {
 		qsp.Add(op, id)
 	}
 
-	return t.client(name).Post("update_nodes", qsp, func(data []byte) error { return nil })
+	return t.client(name).Post(ctx, "update_nodes", qsp, func(data []byte) error { return nil })
 }

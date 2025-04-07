@@ -2,6 +2,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -15,14 +16,14 @@ type PackageRepository struct {
 	APIClient APIClient
 }
 
-func (p *PackageRepository) client(id int) APIClient {
-	return p.APIClient.GetSubObject("package-repositories").GetSubObject(fmt.Sprintf("%v", id))
+func (p *PackageRepository) client(id int) *APIClient {
+	return p.APIClient.SubClient("package-repositories").SubClient(fmt.Sprintf("%v", id))
 }
 
 // Get fetches a packageRepository
-func (p *PackageRepository) Get(id int) (*entity.PackageRepository, error) {
+func (p *PackageRepository) Get(ctx context.Context, id int) (*entity.PackageRepository, error) {
 	packageRepository := new(entity.PackageRepository)
-	err := p.client(id).Get("", url.Values{}, func(data []byte) error {
+	err := p.client(id).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, packageRepository)
 	})
 
@@ -30,14 +31,14 @@ func (p *PackageRepository) Get(id int) (*entity.PackageRepository, error) {
 }
 
 // Update updates a given PackageRepository
-func (p *PackageRepository) Update(id int, packageRepositoryParams *entity.PackageRepositoryParams) (*entity.PackageRepository, error) {
+func (p *PackageRepository) Update(ctx context.Context, id int, packageRepositoryParams *entity.PackageRepositoryParams) (*entity.PackageRepository, error) {
 	qsp, err := query.Values(packageRepositoryParams)
 	if err != nil {
 		return nil, err
 	}
 
 	packageRepository := new(entity.PackageRepository)
-	err = p.client(id).Put(qsp, func(data []byte) error {
+	err = p.client(id).Put(ctx, qsp, func(data []byte) error {
 		return json.Unmarshal(data, packageRepository)
 	})
 
@@ -45,6 +46,6 @@ func (p *PackageRepository) Update(id int, packageRepositoryParams *entity.Packa
 }
 
 // Delete deletes a given PackageRepository
-func (p *PackageRepository) Delete(id int) error {
-	return p.client(id).Delete()
+func (p *PackageRepository) Delete(ctx context.Context, id int) error {
+	return p.client(id).Delete(ctx)
 }

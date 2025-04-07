@@ -2,6 +2,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -15,14 +16,14 @@ type RAIDs struct {
 	APIClient APIClient
 }
 
-func (r *RAIDs) client(systemID string) APIClient {
-	return r.APIClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("raids")
+func (r *RAIDs) client(systemID string) *APIClient {
+	return r.APIClient.SubClient("nodes").SubClient(systemID).SubClient("raids")
 }
 
 // Get RAIDs of a machine.
-func (r *RAIDs) Get(systemID string) ([]entity.RAID, error) {
+func (r *RAIDs) Get(ctx context.Context, systemID string) ([]entity.RAID, error) {
 	raids := make([]entity.RAID, 0)
-	err := r.client(systemID).Get("", url.Values{}, func(data []byte) error {
+	err := r.client(systemID).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &raids)
 	})
 
@@ -30,14 +31,14 @@ func (r *RAIDs) Get(systemID string) ([]entity.RAID, error) {
 }
 
 // Create a RAID of a machine.
-func (r *RAIDs) Create(systemID string, params *entity.RAIDCreateParams) (*entity.RAID, error) {
+func (r *RAIDs) Create(ctx context.Context, systemID string, params *entity.RAIDCreateParams) (*entity.RAID, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	raid := new(entity.RAID)
-	err = r.client(systemID).Post("", qsp, func(data []byte) error {
+	err = r.client(systemID).Post(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, raid)
 	})
 

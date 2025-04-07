@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -13,19 +14,19 @@ type RackControllers struct {
 	APIClient APIClient
 }
 
-func (r *RackControllers) client() APIClient {
-	return r.APIClient.GetSubObject("rackcontrollers")
+func (r *RackControllers) client() *APIClient {
+	return r.APIClient.SubClient("rackcontrollers")
 }
 
 // Get fetches a list rackControllers.
-func (r *RackControllers) Get(rackControllersParams *entity.RackControllersGetParams) ([]entity.RackController, error) {
+func (r *RackControllers) Get(ctx context.Context, rackControllersParams *entity.RackControllersGetParams) ([]entity.RackController, error) {
 	qsp, err := query.Values(rackControllersParams)
 	if err != nil {
 		return nil, err
 	}
 
 	rackControllers := make([]entity.RackController, 0)
-	err = r.client().Get("", qsp, func(data []byte) error {
+	err = r.client().Get(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, &rackControllers)
 	})
 
@@ -33,9 +34,9 @@ func (r *RackControllers) Get(rackControllersParams *entity.RackControllersGetPa
 }
 
 // DescribePowerTypes returns the supported power types of the rack controller.
-func (r *RackControllers) DescribePowerTypes() ([]entity.PowerType, error) {
+func (r *RackControllers) DescribePowerTypes(ctx context.Context) ([]entity.PowerType, error) {
 	powerTypes := make([]entity.PowerType, 0)
-	err := r.client().Get("describe_power_types", url.Values{}, func(data []byte) error {
+	err := r.client().Get(ctx, "describe_power_types", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &powerTypes)
 	})
 
@@ -43,12 +44,12 @@ func (r *RackControllers) DescribePowerTypes() ([]entity.PowerType, error) {
 }
 
 // IsRegistered confirms that a MAC Address is registered to MAAS.
-func (r *RackControllers) IsRegistered(macAddress string) (bool, error) {
+func (r *RackControllers) IsRegistered(ctx context.Context, macAddress string) (bool, error) {
 	qsp := url.Values{}
 	qsp.Set("mac_address", macAddress)
 
 	isRegistered := new(bool)
-	err := r.client().Get("is_registered", qsp, func(data []byte) error {
+	err := r.client().Get(ctx, "is_registered", qsp, func(data []byte) error {
 		return json.Unmarshal(data, isRegistered)
 	})
 
@@ -56,14 +57,14 @@ func (r *RackControllers) IsRegistered(macAddress string) (bool, error) {
 }
 
 // GetPowerParameters of a given node.
-func (r *RackControllers) GetPowerParameters(systemIDs []string) (map[string]interface{}, error) {
+func (r *RackControllers) GetPowerParameters(ctx context.Context, systemIDs []string) (map[string]interface{}, error) {
 	qsp, err := query.Values(map[string][]string{"id": systemIDs})
 	if err != nil {
 		return nil, err
 	}
 
 	params := map[string]interface{}{}
-	err = r.client().Get("power_parameters", qsp, func(data []byte) error {
+	err = r.client().Get(ctx, "power_parameters", qsp, func(data []byte) error {
 		return json.Unmarshal(data, &params)
 	})
 
@@ -71,13 +72,13 @@ func (r *RackControllers) GetPowerParameters(systemIDs []string) (map[string]int
 }
 
 // SetZone to given nodes.
-func (r *RackControllers) SetZone(setZoneParams *entity.RackControllerSetZoneParams) error {
+func (r *RackControllers) SetZone(ctx context.Context, setZoneParams *entity.RackControllerSetZoneParams) error {
 	qsp, err := query.Values(setZoneParams)
 	if err != nil {
 		return err
 	}
 
-	err = r.client().Post("set_zone", qsp, func(data []byte) error { return nil })
+	err = r.client().Post(ctx, "set_zone", qsp, func(data []byte) error { return nil })
 
 	return err
 }

@@ -1,34 +1,36 @@
 package api
 
 import (
+	"context"
+
 	"github.com/canonical/gomaasclient/entity"
 )
 
 // Machine is an interface defining API behaviour for Machine objects
 type Machine interface {
-	Get(systemID string) (*entity.Machine, error)
-	Update(systemID string, machineParams *entity.MachineParams, powerParams map[string]interface{}) (*entity.Machine, error)
-	Delete(systemID string) error
-	Commission(systemID string, params *entity.MachineCommissionParams) (*entity.Machine, error)
-	Deploy(systemID string, params *entity.MachineDeployParams) (*entity.Machine, error)
-	Release(systemID string, params *entity.MachineReleaseParams) (*entity.Machine, error)
-	Lock(systemID string, comment string) (*entity.Machine, error)
-	Unlock(systemID string, comment string) (*entity.Machine, error)
-	ClearDefaultGateways(systemID string) (*entity.Machine, error)
-	GetPowerParameters(systemID string) (map[string]interface{}, error)
-	PowerOn(systemID string, params *entity.MachinePowerOnParams) (*entity.Machine, error)
-	PowerOff(systemID string, params *entity.MachinePowerOffParams) (*entity.Machine, error)
-	GetPowerState(systemID string) (*entity.MachinePowerState, error)
-	SetWorkloadAnnotations(systemID string, params map[string]string) (*entity.Machine, error)
-	RescueMode(systemID string) (*entity.Machine, error)
-	ExitRescueMode(systemID string) (*entity.Machine, error)
-	Abort(systemID string, comment string) (*entity.Machine, error)
-	MarkBroken(systemID string, comment string) (*entity.Machine, error)
-	MarkFixed(systemID string, comment string) (*entity.Machine, error)
-	GetToken(systemID string) (*entity.MachineToken, error)
-	Details(systemID string) (*entity.MachineDetails, error)
-	RestoreDefaultConfiguration(systemID string) error
-	RestoreNetworkingConfiguration(systemID string) error
-	RestoreStorageConfiguration(systemID string) error
-	GetCurtinConfig(systemID string) (map[string]interface{}, error)
+	Get(ctx context.Context, systemID string) (*entity.Machine, error)
+	Update(ctx context.Context, systemID string, machineParams *entity.MachineParams, powerParams map[string]interface{}) (*entity.Machine, error)
+	Delete(ctx context.Context, systemID string) error
+	Commission(ctx context.Context, systemID string, params *entity.MachineCommissionParams) (*entity.Machine, error)
+	Deploy(ctx context.Context, systemID string, params *entity.MachineDeployParams) (*entity.Machine, error)
+	Release(ctx context.Context, systemID string, params *entity.MachineReleaseParams) (*entity.Machine, error)
+	Lock(ctx context.Context, systemID string, comment string) (*entity.Machine, error)
+	Unlock(ctx context.Context, systemID string, comment string) (*entity.Machine, error)
+	ClearDefaultGateways(ctx context.Context, systemID string) (*entity.Machine, error)
+	GetPowerParameters(ctx context.Context, systemID string) (map[string]interface{}, error)
+	PowerOn(ctx context.Context, systemID string, params *entity.MachinePowerOnParams) (*entity.Machine, error)
+	PowerOff(ctx context.Context, systemID string, params *entity.MachinePowerOffParams) (*entity.Machine, error)
+	GetPowerState(ctx context.Context, systemID string) (*entity.MachinePowerState, error)
+	SetWorkloadAnnotations(ctx context.Context, systemID string, params map[string]string) (*entity.Machine, error)
+	RescueMode(ctx context.Context, systemID string) (*entity.Machine, error)
+	ExitRescueMode(ctx context.Context, systemID string) (*entity.Machine, error)
+	Abort(ctx context.Context, systemID string, comment string) (*entity.Machine, error)
+	MarkBroken(ctx context.Context, systemID string, comment string) (*entity.Machine, error)
+	MarkFixed(ctx context.Context, systemID string, comment string) (*entity.Machine, error)
+	GetToken(ctx context.Context, systemID string) (*entity.MachineToken, error)
+	Details(ctx context.Context, systemID string) (*entity.MachineDetails, error)
+	RestoreDefaultConfiguration(ctx context.Context, systemID string) error
+	RestoreNetworkingConfiguration(ctx context.Context, systemID string) error
+	RestoreStorageConfiguration(ctx context.Context, systemID string) error
+	GetCurtinConfig(ctx context.Context, systemID string) (map[string]interface{}, error)
 }

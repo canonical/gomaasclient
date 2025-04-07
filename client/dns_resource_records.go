@@ -2,6 +2,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 
 	"github.com/canonical/gomaasclient/entity"
@@ -13,19 +14,19 @@ type DNSResourceRecords struct {
 	APIClient APIClient
 }
 
-func (d *DNSResourceRecords) client() APIClient {
-	return d.APIClient.GetSubObject("dnsresourcerecords")
+func (d *DNSResourceRecords) client() *APIClient {
+	return d.APIClient.SubClient("dnsresourcerecords")
 }
 
 // Get fetches a list of DNSResourceRecord objectts
-func (d *DNSResourceRecords) Get(params *entity.DNSResourceRecordsParams) ([]entity.DNSResourceRecord, error) {
+func (d *DNSResourceRecords) Get(ctx context.Context, params *entity.DNSResourceRecordsParams) ([]entity.DNSResourceRecord, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	dnsResourceRecords := make([]entity.DNSResourceRecord, 0)
-	err = d.client().Get("", qsp, func(data []byte) error {
+	err = d.client().Get(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, &dnsResourceRecords)
 	})
 
@@ -33,14 +34,14 @@ func (d *DNSResourceRecords) Get(params *entity.DNSResourceRecordsParams) ([]ent
 }
 
 // Create creates a new DNSResourceRecord
-func (d *DNSResourceRecords) Create(params *entity.DNSResourceRecordParams) (*entity.DNSResourceRecord, error) {
+func (d *DNSResourceRecords) Create(ctx context.Context, params *entity.DNSResourceRecordParams) (*entity.DNSResourceRecord, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	dnsResourceRecord := new(entity.DNSResourceRecord)
-	err = d.client().Post("", qsp, func(data []byte) error {
+	err = d.client().Post(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, dnsResourceRecord)
 	})
 

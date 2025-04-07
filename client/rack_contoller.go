@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -14,14 +15,14 @@ type RackController struct {
 	APIClient APIClient
 }
 
-func (r *RackController) client(systemID string) APIClient {
-	return r.APIClient.GetSubObject("rackcontrollers").GetSubObject(systemID)
+func (r *RackController) client(systemID string) *APIClient {
+	return r.APIClient.SubClient("rackcontrollers").SubClient(systemID)
 }
 
 // Get rack controller details.
-func (r *RackController) Get(systemID string) (*entity.RackController, error) {
+func (r *RackController) Get(ctx context.Context, systemID string) (*entity.RackController, error) {
 	rackController := new(entity.RackController)
-	err := r.client(systemID).Get("", url.Values{}, func(data []byte) error {
+	err := r.client(systemID).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, rackController)
 	})
 
@@ -29,7 +30,7 @@ func (r *RackController) Get(systemID string) (*entity.RackController, error) {
 }
 
 // Update rack controller.
-func (r *RackController) Update(systemID string, rackControllerParams *entity.RackControllerParams, powerParams map[string]interface{}) (*entity.RackController, error) {
+func (r *RackController) Update(ctx context.Context, systemID string, rackControllerParams *entity.RackControllerParams, powerParams map[string]interface{}) (*entity.RackController, error) {
 	qsp, err := query.Values(rackControllerParams)
 	if err != nil {
 		return nil, err
@@ -41,7 +42,7 @@ func (r *RackController) Update(systemID string, rackControllerParams *entity.Ra
 	}
 
 	rackController := new(entity.RackController)
-	err = r.client(systemID).Put(qsp, func(data []byte) error {
+	err = r.client(systemID).Put(ctx, qsp, func(data []byte) error {
 		return json.Unmarshal(data, rackController)
 	})
 
@@ -49,14 +50,14 @@ func (r *RackController) Update(systemID string, rackControllerParams *entity.Ra
 }
 
 // Delete rack controller.
-func (r *RackController) Delete(systemID string) error {
-	return r.client(systemID).Delete()
+func (r *RackController) Delete(ctx context.Context, systemID string) error {
+	return r.client(systemID).Delete(ctx)
 }
 
 // GetPowerParameters fetches the power parameters of a given rack controller.
-func (r *RackController) GetPowerParameters(systemID string) (map[string]interface{}, error) {
+func (r *RackController) GetPowerParameters(ctx context.Context, systemID string) (map[string]interface{}, error) {
 	params := map[string]interface{}{}
-	err := r.client(systemID).Get("power_parameters", url.Values{}, func(data []byte) error {
+	err := r.client(systemID).Get(ctx, "power_parameters", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &params)
 	})
 
@@ -64,14 +65,14 @@ func (r *RackController) GetPowerParameters(systemID string) (map[string]interfa
 }
 
 // PowerOn rack controller.
-func (r *RackController) PowerOn(systemID string, params *entity.RackControllerPowerOnParams) (*entity.RackController, error) {
+func (r *RackController) PowerOn(ctx context.Context, systemID string, params *entity.RackControllerPowerOnParams) (*entity.RackController, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	rackController := new(entity.RackController)
-	err = r.client(systemID).Post("power_on", qsp, func(data []byte) error {
+	err = r.client(systemID).Post(ctx, "power_on", qsp, func(data []byte) error {
 		return json.Unmarshal(data, rackController)
 	})
 
@@ -79,14 +80,14 @@ func (r *RackController) PowerOn(systemID string, params *entity.RackControllerP
 }
 
 // PowerOff rack controller.
-func (r *RackController) PowerOff(systemID string, params *entity.RackControllerPowerOffParams) (*entity.RackController, error) {
+func (r *RackController) PowerOff(ctx context.Context, systemID string, params *entity.RackControllerPowerOffParams) (*entity.RackController, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	rackController := new(entity.RackController)
-	err = r.client(systemID).Post("power_off", qsp, func(data []byte) error {
+	err = r.client(systemID).Post(ctx, "power_off", qsp, func(data []byte) error {
 		return json.Unmarshal(data, rackController)
 	})
 
@@ -94,9 +95,9 @@ func (r *RackController) PowerOff(systemID string, params *entity.RackController
 }
 
 // GetPowerState of the rack controller.
-func (r *RackController) GetPowerState(systemID string) (*entity.RackControllerPowerState, error) {
+func (r *RackController) GetPowerState(ctx context.Context, systemID string) (*entity.RackControllerPowerState, error) {
 	ps := new(entity.RackControllerPowerState)
-	err := r.client(systemID).Get("query_power_state", url.Values{}, func(data []byte) error {
+	err := r.client(systemID).Get(ctx, "query_power_state", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, ps)
 	})
 
@@ -104,14 +105,14 @@ func (r *RackController) GetPowerState(systemID string) (*entity.RackControllerP
 }
 
 // Abort rack controller current operation.
-func (r *RackController) Abort(systemID string, comment string) (*entity.RackController, error) {
+func (r *RackController) Abort(ctx context.Context, systemID string, comment string) (*entity.RackController, error) {
 	qsp := make(url.Values)
 	if comment != "" {
 		qsp.Set("comment", comment)
 	}
 
 	rackController := new(entity.RackController)
-	err := r.client(systemID).Post("abort", qsp, func(data []byte) error {
+	err := r.client(systemID).Post(ctx, "abort", qsp, func(data []byte) error {
 		return json.Unmarshal(data, rackController)
 	})
 
@@ -119,9 +120,9 @@ func (r *RackController) Abort(systemID string, comment string) (*entity.RackCon
 }
 
 // Details gets the details for a given rack controller.
-func (r *RackController) Details(systemID string) (*entity.RackControllerDetails, error) {
+func (r *RackController) Details(ctx context.Context, systemID string) (*entity.RackControllerDetails, error) {
 	rackControllerDetails := new(entity.RackControllerDetails)
-	err := r.client(systemID).Get("details", url.Values{}, func(data []byte) error {
+	err := r.client(systemID).Get(ctx, "details", url.Values{}, func(data []byte) error {
 		return bson.Unmarshal(data, rackControllerDetails)
 	})
 
@@ -129,14 +130,14 @@ func (r *RackController) Details(systemID string) (*entity.RackControllerDetails
 }
 
 // OverrideFailedTesting ignores failed tests of the rack controller.
-func (r *RackController) OverrideFailedTesting(systemID string, comment string) (*entity.RackController, error) {
+func (r *RackController) OverrideFailedTesting(ctx context.Context, systemID string, comment string) (*entity.RackController, error) {
 	qsp := make(url.Values)
 	if comment != "" {
 		qsp.Set("comment", comment)
 	}
 
 	rackController := new(entity.RackController)
-	err := r.client(systemID).Post("override_failed_testing", qsp, func(data []byte) error {
+	err := r.client(systemID).Post(ctx, "override_failed_testing", qsp, func(data []byte) error {
 		return json.Unmarshal(data, rackController)
 	})
 
@@ -144,14 +145,14 @@ func (r *RackController) OverrideFailedTesting(systemID string, comment string) 
 }
 
 // Test the rack controller.
-func (r *RackController) Test(systemID string, params map[string]interface{}) (*entity.RackController, error) {
+func (r *RackController) Test(ctx context.Context, systemID string, params map[string]interface{}) (*entity.RackController, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	rackController := new(entity.RackController)
-	err = r.client(systemID).Post("test", qsp, func(data []byte) error {
+	err = r.client(systemID).Post(ctx, "test", qsp, func(data []byte) error {
 		return json.Unmarshal(data, rackController)
 	})
 
