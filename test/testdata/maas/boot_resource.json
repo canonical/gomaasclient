@@ -1,0 +1,28 @@
+{
+    "id": 13,
+    "type": "Uploaded",
+    "name": "alma9",
+    "architecture": "amd64/generic",
+    "resource_uri": "/MAAS/api/2.0/boot-resources/13/",
+    "last_deployed": null,
+    "title": "Alma 9 Custom",
+    "subarches": "generic",
+    "base_image": "rhel/9",
+    "sets": {
+        "20240828": {
+            "version": "20240828",
+            "label": "uploaded",
+            "size": 935047294,
+            "complete": true,
+            "files": {
+                "root.tgz": {
+                    "filename": "root.tgz",
+                    "filetype": "root-tgz",
+                    "sha256": "5b341be98b05d409a41ce8c2d881dbd80df9de07da7613d6722d4f0b5e99e0f1",
+                    "size": 935047294,
+                    "complete": true
+                }
+            }
+        }
+    }
+}

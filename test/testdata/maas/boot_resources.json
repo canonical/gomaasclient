@@ -1,0 +1,22 @@
+[
+    {
+        "id": 95,
+        "type": "Synced",
+        "name": "ubuntu/bionic",
+        "architecture": "amd64/ga-18.04",
+        "resource_uri": "/MAAS/api/2.0/boot-resources/95/",
+        "last_deployed": null,
+        "subarches": "generic,hwe-p,hwe-q,hwe-r,hwe-s,hwe-t,hwe-u,hwe-v,hwe-w,ga-16.04,ga-16.10,ga-17.04,ga-17.10,ga-18.04"
+    },
+    {
+        "id": 13,
+        "type": "Uploaded",
+        "name": "alma9",
+        "architecture": "amd64/generic",
+        "resource_uri": "/MAAS/api/2.0/boot-resources/13/",
+        "last_deployed": null,
+        "title": "Alma 9 Custom",
+        "subarches": "generic",
+        "base_image": "rhel/9"
+    }
+]
