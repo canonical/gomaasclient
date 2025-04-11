@@ -5,9 +5,11 @@ type BootResource struct {
 	Type         string                     `json:"type,omitempty"`
 	Name         string                     `json:"name,omitempty"`
 	Architecture string                     `json:"architecture,omitempty"`
+	BaseImage    string                     `json:"base_image,omitempty"`
 	ResourceURI  string                     `json:"resource_uri,omitempty"`
 	LastDeployed string                     `json:"last_deployed,omitempty"`
 	Subarches    string                     `json:"subarches,omitempty"`
+	Title        string                     `json:"title,omitempty"`
 	ID           int                        `json:"id,omitempty"`
 }
 
