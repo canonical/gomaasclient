@@ -29,8 +29,8 @@ func (s *StaticRoutes) Get() ([]entity.StaticRoute, error) {
 }
 
 // Create creates a new StaticRoute
-func (p *StaticRoutes) Create(staticRouteParams *entity.StaticRouteParams) (*entity.StaticRoute, error) {
-	qsp, err := query.Values(staticRouteParams)
+func (p *StaticRoutes) Create(params *entity.StaticRouteParams) (*entity.StaticRoute, error) {
+	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}

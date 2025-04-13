@@ -4,13 +4,13 @@ type StaticRoute struct {
 	ID          int    `json:"id,omitempty"`
 	Source      Subnet `json:"source,omitempty"`
 	Destination Subnet `json:"destination,omitempty"`
-	Gateway_ip  string `json:"gateway_ip,omitempty"`
+	GatewayIP   string `json:"gateway_ip,omitempty"`
 	Metric      int    `json:"metric,omitempty"`
 }
 
 type StaticRouteParams struct {
-	Source      string `json:"source,omitempty"`
-	Destination string `json:"destination,omitempty"`
-	Gateway_ip  string `json:"gateway_ip,omitempty"`
-	Metric      int    `json:"metric,omitempty"`
+	Source      string `url:"source,omitempty"`
+	Destination string `url:"destination,omitempty"`
+	GatewayIP   string `url:"gateway_ip,omitempty"`
+	Metric      int    `url:"metric,omitempty"`
 }
