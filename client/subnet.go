@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -16,19 +17,19 @@ type Subnet struct {
 	APIClient APIClient
 }
 
-func (s *Subnet) client(id int) APIClient {
-	return s.APIClient.GetSubObject("subnets").GetSubObject(fmt.Sprintf("%v", id))
+func (s *Subnet) client(id int) *APIClient {
+	return s.APIClient.SubClient("subnets").SubClient(fmt.Sprintf("%v", id))
 }
 
 // Delete deletes a given Subnet
-func (s *Subnet) Delete(id int) error {
-	return s.client(id).Delete()
+func (s *Subnet) Delete(ctx context.Context, id int) error {
+	return s.client(id).Delete(ctx)
 }
 
 // Get fetches a given Subnet
-func (s *Subnet) Get(id int) (*entity.Subnet, error) {
+func (s *Subnet) Get(ctx context.Context, id int) (*entity.Subnet, error) {
 	subnet := new(entity.Subnet)
-	err := s.client(id).Get("", url.Values{}, func(data []byte) error {
+	err := s.client(id).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &subnet)
 	})
 
@@ -36,13 +37,13 @@ func (s *Subnet) Get(id int) (*entity.Subnet, error) {
 }
 
 // GetIPAddresses fetches the allocated IPAddresses in the given subnet
-func (s *Subnet) GetIPAddresses(id int) ([]subnet.IPAddress, error) {
+func (s *Subnet) GetIPAddresses(ctx context.Context, id int) ([]subnet.IPAddress, error) {
 	qsp := url.Values{}
 	qsp.Set("with_username", "1")
 	qsp.Set("with_summary", "1")
 
 	subnetIPAddresses := make([]subnet.IPAddress, 0)
-	err := s.client(id).Get("ip_addresses", qsp, func(data []byte) error {
+	err := s.client(id).Get(ctx, "ip_addresses", qsp, func(data []byte) error {
 		return json.Unmarshal(data, &subnetIPAddresses)
 	})
 
@@ -50,9 +51,9 @@ func (s *Subnet) GetIPAddresses(id int) ([]subnet.IPAddress, error) {
 }
 
 // GetReservedIPRanges fetches the reserved IPRange objects for the given Subnet
-func (s *Subnet) GetReservedIPRanges(id int) ([]subnet.ReservedIPRange, error) {
+func (s *Subnet) GetReservedIPRanges(ctx context.Context, id int) ([]subnet.ReservedIPRange, error) {
 	subnetReservedIPRanges := make([]subnet.ReservedIPRange, 0)
-	err := s.client(id).Get("reserved_ip_ranges", url.Values{}, func(data []byte) error {
+	err := s.client(id).Get(ctx, "reserved_ip_ranges", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &subnetReservedIPRanges)
 	})
 
@@ -60,9 +61,9 @@ func (s *Subnet) GetReservedIPRanges(id int) ([]subnet.ReservedIPRange, error) {
 }
 
 // GetStatistics gets the stats of the given subnet
-func (s *Subnet) GetStatistics(id int) (*subnet.Statistics, error) {
+func (s *Subnet) GetStatistics(ctx context.Context, id int) (*subnet.Statistics, error) {
 	stats := new(subnet.Statistics)
-	err := s.client(id).Get("statistics", url.Values{}, func(data []byte) error {
+	err := s.client(id).Get(ctx, "statistics", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, stats)
 	})
 
@@ -70,9 +71,9 @@ func (s *Subnet) GetStatistics(id int) (*subnet.Statistics, error) {
 }
 
 // GetUnreservedIPRanges gets the IPRange objects for allocation use
-func (s *Subnet) GetUnreservedIPRanges(id int) ([]subnet.IPRange, error) {
+func (s *Subnet) GetUnreservedIPRanges(ctx context.Context, id int) ([]subnet.IPRange, error) {
 	ipRanges := make([]subnet.IPRange, 0)
-	err := s.client(id).Get("unreserved_ip_ranges", url.Values{}, func(data []byte) error {
+	err := s.client(id).Get(ctx, "unreserved_ip_ranges", url.Values{}, func(data []byte) error {
 		log.Printf("%s\n", data)
 		return json.Unmarshal(data, &ipRanges)
 	})
@@ -81,14 +82,14 @@ func (s *Subnet) GetUnreservedIPRanges(id int) ([]subnet.IPRange, error) {
 }
 
 // Update updates the given Subnet
-func (s *Subnet) Update(id int, params *entity.SubnetParams) (*entity.Subnet, error) {
+func (s *Subnet) Update(ctx context.Context, id int, params *entity.SubnetParams) (*entity.Subnet, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	subnet := new(entity.Subnet)
-	err = s.client(id).Put(qsp, func(data []byte) error {
+	err = s.client(id).Put(ctx, qsp, func(data []byte) error {
 		return json.Unmarshal(data, subnet)
 	})
 

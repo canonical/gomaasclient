@@ -2,6 +2,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -15,14 +16,14 @@ type IPRange struct {
 	APIClient APIClient
 }
 
-func (i *IPRange) client(id int) APIClient {
-	return i.APIClient.GetSubObject("ipranges").GetSubObject(fmt.Sprintf("%v", id))
+func (i *IPRange) client(id int) *APIClient {
+	return i.APIClient.SubClient("ipranges").SubClient(fmt.Sprintf("%v", id))
 }
 
 // Get fetches a given IPRange
-func (i *IPRange) Get(id int) (*entity.IPRange, error) {
+func (i *IPRange) Get(ctx context.Context, id int) (*entity.IPRange, error) {
 	ipRange := new(entity.IPRange)
-	err := i.client(id).Get("", url.Values{}, func(data []byte) error {
+	err := i.client(id).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, ipRange)
 	})
 
@@ -30,14 +31,14 @@ func (i *IPRange) Get(id int) (*entity.IPRange, error) {
 }
 
 // Update updates a given IPRange
-func (i *IPRange) Update(id int, params *entity.IPRangeParams) (*entity.IPRange, error) {
+func (i *IPRange) Update(ctx context.Context, id int, params *entity.IPRangeParams) (*entity.IPRange, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	ipRange := new(entity.IPRange)
-	err = i.client(id).Put(qsp, func(data []byte) error {
+	err = i.client(id).Put(ctx, qsp, func(data []byte) error {
 		return json.Unmarshal(data, ipRange)
 	})
 
@@ -45,6 +46,6 @@ func (i *IPRange) Update(id int, params *entity.IPRangeParams) (*entity.IPRange,
 }
 
 // Delete deletes a given IPRange
-func (i *IPRange) Delete(id int) error {
-	return i.client(id).Delete()
+func (i *IPRange) Delete(ctx context.Context, id int) error {
+	return i.client(id).Delete(ctx)
 }

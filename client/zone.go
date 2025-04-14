@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -13,14 +14,14 @@ type Zone struct {
 	APIClient APIClient
 }
 
-func (z *Zone) client(name string) APIClient {
-	return z.APIClient.GetSubObject("zones").GetSubObject(name)
+func (z *Zone) client(name string) *APIClient {
+	return z.APIClient.SubClient("zones").SubClient(name)
 }
 
 // Get Zone details.
-func (z *Zone) Get(name string) (*entity.Zone, error) {
+func (z *Zone) Get(ctx context.Context, name string) (*entity.Zone, error) {
 	zone := new(entity.Zone)
-	err := z.client(name).Get("", url.Values{}, func(data []byte) error {
+	err := z.client(name).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, zone)
 	})
 
@@ -28,14 +29,14 @@ func (z *Zone) Get(name string) (*entity.Zone, error) {
 }
 
 // Update Zone.
-func (z *Zone) Update(name string, params *entity.ZoneParams) (*entity.Zone, error) {
+func (z *Zone) Update(ctx context.Context, name string, params *entity.ZoneParams) (*entity.Zone, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	zone := new(entity.Zone)
-	err = z.client(name).Put(qsp, func(data []byte) error {
+	err = z.client(name).Put(ctx, qsp, func(data []byte) error {
 		return json.Unmarshal(data, zone)
 	})
 
@@ -43,6 +44,6 @@ func (z *Zone) Update(name string, params *entity.ZoneParams) (*entity.Zone, err
 }
 
 // Delete Zone.
-func (z *Zone) Delete(name string) error {
-	return z.client(name).Delete()
+func (z *Zone) Delete(ctx context.Context, name string) error {
+	return z.client(name).Delete(ctx)
 }

@@ -2,6 +2,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -15,14 +16,14 @@ type BCaches struct {
 	APIClient APIClient
 }
 
-func (b *BCaches) client(systemID string) APIClient {
-	return b.APIClient.GetSubObject("nodes").GetSubObject(systemID).GetSubObject("bcaches")
+func (b *BCaches) client(systemID string) *APIClient {
+	return b.APIClient.SubClient("nodes").SubClient(systemID).SubClient("bcaches")
 }
 
 // Get BCaches of a machine.
-func (b *BCaches) Get(systemID string) ([]entity.BCache, error) {
+func (b *BCaches) Get(ctx context.Context, systemID string) ([]entity.BCache, error) {
 	bCaches := make([]entity.BCache, 0)
-	err := b.client(systemID).Get("", url.Values{}, func(data []byte) error {
+	err := b.client(systemID).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &bCaches)
 	})
 
@@ -30,14 +31,14 @@ func (b *BCaches) Get(systemID string) ([]entity.BCache, error) {
 }
 
 // Create a BCache of a machine.
-func (b *BCaches) Create(systemID string, params *entity.BCacheParams) (*entity.BCache, error) {
+func (b *BCaches) Create(ctx context.Context, systemID string, params *entity.BCacheParams) (*entity.BCache, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	bCache := new(entity.BCache)
-	err = b.client(systemID).Post("", qsp, func(data []byte) error {
+	err = b.client(systemID).Post(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, bCache)
 	})
 

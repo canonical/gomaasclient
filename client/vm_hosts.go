@@ -2,6 +2,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -14,14 +15,14 @@ type VMHosts struct {
 	APIClient APIClient
 }
 
-func (p *VMHosts) client() APIClient {
-	return p.APIClient.GetSubObject("pods")
+func (p *VMHosts) client() *APIClient {
+	return p.APIClient.SubClient("pods")
 }
 
 // Get fetches a list of VMHost objects
-func (p *VMHosts) Get() ([]entity.VMHost, error) {
+func (p *VMHosts) Get(ctx context.Context) ([]entity.VMHost, error) {
 	vmHosts := make([]entity.VMHost, 0)
-	err := p.client().Get("", url.Values{}, func(data []byte) error {
+	err := p.client().Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &vmHosts)
 	})
 
@@ -29,14 +30,14 @@ func (p *VMHosts) Get() ([]entity.VMHost, error) {
 }
 
 // Create creates a new VMHost
-func (p *VMHosts) Create(params *entity.VMHostParams) (*entity.VMHost, error) {
+func (p *VMHosts) Create(ctx context.Context, params *entity.VMHostParams) (*entity.VMHost, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	vmHost := new(entity.VMHost)
-	err = p.client().Post("", qsp, func(data []byte) error {
+	err = p.client().Post(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, vmHost)
 	})
 

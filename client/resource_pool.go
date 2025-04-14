@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/url"
@@ -14,18 +15,18 @@ type ResourcePool struct {
 	APIClient APIClient
 }
 
-func (r *ResourcePool) client(id int) APIClient {
-	return r.APIClient.GetSubObject(fmt.Sprintf("resourcepool/%v", id))
+func (r *ResourcePool) client(id int) *APIClient {
+	return r.APIClient.SubClient(fmt.Sprintf("resourcepool/%v", id))
 }
 
-func (r *ResourcePool) clientByName(name string) APIClient {
-	return r.APIClient.GetSubObject(fmt.Sprintf("resourcepool/%v", name))
+func (r *ResourcePool) clientByName(name string) *APIClient {
+	return r.APIClient.SubClient(fmt.Sprintf("resourcepool/%v", name))
 }
 
 // GetByName fetches a given ResourcePool
-func (r *ResourcePool) GetByName(name string) (*entity.ResourcePool, error) {
+func (r *ResourcePool) GetByName(ctx context.Context, name string) (*entity.ResourcePool, error) {
 	resourcePool := new(entity.ResourcePool)
-	err := r.clientByName(name).Get("", url.Values{}, func(data []byte) error {
+	err := r.clientByName(name).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, resourcePool)
 	})
 
@@ -33,14 +34,14 @@ func (r *ResourcePool) GetByName(name string) (*entity.ResourcePool, error) {
 }
 
 // UpdateByName updates a given ResourcePool
-func (r *ResourcePool) UpdateByName(name string, params *entity.ResourcePoolParams) (*entity.ResourcePool, error) {
+func (r *ResourcePool) UpdateByName(ctx context.Context, name string, params *entity.ResourcePoolParams) (*entity.ResourcePool, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	resourcePool := new(entity.ResourcePool)
-	err = r.clientByName(name).Put(qsp, func(data []byte) error {
+	err = r.clientByName(name).Put(ctx, qsp, func(data []byte) error {
 		return json.Unmarshal(data, resourcePool)
 	})
 
@@ -48,14 +49,14 @@ func (r *ResourcePool) UpdateByName(name string, params *entity.ResourcePoolPara
 }
 
 // DeleteByName deletes a given ResourcePool
-func (r *ResourcePool) DeleteByName(name string) error {
-	return r.clientByName(name).Delete()
+func (r *ResourcePool) DeleteByName(ctx context.Context, name string) error {
+	return r.clientByName(name).Delete(ctx)
 }
 
 // Get fetches a given ResourcePool
-func (r *ResourcePool) Get(id int) (*entity.ResourcePool, error) {
+func (r *ResourcePool) Get(ctx context.Context, id int) (*entity.ResourcePool, error) {
 	resourcePool := new(entity.ResourcePool)
-	err := r.client(id).Get("", url.Values{}, func(data []byte) error {
+	err := r.client(id).Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, resourcePool)
 	})
 
@@ -63,14 +64,14 @@ func (r *ResourcePool) Get(id int) (*entity.ResourcePool, error) {
 }
 
 // Update updates a given ResourcePool
-func (r *ResourcePool) Update(id int, params *entity.ResourcePoolParams) (*entity.ResourcePool, error) {
+func (r *ResourcePool) Update(ctx context.Context, id int, params *entity.ResourcePoolParams) (*entity.ResourcePool, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	resourcePool := new(entity.ResourcePool)
-	err = r.client(id).Put(qsp, func(data []byte) error {
+	err = r.client(id).Put(ctx, qsp, func(data []byte) error {
 		return json.Unmarshal(data, resourcePool)
 	})
 
@@ -78,6 +79,6 @@ func (r *ResourcePool) Update(id int, params *entity.ResourcePoolParams) (*entit
 }
 
 // Delete deletes a given ResourcePool
-func (r *ResourcePool) Delete(id int) error {
-	return r.client(id).Delete()
+func (r *ResourcePool) Delete(ctx context.Context, id int) error {
+	return r.client(id).Delete(ctx)
 }

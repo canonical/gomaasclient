@@ -2,6 +2,7 @@
 package client
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 
@@ -14,14 +15,14 @@ type Zones struct {
 	APIClient APIClient
 }
 
-func (z *Zones) client() APIClient {
-	return z.APIClient.GetSubObject("zones")
+func (z *Zones) client() *APIClient {
+	return z.APIClient.SubClient("zones")
 }
 
 // Get fetches a list of Zone objects
-func (z *Zones) Get() ([]entity.Zone, error) {
+func (z *Zones) Get(ctx context.Context) ([]entity.Zone, error) {
 	zones := make([]entity.Zone, 0)
-	err := z.client().Get("", url.Values{}, func(data []byte) error {
+	err := z.client().Get(ctx, "", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, &zones)
 	})
 
@@ -29,14 +30,14 @@ func (z *Zones) Get() ([]entity.Zone, error) {
 }
 
 // Create creates a new Zone
-func (z *Zones) Create(params *entity.ZoneParams) (*entity.Zone, error) {
+func (z *Zones) Create(ctx context.Context, params *entity.ZoneParams) (*entity.Zone, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	zone := new(entity.Zone)
-	err = z.client().Post("", qsp, func(data []byte) error {
+	err = z.client().Post(ctx, "", qsp, func(data []byte) error {
 		return json.Unmarshal(data, zone)
 	})
 
