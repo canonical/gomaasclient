@@ -4,7 +4,7 @@ import (
 	"github.com/canonical/gomaasclient/entity"
 )
 
-// StaticRoute is an interface defining API behaviour for
+// StaticRoute is an interface defining API behavior for
 // StaticRoute objects
 type StaticRoute interface {
 	Get(id int) (*entity.StaticRoute, error)

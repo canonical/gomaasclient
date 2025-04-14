@@ -29,14 +29,14 @@ func (s *StaticRoutes) Get() ([]entity.StaticRoute, error) {
 }
 
 // Create creates a new StaticRoute
-func (p *StaticRoutes) Create(params *entity.StaticRouteParams) (*entity.StaticRoute, error) {
+func (s *StaticRoutes) Create(params *entity.StaticRouteParams) (*entity.StaticRoute, error) {
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
 	}
 
 	staticRoute := new(entity.StaticRoute)
-	err = p.client().Post("", qsp, func(data []byte) error {
+	err = s.client().Post("", qsp, func(data []byte) error {
 		return json.Unmarshal(data, staticRoute)
 	})
 

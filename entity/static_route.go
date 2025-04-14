@@ -2,6 +2,7 @@ package entity
 
 type StaticRoute struct {
 	ID          int    `json:"id,omitempty"`
+	ResourceURI string `json:"resource_uri,omitempty"`
 	Source      Subnet `json:"source,omitempty"`
 	Destination Subnet `json:"destination,omitempty"`
 	GatewayIP   string `json:"gateway_ip,omitempty"`
