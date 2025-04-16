@@ -82,6 +82,8 @@ func constructClient(apiClient *APIClient) *Client {
 		NodeDevices:           &NodeDevices{APIClient: *apiClient},
 		RAID:                  &RAID{APIClient: *apiClient},
 		RAIDs:                 &RAIDs{APIClient: *apiClient},
+		StaticRoute:           &StaticRoute{APIClient: *apiClient},
+		StaticRoutes:          &StaticRoutes{APIClient: *apiClient},
 		Subnet:                &Subnet{APIClient: *apiClient},
 		Subnets:               &Subnets{APIClient: *apiClient},
 		IPRange:               &IPRange{APIClient: *apiClient},
@@ -158,6 +160,8 @@ type Client struct {
 	NodeDevices           api.NodeDevices
 	RAID                  api.RAID
 	RAIDs                 api.RAIDs
+	StaticRoute           api.StaticRoute
+	StaticRoutes          api.StaticRoutes
 	Subnet                api.Subnet
 	Subnets               api.Subnets
 	IPRange               api.IPRange
