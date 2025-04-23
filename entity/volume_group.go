@@ -39,7 +39,7 @@ type VolumeGroupUpdateParams struct {
 type LogicalVolumeParams struct {
 	Name string `url:"name,omitempty"`
 	UUID string `url:"uuid,omitempty"`
-	Size int64  `json:"size,omitempty"`
+	Size int64  `url:"size,omitempty"`
 }
 
 // VirtualBlockDevice represents a logical volume and extends BlockDevice.
