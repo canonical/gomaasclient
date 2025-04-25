@@ -50,3 +50,4 @@ vmHosts, _ := c.VMHosts.Get()
 ## Credit
 
 This work was initially started by [Brian Hazeltine (@onwsk8r)](https://github.com/onwsk8r) as part of his [Terraform MAAS provider](https://github.com/Roblox/terraform-provider-maas) implementation.
+
