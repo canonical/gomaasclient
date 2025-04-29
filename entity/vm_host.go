@@ -61,6 +61,7 @@ type VMHostParams struct {
 	Certificate           string  `url:"certificate,omitempty"`
 	MemoryOverCommitRatio float64 `url:"memory_over_commit_ratio,omitempty"`
 	CPUOverCommitRatio    float64 `url:"cpu_over_commit_ratio,omitempty"`
+	Project               string  `url:"project,omitempty"`
 }
 
 // VMHostMachineParams enumerates the VMHost machine configuration options.
