@@ -94,7 +94,7 @@ To test the Go MAAS client:
    go mod tidy
    go run main.go
    ```
-1. You should be able to see MAAS machine info in the output. Congratulations, you've used the GO MAAS client running locally! Modify the client as you see fit and submit a PR. Happy coding! 
+1. You should be able to see MAAS machine info in the output. Congratulations, you've used the Go MAAS client running locally! Modify the client as you see fit and submit a PR. Happy coding! 
 
 ## Testing
 

@@ -59,6 +59,8 @@ type VMHostParams struct {
 	Tags                  string  `url:"tags,omitempty"`
 	DefaultMacvlanMode    string  `url:"default_macvlan_mode,omitempty"`
 	Certificate           string  `url:"certificate,omitempty"`
+	Project               string  `url:"project,omitempty"`
+	Password              string  `url:"password,omitempty"`
 	MemoryOverCommitRatio float64 `url:"memory_over_commit_ratio,omitempty"`
 	CPUOverCommitRatio    float64 `url:"cpu_over_commit_ratio,omitempty"`
 }
