@@ -1,6 +1,7 @@
 package entity
 
 // RAID represents the MAAS RAID endpoint.
+// LP:2109708 - size field field is a float, not an int, for RAID-10
 type RAID struct {
 	UUID          string       `json:"uuid,omitempty"`
 	Name          string       `json:"name,omitempty"`
@@ -12,7 +13,7 @@ type RAID struct {
 	SpareDevices  []RAIDDevice `json:"spare_devices,omitempty"`
 	VirtualDevice BlockDevice  `json:"virtual_device,omitempty"`
 	ID            int          `json:"id,omitempty"`
-	Size          int64        `json:"size,omitempty"`
+	Size          float64      `json:"size,omitempty"`
 }
 
 // RAIDDevice is a combination of a BlockDevice and BlockDevicePartition since a RAID can contain either at devices field
