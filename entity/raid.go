@@ -12,7 +12,8 @@ type RAID struct {
 	SpareDevices  []RAIDDevice `json:"spare_devices,omitempty"`
 	VirtualDevice BlockDevice  `json:"virtual_device,omitempty"`
 	ID            int          `json:"id,omitempty"`
-	Size          int64        `json:"size,omitempty"`
+	// LP:2109708 - this field is a float, not an int, for RAID-10
+	Size          float64      `json:"size,omitempty"`
 }
 
 // RAIDDevice is a combination of a BlockDevice and BlockDevicePartition since a RAID can contain either at devices field
