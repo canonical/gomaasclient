@@ -15,7 +15,7 @@ type LicenseKeys struct {
 }
 
 func (l *LicenseKeys) client() APIClient {
-	return l.APIClient.GetSubObject("license-key")
+	return l.APIClient.GetSubObject("license-keys")
 }
 
 // Get fetches a list of LicenseKey objects
