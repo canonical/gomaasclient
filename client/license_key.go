@@ -13,17 +13,17 @@ type LicenseKey struct {
 	APIClient APIClient
 }
 
-func (f *LicenseKey) client(osystem string, distroSeries string) APIClient {
-	return f.APIClient.
+func (l *LicenseKey) client(osystem string, distroSeries string) APIClient {
+	return l.APIClient.
 		GetSubObject("license-key").
 		GetSubObject(osystem).
 		GetSubObject(distroSeries)
 }
 
 // Get fetches a LicenseKey object
-func (f *LicenseKey) Get(osystem string, distroSeries string) (*entity.LicenseKey, error) {
+func (l *LicenseKey) Get(osystem string, distroSeries string) (*entity.LicenseKey, error) {
 	licenseKey := new(entity.LicenseKey)
-	err := f.client(osystem, distroSeries).Get("", url.Values{}, func(data []byte) error {
+	err := l.client(osystem, distroSeries).Get("", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, licenseKey)
 	})
 

@@ -1,3 +1,4 @@
+//nolint:dupl // disable dupl check on client for now
 package client
 
 import (
@@ -13,8 +14,8 @@ type LicenseKeys struct {
 	APIClient APIClient
 }
 
-func (f *LicenseKeys) client() APIClient {
-	return f.APIClient.GetSubObject("license-key")
+func (l *LicenseKeys) client() APIClient {
+	return l.APIClient.GetSubObject("license-key")
 }
 
 // Get fetches a list of LicenseKey objects
