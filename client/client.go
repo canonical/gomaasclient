@@ -129,6 +129,8 @@ func constructClient(apiClient *APIClient) *Client {
 		VolumeGroups:          &VolumeGroups{APIClient: *apiClient},
 		LicenseKey:            &LicenseKey{APIClient: *apiClient},
 		LicenseKeys:           &LicenseKeys{APIClient: *apiClient},
+		Notification:          &Notification{APIClient: *apiClient},
+		Notifications:         &Notifications{APIClient: *apiClient},
 	}
 
 	return &client
@@ -209,6 +211,8 @@ type Client struct {
 	VolumeGroups          api.VolumeGroups
 	LicenseKey            api.LicenseKey
 	LicenseKeys           api.LicenseKeys
+	Notification          api.Notification
+	Notifications         api.Notifications
 }
 
 // GetAPIClient returns a MAAS API client.
