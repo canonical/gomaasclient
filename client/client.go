@@ -316,3 +316,18 @@ func (c APIClient) PutFiles(params url.Values, files map[string][]byte, f func([
 
 	return f(data)
 }
+
+func (c APIClient) DeleteWithParams(params url.Values) error {
+	// A little hack on top of delete to allow passing parameters to it
+	uri := c.URI()
+	query := uri.Query()
+
+	for key, values := range(params) {
+		for _, value := range(values) {
+			query.Add(key, value)
+		}
+	}
+	uri.RawQuery = query.Encode()
+
+	return c.Delete()
+}
