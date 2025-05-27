@@ -42,3 +42,13 @@ func (u *Users) Create(params *entity.UserParams) (*entity.User, error) {
 
 	return user, err
 }
+
+// Whoami fetches a reference to the curently logged in user
+func (u *Users) Whoami() (*entity.User, error) {
+	user := new(entity.User)
+	err := u.client().Get("whoami", url.Values{}, func(data []byte) error {
+		return json.Unmarshal(data, user)
+	})
+
+	return user, err
+}

@@ -6,6 +6,7 @@ import (
 	"net/url"
 
 	"github.com/canonical/gomaasclient/entity"
+	"github.com/google/go-querystring/query"
 )
 
 // User implements api.User
@@ -28,6 +29,10 @@ func (u *User) Get(userName string) (*entity.User, error) {
 }
 
 // Delete deletes a given User
-func (u *User) Delete(userName string) error {
-	return u.client(userName).Delete()
+func (u *User) Delete(params *entity.UserDeleteParams) error {
+	qsp, err := query.Values(params)
+	if err != nil {
+		return err
+	}
+	return u.client(params.UserName).DeleteWithParams(qsp)
 }
