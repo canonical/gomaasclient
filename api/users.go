@@ -6,5 +6,5 @@ import "github.com/canonical/gomaasclient/entity"
 type Users interface {
 	Get() ([]entity.User, error)
 	Create(params *entity.UserParams) (*entity.User, error)
-	Whoami() ([]entity.User, error)
+	Whoami() (*entity.User, error)
 }
