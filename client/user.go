@@ -34,5 +34,6 @@ func (u *User) Delete(params *entity.UserDeleteParams) error {
 	if err != nil {
 		return err
 	}
+
 	return u.client(params.UserName).DeleteWithParams(qsp)
 }

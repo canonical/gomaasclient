@@ -322,11 +322,12 @@ func (c APIClient) DeleteWithParams(params url.Values) error {
 	uri := c.URI()
 	query := uri.Query()
 
-	for key, values := range(params) {
-		for _, value := range(values) {
+	for key, values := range params {
+		for _, value := range values {
 			query.Add(key, value)
 		}
 	}
+
 	uri.RawQuery = query.Encode()
 
 	return c.Delete()
