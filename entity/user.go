@@ -14,3 +14,8 @@ type UserParams struct {
 	Email       string `url:"email"`
 	IsSuperUser bool   `url:"is_superuser,int"`
 }
+
+type UserDeleteParams struct {
+	UserName            string `url:"username"`
+	TransferResourcesTo string `url:"transfer_resources_to,omitempty"`
+}

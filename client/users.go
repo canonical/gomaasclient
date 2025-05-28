@@ -1,4 +1,3 @@
-//nolint:dupl // disable dupl check on client for now
 package client
 
 import (
@@ -37,6 +36,16 @@ func (u *Users) Create(params *entity.UserParams) (*entity.User, error) {
 
 	user := new(entity.User)
 	err = u.client().Post("", qsp, func(data []byte) error {
+		return json.Unmarshal(data, user)
+	})
+
+	return user, err
+}
+
+// Whoami fetches a reference to the currently logged in user
+func (u *Users) Whoami() (*entity.User, error) {
+	user := new(entity.User)
+	err := u.client().Get("whoami", url.Values{}, func(data []byte) error {
 		return json.Unmarshal(data, user)
 	})
 
