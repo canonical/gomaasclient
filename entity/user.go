@@ -17,5 +17,5 @@ type UserParams struct {
 
 type UserDeleteParams struct {
 	UserName            string `url:"username"`
-	TransferResourcesTo string `json:"transfer_resources_to,omitempty"`
+	TransferResourcesTo string `url:"transfer_resources_to,omitempty"`
 }
