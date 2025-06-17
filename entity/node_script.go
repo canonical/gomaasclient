@@ -1,5 +1,7 @@
 package entity
 
+import "encoding/json"
+
 type NodeScriptType int
 
 // NodeScriptType referring from MAAS server
@@ -36,9 +38,9 @@ const (
 
 // NodeScript represents the MAAS Node Script endpoint.
 type NodeScript struct {
-	Packages                  map[string]interface{} `json:"packages,omitempty"`
-	Results                   map[string]interface{} `json:"results,omitempty"`
-	Parameters                map[string]interface{} `json:":parameters,omitempty"`
+	Packages                  json.RawMessage        `json:"packages,omitempty"`
+	Results                   json.RawMessage        `json:"results,omitempty"`
+	Parameters                json.RawMessage        `json:":parameters,omitempty"`
 	TypeName                  string                 `json:"type_name,omitempty"`
 	HardwareTypeName          string                 `json:"hardware_type_name,omitempty"`
 	ParallelName              string                 `json:"parallel_name,omitempty"`
@@ -71,21 +73,21 @@ type NodeScriptHistory struct {
 }
 
 type NodeScriptParams struct {
-	ScriptType                string   `url:"script_type,omitempty"`
-	HardwareType              string   `url:"hardware_type,omitempty"`
-	Parallel                  string   `url:"parallel,omitempty"`
-	Packages                  string   `url:"packages,omitempty"`
-	Timeout                   string   `url:"timeout,omitempty"`
-	Comment                   string   `url:"comment,omitempty"`
-	ForHardware               string   `url:"for_hardware,omitempty"`
-	Name                      string   `url:"name,omitempty"`
-	Title                     string   `url:"title,omitempty"`
-	Description               string   `url:"description,omitempty"`
-	Tags                      []string `url:"tags,omitempty"`
-	ApplyConfiguredNetworking bool     `url:"apply_configured_networking,omitempty"`
-	Destructive               bool     `url:"destructive,omitempty"`
-	MayReboot                 bool     `url:"may_reboot,omitempty"`
-	Recommission              bool     `url:"recommission,omitempty"`
+	ScriptType                string `url:"script_type,omitempty"`
+	HardwareType              string `url:"hardware_type,omitempty"`
+	Parallel                  string `url:"parallel,omitempty"`
+	Packages                  string `url:"packages,omitempty"`
+	Timeout                   string `url:"timeout,omitempty"`
+	Comment                   string `url:"comment,omitempty"`
+	ForHardware               string `url:"for_hardware,omitempty"`
+	Name                      string `url:"name,omitempty"`
+	Title                     string `url:"title,omitempty"`
+	Description               string `url:"description,omitempty"`
+	Tags                      string `url:"tags,omitempty"`
+	ApplyConfiguredNetworking *bool  `url:"apply_configured_networking"`
+	Destructive               *bool  `url:"destructive"`
+	MayReboot                 *bool  `url:"may_reboot"`
+	Recommission              *bool  `url:"recommission"`
 }
 
 type NodeScriptReadParams struct {
