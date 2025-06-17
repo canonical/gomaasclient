@@ -73,6 +73,10 @@ type NodeScriptHistory struct {
 }
 
 type NodeScriptParams struct {
+	ApplyConfiguredNetworking *bool  `url:"apply_configured_networking"`
+	Destructive               *bool  `url:"destructive"`
+	MayReboot                 *bool  `url:"may_reboot"`
+	Recommission              *bool  `url:"recommission"`
 	ScriptType                string `url:"script_type,omitempty"`
 	HardwareType              string `url:"hardware_type,omitempty"`
 	Parallel                  string `url:"parallel,omitempty"`
@@ -84,10 +88,6 @@ type NodeScriptParams struct {
 	Title                     string `url:"title,omitempty"`
 	Description               string `url:"description,omitempty"`
 	Tags                      string `url:"tags,omitempty"`
-	ApplyConfiguredNetworking *bool  `url:"apply_configured_networking"`
-	Destructive               *bool  `url:"destructive"`
-	MayReboot                 *bool  `url:"may_reboot"`
-	Recommission              *bool  `url:"recommission"`
 }
 
 type NodeScriptReadParams struct {
