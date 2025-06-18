@@ -40,7 +40,7 @@ const (
 type NodeScript struct {
 	Packages                  json.RawMessage        `json:"packages,omitempty"`
 	Results                   json.RawMessage        `json:"results,omitempty"`
-	Parameters                json.RawMessage        `json:":parameters,omitempty"`
+	Parameters                json.RawMessage        `json:"parameters,omitempty"`
 	TypeName                  string                 `json:"type_name,omitempty"`
 	HardwareTypeName          string                 `json:"hardware_type_name,omitempty"`
 	ParallelName              string                 `json:"parallel_name,omitempty"`
