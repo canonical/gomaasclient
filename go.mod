@@ -1,12 +1,12 @@
 module github.com/canonical/gomaasclient
 
-go 1.20
+go 1.21
 
 require (
 	github.com/google/go-cmp v0.7.0
 	github.com/google/go-querystring v1.1.0
 	github.com/juju/gomaasapi/v2 v2.3.0
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.0
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 	gopkg.in/yaml.v3 v3.0.1
 )
