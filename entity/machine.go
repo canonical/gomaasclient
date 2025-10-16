@@ -312,6 +312,7 @@ type MachineReleaseParams struct {
 	Force       bool   `url:"force,omitempty"`
 	QuickErase  bool   `url:"quick_erase,omitempty"`
 	SecureErase bool   `url:"secure_erase,omitempty"`
+	Scripts     string `url:"scripts,omitempty"`
 }
 
 // MachinePowerOnParams enumerates the parameters for the machine power on operation
