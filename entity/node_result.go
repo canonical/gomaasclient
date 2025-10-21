@@ -26,7 +26,6 @@ type NodeResult struct {
 }
 
 type NodeResultParams struct {
-	SystemID   string     `url:"system_id,omitempty"`
-	Name       []string   `url:"name,omitempty"`
-	ResultType ResultType `url:"result_type,omitempty"`
+	Name []string   `url:"name,omitempty"`
+	Type ResultType `url:"type,omitempty"`
 }
