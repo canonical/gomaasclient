@@ -1,0 +1,40 @@
+[
+    {
+        "type": 3,
+        "status_name": "Passed",
+        "ended": "Tue, 21 Oct 2025 15:17:12 +0000",
+        "last_ping": "Tue, 21 Oct 2025 15:17:12 +0000",
+        "runtime": "0:00:00",
+        "type_name": "Release",
+        "status": 2,
+        "system_id": "qmrdsx",
+        "id": 11,
+        "started": "Tue, 21 Oct 2025 15:17:12 +0000",
+        "results": [
+            {
+                "id": 56,
+                "created": "Tue, 21 Oct 2025 15:16:19 +0000",
+                "updated": "Tue, 21 Oct 2025 15:17:12 +0000",
+                "name": "testname",
+                "status": 2,
+                "status_name": "Passed",
+                "exit_status": 0,
+                "started": "Tue, 21 Oct 2025 15:17:12 +0000",
+                "ended": "Tue, 21 Oct 2025 15:17:12 +0000",
+                "runtime": "0:00:00",
+                "starttime": 1761059832.783871,
+                "endtime": 1761059832.844518,
+                "estimated_runtime": "0:00:00",
+                "parameters": {},
+                "script_id": 32,
+                "script_revision_id": 33,
+                "suppressed": false,
+                "output": "SGVsbG8gV29ybGQK",
+                "stdout": "SGVsbG8gV29ybGQK",
+                "stderr": "",
+                "result": ""
+            }
+        ],
+        "resource_uri": "/MAAS/api/2.0/nodes/qmrdsx/results/11/"
+    }
+]
