@@ -305,9 +305,10 @@ type MachineDeployParams struct {
 	EphemeralDeploy bool   `url:"ephemeral_deploy,omitempty"`
 }
 
-// MachineReleaseParams enumerates the parameters for the release operation
+// MachineReleaseParams enumerates the parameters for the release operation. `Scripts` is only available for MAAS versions 3.5 and later.
 type MachineReleaseParams struct {
 	Comment     string `url:"comment,omitempty"`
+	Scripts     string `url:"scripts,omitempty"`
 	Erase       bool   `url:"erase,omitempty"`
 	Force       bool   `url:"force,omitempty"`
 	QuickErase  bool   `url:"quick_erase,omitempty"`
