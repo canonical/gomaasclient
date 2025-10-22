@@ -1,6 +1,6 @@
 # Releasing
 
-Builds and releases are automated with GitHub Actions and GoReleaser. There are several manual steps to complete:
+Releases are automated with GitHub Actions and GoReleaser. There are several manual steps to complete:
 
 1. Decide on the version number by reviewing commits since the last release. The provider versions follow [semantic versioning](https://semver.org/).
 
