@@ -29,9 +29,5 @@ Releases are automated with GitHub Actions and GoReleaser. There are several man
 
 1. Verify the release is published:
    1. Check the release is now the latest published under [Releases](https://github.com/canonical/gomaasclient/releases).
-   1. Verify the Go module is available by checking it can be fetched:
 
-      ```shell
-      go list -m github.com/canonical/gomaasclient@vX.Y.Z
-      ```
-   1. Check the package is indexed on [pkg.go.dev](https://pkg.go.dev/github.com/canonical/gomaasclient). This could take some hours to update.
+   You should be able to install the new version after a few minutes.
