@@ -36,5 +36,39 @@
             }
         ],
         "resource_uri": "/MAAS/api/2.0/nodes/qmrdsx/results/11/"
+    },
+    {
+        "system_id": "qmrdsx",
+        "type": 3,
+        "status_name": "Aborted",
+        "ended": null,
+        "runtime": "",
+        "results": [
+            {
+                "id": 871,
+                "created": "Wed, 22 Oct 2025 14:27:01 +0000",
+                "updated": "Wed, 22 Oct 2025 14:27:01 +0000",
+                "name": "wipe-disks",
+                "status": 5,
+                "status_name": "Aborted",
+                "exit_status": null,
+                "started": null,
+                "ended": null,
+                "runtime": "",
+                "starttime": "",
+                "endtime": "",
+                "estimated_runtime": "Unknown",
+                "parameters": {"quick_erase":{"type":"boolean","value":true,"argument_format":"--quick-erase"}},
+                "script_id": 31,
+                "script_revision_id": null,
+                "suppressed": false
+            }
+        ],
+        "id": 196,
+        "status": 5,
+        "type_name": "Release",
+        "started": null,
+        "last_ping": null,
+        "resource_uri": "/MAAS/api/2.0/nodes/qmrdsx/results/196/"
     }
 ]

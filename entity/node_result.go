@@ -66,8 +66,8 @@ type NodeResultItem struct {
 	ScriptID         int             `json:"script_id,omitempty"`
 	ScriptRevisionID int             `json:"script_revision_id,omitempty"`
 	ExitStatus       int             `json:"exit_status,omitempty"`
-	Starttime        float64         `json:"starttime,omitempty"`
-	Endtime          float64         `json:"endtime,omitempty"`
+	Starttime        json.RawMessage `json:"starttime,omitempty"`
+	Endtime          json.RawMessage `json:"endtime,omitempty"`
 	Suppressed       bool            `json:"suppressed,omitempty"`
 }
 
