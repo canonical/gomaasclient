@@ -48,26 +48,26 @@ type NodeResult struct {
 }
 
 type NodeResultItem struct {
-	Stdout           string          `json:"stdout,omitempty"`
-	StatusName       string          `json:"status_name,omitempty"`
-	Updated          string          `json:"updated,omitempty"`
-	Result           string          `json:"result,omitempty"`
+	Created          string          `json:"created,omitempty"`
 	Stderr           string          `json:"stderr,omitempty"`
+	Stdout           string          `json:"stdout,omitempty"`
+	Result           string          `json:"result,omitempty"`
+	Name             string          `json:"name,omitempty"`
 	Started          string          `json:"started,omitempty"`
 	Ended            string          `json:"ended,omitempty"`
 	Runtime          string          `json:"runtime,omitempty"`
 	EstimatedRuntime string          `json:"estimated_runtime,omitempty"`
 	Output           string          `json:"output,omitempty"`
-	Created          string          `json:"created,omitempty"`
-	Name             string          `json:"name,omitempty"`
+	Updated          string          `json:"updated,omitempty"`
+	StatusName       string          `json:"status_name,omitempty"`
 	Parameters       json.RawMessage `json:"parameters,omitempty"`
+	Starttime        json.RawMessage `json:"starttime,omitempty"`
+	Endtime          json.RawMessage `json:"endtime,omitempty"`
 	Status           ResultStatus    `json:"status,omitempty"`
 	ID               int             `json:"id,omitempty"`
 	ScriptID         int             `json:"script_id,omitempty"`
 	ScriptRevisionID int             `json:"script_revision_id,omitempty"`
 	ExitStatus       int             `json:"exit_status,omitempty"`
-	Starttime        float64         `json:"starttime,omitempty"`
-	Endtime          float64         `json:"endtime,omitempty"`
 	Suppressed       bool            `json:"suppressed,omitempty"`
 }
 
