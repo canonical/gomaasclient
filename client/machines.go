@@ -33,7 +33,7 @@ func (m *Machines) Get(machinesParams *entity.MachinesParams) ([]entity.Machine,
 }
 
 // Create machine.
-func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[string]interface{}) (*entity.Machine, error) {
+func (m *Machines) Create(machineParams *entity.MachineCreateParams, powerParams map[string]interface{}) (*entity.Machine, error) {
 	qsp, err := query.Values(machineParams)
 	if err != nil {
 		return nil, err
