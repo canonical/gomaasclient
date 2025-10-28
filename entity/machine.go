@@ -229,20 +229,27 @@ type MachineToken struct {
 
 // MachineCreateParams enumerates the parameters for the machine create/update operation
 type MachineCreateParams struct {
-	Domain          string   `url:"domain,omitempty"`
-	Architecture    string   `url:"architecture,omitempty"`
-	MinHWEKernel    string   `url:"min_hwe_kernel,omitempty"`
-	Hostname        string   `url:"hostname,omitempty"`
-	Description     string   `url:"description,omitempty"`
-	PowerType       string   `url:"power_type,omitempty"`
-	Pool            string   `url:"pool,omitempty"`
-	Zone            string   `url:"zone,omitempty"`
-	MACAddresses    []string `url:"mac_addresses,omitempty"`
-	Memory          int64    `url:"memory,omitempty"`
-	SwapSize        int64    `url:"swap_size,omitempty"`
-	CPUCount        int      `url:"cpu_count,omitempty"`
-	Commission      bool     `url:"commission,omitempty"`
-	Subarchitecture string   `url:"subarchitecture,omitempty"`
+	Domain               string   `url:"domain,omitempty"`
+	Architecture         string   `url:"architecture,omitempty"`
+	MinHWEKernel         string   `url:"min_hwe_kernel,omitempty"`
+	Hostname             string   `url:"hostname,omitempty"`
+	Description          string   `url:"description,omitempty"`
+	PowerType            string   `url:"power_type,omitempty"`
+	Pool                 string   `url:"pool,omitempty"`
+	Zone                 string   `url:"zone,omitempty"`
+	CommissioningScripts string   `url:"commissioning_scripts,omitempty"`
+	TestingScripts       string   `url:"testing_scripts,omitempty"`
+	Subarchitecture      string   `url:"subarchitecture,omitempty"`
+	MACAddresses         []string `url:"mac_addresses,omitempty"`
+	EnableSSH            int      `url:"enable_ssh,omitempty"`
+	SkipBMCConfig        int      `url:"skip_bmc_config,omitempty"`
+	SkipNetworking       int      `url:"skip_networking,omitempty"`
+	SkipStorage          int      `url:"skip_storage,omitempty"`
+	Memory               int64    `url:"memory,omitempty"`
+	SwapSize             int64    `url:"swap_size,omitempty"`
+	CPUCount             int      `url:"cpu_count,omitempty"`
+	Commission           bool     `url:"commission,omitempty"`
+	IsDpu                bool     `url:"is_dpu,omitempty"`
 }
 
 type MachineUpdateParams struct {
