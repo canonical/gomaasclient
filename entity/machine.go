@@ -239,7 +239,6 @@ type MachineCreateParams struct {
 	Zone                 string   `url:"zone,omitempty"`
 	CommissioningScripts string   `url:"commissioning_scripts,omitempty"`
 	TestingScripts       string   `url:"testing_scripts,omitempty"`
-	Subarchitecture      string   `url:"subarchitecture,omitempty"`
 	MACAddresses         []string `url:"mac_addresses,omitempty"`
 	EnableSSH            int      `url:"enable_ssh,omitempty"`
 	SkipBMCConfig        int      `url:"skip_bmc_config,omitempty"`
@@ -250,6 +249,7 @@ type MachineCreateParams struct {
 	CPUCount             int      `url:"cpu_count,omitempty"`
 	Commission           bool     `url:"commission,omitempty"`
 	IsDpu                bool     `url:"is_dpu,omitempty"`
+	// deployed?
 }
 
 type MachineUpdateParams struct {
