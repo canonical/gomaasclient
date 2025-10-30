@@ -35,7 +35,7 @@ func (r *RackController) Update(systemID string, rackControllerParams *entity.Ra
 		return nil, err
 	}
 
-	for k, v := range powerParamsToURLValues(powerParams) {
+	for k, v := range paramsToURLValues(powerParams) {
 		// Since qsp.Add(k, v...) is not allowed
 		qsp[k] = append(qsp[k], v...)
 	}

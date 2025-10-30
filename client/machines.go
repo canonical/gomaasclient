@@ -39,7 +39,12 @@ func (m *Machines) Create(machineParams *entity.MachineCreateParams, powerParams
 		return nil, err
 	}
 
-	for k, v := range powerParamsToURLValues(powerParams) {
+	for k, v := range paramsToURLValues(machineParams.ScriptParams) {
+		// Since qsp.Add(k, v...) is not allowed
+		qsp[k] = append(qsp[k], v...)
+	}
+
+	for k, v := range paramsToURLValues(powerParams) {
 		// Since qsp.Add(k, v...) is not allowed
 		qsp[k] = append(qsp[k], v...)
 	}

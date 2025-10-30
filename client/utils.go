@@ -8,7 +8,7 @@ import (
 
 // Converts power parameters to url.Values.
 // Supported power parameter value types: `string`, `int`, `bool`, `[]string`, `[]int`, `[]bool`
-func powerParamsToURLValues(params map[string]interface{}) url.Values {
+func paramsToURLValues(params map[string]interface{}) url.Values {
 	qsp := url.Values{}
 
 	for k, v := range params {

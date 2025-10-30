@@ -240,6 +240,7 @@ type MachineCreateParams struct {
 	CommissioningScripts string   `url:"commissioning_scripts,omitempty"`
 	TestingScripts       string   `url:"testing_scripts,omitempty"`
 	MACAddresses         []string `url:"mac_addresses,omitempty"`
+	ScriptParams         map[string]interface{} `url:"-"`
 	EnableSSH            int      `url:"enable_ssh,omitempty"`
 	SkipBMCConfig        int      `url:"skip_bmc_config,omitempty"`
 	SkipNetworking       int      `url:"skip_networking,omitempty"`
@@ -249,7 +250,6 @@ type MachineCreateParams struct {
 	CPUCount             int      `url:"cpu_count,omitempty"`
 	Commission           bool     `url:"commission,omitempty"`
 	IsDpu                bool     `url:"is_dpu,omitempty"`
-	// deployed?
 }
 
 type MachineUpdateParams struct {
@@ -265,7 +265,6 @@ type MachineUpdateParams struct {
 	Memory                   int64    `url:"memory,omitempty"`
 	SwapSize                 int64    `url:"swap_size,omitempty"`
 	CPUCount                 int      `url:"cpu_count,omitempty"`
-	Commission               bool     `url:"commission,omitempty"`
 	PowerParametersSkipCheck bool     `url:"power_parameters_skip_check,omitempty"`
 }
 
@@ -273,7 +272,7 @@ type MachineUpdateParams struct {
 type MachineCommissionParams struct {
 	CommissioningScripts string            `url:"commissioning_scripts,omitempty"`
 	TestingScripts       string            `url:"testing_scripts,omitempty"`
-	Parameters           map[string]string `url:"-"`
+	ScriptParams         map[string]interface{} `url:"-"`
 	EnableSSH            int               `url:"enable_ssh,omitempty"`
 	SkipBMCConfig        int               `url:"skip_bmc_config,omitempty"`
 	SkipNetworking       int               `url:"skip_networking,omitempty"`

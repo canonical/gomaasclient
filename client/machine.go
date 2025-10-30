@@ -36,7 +36,7 @@ func (m *Machine) Update(systemID string, machineParams *entity.MachineUpdatePar
 		return nil, err
 	}
 
-	for k, v := range powerParamsToURLValues(powerParams) {
+	for k, v := range paramsToURLValues(powerParams) {
 		// Since qsp.Add(k, v...) is not allowed
 		qsp[k] = append(qsp[k], v...)
 	}
@@ -60,12 +60,11 @@ func (m *Machine) Commission(systemID string, params *entity.MachineCommissionPa
 	if err != nil {
 		return nil, err
 	}
-	if params.Parameters != nil {
-		for k, v := range params.Parameters {
-			qsp.Add(k, v)
-		}
-	}
 
+	for k, v := range paramsToURLValues(params.ScriptParams) {
+		// Since qsp.Add(k, v...) is not allowed
+		qsp[k] = append(qsp[k], v...)
+	}
 	machine := new(entity.Machine)
 	err = m.client(systemID).Post("commission", qsp, func(data []byte) error {
 		return json.Unmarshal(data, machine)
