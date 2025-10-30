@@ -227,7 +227,7 @@ type MachineToken struct {
 	ConsumerKey string `json:"consumer_key,omitempty"`
 }
 
-// MachineCreateParams enumerates the parameters for the machine create/update operation
+// MachineCreateParams enumerates the parameters for the machine create operation
 type MachineCreateParams struct {
 	ScriptParams         map[string]interface{} `url:"-"`
 	Architecture         string                 `url:"architecture,omitempty"`
@@ -252,6 +252,7 @@ type MachineCreateParams struct {
 	IsDpu                bool                   `url:"is_dpu,omitempty"`
 }
 
+// MachineUpdateParams enumerates the parameters for the machine update operation
 type MachineUpdateParams struct {
 	Domain                   string   `url:"domain,omitempty"`
 	Architecture             string   `url:"architecture,omitempty"`
