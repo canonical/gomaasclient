@@ -265,6 +265,7 @@ type MachineUpdateParams struct {
 	Memory                   int64    `url:"memory,omitempty"`
 	SwapSize                 int64    `url:"swap_size,omitempty"`
 	CPUCount                 int      `url:"cpu_count,omitempty"`
+	Commission               bool     `url:"commission,omitempty"`
 	PowerParametersSkipCheck bool     `url:"power_parameters_skip_check,omitempty"`
 }
 
