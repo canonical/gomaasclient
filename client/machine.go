@@ -65,6 +65,7 @@ func (m *Machine) Commission(systemID string, params *entity.MachineCommissionPa
 		// Since qsp.Add(k, v...) is not allowed
 		qsp[k] = append(qsp[k], v...)
 	}
+
 	machine := new(entity.Machine)
 	err = m.client(systemID).Post("commission", qsp, func(data []byte) error {
 		return json.Unmarshal(data, machine)
