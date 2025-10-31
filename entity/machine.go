@@ -249,7 +249,7 @@ type MachineCreateParams struct {
 	SwapSize             int64                  `url:"swap_size,omitempty"`
 	CPUCount             int                    `url:"cpu_count,omitempty"`
 	Commission           bool                   `url:"commission,omitempty"`
-	IsDpu                bool                   `url:"is_dpu,omitempty"`
+	IsDPU                bool                   `url:"is_dpu,omitempty"`
 }
 
 // MachineUpdateParams enumerates the parameters for the machine update operation
