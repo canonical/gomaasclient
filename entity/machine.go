@@ -230,7 +230,7 @@ type MachineToken struct {
 // MachineCreateParams enumerates the parameters for the machine create operation
 type MachineCreateParams struct {
 	ScriptParams         map[string]interface{} `url:"-"`
-	Architecture         string                 `url:"architecture,omitempty"`
+	Domain               string                 `url:"domain,omitempty"`
 	MinHWEKernel         string                 `url:"min_hwe_kernel,omitempty"`
 	Hostname             string                 `url:"hostname,omitempty"`
 	Description          string                 `url:"description,omitempty"`
@@ -238,16 +238,16 @@ type MachineCreateParams struct {
 	Pool                 string                 `url:"pool,omitempty"`
 	Zone                 string                 `url:"zone,omitempty"`
 	CommissioningScripts string                 `url:"commissioning_scripts,omitempty"`
+	Architecture         string                 `url:"architecture,omitempty"`
 	TestingScripts       string                 `url:"testing_scripts,omitempty"`
-	Domain               string                 `url:"domain,omitempty"`
 	MACAddresses         []string               `url:"mac_addresses,omitempty"`
-	EnableSSH            bool                    `url:"enable_ssh,omitempty"`
-	SkipBMCConfig        bool                    `url:"skip_bmc_config,omitempty"`
-	SkipNetworking       bool                    `url:"skip_networking,omitempty"`
-	SkipStorage          bool                    `url:"skip_storage,omitempty"`
 	Memory               int64                  `url:"memory,omitempty"`
 	SwapSize             int64                  `url:"swap_size,omitempty"`
 	CPUCount             int                    `url:"cpu_count,omitempty"`
+	SkipBMCConfig        bool                   `url:"skip_bmc_config,omitempty"`
+	EnableSSH            bool                   `url:"enable_ssh,omitempty"`
+	SkipNetworking       bool                   `url:"skip_networking,omitempty"`
+	SkipStorage          bool                   `url:"skip_storage,omitempty"`
 	Commission           bool                   `url:"commission,omitempty"`
 	IsDPU                bool                   `url:"is_dpu,omitempty"`
 }
@@ -275,10 +275,10 @@ type MachineCommissionParams struct {
 	ScriptParams         map[string]interface{} `url:"-"`
 	CommissioningScripts string                 `url:"commissioning_scripts,omitempty"`
 	TestingScripts       string                 `url:"testing_scripts,omitempty"`
-	EnableSSH            bool                    `url:"enable_ssh,omitempty"`
-	SkipBMCConfig        bool                    `url:"skip_bmc_config,omitempty"`
-	SkipNetworking       bool                    `url:"skip_networking,omitempty"`
-	SkipStorage          bool                    `url:"skip_storage,omitempty"`
+	EnableSSH            bool                   `url:"enable_ssh,omitempty"`
+	SkipBMCConfig        bool                   `url:"skip_bmc_config,omitempty"`
+	SkipNetworking       bool                   `url:"skip_networking,omitempty"`
+	SkipStorage          bool                   `url:"skip_storage,omitempty"`
 }
 
 // MachineAllocateParams enumerates the options for the allocate operation.
