@@ -241,10 +241,10 @@ type MachineCreateParams struct {
 	TestingScripts       string                 `url:"testing_scripts,omitempty"`
 	Domain               string                 `url:"domain,omitempty"`
 	MACAddresses         []string               `url:"mac_addresses,omitempty"`
-	EnableSSH            int                    `url:"enable_ssh,omitempty"`
-	SkipBMCConfig        int                    `url:"skip_bmc_config,omitempty"`
-	SkipNetworking       int                    `url:"skip_networking,omitempty"`
-	SkipStorage          int                    `url:"skip_storage,omitempty"`
+	EnableSSH            bool                    `url:"enable_ssh,omitempty"`
+	SkipBMCConfig        bool                    `url:"skip_bmc_config,omitempty"`
+	SkipNetworking       bool                    `url:"skip_networking,omitempty"`
+	SkipStorage          bool                    `url:"skip_storage,omitempty"`
 	Memory               int64                  `url:"memory,omitempty"`
 	SwapSize             int64                  `url:"swap_size,omitempty"`
 	CPUCount             int                    `url:"cpu_count,omitempty"`
@@ -275,10 +275,10 @@ type MachineCommissionParams struct {
 	ScriptParams         map[string]interface{} `url:"-"`
 	CommissioningScripts string                 `url:"commissioning_scripts,omitempty"`
 	TestingScripts       string                 `url:"testing_scripts,omitempty"`
-	EnableSSH            int                    `url:"enable_ssh,omitempty"`
-	SkipBMCConfig        int                    `url:"skip_bmc_config,omitempty"`
-	SkipNetworking       int                    `url:"skip_networking,omitempty"`
-	SkipStorage          int                    `url:"skip_storage,omitempty"`
+	EnableSSH            bool                    `url:"enable_ssh,omitempty"`
+	SkipBMCConfig        bool                    `url:"skip_bmc_config,omitempty"`
+	SkipNetworking       bool                    `url:"skip_networking,omitempty"`
+	SkipStorage          bool                    `url:"skip_storage,omitempty"`
 }
 
 // MachineAllocateParams enumerates the options for the allocate operation.
