@@ -7,7 +7,7 @@ import (
 )
 
 // Converts parameters to url.Values.
-// Supported power parameter value types: `string`, `int`, `bool`, `[]string`, `[]int`, `[]bool`
+// Supported parameter value types: `string`, `int`, `bool`, `[]string`, `[]int`, `[]bool`
 func paramsToURLValues(params map[string]interface{}) url.Values {
 	qsp := url.Values{}
 
