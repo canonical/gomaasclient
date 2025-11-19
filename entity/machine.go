@@ -227,31 +227,57 @@ type MachineToken struct {
 	ConsumerKey string `json:"consumer_key,omitempty"`
 }
 
-// MachineParams enumerates the parameters for the machine create/update operation
-type MachineParams struct {
-	Domain       string   `url:"domain,omitempty"`
-	Architecture string   `url:"architecture,omitempty"`
-	MinHWEKernel string   `url:"min_hwe_kernel,omitempty"`
-	Hostname     string   `url:"hostname,omitempty"`
-	Description  string   `url:"description,omitempty"`
-	PowerType    string   `url:"power_type,omitempty"`
-	Pool         string   `url:"pool,omitempty"`
-	Zone         string   `url:"zone,omitempty"`
-	MACAddresses []string `url:"mac_addresses,omitempty"`
-	Memory       int64    `url:"memory,omitempty"`
-	SwapSize     int64    `url:"swap_size,omitempty"`
-	CPUCount     int      `url:"cpu_count,omitempty"`
-	Commission   bool     `url:"commission,omitempty"`
+// MachineCreateParams enumerates the parameters for the machine create operation
+type MachineCreateParams struct {
+	ScriptParams         map[string]interface{} `url:"-"`
+	Domain               string                 `url:"domain,omitempty"`
+	MinHWEKernel         string                 `url:"min_hwe_kernel,omitempty"`
+	Hostname             string                 `url:"hostname,omitempty"`
+	Description          string                 `url:"description,omitempty"`
+	PowerType            string                 `url:"power_type,omitempty"`
+	Pool                 string                 `url:"pool,omitempty"`
+	Zone                 string                 `url:"zone,omitempty"`
+	CommissioningScripts string                 `url:"commissioning_scripts,omitempty"`
+	Architecture         string                 `url:"architecture,omitempty"`
+	TestingScripts       string                 `url:"testing_scripts,omitempty"`
+	MACAddresses         []string               `url:"mac_addresses,omitempty"`
+	Memory               int64                  `url:"memory,omitempty"`
+	SwapSize             int64                  `url:"swap_size,omitempty"`
+	CPUCount             int                    `url:"cpu_count,omitempty"`
+	SkipBMCConfig        bool                   `url:"skip_bmc_config,omitempty"`
+	EnableSSH            bool                   `url:"enable_ssh,omitempty"`
+	SkipNetworking       bool                   `url:"skip_networking,omitempty"`
+	SkipStorage          bool                   `url:"skip_storage,omitempty"`
+	Commission           bool                   `url:"commission,omitempty"`
+}
+
+// MachineUpdateParams enumerates the parameters for the machine update operation
+type MachineUpdateParams struct {
+	Domain                   string   `url:"domain,omitempty"`
+	Architecture             string   `url:"architecture,omitempty"`
+	MinHWEKernel             string   `url:"min_hwe_kernel,omitempty"`
+	Hostname                 string   `url:"hostname,omitempty"`
+	Description              string   `url:"description,omitempty"`
+	PowerType                string   `url:"power_type,omitempty"`
+	Pool                     string   `url:"pool,omitempty"`
+	Zone                     string   `url:"zone,omitempty"`
+	MACAddresses             []string `url:"mac_addresses,omitempty"`
+	Memory                   int64    `url:"memory,omitempty"`
+	SwapSize                 int64    `url:"swap_size,omitempty"`
+	CPUCount                 int      `url:"cpu_count,omitempty"`
+	Commission               bool     `url:"commission,omitempty"`
+	PowerParametersSkipCheck bool     `url:"power_parameters_skip_check,omitempty"`
 }
 
 // MachineCommissionParams enumerates the parameters for the commission operation
 type MachineCommissionParams struct {
-	CommissioningScripts string `url:"commissioning_scripts,omitempty"`
-	TestingScripts       string `url:"testing_scripts,omitempty"`
-	EnableSSH            int    `url:"enable_ssh,omitempty"`
-	SkipBMCConfig        int    `url:"skip_bmc_config,omitempty"`
-	SkipNetworking       int    `url:"skip_networking,omitempty"`
-	SkipStorage          int    `url:"skip_storage,omitempty"`
+	ScriptParams         map[string]interface{} `url:"-"`
+	CommissioningScripts string                 `url:"commissioning_scripts,omitempty"`
+	TestingScripts       string                 `url:"testing_scripts,omitempty"`
+	EnableSSH            bool                   `url:"enable_ssh,omitempty"`
+	SkipBMCConfig        bool                   `url:"skip_bmc_config,omitempty"`
+	SkipNetworking       bool                   `url:"skip_networking,omitempty"`
+	SkipStorage          bool                   `url:"skip_storage,omitempty"`
 }
 
 // MachineAllocateParams enumerates the options for the allocate operation.

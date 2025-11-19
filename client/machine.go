@@ -30,13 +30,13 @@ func (m *Machine) Get(systemID string) (*entity.Machine, error) {
 }
 
 // Update machine.
-func (m *Machine) Update(systemID string, machineParams *entity.MachineParams, powerParams map[string]interface{}) (*entity.Machine, error) {
+func (m *Machine) Update(systemID string, machineParams *entity.MachineUpdateParams, powerParams map[string]interface{}) (*entity.Machine, error) {
 	qsp, err := query.Values(machineParams)
 	if err != nil {
 		return nil, err
 	}
 
-	for k, v := range powerParamsToURLValues(powerParams) {
+	for k, v := range paramsToURLValues(powerParams) {
 		// Since qsp.Add(k, v...) is not allowed
 		qsp[k] = append(qsp[k], v...)
 	}
@@ -59,6 +59,11 @@ func (m *Machine) Commission(systemID string, params *entity.MachineCommissionPa
 	qsp, err := query.Values(params)
 	if err != nil {
 		return nil, err
+	}
+
+	for k, v := range paramsToURLValues(params.ScriptParams) {
+		// Since qsp.Add(k, v...) is not allowed
+		qsp[k] = append(qsp[k], v...)
 	}
 
 	machine := new(entity.Machine)

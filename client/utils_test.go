@@ -58,7 +58,7 @@ func TestPowerParamsToURLValues(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
-			res := powerParamsToURLValues(tc.in).Encode()
+			res := paramsToURLValues(tc.in).Encode()
 			assert.Equal(t, tc.out, res)
 		})
 	}

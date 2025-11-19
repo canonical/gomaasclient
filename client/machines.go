@@ -33,13 +33,18 @@ func (m *Machines) Get(machinesParams *entity.MachinesParams) ([]entity.Machine,
 }
 
 // Create machine.
-func (m *Machines) Create(machineParams *entity.MachineParams, powerParams map[string]interface{}) (*entity.Machine, error) {
+func (m *Machines) Create(machineParams *entity.MachineCreateParams, powerParams map[string]interface{}) (*entity.Machine, error) {
 	qsp, err := query.Values(machineParams)
 	if err != nil {
 		return nil, err
 	}
 
-	for k, v := range powerParamsToURLValues(powerParams) {
+	for k, v := range paramsToURLValues(machineParams.ScriptParams) {
+		// Since qsp.Add(k, v...) is not allowed
+		qsp[k] = append(qsp[k], v...)
+	}
+
+	for k, v := range paramsToURLValues(powerParams) {
 		// Since qsp.Add(k, v...) is not allowed
 		qsp[k] = append(qsp[k], v...)
 	}

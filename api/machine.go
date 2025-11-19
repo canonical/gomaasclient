@@ -7,7 +7,7 @@ import (
 // Machine is an interface defining API behaviour for Machine objects
 type Machine interface {
 	Get(systemID string) (*entity.Machine, error)
-	Update(systemID string, machineParams *entity.MachineParams, powerParams map[string]interface{}) (*entity.Machine, error)
+	Update(systemID string, machineParams *entity.MachineUpdateParams, powerParams map[string]interface{}) (*entity.Machine, error)
 	Delete(systemID string) error
 	Commission(systemID string, params *entity.MachineCommissionParams) (*entity.Machine, error)
 	Deploy(systemID string, params *entity.MachineDeployParams) (*entity.Machine, error)
