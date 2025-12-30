@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/google/go-cmp v0.7.0
-	github.com/google/go-querystring v1.1.0
+	github.com/google/go-querystring v1.2.0
 	github.com/juju/gomaasapi/v2 v2.3.0
 	github.com/stretchr/testify v1.11.1
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
