@@ -25,5 +25,5 @@ type PackageRepositoryParams struct {
 	Arches             string `url:"arches,omitempty"`
 	Key                string `url:"key,omitempty"`
 	DisableSources     bool   `url:"disable_sources,omitempty"`
-	Enabled            bool   `url:"enabled,omitempty"`
+	Enabled            *bool  `url:"enabled,omitempty"`
 }
