@@ -3,7 +3,6 @@ package client
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/url"
 
 	"github.com/canonical/gomaasclient/entity"
@@ -35,8 +34,6 @@ func (p *PackageRepositories) Create(packageRepositoryParams *entity.PackageRepo
 	if err != nil {
 		return nil, err
 	}
-
-	fmt.Println("Creating package repository with params:", qsp)
 
 	packageRepository := new(entity.PackageRepository)
 	err = p.client().Post("", qsp, func(data []byte) error {
