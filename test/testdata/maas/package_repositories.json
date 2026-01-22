@@ -1,0 +1,13 @@
+[
+  {
+    "name": "security.ubuntu.com",
+    "url": "https://security.ubuntu.com/ubuntu",
+    "disable_sources": true,
+    "enabled": false
+  },
+  {
+    "name": "security.ubuntu.com",
+    "url": "https://security.ubuntu.com/ubuntu",
+    "arches": ["amd64", "arm64"]
+  }
+]
