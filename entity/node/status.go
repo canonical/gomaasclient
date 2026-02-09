@@ -32,7 +32,7 @@ const (
 	StatusDiskErasing
 	StatusFailedDiskErasing
 	StatusRescueMode
-	StatusEnteringRescureMode
+	StatusEnteringRescueMode
 	StatusFailedEnteringRescueMode
 	StatusExitingRescueMode
 	StatusFailedExitingRescueMode
