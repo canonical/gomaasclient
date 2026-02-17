@@ -249,6 +249,7 @@ type MachineCreateParams struct {
 	SkipNetworking       bool                   `url:"skip_networking,omitempty"`
 	SkipStorage          bool                   `url:"skip_storage,omitempty"`
 	Commission           bool                   `url:"commission,omitempty"`
+	IsDPU                bool                   `url:"is_dpu,omitempty"`
 }
 
 // MachineUpdateParams enumerates the parameters for the machine update operation
