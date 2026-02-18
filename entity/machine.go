@@ -255,8 +255,8 @@ type MachineCreateParams struct {
 // MachineUpdateParams enumerates the parameters for the machine update operation
 type MachineUpdateParams struct {
 	Domain                   string   `url:"domain,omitempty"`
+	MinHWEKernel             *string  `url:"min_hwe_kernel,omitempty"`
 	Architecture             string   `url:"architecture,omitempty"`
-	MinHWEKernel             string   `url:"min_hwe_kernel,omitempty"`
 	Hostname                 string   `url:"hostname,omitempty"`
 	Description              string   `url:"description,omitempty"`
 	PowerType                string   `url:"power_type,omitempty"`
