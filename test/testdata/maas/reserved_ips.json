@@ -1,0 +1,118 @@
+[
+    {
+        "subnet": {
+            "name": "10.30.0.0/24",
+            "description": "",
+            "vlan": {
+                "vid": 0,
+                "mtu": 1500,
+                "dhcp_on": false,
+                "external_dhcp": null,
+                "relay_vlan": null,
+                "id": 5005,
+                "secondary_rack": null,
+                "space": "undefined",
+                "name": "untagged",
+                "fabric_id": 4,
+                "fabric": "fabric-4",
+                "primary_rack": null,
+                "resource_uri": "/MAAS/api/2.0/vlans/5005/"
+            },
+            "cidr": "10.30.0.0/24",
+            "rdns_mode": 2,
+            "gateway_ip": null,
+            "dns_servers": [],
+            "allow_dns": true,
+            "allow_proxy": true,
+            "active_discovery": false,
+            "managed": true,
+            "disabled_boot_architectures": [],
+            "id": 7,
+            "space": "undefined",
+            "resource_uri": "/MAAS/api/2.0/subnets/7/"
+        },
+        "ip": "10.30.0.42",
+        "mac_address": "ab:cd:ef:01:23:45",
+        "comment": "Reserved for PDU",
+        "id": 1,
+        "resource_uri": "/MAAS/api/2.0/reservedips/1/"
+    },
+    {
+        "subnet": {
+            "name": "192.168.1.0/24",
+            "description": "",
+            "vlan": {
+                "vid": 0,
+                "mtu": 1500,
+                "dhcp_on": true,
+                "external_dhcp": null,
+                "relay_vlan": null,
+                "id": 5001,
+                "secondary_rack": null,
+                "space": "management",
+                "name": "untagged",
+                "fabric_id": 1,
+                "fabric": "fabric-1",
+                "primary_rack": "abc123",
+                "resource_uri": "/MAAS/api/2.0/vlans/5001/"
+            },
+            "cidr": "192.168.1.0/24",
+            "rdns_mode": 2,
+            "gateway_ip": "192.168.1.1",
+            "dns_servers": [
+                "8.8.8.8"
+            ],
+            "allow_dns": true,
+            "allow_proxy": true,
+            "active_discovery": true,
+            "managed": true,
+            "disabled_boot_architectures": [],
+            "id": 1,
+            "space": "management",
+            "resource_uri": "/MAAS/api/2.0/subnets/1/"
+        },
+        "ip": "192.168.1.100",
+        "mac_address": "52:54:00:12:34:56",
+        "comment": "Reserved for router",
+        "id": 2,
+        "resource_uri": "/MAAS/api/2.0/reservedips/2/"
+    },
+    {
+        "subnet": {
+            "name": "172.16.0.0/24",
+            "description": "Internal network",
+            "vlan": {
+                "vid": 100,
+                "mtu": 1500,
+                "dhcp_on": false,
+                "external_dhcp": null,
+                "relay_vlan": null,
+                "id": 5010,
+                "secondary_rack": null,
+                "space": "internal",
+                "name": "vlan-100",
+                "fabric_id": 2,
+                "fabric": "fabric-2",
+                "primary_rack": null,
+                "resource_uri": "/MAAS/api/2.0/vlans/5010/"
+            },
+            "cidr": "172.16.0.0/24",
+            "rdns_mode": 2,
+            "gateway_ip": "172.16.0.1",
+            "dns_servers": [],
+            "allow_dns": true,
+            "allow_proxy": false,
+            "active_discovery": false,
+            "managed": true,
+            "disabled_boot_architectures": [],
+            "id": 5,
+            "space": "internal",
+            "resource_uri": "/MAAS/api/2.0/subnets/5/"
+        },
+        "ip": "172.16.0.50",
+        "mac_address": "",
+        "comment": "",
+        "id": 3,
+        "resource_uri": "/MAAS/api/2.0/reservedips/3/"
+    }
+]

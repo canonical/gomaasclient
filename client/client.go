@@ -99,6 +99,8 @@ func constructClient(apiClient *APIClient) *Client {
 		Users:                 &Users{APIClient: *apiClient},
 		ResourcePool:          &ResourcePool{APIClient: *apiClient},
 		ResourcePools:         &ResourcePools{APIClient: *apiClient},
+		ReservedIP:            &ReservedIP{APIClient: *apiClient},
+		ReservedIPs:           &ReservedIPs{APIClient: *apiClient},
 		MAASServer:            &MAASServer{APIClient: *apiClient},
 		PackageRepository:     &PackageRepository{APIClient: *apiClient},
 		PackageRepositories:   &PackageRepositories{APIClient: *apiClient},
@@ -181,6 +183,8 @@ type Client struct {
 	Users                 api.Users
 	ResourcePool          api.ResourcePool
 	ResourcePools         api.ResourcePools
+	ReservedIP            api.ReservedIP
+	ReservedIPs           api.ReservedIPs
 	MAASServer            api.MAASServer
 	PackageRepository     api.PackageRepository
 	PackageRepositories   api.PackageRepositories

@@ -1,0 +1,38 @@
+{
+    "subnet": {
+        "name": "10.30.0.0/24",
+        "description": "",
+        "vlan": {
+            "vid": 0,
+            "mtu": 1500,
+            "dhcp_on": false,
+            "external_dhcp": null,
+            "relay_vlan": null,
+            "id": 5005,
+            "secondary_rack": null,
+            "space": "undefined",
+            "name": "untagged",
+            "fabric_id": 4,
+            "fabric": "fabric-4",
+            "primary_rack": null,
+            "resource_uri": "/MAAS/api/2.0/vlans/5005/"
+        },
+        "cidr": "10.30.0.0/24",
+        "rdns_mode": 2,
+        "gateway_ip": null,
+        "dns_servers": [],
+        "allow_dns": true,
+        "allow_proxy": true,
+        "active_discovery": false,
+        "managed": true,
+        "disabled_boot_architectures": [],
+        "id": 7,
+        "space": "undefined",
+        "resource_uri": "/MAAS/api/2.0/subnets/7/"
+    },
+    "ip": "10.30.0.42",
+    "mac_address": "ab:cd:ef:01:23:45",
+    "comment": "Reserved for PDU",
+    "id": 1,
+    "resource_uri": "/MAAS/api/2.0/reservedips/1/"
+}
