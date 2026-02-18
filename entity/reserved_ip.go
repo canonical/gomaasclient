@@ -2,12 +2,12 @@ package entity
 
 // ReservedIP represents the MAAS Reserved IP endpoint
 type ReservedIP struct {
-	ID          int    `json:"id,omitempty"`
 	Comment     string `json:"comment,omitempty"`
 	IP          string `json:"ip,omitempty"`
 	MACAddress  string `json:"mac_address,omitempty"`
 	ResourceURI string `json:"resource_uri,omitempty"`
 	Subnet      Subnet `json:"subnet,omitempty"`
+	ID          int    `json:"id,omitempty"`
 }
 
 type ReservedIPCreateParams struct {
