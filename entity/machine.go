@@ -230,6 +230,7 @@ type MachineToken struct {
 // MachineCreateParams enumerates the parameters for the machine create operation
 type MachineCreateParams struct {
 	ScriptParams         map[string]interface{} `url:"-"`
+	Commission           *bool                  `url:"commission,omitempty"`
 	Domain               string                 `url:"domain,omitempty"`
 	MinHWEKernel         string                 `url:"min_hwe_kernel,omitempty"`
 	Hostname             string                 `url:"hostname,omitempty"`
@@ -248,13 +249,13 @@ type MachineCreateParams struct {
 	EnableSSH            bool                   `url:"enable_ssh,omitempty"`
 	SkipNetworking       bool                   `url:"skip_networking,omitempty"`
 	SkipStorage          bool                   `url:"skip_storage,omitempty"`
-	Commission           bool                   `url:"commission,omitempty"`
 	IsDPU                bool                   `url:"is_dpu,omitempty"`
 }
 
 // MachineUpdateParams enumerates the parameters for the machine update operation
 type MachineUpdateParams struct {
 	Domain                   string   `url:"domain,omitempty"`
+	Commission               *bool    `url:"commission,omitempty"`
 	MinHWEKernel             *string  `url:"min_hwe_kernel,omitempty"`
 	Architecture             string   `url:"architecture,omitempty"`
 	Hostname                 string   `url:"hostname,omitempty"`
@@ -266,7 +267,6 @@ type MachineUpdateParams struct {
 	Memory                   int64    `url:"memory,omitempty"`
 	SwapSize                 int64    `url:"swap_size,omitempty"`
 	CPUCount                 int      `url:"cpu_count,omitempty"`
-	Commission               bool     `url:"commission,omitempty"`
 	PowerParametersSkipCheck bool     `url:"power_parameters_skip_check,omitempty"`
 }
 
