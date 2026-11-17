@@ -5,12 +5,13 @@ import "encoding/json"
 type NodeScriptType int
 
 // NodeScriptType referring from MAAS server
-// https://github.com/canonical/maas/blob/deab73792a4fe839a2e84a926a6c728d510fc9ad/src/metadataserver/enum.py#L42
+// https://github.com/canonical/maas/blob/420f5a80fda46eba7594ad48d24ca265d6966a4b/src/metadataserver/enum.py#L44
 const (
 	ScriptTypeCommissioning NodeScriptType = iota
 	_
 	ScriptTypeTesting
 	ScriptTypeRelease
+	ScriptTypeDeployment
 )
 
 type NodeScriptHardwareType int
