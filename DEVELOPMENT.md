@@ -4,7 +4,7 @@ Thank you for your interest in contributing to the Go MAAS Client! We appreciate
 
 ## Requirements
 
-- [Go](https://golang.org/doc/install) >= 1.20
+- [Go](https://golang.org/doc/install) >= 1.26
 - A MAAS installation running, to connect to and test against. See the [maas-dev-setup](https://github.com/canonical/maas-dev-setup) repository for more information on a development setup.
 - [CLA](https://ubuntu.com/legal/contributors) signed with the email used with git and GitHub.
 

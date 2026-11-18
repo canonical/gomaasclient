@@ -27,7 +27,6 @@ func GetTLSClient(apiURL string, apiKey string, apiVersion string, tlsConfig *tl
 	}
 
 	apiClient, err := getAPIClient(apiURL, apiKey, apiVersion, tr)
-
 	if err != nil {
 		return nil, err
 	}
