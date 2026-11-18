@@ -29,7 +29,7 @@ linters:
     - tagliatelle
     - unused
     - whitespace
-    - wsl
+    - wsl_v5
     - zerologlint
   settings:
     errcheck:
