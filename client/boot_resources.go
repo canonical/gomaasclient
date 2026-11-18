@@ -2,7 +2,6 @@ package client
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/url"
 
 	"github.com/canonical/gomaasclient/entity"
@@ -35,7 +34,16 @@ func (b *BootResources) Get(params *entity.BootResourcesReadParams) ([]entity.Bo
 
 // Create creates a new boot source
 func (b *BootResources) Create(params *entity.BootResourceParams) (*entity.BootResource, error) {
-	return nil, fmt.Errorf("not implemented")
+	qsp, err := query.Values(params)
+	if err != nil {
+		return nil, err
+	}
+
+	bootresource := new(entity.BootResource)
+	err = b.client().Post("", qsp, func(body []byte) error {
+		return json.Unmarshal(body, bootresource)
+	})
+	return bootresource, err
 }
 
 // Import imports boot resources to rack controllers
