@@ -3,7 +3,7 @@ package entity
 import "encoding/json"
 
 // ResultType referring from MAAS server
-// https://github.com/maas/maas/blob/master/src/metadataserver/enum.py#L58
+// https://github.com/canonical/maas/blob/420f5a80fda46eba7594ad48d24ca265d6966a4b/src/metadataserver/enum.py#L60
 type ResultType int
 
 const (
@@ -11,6 +11,7 @@ const (
 	INSTALLATION
 	TESTING
 	RELEASE
+	DEPLOYMENT
 )
 
 // ResultStatus referring from MAAS server
